@@ -1,0 +1,2057 @@
+{
+  "name": {
+    "total_samples": 3,
+    "correct_samples": 2,
+    "error_samples": 1,
+    "accuracy": 0.6666666666666666,
+    "correct_examples": [
+      {
+        "line": 1,
+        "instruction": "请从OCR文本中抽取旅行订单中的游客身份证信息。\n\n提取字段及说明：\nname (姓名): 游客的真实姓名\nidcard (身份证号): 18位身份证号码，支持末位为X的格式\ngender (性别): 根据身份证号倒数第二位数字判断（奇数为男，偶数为女）\nphone (电话号码): 游客联系电话，如果OCR文本中没有则为null\n\n严格按照以下JSON格式输出：\n[\n  {\n    \"name\": \"姓名\",\n    \"idcard\": \"身份证号\",\n    \"gender\": \"男/女\",\n    \"phone\": \"电话号码或null\"\n  }\n]\n\n注意事项：\n1. 确保身份证号码格式正确（18位数字，末位可为X）\n2. 性别根据身份证号自动判断，不依赖OCR文本中的性别信息\n3. 如果姓名缺失或无法识别，name字段设为\"无\"\n4. 电话号码如果在OCR文本中不存在，设置为null\n5. 输出必须是有效的JSON数组格式",
+        "input": "序号 姓名 居民身份证\n1 孙忠华 \"330411196912263618\"\n2 徐方华 \"33041119690118421X\"\n3 徐松良 \"330411198607093615\"\n4 伍富强 \"330411196907193619\"\n5 章青青 \"342531198603093727\"\n6 陈章哲 \"330402201405305710\"\n7 张丽群 \"330411198402063623\"\n8 徐玲丽 \"330411198703143643\"\n9 徐晨馨 ：\"330402201408185726\"",
+        "predict": [
+          {
+            "phone": null,
+            "name": "孙忠华",
+            "idcard": "330411196912263618",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "徐方华",
+            "idcard": "33041119690118421X",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "徐松良",
+            "idcard": "330411198607093615",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "伍富强",
+            "idcard": "330411196907193619",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "章青青",
+            "idcard": "342531198603093727",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "陈章哲",
+            "idcard": "330402201405305710",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "张丽群",
+            "idcard": "330411198402063623",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "徐玲丽",
+            "idcard": "330411198703143643",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "徐晨馨",
+            "idcard": "330402201408185726",
+            "gender": "女"
+          }
+        ],
+        "label": [
+          {
+            "phone": null,
+            "name": "孙忠华",
+            "idcard": "330411196912263618",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "徐方华",
+            "idcard": "33041119690118421X",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "徐松良",
+            "idcard": "330411198607093615",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "伍富强",
+            "idcard": "330411196907193619",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "章青青",
+            "idcard": "342531198603093727",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "陈章哲",
+            "idcard": "330402201405305710",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "张丽群",
+            "idcard": "330411198402063623",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "徐玲丽",
+            "idcard": "330411198703143643",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "徐晨馨",
+            "idcard": "330402201408185726",
+            "gender": "女"
+          }
+        ],
+        "correct": true
+      },
+      {
+        "line": 15,
+        "instruction": "请从OCR文本中抽取旅行订单中的游客身份证信息。\n\n提取字段及说明：\nname (姓名): 游客的真实姓名\nidcard (身份证号): 18位身份证号码，支持末位为X的格式\ngender (性别): 根据身份证号倒数第二位数字判断（奇数为男，偶数为女）\nphone (电话号码): 游客联系电话，如果OCR文本中没有则为null\n\n严格按照以下JSON格式输出：\n[\n  {\n    \"name\": \"姓名\",\n    \"idcard\": \"身份证号\",\n    \"gender\": \"男/女\",\n    \"phone\": \"电话号码或null\"\n  }\n]\n\n注意事项：\n1. 确保身份证号码格式正确（18位数字，末位可为X）\n2. 性别根据身份证号自动判断，不依赖OCR文本中的性别信息\n3. 如果姓名缺失或无法识别，name字段设为\"无\"\n4. 电话号码如果在OCR文本中不存在，设置为null\n5. 输出必须是有效的JSON数组格式",
+        "input": "杭州大翼，7月16日七里扬帆景区+葫芦峡漂流，2人\n具体联系人：朱敏慧，13506140071\n朱敏慧，32040419851108222X\n袁也栋，32041120150416011X",
+        "predict": [
+          {
+            "phone": null,
+            "name": "朱敏慧",
+            "idcard": "32040419851108222X",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "袁也栋",
+            "idcard": "32041120150416011X",
+            "gender": "男"
+          }
+        ],
+        "label": [
+          {
+            "phone": null,
+            "name": "朱敏慧",
+            "idcard": "32040419851108222X",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "袁也栋",
+            "idcard": "32041120150416011X",
+            "gender": "男"
+          }
+        ],
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 8,
+        "instruction": "请从OCR文本中抽取旅行订单中的游客身份证信息。\n\n提取字段及说明：\nname (姓名): 游客的真实姓名\nidcard (身份证号): 18位身份证号码，支持末位为X的格式\ngender (性别): 根据身份证号倒数第二位数字判断（奇数为男，偶数为女）\nphone (电话号码): 游客联系电话，如果OCR文本中没有则为null\n\n严格按照以下JSON格式输出：\n[\n  {\n    \"name\": \"姓名\",\n    \"idcard\": \"身份证号\",\n    \"gender\": \"男/女\",\n    \"phone\": \"电话号码或null\"\n  }\n]\n\n注意事项：\n1. 确保身份证号码格式正确（18位数字，末位可为X）\n2. 性别根据身份证号自动判断，不依赖OCR文本中的性别信息\n3. 如果姓名缺失或无法识别，name字段设为\"无\"\n4. 电话号码如果在OCR文本中不存在，设置为null\n5. 输出必须是有效的JSON数组格式",
+        "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+        "predict": [
+          {
+            "phone": null,
+            "name": "冯珠奶",
+            "idcard": "330721194302226748",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "沙利亚",
+            "idcard": "330721196009037218",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "沙于冬",
+            "idcard": "110108201712038633",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "胡兰英",
+            "idcard": "330721196112297229",
+            "gender": "女"
+          },
+          {
+            "phone": "13968136568",
+            "name": "唐飞",
+            "idcard": "330721196112297229",
+            "gender": "女"
+          }
+        ],
+        "label": [
+          {
+            "phone": null,
+            "name": "冯珠奶",
+            "idcard": "330721194302226748",
+            "gender": "女"
+          },
+          {
+            "phone": null,
+            "name": "沙于冬",
+            "idcard": "330721196009037218",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "胡兰英",
+            "idcard": "110108201712038633",
+            "gender": "男"
+          },
+          {
+            "phone": null,
+            "name": "胡兰英",
+            "idcard": "330721196112297229",
+            "gender": "女"
+          }
+        ],
+        "correct": false
+      }
+    ]
+  },
+  "team_size": {
+    "total_samples": 30,
+    "correct_samples": 30,
+    "error_samples": 0,
+    "accuracy": 1.0,
+    "correct_examples": [
+      {
+        "line": 21,
+        "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+        "input": "二车杭州天翼7月16日 +七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月16日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+        "predict": {
+          "team_size": 36
+        },
+        "label": {
+          "team_size": 36
+        },
+        "correct": true
+      },
+      {
+        "line": 31,
+        "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+        "input": "使H\n二车杭州天翼7月17日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月17日千孙婷\n36 人.xlsx X\n11.5 KB\n微信电脑版",
+        "predict": {
+          "team_size": 36
+        },
+        "label": {
+          "team_size": 36
+        },
+        "correct": true
+      },
+      {
+        "line": 32,
+        "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+        "input": "车杭州天翼7月17日+七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月17日童益梅\n50人.xls X\n26.5KB\n微信电脑版",
+        "predict": {
+          "team_size": 50
+        },
+        "label": {
+          "team_size": 50
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": []
+  },
+  "end_date": {
+    "total_samples": 30,
+    "correct_samples": 30,
+    "error_samples": 0,
+    "accuracy": 1.0,
+    "correct_examples": [
+      {
+        "line": 22,
+        "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "浙江吉程，7月17号：灵栖洞景区\n人数：23预约一位景区讲解员\n全陪导游：13857745880顾红娟",
+        "predict": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 28,
+        "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "使H\n二车杭州天翼7月17日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月17日千孙婷\n36 人.xlsx X\n11.5 KB\n微信电脑版",
+        "predict": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 54,
+        "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "车杭州天翼7月17日+七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月17日童益梅\n50人.xls X\n26.5KB\n微信电脑版",
+        "predict": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "end_date": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": []
+  },
+  "resource_start_time": {
+    "total_samples": 63,
+    "correct_samples": 63,
+    "error_samples": 0,
+    "accuracy": 1.0,
+    "correct_examples": [
+      {
+        "line": 23,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的开始时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_start_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "导游童益梅18857188254，杭州天翼，人数19人，7月16日，好运岛",
+        "predict": {
+          "resource_start_time": "2025-07-16 00:00:00"
+        },
+        "label": {
+          "resource_start_time": "2025-07-16 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 42,
+        "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的开始时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_start_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "使H\n二车杭州天翼7月17日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月17日千孙婷\n36 人.xlsx X\n11.5 KB\n微信电脑版",
+        "predict": {
+          "resource_start_time": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "resource_start_time": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 43,
+        "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的开始时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_start_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "二车杭州天翼7月16日 +七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月16日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+        "predict": {
+          "resource_start_time": "2025-07-16 00:00:00"
+        },
+        "label": {
+          "resource_start_time": "2025-07-16 00:00:00"
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": []
+  },
+  "resource_end_time": {
+    "total_samples": 63,
+    "correct_samples": 61,
+    "error_samples": 2,
+    "accuracy": 0.9682539682539683,
+    "correct_examples": [
+      {
+        "line": 24,
+        "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的结束时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_end_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "金华七天（方）\n旅行社：金华七天\n日期：7.18号\n人数：55人\n景点：灵栖洞\n刘立军15381551999",
+        "predict": {
+          "resource_end_time": "2025-07-18 00:00:00"
+        },
+        "label": {
+          "resource_end_time": "2025-07-18 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 37,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的结束时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_end_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "导游童益梅18857188254，杭州天翼，人数19人，7月16日，好运岛",
+        "predict": {
+          "resource_end_time": "2025-07-16 00:00:00"
+        },
+        "label": {
+          "resource_end_time": "2025-07-16 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 38,
+        "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的结束时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_end_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "杭州大翼，7月16日七里扬帆景区+葫芦峡漂流，2人\n具体联系人：朱敏慧，13506140071\n朱敏慧，32040419851108222X\n袁也栋，32041120150416011X",
+        "predict": {
+          "resource_end_time": "2025-07-16 00:00:00"
+        },
+        "label": {
+          "resource_end_time": "2025-07-16 00:00:00"
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 65,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的结束时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_end_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "导游童益梅18857188254，杭州天翼，人数19人，7月16日，好运岛",
+        "predict": {
+          "resource_end_time": "2025-07-16 00:00:00"
+        },
+        "label": {
+          "resource_end_time": "2025-07-17 00:00:00"
+        },
+        "correct": false
+      },
+      {
+        "line": 188,
+        "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的结束时间。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_end_time\": \"YYYY-MM-DD\"或null\n}",
+        "input": "江苏聚庆，7月17日-7月18日新安江梦幻，好运岛，导游邓13867126741，人数85\n人",
+        "predict": {
+          "resource_end_time": "2025-07-18 00:00:00"
+        },
+        "label": {
+          "resource_end_time": "2025-07-17 00:00:00"
+        },
+        "correct": false
+      }
+    ]
+  },
+  "start_date": {
+    "total_samples": 30,
+    "correct_samples": 30,
+    "error_samples": 0,
+    "accuracy": 1.0,
+    "correct_examples": [
+      {
+        "line": 25,
+        "instruction": "请从OCR文本中抽取旅行订单的开始日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"start_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "车杭州天翼7月17日+七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月17日童益梅\n50人.xls X\n26.5KB\n微信电脑版",
+        "predict": {
+          "start_date": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "start_date": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 36,
+        "instruction": "请从OCR文本中抽取旅行订单的开始日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"start_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "金华七天（方）\n旅行社：金华七天\n日期：7.18号\n人数：55人\n景点：灵栖洞\n刘立军15381551999",
+        "predict": {
+          "start_date": "2025-07-18 00:00:00"
+        },
+        "label": {
+          "start_date": "2025-07-18 00:00:00"
+        },
+        "correct": true
+      },
+      {
+        "line": 39,
+        "instruction": "请从OCR文本中抽取旅行订单的开始日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"start_date\": \"YYYY-MM-DD\"或null\n}",
+        "input": "浙江吉程，7月17号：灵栖洞景区\n人数：23预约一位景区讲解员\n全陪导游：13857745880顾红娟",
+        "predict": {
+          "start_date": "2025-07-17 00:00:00"
+        },
+        "label": {
+          "start_date": "2025-07-17 00:00:00"
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": []
+  },
+  "resource_detail": {
+    "total_samples": 62,
+    "correct_samples": 58,
+    "error_samples": 4,
+    "accuracy": 0.9354838709677419,
+    "correct_examples": [
+      {
+        "line": 26,
+        "instruction": "请从OCR文本中抽取旅行订单中灵栖洞景区导服的详细信息。\n\n提取字段及可选值：\nguide_items (导游项目): \"灵栖洞景区导服\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"guide_items\": 选择值或null\n  }\n}",
+        "input": "欢朋小周679250杭州嘉绍江苏上海\n7.17，灵栖洞景区\n人数45人左右，午餐后留一个讲解员\n导游：丁文军13958298707",
+        "predict": {
+          "resource_detail": {
+            "guide_items": "灵栖洞景区导服"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "guide_items": "灵栖洞景区导服"
+          }
+        },
+        "correct": true
+      },
+      {
+        "line": 27,
+        "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+        "input": "欢朋小周679250杭州嘉绍江苏上海\n7.17，灵栖洞景区\n人数45人左右，午餐后留一个讲解员\n导游：丁文军13958298707",
+        "predict": {
+          "resource_detail": {
+            "ship_items": "船票"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "ship_combo": null,
+            "ship_items": "船票"
+          }
+        },
+        "correct": true
+      },
+      {
+        "line": 30,
+        "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+        "input": "车杭州天翼7月17日+七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月17日童益梅\n50人.xls X\n26.5KB\n微信电脑版",
+        "predict": {
+          "resource_detail": {
+            "ship_combo": null,
+            "ship_items": "三江口游线"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "ship_combo": null,
+            "ship_items": "三江口游线"
+          }
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 208,
+        "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦山庄餐饮的详细信息。\n\n提取字段及可选值：\nmeal_standard (餐饮标准): \"0\"、\"20\"、\"25\"、\"30\"、\"35\"、\"40\"、\"45\"、\"50\"、\"55\"、\"60\"\nmeal_standard_table (桌餐标准): \"300\"、\"500\"、\"600\"、\"800\"、\"1000\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"meal_standard\": 选择值或null,\n    \"meal_standard_table\": 选择值或null\n  }\n}",
+        "input": "7月18日建德\n七里扬帆+葫芦峡漂流套票（1.2m\n以下儿童80元）\n政策：联票125元\n餐：40元留10%扣\n导游：金杏花13396506951（无\n证)\n车牌号：浙A60E57\n人数：50人",
+        "predict": {
+          "resource_detail": {
+            "meal_standard": 40,
+            "meal_standard_table": null
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "meal_standard": "40",
+            "meal_standard_table": null
+          }
+        },
+        "correct": false
+      },
+      {
+        "line": 226,
+        "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+        "input": "建德光大，7月18日，5人，江清（乘船）导游：戴艳嫔13868126262",
+        "predict": {
+          "resource_detail": {
+            "ship_items": "诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "ship_items": "梦幻新安江"
+          }
+        },
+        "correct": false
+      },
+      {
+        "line": 239,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+        "input": "旅行社：\n安徽海屯国际旅行社有限公司\n游玩日期：\n7月18号好运岛+灵栖洞\n人数：10人\n导游：许善春13155531899",
+        "predict": {
+          "resource_detail": {
+            "ticket_items": "门票"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "ticket_combo": "中远程及新增市场价格",
+            "ticket_items": "门票"
+          }
+        },
+        "correct": false
+      },
+      {
+        "line": 358,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+        "input": "导游童益梅18857188254，杭州\n天翼，人数31人，7月29日，好\n运岛",
+        "predict": {
+          "resource_detail": {
+            "ship_combo": null,
+            "ship_items": "千岛湖好运岛游船"
+          }
+        },
+        "label": {
+          "resource_detail": {
+            "ship_combo": null
+          }
+        },
+        "correct": false
+      }
+    ]
+  },
+  "resource_team_size": {
+    "total_samples": 63,
+    "correct_samples": 63,
+    "error_samples": 0,
+    "accuracy": 1.0,
+    "correct_examples": [
+      {
+        "line": 29,
+        "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+        "input": "导游童益梅18857188254，杭州天翼，人数19人，7月16日，好运岛",
+        "predict": {
+          "resource_team_size": 19
+        },
+        "label": {
+          "resource_team_size": 19
+        },
+        "correct": true
+      },
+      {
+        "line": 58,
+        "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+        "input": "上海歆美旅行社\n7月16\n人数50人\n灵栖洞\n张文胜13636588126",
+        "predict": {
+          "resource_team_size": 50
+        },
+        "label": {
+          "resource_team_size": 50
+        },
+        "correct": true
+      },
+      {
+        "line": 62,
+        "instruction": "请从OCR文本中抽取旅行订单中导服中心-灵栖洞景区导服的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+        "input": "欢朋小周679250杭州嘉绍江苏上海\n7.17，灵栖洞景区\n人数45人左右，午餐后留一个讲解员\n导游：丁文军13958298707",
+        "predict": {
+          "resource_team_size": 45
+        },
+        "label": {
+          "resource_team_size": 45
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": []
+  },
+  "contacts": {
+    "total_samples": 27,
+    "correct_samples": 24,
+    "error_samples": 3,
+    "accuracy": 0.8888888888888888,
+    "correct_examples": [
+      {
+        "line": 47,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "一车杭州天翼7月16日，+七里扬\n帆。人数：45人。导游联系人：奚侃\n18158519227\n游客信息模板7月16日奚侃45\n人.xls X\n25.5KB\n微信电脑版",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "18158519227",
+                "name": "奚侃",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "18158519227",
+                "name": "奚侃",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": true
+      },
+      {
+        "line": 51,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "上海歆美旅行社\n7月16\n人数50人\n灵栖洞\n张文胜13636588126",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13636588126",
+                "name": "张文胜",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13636588126",
+                "name": "张文胜",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": true
+      },
+      {
+        "line": 53,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "浙江吉程，7月17号：灵栖洞景区\n人数：23预约一位景区讲解员\n全陪导游：13857745880顾红娟",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13857745880",
+                "name": "顾红娟",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13857745880",
+                "name": "顾红娟",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 85,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "杭州大翼，7月16日七里扬帆景区+葫芦峡漂流，2人\n具体联系人：朱敏慧，13506140071\n朱敏慧，32040419851108222X\n袁也栋，32041120150416011X",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13506140071",
+                "name": "朱敏慧",
+                "idcard": "32040419851108222X"
+              },
+              {
+                "phone": null,
+                "name": "袁也栋",
+                "idcard": "32041120150416011X"
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13506140071",
+                "name": "朱敏慧",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": false
+      },
+      {
+        "line": 352,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "建德中旅，7.30日，39人，新叶古村，\n导游翁1巧君13805701560",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13805701560",
+                "name": "翁1巧君",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13805701560",
+                "name": "翁巧君",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": false
+      },
+      {
+        "line": 373,
+        "instruction": "请从OCR文本中抽取旅行订单的联系人信息。\n\n提取字段：\nname (联系人姓名)\nphone (联系电话)\nidcard (身份证号码，如果没有则为null)\n\n严格按照以下JSON格式输出：\n{\n  \"contacts\": {\n    \"data\": [\n      {\n        \"name\": \"姓名\",\n        \"phone\": \"电话\", \n        \"idcard\": \"身份证号\"或null\n      }\n    ]\n  }\n}",
+        "input": "苏州快乐三义。7.28日，大慈岩\n人数10人，朱爱风13862111871",
+        "predict": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13862111871",
+                "name": "朱爱风",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "label": {
+          "contacts": {
+            "data": [
+              {
+                "phone": "13862111871",
+                "name": "朱爱凤",
+                "idcard": null
+              }
+            ]
+          }
+        },
+        "correct": false
+      }
+    ]
+  },
+  "price_policy_calculation": {
+    "total_samples": 5,
+    "correct_samples": 0,
+    "error_samples": 5,
+    "accuracy": 0.0,
+    "correct_examples": [],
+    "error_examples": [
+      {
+        "line": 389,
+        "instruction": "## 任务描述 ##\n根据以下价格政策信息和OCR文本，提取并计算资源价格。\n\n## 产品信息 ##\n产品名称: 大慈岩门票_产品\n\n## 价格政策条件 ##\n产品名称: 大慈岩门票_产品\n产品类型: 大慈岩门票\n  票型: 门市价 (价格: 80 人次)\n  票型: 协议成团价 (价格: 50 人次)\n  票型: 协议不成团价 (价格: 50 人次)\n  票型: 非协议成团价 (价格: 64 人次)\n  票型: 非协议不成团价 (价格: 72 人次)\n  票型: 老年团队价 (价格: 40 人次) [条件: 年龄条件",
+        "input": "杭州绿城\n\n9月15日 大慈岩\n\n人数：10人\n\n导游信息：刘导13800138000",
+        "predict": {
+          "resources": [
+            {
+              "resource_name": "大慈岩门票",
+              "start_time": "20250915",
+              "end_time": "20250915",
+              "unit_count": "10",
+              "conditions": {
+                "name": "协议成团价",
+                "children": null
+              },
+              "notes": "无",
+              "unit": "人次",
+              "usage_info": "无",
+              "unit_price": 50,
+              "total_price": 500
+            }
+          ],
+          "product_total_amount": 500,
+          "product_total_unit_amount": 10
+        },
+        "label": {
+          "resources": [
+            {
+              "resource_name": "大慈岩门票",
+              "start_time": "20250915",
+              "end_time": "20250915",
+              "unit_count": "10",
+              "conditions": {
+                "name": "协议成团价",
+                "children": null
+              },
+              "notes": "协议客户，人数正好等于10人，满足成团条件",
+              "unit": "人次",
+              "usage_info": "10人",
+              "unit_price": 50,
+              "total_price": 500
+            }
+          ],
+          "product_total_amount": 500,
+          "product_total_unit_amount": 10
+        },
+        "correct": false
+      },
+      {
+        "line": 390,
+        "instruction": "## 任务描述 ##\n根据以下价格政策信息和OCR文本，提取并计算资源价格。\n\n## 产品信息 ##\n产品名称: 灵栖洞门票_产品\n\n## 价格政策条件 ##\n产品名称: 灵栖洞门票_产品\n产品类型: 灵栖洞门票\n  票型: 门市价 (价格: 80 人次)\n  票型: 协议成团价 (价格: 50 人次)\n  票型: 协议不成团价 (价格: 50 人次)\n  票型: 非协议成团价 (价格: 64 人次)\n  票型: 非协议不成团价 (价格: 72 人次)\n  票型: 老年团队价 (价格: 40 人次) [条件: 年龄条件",
+        "input": "盐城海滨\n\n2月20日 灵栖洞\n\n人数：16人\n\n导游信息：孙导13765432109",
+        "predict": {
+          "resources": [
+            {
+              "resource_name": "灵栖洞门票",
+              "start_time": "20250220",
+              "end_time": "20250220",
+              "unit_count": "16",
+              "conditions": {
+                "name": "非协议不成团价",
+                "children": null
+              },
+              "notes": "无",
+              "unit": "人次",
+              "usage_info": "无",
+              "unit_price": 72,
+              "total_price": 1152
+            }
+          ],
+          "product_total_amount": 1152,
+          "product_total_unit_amount": 16
+        },
+        "label": {
+          "resources": [
+            {
+              "resource_name": "灵栖洞门票",
+              "start_time": "20250220",
+              "end_time": "20250220",
+              "unit_count": "16",
+              "conditions": {
+                "name": "协议成团价",
+                "children": {
+                  "name": "住酒店免门票",
+                  "children": null
+                }
+              },
+              "notes": "盐城属于江浙沪以外的市场，2025年2月20日在1月1日-3月31日期间，享受住酒店免门票政策",
+              "unit": "人次",
+              "usage_info": "住酒店免门票",
+              "unit_price": 50,
+              "total_price": 800
+            }
+          ],
+          "product_total_amount": 800,
+          "product_total_unit_amount": 16
+        },
+        "correct": false
+      },
+      {
+        "line": 391,
+        "instruction": "## 任务描述 ##\n根据以下价格政策信息和OCR文本，提取并计算资源价格。\n\n## 产品信息 ##\n产品名称: 大慈岩豆腐包制作体验_大慈岩门票_联票\n\n## 价格政策条件 ##\n产品名称: 大慈岩豆腐包制作体验_大慈岩门票_联票\n产品类型: 大慈岩门票 (价格: 40 人次)\n产品类型: 大慈岩豆腐包制作体验 (价格: 40 人次)\n\n## 客户信息 ##\n- 客户名称: 宁波天一旅行社\n- 身份证信息: 无\n\n## 输出格式 ##\n请分析OCR文本中与产品\"大慈岩豆腐包制作体验_大慈岩门票_联票\"相关的资源信息，匹配对应的价格政策，并返回JSON格式的结果：\n\n{\n    \"resources\": [\n        {\n            \"resource_name\": \"资源名称\",\n            \"start_time\": \"开始时间\",\n            \"end_time\": \"结束时间\", \n            \"unit_count\": \"单位数量（字符串格式）\",\n            \"conditions\": {\n                \"name\": \"matched_policyA\", \n                \"children\": {\n                    \"name\": \"matched_policyB\", \n                    \"children\": null\n                }\n            },\n            \"notes\": \"备注信息\",\n            \"unit\": \"单位\",\n            \"usage_info\": \"使用信息\",\n            \"unit_price\": 单价,\n            \"total_price\": 总价\n        }\n    ],\n    \"product_total_amount\": 产品总金额,\n    \"product_total_unit_amount\": 产品总单位数量（数字）\n}\n\n## 处理要求 ##\n1. 只返回与产品\"大慈岩豆腐包制作体验_大慈岩门票_联票\"相关的资源\n2. 根据价格条件准确匹配对应的价格\n3. 时间输出格式：YYYYMMDD， 如果OCR文本中没有年份，则使用2025年\n4. 考虑所有限制条件（如人数、年龄、证件等）\n5. 计算准确的单价和总价\n\n## 字段规范 ##\n6. 单位输出的枚举范围：人次、桌数、辆、无单位、房，晚\n7. 在conditions字段中返回匹配的政策树状结构，体现层级关系\n8. unit_count根据单位类型提取：人次→人数，辆→车辆数，无单位→null，房晚→\"房数,晚数\"格式\n9. unit_count必须是字符串格式，即使是数字也要用引号包围\n10. product_total_unit_amount必须是数字格式，不要包含单位名称\n\n## 输出要求 ##\n11. 只返回JSON格式的结果，不要包含其他文字说明",
+        "input": "宁波天一\n\n11月8日 大慈岩、大慈岩豆腐包\n\n人数：18人\n\n导游信息：陈导13987654321",
+        "predict": {
+          "resources": [
+            {
+              "resource_name": "大慈岩豆腐包制作体验_大慈岩门票_联票",
+              "start_time": "20251108",
+              "end_time": "20251108",
+              "unit_count": "18",
+              "conditions": {
+                "name": "大慈岩门票",
+                "children": {
+                  "name": "大慈岩豆腐包制作体验",
+                  "children": null
+                }
+              },
+              "notes": "",
+              "unit": "人次",
+              "usage_info": "大慈岩门票",
+              "unit_price": 40,
+              "total_price": 720
+            }
+          ],
+          "product_total_amount": 720,
+          "product_total_unit_amount": 18
+        },
+        "label": {
+          "resources": [
+            {
+              "resource_name": "大慈岩门票",
+              "start_time": "20251108",
+              "end_time": "20251108",
+              "unit_count": "18",
+              "conditions": {
+                "name": "大慈岩门票",
+                "children": null
+              },
+              "notes": "联票产品",
+              "unit": "人次",
+              "usage_info": "18人",
+              "unit_price": 40,
+              "total_price": 720
+            },
+            {
+              "resource_name": "大慈岩豆腐包制作体验",
+              "start_time": "20251108",
+              "end_time": "20251108",
+              "unit_count": "18",
+              "conditions": {
+                "name": "大慈岩豆腐包制作体验",
+                "children": null
+              },
+              "notes": "联票产品",
+              "unit": "人次",
+              "usage_info": "18人",
+              "unit_price": 40,
+              "total_price": 720
+            }
+          ],
+          "product_total_amount": 1440,
+          "product_total_unit_amount": 18
+        },
+        "correct": false
+      },
+      {
+        "line": 392,
+        "instruction": "## 任务描述 ##\n根据以下价格政策信息和OCR文本，提取并计算资源价格。\n\n## 产品信息 ##\n产品名称: 新安江游船_产品\n\n## 价格政策条件 ##\n产品名称: 新安江游船_产品\n产品类型: 江清月近人实景演艺船票\n  票型: 门市价 (价格: 100 人次)\n  票型: 协议成团价 (价格: 50 人次)\n  票型: 协议不成团价 (价格: 50 人次)\n  票型: 非协议成团价 (价格: 100 人次)\n  票型: 非协议不成团价 (价格: 100 人次)\n  票型: 老年团队价 (价格: 50 人次)\n  票型: 学生团队价 (价格: 50 人次)\n  票型: 中远程及新增市场价格 (价格: 40 人次)\n  票型: 景酒打包价 (价格: 50 人次)\n  票型: 旅投员工价 (价格: 50 人次)\n产品类型: 新安江龙舟漂游\n  票型: 门市价 (价格: 110 人次)\n  票型: 协议成团价 (价格: 60 人次)\n  票型: 协议不成团价 (价格: 60 人次)\n  票型: 非协议成团价 (价格: 110 人次)\n  票型: 非协议不成团价 (价格: 110 人次)\n  票型: 老年团队价 (价格: 60 人次)\n  票型: 学生团队价 (价格: 60 人次)\n  票型: 中远程及新增市场价格 (价格: 50 人次)\n  票型: 景酒打包价 (价格: 60 人次)\n  票型: 旅投员工价 (价格: 60 人次)\n产品类型: 新安江竹筏漂流\n  票型: 门市价 (价格: 120 人次)\n  票型: 协议成团价 (价格: 60 人次)\n  票型: 协议不成团价 (价格: 60 人次)\n  票型: 非协议成团价 (价格: 120 人次)\n  票型: 非协议不成团价 (价格: 120 人次)\n  票型: 老年团队价 (价格: 50 人次)\n  票型: 学生团队价 (价格: 50 人次)\n  票型: 中远程及新增市场价格 (价格: 50 人次)\n  票型: 景酒打包价 (价格: 60 人次)\n  票型: 旅投员工价 (价格: 60 人次)\n产品类型: 梦幻新安江\n  票型: 门市价 (价格: 100 人次)\n  票型: 协议成团价 (价格: 50 人次)\n  票型: 协议不成团价 (价格: 50 人次)\n  票型: 非协议成团价 (价格: 100 人次)\n  票型: 非协议不成团价 (价格: 100 人次)\n  票型: 老年团队价 (价格: 50 人次)\n  票型: 学生团队价 (价格: 50 人次)\n  票型: 中远程及新增市场价格 (价格: 40 人次)\n  票型: 景酒打包价 (价格: 50 人次)\n  票型: 旅投员工价 (价格: 50 人次)\n产品类型: 诗韵新安江\n  票型: 门市价 (价格: 168 人次)\n  票型: 协议成团价 (价格: 88 人次)\n  票型: 协议不成团价 (价格: 88 人次)\n  票型: 非协议成团价 (价格: 168 人次)\n  票型: 非协议不成团价 (价格: 168 人次)\n  票型: 老年团队价 (价格: 88 人次)\n  票型: 学生团队价 (价格: 88 人次)\n  票型: 中远程及新增市场价格 (价格: 70 人次)\n  票型: 景酒打包价 (价格: 88 人次)\n  票型: 旅投员工价 (价格: 88 人次)\n\n## 客户信息 ##\n- 客户名称: 温州雁荡旅行社\n- 身份证信息: 无\n\n## 输出格式 ##\n请分析OCR文本中与产品\"新安江游船_产品\"相关的资源信息，匹配对应的价格政策，并返回JSON格式的结果：\n\n{\n    \"resources\": [\n        {\n            \"resource_name\": \"资源名称\",\n            \"start_time\": \"开始时间\",\n            \"end_time\": \"结束时间\", \n            \"unit_count\": \"单位数量（字符串格式）\",\n            \"conditions\": {\n                \"name\": \"matched_policyA\", \n                \"children\": {\n                    \"name\": \"matched_policyB\", \n                    \"children\": null\n                }\n            },\n            \"notes\": \"备注信息\",\n            \"unit\": \"单位\",\n            \"usage_info\": \"使用信息\",\n            \"unit_price\": 单价,\n            \"total_price\": 总价\n        }\n    ],\n    \"product_total_amount\": 产品总金额,\n    \"product_total_unit_amount\": 产品总单位数量（数字）\n}\n\n## 处理要求 ##\n1. 只返回与产品\"新安江游船_产品\"相关的资源\n2. 根据价格条件准确匹配对应的价格\n3. 时间输出格式：YYYYMMDD， 如果OCR文本中没有年份，则使用2025年\n4. 考虑所有限制条件（如人数、年龄、证件等）\n5. 计算准确的单价和总价\n\n## 字段规范 ##\n6. 单位输出的枚举范围：人次、桌数、辆、无单位、房，晚\n7. 在conditions字段中返回匹配的政策树状结构，体现层级关系\n8. unit_count根据单位类型提取：人次→人数，辆→车辆数，无单位→null，房晚→\"房数,晚数\"格式\n9. unit_count必须是字符串格式，即使是数字也要用引号包围\n10. product_total_unit_amount必须是数字格式，不要包含单位名称\n\n## 输出要求 ##\n11. 只返回JSON格式的结果，不要包含其他文字说明",
+        "input": "温州雁荡\n\n4月12日 新安江龙舟漂游\n\n人数：25人\n\n导游信息：林导13612345678",
+        "predict": {
+          "resources": [
+            {
+              "resource_name": "新安江龙舟漂游",
+              "start_time": "20250412",
+              "end_time": "20250412",
+              "unit_count": "25",
+              "conditions": {
+                "name": "非协议不成团价",
+                "children": null
+              },
+              "notes": "无",
+              "unit": "人次",
+              "usage_info": "无",
+              "unit_price": 110,
+              "total_price": 2750
+            }
+          ],
+          "product_total_amount": 2750,
+          "product_total_unit_amount": 25
+        },
+        "label": {
+          "resources": [
+            {
+              "resource_name": "新安江龙舟漂游",
+              "start_time": "20250412",
+              "end_time": "20250412",
+              "unit_count": "25",
+              "conditions": {
+                "name": "协议成团价",
+                "children": null
+              },
+              "notes": "协议客户，人数25人满足成团条件",
+              "unit": "人次",
+              "usage_info": "25人",
+              "unit_price": 60,
+              "total_price": 1500
+            }
+          ],
+          "product_total_amount": 1500,
+          "product_total_unit_amount": 25
+        },
+        "correct": false
+      },
+      {
+        "line": 393,
+        "instruction": "## 任务描述 ##\n根据以下价格政策信息和OCR文本，提取并计算资源价格。\n\n## 产品信息 ##\n产品名称: 大慈岩豆腐包制作体验_产品\n\n## 价格政策条件 ##\n产品名称: 大慈岩豆腐包制作体验_产品\n产品类型: 大慈岩豆腐包制作体验\n  None: 门市价 (价格: 35 人次)\n  None: 协议成团价 (价格: 20 人次) [条件: 成团",
+        "input": "嘉兴南湖\n\n6月25日 大慈岩豆腐包\n\n人数：9人\n\n导游信息：王导13587654321",
+        "predict": {
+          "resources": [
+            {
+              "resource_name": "大慈岩豆腐包制作体验",
+              "start_time": "20250625",
+              "end_time": "20250625",
+              "unit_count": "9",
+              "conditions": {
+                "name": "协议不成团价",
+                "children": null
+              },
+              "notes": "无",
+              "unit": "人次",
+              "usage_info": "无",
+              "unit_price": 20,
+              "total_price": 180
+            }
+          ],
+          "product_total_amount": 180,
+          "product_total_unit_amount": 9
+        },
+        "label": {
+          "resources": [
+            {
+              "resource_name": "大慈岩豆腐包制作体验_产品",
+              "start_time": "20250625",
+              "end_time": "20250625",
+              "unit_count": "9",
+              "conditions": {
+                "name": "协议不成团价",
+                "children": null
+              },
+              "notes": "协议客户，人数9人不足10人，适用不成团价",
+              "unit": "人次",
+              "usage_info": "9人",
+              "unit_price": 20,
+              "total_price": 180
+            }
+          ],
+          "product_total_amount": 180,
+          "product_total_unit_amount": 9
+        },
+        "correct": false
+      }
+    ]
+  },
+  "final_answer": {
+    "total_samples": 42,
+    "correct_samples": 0,
+    "error_samples": 42,
+    "accuracy": 0.0,
+    "correct_examples": [],
+    "error_examples": [
+      {
+        "line": 394,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "杭州爱马假期文化旅游有限公司6月份订单状态中，未支付订单占比是否异常？",
+        "predict": "<think>\n</think> 根据查询结果，杭州爱马假期文化旅游有限公司6月份的订单状态分布分析显示，总订单数为0个，因此无法计算未支付订单的占比。系统中没有相关数据可供分析。",
+        "label": "<think>\n</think> 根据查询结果，我无法分析杭州爱马假期文化旅游有限公司6月份订单状态中未支付订单的占比是否异常，因为系统显示总订单数为0个，没有任何订单数据可供分析。建议您确认该公司在6月份是否有订单记录，或检查查询条件是否正确。\n",
+        "correct": false
+      },
+      {
+        "line": 395,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "将策略ID=27872从系统中删除。",
+        "predict": "<think>\n</think> 根据系统返回的结果，策略ID=27872已成功从系统中删除。",
+        "label": "<think>\n</think> 已成功将策略ID=27872从系统中删除。\n",
+        "correct": false
+      },
+      {
+        "line": 396,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "上海晟鑫国际旅行社有限公司2025年春节档各支付方式占比如何？现金结算是否明显回升？",
+        "predict": "<think>\n</think> 根据查询结果，上海晟鑫国际旅行社有限公司在2025年春节档期间（2025-01-28至2025-02-04）的支付方式分析报告显示，总支付金额为¥0.00，且支付方式分布数据为空。这意味着在该分析期间内，没有记录到任何支付交易，因此无法分析各支付方式的占比情况，也无法判断现金结算是否有所回升。",
+        "label": "<think>\n</think> 根据查询的支付方式分析报告，系统显示2025年1月28日至2月4日(春节档期间)的支付数据为空，总支付金额为¥0.00，没有任何支付方式的记录。因此无法分析上海晟鑫国际旅行社有限公司2025年春节档各支付方式的占比情况，也无法判断现金结算是否有回升趋势。建议检查数据是否正确录入系统，或者确认该时间段是否有业务发生。\n",
+        "correct": false
+      },
+      {
+        "line": 397,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "请拉取策略ID为27875的全量字段和配置细节。",
+        "predict": "<think>\n</think> 根据查询结果，策略ID为27875的详细信息如下：\n\n- 策略ID: 27875\n- 策略类型: p\n- v0字段值: 9\n- v1字段值: 6\n- v2字段值: /api/analytics/dashboard\n- v3字段值: GET\n- v4字段值: allow\n- v5字段值: null\n- 创建时间: 2025-08-19T22:38:56+08:00\n- 更新时间: 2025-08-19T22:38:56+08:00\n- 删除时间: null\n\n该策略允许GET请求访问/api/analytics/dashboard路径，且v0和v1字段值分别为9和6。",
+        "label": "<think>\n</think> 根据查询结果，策略ID为27875的全量字段和配置细节如下：\n\n- 策略ID: 27875\n- 策略类型(ptype): p\n- 主体(v0): 9\n- 对象(v1): 6\n- 资源(v2): /api/analytics/dashboard\n- 操作(v3): GET\n- 效果(v4): allow\n- 条件(v5): 无\n- 创建时间: 2025-08-19T22:38:56+08:00\n- 更新时间: 2025-08-19T22:38:56+08:00\n- 删除时间: 无\n\n该策略允许主体\"9\"对对象\"6\"执行GET操作访问\"/api/analytics/dashboard\"资源。\n",
+        "correct": false
+      },
+      {
+        "line": 398,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "宁波达人旅行服务有限公司8月第一周的订单状态中，周末两天的核销占比是不是更高？",
+        "predict": "<think>\n</think> 根据查询结果，系统显示总订单数为0个，因此无法分析宁波达人旅行服务有限公司8月第一周的订单状态分布，包括周末两天的核销占比情况。需要先有订单数据才能进行相关分析。",
+        "label": "<think>\n</think> 根据查询结果，我无法回答您关于宁波达人旅行服务有限公司8月第一周订单状态中周末两天核销占比的问题，因为系统显示没有检索到任何订单数据（总订单数为0个）。建议您确认公司名称、日期范围是否正确，或者联系系统管理员检查数据是否完整。\n",
+        "correct": false
+      },
+      {
+        "line": 399,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "取消并删除策略ID 27876。",
+        "predict": "<think>\n</think> 根据系统返回的信息，策略ID 27876的权限策略已成功移除。该操作已完成，无需进一步操作。",
+        "label": "<think>\n</think> 已成功删除策略ID 27876。权限策略移除操作已完成。\n",
+        "correct": false
+      },
+      {
+        "line": 401,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "建德市光大国际旅行社有限公司在2025年1月到3月期间，主要收入来自哪些业务类型？",
+        "predict": "<think>\n</think> 根据查询结果，建德市光大国际旅行社有限公司在2025年1月到3月期间没有产生任何收入。系统显示总收入为¥0.00，且没有记录任何收入类型的数据。这可能意味着该期间内公司没有开展任何业务活动，或者收入尚未录入系统。",
+        "label": "<think>\n</think> 根据查询结果，建德市光大国际旅行社有限公司在2025年1月到3月期间没有记录任何收入，总收入为¥0.00。因此无法分析该期间的主要业务收入类型。\n",
+        "correct": false
+      },
+      {
+        "line": 402,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "上海众朗电子商务有限公司2024年12月订单量是否存在“周末双峰”？请输出日度趋势以观察季节性特征。",
+        "predict": "<think>\n</think> 根据查询结果，系统显示\"订单趋势分析：暂无数据\"，这意味着目前没有关于上海众朗电子商务有限公司2024年12月的订单数据可供分析。因此，无法判断是否存在\"周末双峰\"现象，也无法观察到任何季节性特征。建议您确认数据是否已正确录入系统，或尝试其他时间段的数据查询。",
+        "label": "<think>\n</think> 根据查询结果，目前系统中暂无上海众朗电子商务有限公司2024年12月的订单数据。因此无法分析该公司在2024年12月的订单量是否存在\"周末双峰\"现象，也无法提供日度趋势图表来观察季节性特征。\n\n建议您确认数据是否已录入系统，或者检查查询条件是否正确，例如公司名称、日期范围等。\n",
+        "correct": false
+      },
+      {
+        "line": 403,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "给部门3的角色12开放协议模块“/api/agreements/*”的GET权限。",
+        "predict": "<think>\n</think> 抱歉，系统暂不支持通配符添加权限策略。请直接添加指定的权限策略，例如“/api/agreements”而不是使用通配符“/api/agreements/*”。",
+        "label": "<think>\n</think> 抱歉，系统暂不支持使用通配符添加权限策略。您需要直接添加指定的权限策略，而不是使用\"/api/agreements/*\"这样的通配符形式。请明确指定具体的协议模块API路径后再进行权限设置。\n",
+        "correct": false
+      },
+      {
+        "line": 404,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "复制现有模板并创建票务协议模版，打开新增协议模版页面。",
+        "predict": "<think>\n</think> 根据您的要求，我已为您打开票务协议模板页面。您可以在该页面上复制现有模板并创建新的票务协议模板。请在页面上找到\"复制现有模板\"按钮，然后选择\"创建票务协议模板\"选项，即可进入新增协议模板页面进行操作。",
+        "label": "<think>\n</think> 我已为您打开模板列表页面。要复制现有模板并创建票务协议模版，请在当前页面找到您想要复制的模板，点击对应的\"复制\"按钮，然后在弹出的编辑界面中将模板类型修改为\"票务协议\"，完成相应信息填写后保存即可创建新的票务协议模版。\n",
+        "correct": false
+      },
+      {
+        "line": 405,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "浙江银辉国际旅行社有限公司2025年4月各景区日收入走势是否受清明假期显著拉动？请对比假期前后走势。",
+        "predict": "<think>\n</think> 根据查询结果，系统显示\"景区收入趋势分析：暂无数据\"，无法提供浙江银辉国际旅行社有限公司2025年4月各景区日收入走势的分析。由于没有相关数据，无法判断清明假期是否对景区收入产生显著影响，也无法对比假期前后的走势情况。",
+        "label": "<think>\n</think> 根据查询结果，目前系统中暂无浙江银辉国际旅行社有限公司2025年4月各景区日收入走势的数据。因此无法分析清明假期对景区收入的影响，也无法对比假期前后的收入走势。建议您确认数据是否已录入系统，或联系相关部门获取这些数据后再进行分析。\n",
+        "correct": false
+      },
+      {
+        "line": 406,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "我要添加一个新的景区资源条目，进入新增资源。",
+        "predict": [
+          {
+            "type": "link",
+            "text": "进入新增资源页面",
+            "url": "https://testai.compassaihz.com/#/pages/resourceEdit/resourceEdit"
+          }
+        ],
+        "label": "<think>\n</think> 我已经为您打开了资源编辑页面，您可以在这里添加新的景区资源条目。请在页面中填写相关信息来完成新景区资源的添加。\n",
+        "correct": false
+      },
+      {
+        "line": 407,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "废弃策略27879并执行删除。",
+        "predict": "<think>\n</think> 根据系统返回的信息，我无法找到名为\"废弃策略27879\"的权限策略记录。该策略可能已被删除或不存在于系统中。建议您确认策略名称是否正确，或联系系统管理员获取更多帮助。",
+        "label": "<think>\n</think> 我尝试废弃并删除策略27879，但操作失败。系统返回错误信息：记录不存在（错误码404）。这表明您要删除的策略27879在系统中已不存在，可能之前已被删除或者策略ID有误。请确认策略ID是否正确，或者检查该策略是否已经被移除。\n",
+        "correct": false
+      },
+      {
+        "line": 408,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "查询策略27874的详细信息，确认是否包含POST权限项。",
+        "predict": "<think>\n</think> 根据查询结果，策略27874的详细信息如下：\n\n- 策略ID: 27874\n- 权限类型: p (表示策略类型)\n- v0: 5\n- v1: 3\n- v2: /api/users/exports\n- v3: GET\n- v4: deny\n- v5: null\n\n该策略不包含POST权限项，只包含GET方法的权限控制。",
+        "label": "<think>\n</think> 根据查询结果，策略27874的详细信息如下：\n- 策略类型：p\n- 主体：5\n- 对象：3\n- 资源：/api/users/exports\n- 操作：GET\n- 效果：deny\n\n该策略仅包含GET操作的权限设置，不包含POST权限项。该策略是一个拒绝(deny)策略，禁止主体5对资源/api/users/exports进行GET操作。\n",
+        "correct": false
+      },
+      {
+        "line": 409,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "把部门ID为5下的所有权限策略列出来，按每页50条显示第2页。",
+        "predict": "<think>\n</think> 根据查询结果，部门ID为5下的权限策略列表为空，没有找到任何权限策略。当前显示第2页，每页显示50条记录，但没有任何数据。",
+        "label": "<think>\n</think> 根据查询结果，部门ID为5下的权限策略第2页没有数据，总共有0条记录。这表明部门ID为5的所有权限策略数量不超过50条，所有数据都在第1页，第2页没有任何数据。\n",
+        "correct": false
+      },
+      {
+        "line": 410,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "查询策略ID 27878的具体配置，看看是否包含部门限制条件。",
+        "predict": "<think>\n</think> 根据查询结果，策略ID 27878不存在，因此无法查看其具体配置信息。请确认策略ID是否正确，或联系管理员获取帮助。",
+        "label": "<think>\n</think> 根据查询结果，策略ID 27878不存在。系统返回了错误信息：\"策略(ID: 27878)不存在\"。您可能需要确认策略ID是否正确，或者查询其他有效的策略ID。\n",
+        "correct": false
+      },
+      {
+        "line": 411,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "浙江微微笑国际旅行社有限公司2024年暑期（7-8月）各景区收入总体趋势如何？是否有周中回落、周末冲高特征？",
+        "predict": "<think>\n</think> 根据查询结果，目前系统中暂无浙江微微笑国际旅行社有限公司2024年暑期（7-8月）各景区收入的相关数据。因此无法分析收入趋势，也无法判断是否存在周中回落、周末冲高的特征。建议您稍后再查询或联系相关业务部门获取最新数据。",
+        "label": "<think>\n</think> 抱歉，根据系统返回的结果，目前没有关于浙江微微笑国际旅行社有限公司2024年暑期（7-8月）各景区收入趋势的数据。因此无法分析其总体趋势以及是否存在周中回落、周末冲高的特征。建议您确认数据是否已录入系统，或联系相关部门获取这些信息。\n",
+        "correct": false
+      },
+      {
+        "line": 412,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "ID 2319作为申请人，所有记录都列一下。",
+        "predict": "<think>\n</think> 根据您提供的信息，我无法获取到ID 2319作为申请人的所有记录。系统返回的结果显示成功获取了审批列表，但没有具体的数据内容。您可能需要检查是否有权限查看这些记录，或者确认是否已经正确输入了申请人ID。",
+        "label": "<think>\n</think> 抱歉，我无法提供您所需的信息。虽然我成功调用了获取审批列表的服务，但返回的数据为空。系统显示\"成功获取审批列表\"，但没有返回任何具体记录。如果您确定ID 2319有相关申请记录，可能需要检查ID是否正确，或者联系系统管理员查询数据问题。\n",
+        "correct": false
+      },
+      {
+        "line": 413,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "部门7的角色1是否有权限查看数据看板“/api/analytics/dashboard”的GET？",
+        "predict": "<think>\n</think> 根据系统返回的鉴权失败信息，部门7的角色1没有权限查看数据看板\"/api/analytics/dashboard\"的GET请求。",
+        "label": "<think>\n</think> 根据鉴权结果，部门7的角色1没有权限查看数据看板\"/api/analytics/dashboard\"的GET请求。系统返回了\"鉴权失败\"的消息。\n",
+        "correct": false
+      },
+      {
+        "line": 414,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "授权部门1的角色7对票务模块“/api/tickets/*”进行创建或修改（POST）。",
+        "predict": "<think>\n</think>\n\n抱歉，系统暂不支持通配符添加权限策略。请直接添加指定的权限策略，而不是使用通配符。",
+        "label": "<think>\n</think> 抱歉，系统暂不支持使用通配符（如\"/api/tickets/*\"）添加权限策略。请您指定具体的API路径进行授权，而不是使用通配符形式。您可以分别添加需要授权的具体票务模块API路径权限。\n",
+        "correct": false
+      },
+      {
+        "line": 415,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "把我（ID 2305）发起的所有申请都列出来，不用按状态筛选。",
+        "predict": "<think>\n</think> 根据系统返回的信息，我已成功获取到您（ID 2305）发起的所有申请列表。系统显示您当前没有待审批的申请，也没有已提交的申请记录。如果您需要查看其他状态的申请，可以随时告诉我。",
+        "label": "<think>\n</think> 我需要先获取您的申请列表。请稍等，我将为您查询ID为2305的所有申请记录。\n",
+        "correct": false
+      },
+      {
+        "line": 416,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "苏州非凡国际旅行社有限公司2025年3月中下旬各景区收入趋势是否受早樱季影响明显？给我日度趋势线就好。",
+        "predict": "<think>\n</think> 根据查询结果，目前系统中暂无苏州非凡国际旅行社有限公司2025年3月中下旬各景区收入趋势的数据。因此无法分析早樱季对景区收入的影响，也无法提供日度趋势线。建议您稍后再查询或联系相关数据管理部门获取最新数据。",
+        "label": "<think>\n</think> 抱歉，我无法提供苏州非凡国际旅行社有限公司2025年3月中下旬各景区收入趋势的数据。系统中暂无相关景区收入数据，因此无法分析早樱季对景区收入的影响情况及提供日度趋势线。\n",
+        "correct": false
+      },
+      {
+        "line": 417,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "上饶市环球旅行社有限公司2025年2月景区收入趋势如何？",
+        "predict": "<think>\n</think> 根据查询结果，目前没有上饶市环球旅行社有限公司2025年2月景区收入趋势的数据。系统显示\"景区收入趋势分析：暂无数据\"，无法提供该时间段的收入趋势分析或图表数据。",
+        "label": "<think>\n</think> 根据查询结果，目前暂无上饶市环球旅行社有限公司2025年2月的景区收入趋势数据。系统中没有相关记录可供分析。\n",
+        "correct": false
+      },
+      {
+        "line": 418,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "游大大国际旅行社（上海）有限公司2024年全年不同支付方式（二维码、现金、对公转账）的占比情况怎样？请给出饼图数据。",
+        "predict": "<think>\n</think> 根据查询结果，2024年全年游大大国际旅行社（上海）有限公司的支付方式分析报告显示，总支付金额为¥0.00，且没有记录任何支付方式的数据。因此无法提供二维码、现金或对公转账的占比情况。系统中没有相关支付数据可供分析。",
+        "label": "<think>\n</think> 根据查询，我无法提供游大大国际旅行社（上海）有限公司2024年全年不同支付方式的占比情况。系统中没有该公司的支付数据记录，因此无法生成相关饼图。如需查看此类数据，请确认公司名称是否正确，或联系系统管理员添加相关数据。\n",
+        "correct": false
+      },
+      {
+        "line": 419,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "浙江吉程国际旅行社有限公司在2025年1月至3月的业务收入中，出境游和国内游哪个占比更高？",
+        "predict": "<think>\n</think> 根据查询结果，浙江吉程国际旅行社有限公司在2025年1月至3月期间的业务收入为¥0.00，没有记录任何收入数据。因此无法比较出境游和国内游的收入占比。",
+        "label": "<think>\n</think> 根据查询结果，我无法确定浙江吉程国际旅行社有限公司在2025年1月至3月期间出境游和国内游的收入占比情况，因为报告显示该时期总收入为¥0.00，没有任何收入数据记录。系统中没有显示任何业态的收入分布信息。\n",
+        "correct": false
+      },
+      {
+        "line": 420,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "请帮我分析杭州华行旅行社有限公司在2023年全年各类业务的收入占比情况。",
+        "predict": "<think>\n</think> 根据系统查询结果，杭州华行旅行社有限公司在2023年全年没有记录到任何收入数据。总收入为¥0.00，因此无法提供各类业务的收入占比分析。建议确认数据是否已正确录入系统，或检查查询条件是否准确。",
+        "label": "<think>\n</think> 根据查询结果，我无法提供杭州华行旅行社有限公司2023年全年各类业务的收入占比情况，因为系统中没有记录到相关收入数据。报告显示2023年1月1日至2023年12月31日期间的总收入为¥0.00，且没有任何业态收入分布数据。\n\n如果您确认该公司在2023年有业务收入，建议检查数据是否已正确录入系统，或联系相关部门获取准确的财务信息。\n",
+        "correct": false
+      },
+      {
+        "line": 421,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "录入一家新合作酒店到资源库，新增资源入口。",
+        "predict": "<think>\n</think> 根据您的查询，已成功匹配到资源录入页面。您可以通过以下链接进入新增资源入口：https://testai.compassaihz.com/#/pages/resourceEdit/resourceEdit",
+        "label": "<think>\n</think> 您可以通过访问资源编辑页面来录入新合作酒店到资源库。请点击以下链接进入资源编辑页面，在那里您可以完成新酒店资源的添加：\nhttps://testai.compassaihz.com/#/pages/resourceEdit/resourceEdit\n\n在该页面，您可以填写新合作酒店的相关信息并将其添加到资源库中。\n",
+        "correct": false
+      },
+      {
+        "line": 422,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "部门8的角色1需要维护价格策略，授权“/api/pricing/*”的POST权限。",
+        "predict": "<think>\n</think> 根据系统提示，目前不支持使用通配符添加权限策略。您需要直接添加指定的权限策略。因此，我无法为您添加\"/api/pricing/*\"的POST权限。请直接添加具体的权限策略，例如\"/api/pricing\"的POST权限。",
+        "label": "<think>\n</think> 抱歉，系统不支持使用通配符（如\"/api/pricing/*\"）添加权限策略。请您具体指定需要授权的具体API路径，而不是使用通配符形式。您可以列出所有需要授权的具体价格策略相关API路径，我可以帮您逐一添加POST权限。\n",
+        "correct": false
+      },
+      {
+        "line": 423,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "杭州三江两岸旅业有限公司2025年第二季度各支付方式结构有何变化？银行卡占比是否提升？",
+        "predict": "<think>\n</think> 根据支付方式分析报告，杭州三江两岸旅业有限公司2025年第二季度的支付方式结构如下：\n\n- 二维码支付占比7.8%，金额为¥1,380.00\n- 记账支付占比92.2%，金额为¥16,310.00\n- 现金支付占比0.0%，金额为¥0.00\n\n从数据来看，银行卡支付方式并未出现在报告中，因此无法判断其占比是否提升。报告中显示主要支付方式为记账，占总支付的92.2%。",
+        "label": "<think>\n</think> 根据杭州三江两岸旅业有限公司2025年第二季度(4月1日至6月30日)的支付方式分析数据，支付方式结构如下：\n\n- 记账支付占主导地位，金额为¥16,310.00，占总支付的92.2%\n- 二维码支付金额为¥1,380.00，占比7.8%\n- 现金支付金额为¥0.00，占比0%\n\n关于银行卡占比是否提升的问题，数据中并未显示有银行卡这一支付方式，因此无法判断其占比是否有所提升。在本季度的支付方式中，记账是绝对主要的支付方式，二维码支付次之，而现金支付完全未被使用。\n",
+        "correct": false
+      },
+      {
+        "line": 424,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "ID 2315作为申请人，把发起的所有审批都列出来。",
+        "predict": "<think>\n</think> 根据系统返回的信息，ID 2315作为申请人，成功获取了所有发起的审批列表。系统显示\"成功获取审批列表！\"，状态码为200，表示请求处理成功。目前没有具体审批列表内容，但可以确认该用户的所有审批记录已成功获取。",
+        "label": "<think>\n</think> 抱歉，我无法列出ID 2315作为申请人发起的所有审批，因为工具调用返回的数据为空。系统显示\"成功获取审批列表\"，但没有返回具体的审批记录。这可能是因为该ID没有发起过审批，或者系统中不存在相关记录。您可以尝试确认ID是否正确，或联系系统管理员获取更多帮助。\n",
+        "correct": false
+      },
+      {
+        "line": 425,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "验证一下部门3的角色8能不能对“/api/v1/orders/create”执行POST操作。",
+        "predict": "<think>\n</think> 根据系统返回的鉴权失败信息，部门3的角色8无法对\"/api/v1/orders/create\"执行POST操作。系统返回的错误代码4002表示鉴权失败，说明该角色和部门的权限配置中没有包含对这个API端点的POST操作权限。",
+        "label": "<think>\n</think> 根据鉴权结果，部门3的角色8无法对\"/api/v1/orders/create\"执行POST操作。系统返回了\"鉴权失败\"的消息，状态码为4002。\n",
+        "correct": false
+      },
+      {
+        "line": 426,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "查一下策略27868的权限定义和适用范围，给我详情页数据。",
+        "predict": "<think>\n</think> 根据查询结果，策略27868的权限定义如下：\n\n- 权限类型：产品发布权限（ptype: p）\n- 权限级别：5级（v0: 5）\n- 权限范围：2级（v1: 2）\n- 权限路径：/api/v1/products/publish（v2: /api/v1/products/publish）\n- 权限方法：POST（v3: POST）\n- 权限状态：允许（v4: allow）\n- 权限值：无（v5: null）\n\n该策略创建于2025-08-19 22:36:49，更新时间与创建时间相同，未被删除。该权限定义允许用户通过POST方法访问/api/v1/products/publish路径，用于产品发布操作。",
+        "label": "<think>\n</think> 根据查询结果，策略27868的详细信息如下：\n\n- 策略类型：p (policy)\n- 主体(subject)：5\n- 对象(object)：2\n- 操作路径：/api/v1/products/publish\n- 操作方法：POST\n- 权限结果：allow (允许)\n- 创建时间：2025-08-19 22:36:49\n- 更新时间：2025-08-19 22:36:49\n\n该策略定义了主体\"5\"对对象\"2\"有执行POST请求到\"/api/v1/products/publish\"路径的权限。\n",
+        "correct": false
+      },
+      {
+        "line": 427,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "宁波欢朋国际旅行社有限公司2025年3月（报表MAR-OPS）中支付宝是否为第一大支付方式？占比多少？",
+        "predict": "<think>\n</think> 根据查询结果，宁波欢朋国际旅行社有限公司2025年3月的支付方式分析报告显示，总支付金额为¥0.00，且各支付方式分布数据为空。因此无法确定支付宝是否为第一大支付方式，也无法提供其占比情况。",
+        "label": "<think>\n</think> 根据查询的2025年3月支付方式分析报告，目前无法确定支付宝是否为第一大支付方式，因为报告显示总支付金额为¥0.00，且各支付方式分布为空。报告中没有任何支付数据，所以无法分析支付宝的占比情况。\n",
+        "correct": false
+      },
+      {
+        "line": 428,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "请求查看策略27883的所有字段详情，尤其关注资源通配符设置。",
+        "predict": "<think>\n</think> 根据查询结果，策略ID为27883的策略不存在。系统返回状态码3000，表示该策略不存在，因此无法查看其字段详情或资源通配符设置。",
+        "label": "<think>\n</think> 抱歉，无法查看策略27883的详情，因为系统显示该策略不存在。错误信息为\"策略(ID: 27883)不存在\"。请确认策略ID是否正确，或者该策略可能已被删除。\n",
+        "correct": false
+      },
+      {
+        "line": 429,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "浙江海都国际旅行社有限公司2025年8月上半月主要支付方式占比如何？移动支付是否继续占主导？",
+        "predict": "<think>\n</think> 根据查询结果，浙江海都国际旅行社有限公司2025年8月上半月（2025-08-01至2025-08-15）的支付方式分析报告显示，总支付金额为¥0.00，且没有记录任何支付方式的数据。因此无法分析支付方式的占比情况，也无法判断移动支付是否占主导地位。",
+        "label": "<think>\n</think> 根据查询的数据，我无法提供浙江海都国际旅行社有限公司2025年8月上半月的支付方式占比分析。系统显示该时间段内(2025年8月1日至15日)的总支付金额为0元，没有任何支付方式的数据记录。因此无法确定移动支付是否继续占主导地位，也无法提供各支付方式的具体占比情况。\n",
+        "correct": false
+      },
+      {
+        "line": 430,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "浙江品赞国际旅游有限公司2024年12月景区收入走势有没有“周末双峰”？请输出日度折线用于观察周期性。",
+        "predict": "<think>\n</think> 根据查询结果，系统显示\"景区收入趋势分析：暂无数据\"，无法提供浙江品赞国际旅游有限公司2024年12月景区收入走势的折线图。由于没有可用数据，无法观察是否存在\"周末双峰\"现象。建议确认数据是否已正确录入系统，或尝试其他查询条件。",
+        "label": "<think>\n</think> 根据查询结果，系统显示\"景区收入趋势分析：暂无数据\"，无法提供浙江品赞国际旅游有限公司2024年12月的景区收入走势数据。因此无法分析是否存在\"周末双峰\"现象或生成日度折线图来观察周期性。\n",
+        "correct": false
+      },
+      {
+        "line": 431,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "常州运通旅行社有限公司在2024年国庆黄金周订单趋势如何？",
+        "predict": "<think>\n</think> 根据查询结果，常州运通旅行社有限公司在2024年国庆黄金周的订单趋势分析显示暂无数据。系统中没有相关的订单数量趋势信息可供参考。",
+        "label": "<think>\n</think> 根据查询结果，很抱歉，系统中暂无常州运通旅行社有限公司在2024年国庆黄金周期间的订单数据。\n\n可能的原因包括：\n1. 该时间段内该公司没有产生订单记录\n2. 数据尚未录入系统\n3. 公司名称可能存在差异\n\n建议您：\n- 确认公司名称是否准确\n- 检查是否有其他时间段的数据\n- 联系相关部门确认数据录入情况\n\n如需查询其他旅行社或不同时间段的订单趋势，我可以为新查询。\n",
+        "correct": false
+      },
+      {
+        "line": 432,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "天津西瓜旅游有限责任公司8月上半月订单趋势如何？工作日与周末的波动幅度差多少？",
+        "predict": "<think>\n</think> 根据查询结果，系统显示\"订单趋势分析：暂无数据\"，无法提供天津西瓜旅游有限责任公司8月上半月的订单趋势分析。系统中没有相关数据记录，因此无法比较工作日与周末的订单波动幅度。",
+        "label": "<think>\n</think> 根据查询结果，目前暂无天津西瓜旅游有限责任公司8月上半月的订单趋势数据。因此无法分析工作日与周末的波动幅度差异。建议您确认公司名称是否正确，或联系系统管理员查看是否有相关数据可供分析。\n",
+        "correct": false
+      },
+      {
+        "line": 433,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "把策略ID 27884的详细信息发我，确认其与角色映射是否有效。",
+        "predict": "<think>\n</think> 根据查询结果，策略ID 27884不存在，因此无法确认其与角色映射的有效性。请检查策略ID是否正确，或确认该策略是否已被删除。",
+        "label": "<think>\n</think> 根据查询结果，策略ID 27884不存在。系统返回了错误消息\"策略(ID: 27884)不存在\"。因此无法提供该策略的详细信息或确认其与角色映射是否有效。您可能需要检查策略ID是否正确，或者确认该策略是否已被删除。\n",
+        "correct": false
+      },
+      {
+        "line": 434,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "杭州市职工国际旅行社在2025年第三季度的收入构成，哪类业务贡献最大？",
+        "predict": "<think>\n</think> 根据查询结果，杭州市职工国际旅行社在2025年第三季度（2025-07-01至2025-09-30）的总收入为¥0.00，没有记录任何收入数据。因此无法确定哪类业务贡献最大。",
+        "label": "<think>\n</think> 根据查询结果，杭州市职工国际旅行社在2025年第三季度(2025年7月1日至9月30日)的总收入为¥0.00，没有任何收入记录。由于没有收入数据，无法确定哪类业务贡献最大。\n",
+        "correct": false
+      },
+      {
+        "line": 435,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "台州市天虹国际旅行社有限公司2025年7月（RV0725）现金、刷卡、二维码的占比分别是多少？请标出占比最高的方式。",
+        "predict": "<think>\n</think> 根据查询结果，台州市天虹国际旅行社有限公司2025年7月（RV0725）的支付方式占比如下：\n\n- 二维码：100.0%（¥38,400.00）\n- 其他：0.0%（¥0.00）\n\n占比最高的支付方式是二维码，占总支付金额的100.0%。",
+        "label": "<think>\n</think> 根据台州市天虹国际旅行社有限公司2025年7月的支付数据分析：\n\n- 二维码支付：¥38,400.00，占比100.0%\n- 现金支付：¥0.00，占比0.0%\n- 刷卡支付：¥0.00，占比0.0%\n\n占比最高的支付方式是：二维码支付，占总支付的100.0%。\n",
+        "correct": false
+      },
+      {
+        "line": 436,
+        "instruction": "请根据以上用户的查询(input)和工具调用返回结果(context)，生成一个最终回答。  \n    注意：输出中不能包含其他多余信息。",
+        "input": "给部门9的角色4授权报表查询“/api/reports/daily”的GET权限即可。",
+        "predict": "<think>\n</think> 根据系统返回的信息，已经成功为部门9的角色4添加了对报表查询接口\"/api/reports/daily\"的GET权限。该操作无需额外处理，权限已生效。",
+        "label": "<think>\n</think> 已成功为部门9的角色4授权报表查询\"/api/reports/daily\"的GET权限。\n",
+        "correct": false
+      }
+    ]
+  },
+  "user_intent_analysis": {
+    "total_samples": 52,
+    "correct_samples": 44,
+    "error_samples": 8,
+    "accuracy": 0.8461538461538461,
+    "correct_examples": [
+      {
+        "line": 439,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: casbin_policy_check\n描述: 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"department_id\": {\n      \"type\": \"string\",\n      \"description\": \"策略所属的部门ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"role_id\": {\n      \"type\": \"string\",\n      \"description\": \"要授予权限的角色ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\",\n        \"11\",\n        \"12\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"resource\": {\n      \"type\": \"string\",\n      \"description\": \"资源路径\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"action\": {\n      \"type\": \"string\",\n      \"description\": \"操作方法\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"GET\",\n        \"POST\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"role_id\",\n    \"department_id\",\n    \"resource\",\n    \"action\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "部门7的角色1是否有权限查看数据看板“/api/analytics/dashboard”的GET？",
+        "predict": "<think>\n</think> \"department_id\": \"7\", \"role_id\": \"1\", \"resource\": \"/api/analytics/dashboard\", \"action\": \"GET\"",
+        "label": "<think>\n</think> \"department_id\": \"7\", \"role_id\": \"1\", \"resource\": \"/api/analytics/dashboard\", \"action\": \"GET\"\n",
+        "correct": true
+      },
+      {
+        "line": 440,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: casbin_policy_check\n描述: 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"department_id\": {\n      \"type\": \"string\",\n      \"description\": \"策略所属的部门ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"role_id\": {\n      \"type\": \"string\",\n      \"description\": \"要授予权限的角色ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\",\n        \"11\",\n        \"12\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"resource\": {\n      \"type\": \"string\",\n      \"description\": \"资源路径\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"action\": {\n      \"type\": \"string\",\n      \"description\": \"操作方法\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"GET\",\n        \"POST\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"role_id\",\n    \"department_id\",\n    \"resource\",\n    \"action\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "检查部门7的角色5能否GET访问“/api/hotels/*”。",
+        "predict": "<think>\n</think> \"department_id\": \"7\", \"role_id\": \"5\", \"resource\": \"/api/hotels/*\", \"action\": \"GET\"",
+        "label": "<think>\n</think> \"department_id\": \"7\", \"role_id\": \"5\", \"resource\": \"/api/hotels/*\", \"action\": \"GET\"\n",
+        "correct": true
+      },
+      {
+        "line": 441,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: calculate_order_distribution\n描述: 分析订单状态分布，返回饼图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"scenic_spot_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：景区名称筛选\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "杭州爱马假期文化旅游有限公司6月份订单状态中，未支付订单占比是否异常？",
+        "predict": "<think>\n</think> \"start_date\": \"2025-06-01\", \"end_date\": \"2025-06-30\", \"travel_agency_filter\": \"杭州爱马假期文化旅游有限公司\"",
+        "label": "<think>\n</think> \"start_date\": \"2025-06-01\", \"end_date\": \"2025-06-30\", \"travel_agency_filter\": \"杭州爱马假期文化旅游有限公司\"\n",
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 437,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: analyze_payment_methods\n描述: 分析各支付方式占比，返回饼图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"report_number\": {\n      \"type\": \"string\",\n      \"description\": \"可选：报表编号筛选\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "2025年7月第一周整体主流支付方式占比如何？现金是否低于10%？",
+        "predict": "<think>\n</think> \"start_date\": \"2025-07-07\", \"end_date\": \"2025-07-11\"",
+        "label": "<think>\n</think> \"start_date\": \"2025-07-01\", \"end_date\": \"2025-07-07\"\n",
+        "correct": false
+      },
+      {
+        "line": 438,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: calculate_order_distribution\n描述: 分析订单状态分布，返回饼图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"scenic_spot_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：景区名称筛选\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "杭州飞联旅行社有限公司上周订单中，取消/退款是否出现异常峰值？",
+        "predict": "<think>\n</think> \"start_date\": \"2025-07-28\", \"end_date\": \"2025-08-03\", \"travel_agency_filter\": \"杭州飞联旅行社有限公司\"",
+        "label": "<think>\n</think> \"start_date\": \"2025-08-04\", \"end_date\": \"2025-08-10\", \"travel_agency_filter\": \"杭州飞联旅行社有限公司\"\n",
+        "correct": false
+      },
+      {
+        "line": 444,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: analyze_payment_methods\n描述: 分析各支付方式占比，返回饼图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"report_number\": {\n      \"type\": \"string\",\n      \"description\": \"可选：报表编号筛选\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "上海晟鑫国际旅行社有限公司2025年春节档各支付方式占比如何？现金结算是否明显回升？",
+        "predict": "<think>\n</think> \"start_date\": \"2025-01-28\", \"end_date\": \"2025-02-05\", \"travel_agency_filter\": \"上海晟鑫国际旅行社有限公司\"",
+        "label": "<think>\n</think> \"start_date\": \"2025-01-28\", \"end_date\": \"2025-02-04\", \"travel_agency_filter\": \"上海晟鑫国际旅行社有限公司\"\n",
+        "correct": false
+      },
+      {
+        "line": 455,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: analyze_order_trends\n描述: 分析订单数量趋势，返回折线图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "上海众朗电子商务有限公司2024年12月订单量是否存在“周末双峰”？请输出日度趋势以观察季节性特征。",
+        "predict": "<think>\n</think> \"start_date\": \"2024-12-01\", \"end_date\": \"2024-12-31\"",
+        "label": "<think>\n</think> \"start_date\": \"2024-12-01\", \"end_date\": \"2024-12-31\", \"travel_agency_filter\": \"上海众朗电子商务有限公司\"\n",
+        "correct": false
+      },
+      {
+        "line": 461,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: casbin_policy_list\n描述: 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"policy_id\": {\n      \"type\": \"integer\",\n      \"description\": \"可选：根据唯一的策略ID进行精确查询。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"department_id\": {\n      \"type\": \"string\",\n      \"description\": \"策略所属的部门ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"role_id\": {\n      \"type\": \"string\",\n      \"description\": \"要授予权限的角色ID。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"1\",\n        \"2\",\n        \"3\",\n        \"4\",\n        \"5\",\n        \"6\",\n        \"7\",\n        \"8\",\n        \"9\",\n        \"10\",\n        \"11\",\n        \"12\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"resource\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据资源路径进行筛选。支持通配符(*)和路径匹配。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"action\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据操作方法进行筛选。使用星号(*)可匹配所有方法。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": [\n        \"GET\",\n        \"POST\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"eft\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据策略效果进行筛选，默认为'allow'。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": \"allow\",\n      \"enum\": [\n        \"allow\",\n        \"deny\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"page\": {\n      \"type\": \"integer\",\n      \"description\": \"查询结果的页码，默认为第1页。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": 1,\n      \"enum\": null,\n      \"minimum\": 1.0,\n      \"maximum\": null\n    },\n    \"page_size\": {\n      \"type\": \"integer\",\n      \"description\": \"每页返回的策略数量，默认为20，最大为100。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": 20,\n      \"enum\": null,\n      \"minimum\": 1.0,\n      \"maximum\": 100.0\n    },\n    \"ptype\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据策略类型进行筛选。'p'代表权限策略，'g'代表角色与用户的分组策略。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "按策略类型p筛选，资源“/api/finance/*”的所有POST策略列出来。",
+        "predict": "<think>\n</think> \"resource\": \"/api/finance/*\", \"action\": \"POST\", \"ptype\": \"p\"",
+        "label": "<think>\n</think> \"ptype\": \"p\", \"resource\": \"/api/finance/*\", \"action\": \"POST\"\n",
+        "correct": false
+      },
+      {
+        "line": 465,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: get_approval_list\n描述: 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"user_id\": {\n      \"type\": \"integer\",\n      \"description\": \"用户的唯一标识ID。此参数通常由系统根据当前登录用户自动填充。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"user_role\": {\n      \"type\": \"string\",\n      \"description\": \"查询时所使用的用户角色\",\n      \"format\": null,\n      \"examples\": [\n        \"approver\"\n      ],\n      \"default\": null,\n      \"enum\": [\n        \"applicant\",\n        \"approver\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"approval_status\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据审批状态进行筛选\",\n      \"format\": null,\n      \"examples\": [\n        \"pending\"\n      ],\n      \"default\": null,\n      \"enum\": [\n        \"pending\",\n        \"approved\",\n        \"rejected\",\n        \"cancelled\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"user_id\",\n    \"user_role\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "查询ID 2304作为申请人的待审批列表。",
+        "predict": "<think>\n</think> \"user_id\": 2304, \"user_role\": \"applicant\"",
+        "label": "<think>\n</think> \"user_id\": 2304, \"user_role\": \"applicant\", \"approval_status\": \"pending\"\n",
+        "correct": false
+      },
+      {
+        "line": 471,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: analyze_payment_methods\n描述: 分析各支付方式占比，返回饼图格式数据\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"start_date\": {\n      \"type\": \"string\",\n      \"description\": \"开始日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"end_date\": {\n      \"type\": \"string\",\n      \"description\": \"结束日期 (YYYY-MM-DD)\",\n      \"format\": \"date\",\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"report_number\": {\n      \"type\": \"string\",\n      \"description\": \"可选：报表编号筛选\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"travel_agency_filter\": {\n      \"type\": \"string\",\n      \"description\": \"可选：旅行社名称筛选（支持模糊匹配）\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"start_date\",\n    \"end_date\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "游大大国际旅行社（上海）有限公司2024年全年不同支付方式（二维码、现金、对公转账）的占比情况怎样？请给出饼图数据。",
+        "predict": "<think>\n</think> \"start_date\": \"2024-01-01\", \"end_date\": \"2024-12-31\", \"travel_agency_filter\": \"游大大国际旅行社（上海）有限公司\"",
+        "label": "<think>\n</think> \"start_date\": \"2024-01-01\", \"end_date\": \"2024-12-31\", \"travel_agency_filter\": \"游大大国际旅行社（上海）有限公司\", \"report_number\": \"ANNUAL24\"\n",
+        "correct": false
+      },
+      {
+        "line": 486,
+        "instruction": "请根据query和工具信息，分析用户意图，提取或推理出调用该工具所需的参数。请输出一个包含所有必填参数及其对应值的字典格式，确保参数名称与工具定义中的一致。\n\n工具信息:\n名称: get_approval_list\n描述: 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\n参数模式:\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"user_id\": {\n      \"type\": \"integer\",\n      \"description\": \"用户的唯一标识ID。此参数通常由系统根据当前登录用户自动填充。\",\n      \"format\": null,\n      \"examples\": null,\n      \"default\": null,\n      \"enum\": null,\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"user_role\": {\n      \"type\": \"string\",\n      \"description\": \"查询时所使用的用户角色\",\n      \"format\": null,\n      \"examples\": [\n        \"approver\"\n      ],\n      \"default\": null,\n      \"enum\": [\n        \"applicant\",\n        \"approver\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    },\n    \"approval_status\": {\n      \"type\": \"string\",\n      \"description\": \"可选：根据审批状态进行筛选\",\n      \"format\": null,\n      \"examples\": [\n        \"pending\"\n      ],\n      \"default\": null,\n      \"enum\": [\n        \"pending\",\n        \"approved\",\n        \"rejected\",\n        \"cancelled\"\n      ],\n      \"minimum\": null,\n      \"maximum\": null\n    }\n  },\n  \"required\": [\n    \"user_id\",\n    \"user_role\"\n  ],\n  \"additionalProperties\": null\n}\n\n注意：今天的日期是2025-08-17\n\n请严格按照以下格式输出结果（不要添加任何其他内容）:\n\n参数详情:\n{\n    参数名称: 参数值,\n    参数名称: 参数值,\n    ...\n}",
+        "input": "把我（ID 2301）待审批的单子列出来。",
+        "predict": "<think>\n</think> \"user_id\": 2301, \"user_role\": \"applicant\", \"approval_status\": \"pending\"",
+        "label": "<think>\n</think> \"user_id\": 2301, \"user_role\": \"approver\", \"approval_status\": \"pending\"\n",
+        "correct": false
+      }
+    ]
+  },
+  "service_type": {
+    "total_samples": 14,
+    "correct_samples": 5,
+    "error_samples": 9,
+    "accuracy": 0.35714285714285715,
+    "correct_examples": [
+      {
+        "line": 489,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n\n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、大慈岩门票价格政策：\n\n|  |  |  |\n| --- | --- | --- |\n| 价格政策 | 单价 | 有效期 |\n| 门市价 | 80 | 2025年1月1日-12月31日 |\n| 协议成团价 | 50 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 50 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 64 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 72 | 2025年1月1日-12月31日 |\n| 老年团队价 | 40 | 2025年1月1日-12月31日 |\n| 学生团队价 | 40 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 30 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 50 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 50 | 2025年1月1日-12月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "景区门票",
+          "service_name": "大慈岩门票",
+          "main_products": [
+            "大慈岩门票"
+          ]
+        },
+        "label": {
+          "service_type": "景区门票",
+          "service_name": "大慈岩门票",
+          "main_products": [
+            "大慈岩门票"
+          ]
+        },
+        "correct": true
+      },
+      {
+        "line": 491,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n\n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n只返回JSON，不要其他解释。",
+        "input": "一、新叶古村门票价格政策：\n\n|  |  |  |\n| --- | --- | --- |\n| 价格政策 | 单价 | 有效期 |\n| 门市价 | 68 | 2025年1月1日-12月31日 |\n| 协议成团价 | 40 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 40 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 54 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 60 | 2025年1月1日-12月31日 |\n| 老年团队价 | 30 | 2025年1月1日-12月31日 |\n| 学生团队价 | 30 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 25 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 40 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 40 | 2025年1月1日-12月31日 |\n| 住酒店免门票 | 0 | 2025年1月1日-3月31日 |\n| 研学团队价 | 30 | 2025年1月1日-3月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "景区门票",
+          "service_name": "新叶古村门票",
+          "main_products": [
+            "新叶古村门票"
+          ]
+        },
+        "label": {
+          "service_type": "景区门票",
+          "service_name": "新叶古村门票",
+          "main_products": [
+            "新叶古村门票"
+          ]
+        },
+        "correct": true
+      },
+      {
+        "line": 497,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n\n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、七里扬帆门票价格政策：\n\n|  |  |  |\n| --- | --- | --- |\n| 价格政策 | 单价 | 有效期 |\n| 门市价 | 80 | 2025年1月1日-12月31日 |\n| 协议成团价 | 50 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 50 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 64 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 72 | 2025年1月1日-12月31日 |\n| 老年团队价 | 40 | 2025年1月1日-12月31日 |\n| 学生团队价 | 40 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 30 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 50 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 50 | 2025年1月1日-12月31日 |\n| 住酒店免门票 | 0 | 2025年1月1日-3月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "景区门票",
+          "service_name": "七里扬帆门票",
+          "main_products": [
+            "七里扬帆门票"
+          ]
+        },
+        "label": {
+          "service_type": "景区门票",
+          "service_name": "七里扬帆门票",
+          "main_products": [
+            "七里扬帆门票"
+          ]
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 490,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n\n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、大慈岩丛林速滑（旱滑道）下行价格政策：\n\n|  |  |  |\n| --- | --- | --- |\n| 价格政策 | 单价 | 有效期 |\n| 门市价 | 60 | 2025年1月1日-12月31日 |\n| 协议成团价 | 40 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 40 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 60 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 60 | 2025年1月1日-12月31日 |\n| 老年团队价 | 40 | 2025年1月1日-12月31日 |\n| 学生团队价 | 40 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 40 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 40 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 40 | 2025年1月1日-12月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "索道服务",
+          "service_name": "大慈岩丛林速滑（旱滑道）",
+          "main_products": [
+            "大慈岩丛林速滑（旱滑道）"
+          ]
+        },
+        "label": {
+          "service_type": "索道服务",
+          "service_name": "大慈岩丛林速滑（旱滑道）下行",
+          "main_products": [
+            "大慈岩丛林速滑（旱滑道）下行"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 492,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n只返回JSON，不要其他解释。",
+        "input": "一、大慈岩索道价格政策：\n\n|  |  |  |  |  |\n| --- | --- | --- | --- | --- |\n| 价格政策 | 索道上行单价 | 索道下行单价 | 索道上下行单价 | 有效期 |\n| 门市价 | 80 | 70 | 100 | 2025年1月1日-12月31日 |\n| 协议成团价 | 60 | 50 | 100 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 60 | 50 | 100 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 80 | 70 | 100 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 80 | 70 | 100 | 2025年1月1日-12月31日 |\n| 老年团队价 |  |  | 100 | 2025年1月1日-12月31日 |\n| 学生团队价 |  |  | 100 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 60 | 50 | 100 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 60 | 50 | 100 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 60 | 50 | 100 | 2025年1月1日-12月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "索道服务",
+          "service_name": "大慈岩索道",
+          "main_products": [
+            "索道上行",
+            "索道下行",
+            "索道上下行"
+          ]
+        },
+        "label": {
+          "service_type": "索道服务",
+          "service_name": "大慈岩索道",
+          "main_products": [
+            "索道上行单价",
+            "索道下行单价",
+            "索道上下行单价"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 493,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 或者格式：产品-子产品：价格（如\"新安江游船-梦幻新安江\"）\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例1：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n   示例2：新安江游船-梦幻新安江：40 → 船费服务（不是联票套餐）\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n   - 格式：产品价格政策：子产品1，子产品2\n   - 格式：产品-子产品：价格（如\"新安江游船-梦幻新安江\"）\n   - 如果检测到这种格式，直接判定为产品细分，不要判定为联票套餐\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"新安江游船\"]（包含子产品）\n- 文档：新安江游船-梦幻新安江：40 → main_products: [\"新安江游船\"]（包含子产品）\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n\n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n【产品细分 vs 联票套餐 区分要点】\n- **产品细分**：同一服务的不同产品线，如\"新安江游船-梦幻新安江\"\n- **联票套餐**：不同服务的组合，如\"大慈岩门票-玻璃栈道-丛林速滑\"\n- 关键判断：如果\"-\"连接的是同一服务的不同产品线，则是产品细分；如果连接的是不同服务，则是联票套餐\n\n\n只返回JSON，不要其他解释。",
+        "input": "|  |  |  |  |\n| --- | --- | --- | --- |\n| 资源 | 适用对象 | 有效期 | 价格 |\n| 大慈岩门票、灵栖洞手划船、灵栖洞门票 | 浙江吉程国际旅行社有限公司 | 2025年1月1日-2025年12月31日 | 灵栖洞手划船：15 |\n| 灵栖洞门票：20 |\n| 大慈岩门票：70 |\n| 大慈岩门票、灵栖洞手划船、灵栖洞门票 | 嘉兴市米兰国际旅行社股份有限公司 | 2025年1月1日-2025年12月31日 | 灵栖洞手划船：15 |\n| 灵栖洞门票：20 |\n| 大慈岩门票：70 |\n| 大慈岩门票、灵栖洞手划船、灵栖洞门票 | 湖州自由假期国际旅行社有限公司 | 2025年1月1日-2025年12月31日 | 灵栖洞手划船：15 |\n| 灵栖洞门票：20 |\n| 大慈岩门票：70 |\n| 大慈岩门票、灵栖洞手划船、灵栖洞门票 | 天天在线（苏州）国际旅行社有限公司 | 2025年1月1日-2025年12月31日 | 大慈岩门票：35 |\n| 灵栖洞手划船：15 |\n| 灵栖洞门票：20 |",
+        "predict": {
+          "service_type": "联票套餐",
+          "service_name": "大慈岩门票-灵栖洞手划船-灵栖洞门票",
+          "main_products": [
+            "大慈岩门票",
+            "灵栖洞手划船",
+            "灵栖洞门票"
+          ]
+        },
+        "label": {
+          "service_type": "联票套餐",
+          "service_name": "大慈岩门票、灵栖洞手划船、灵栖洞门票",
+          "main_products": [
+            "大慈岩门票",
+            "灵栖洞手划船",
+            "灵栖洞门票"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 494,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n只返回JSON，不要其他解释。",
+        "input": "一、灵栖洞考拉森林丛林探险价格政策：\n\n|  |  |  |  |\n| --- | --- | --- | --- |\n| 价格政策 | 亲子线 | 成人线 | 有效期 |\n| 门市价 | 68 | 108 | 2025年1月1日-12月31日 |\n| 协议成团价 | 40 | 50 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 40 | 50 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 68 | 108 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 68 | 108 | 2025年1月1日-12月31日 |\n| 老年团队价 | 40 | 50 | 2025年1月1日-12月31日 |\n| 学生团队价 | 40 | 50 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 40 | 50 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 40 | 50 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 40 | 50 | 2025年1月1日-12月31日 |",
+        "predict": {
+          "service_type": "体验活动",
+          "service_name": "灵栖洞考拉森林丛林探险",
+          "main_products": [
+            "灵栖洞考拉森林丛林探险"
+          ]
+        },
+        "label": {
+          "service_type": "体验活动",
+          "service_name": "灵栖洞考拉森林丛林探险",
+          "main_products": [
+            "亲子线",
+            "成人线"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 495,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "|  |  |  |  |  |\n| --- | --- | --- | --- | --- |\n| 资源 | 适用对象 | 有效期 | 价格 | 备注 |\n| 江清月近人白天场 | 所有 | 2025年1月1日-2025年12月31日 | 江清月近人白天场：30 | 研学团",
+        "predict": {
+          "service_type": "景区门票",
+          "service_name": "江清月近人白天场",
+          "main_products": [
+            "江清月近人白天场"
+          ]
+        },
+        "label": {
+          "service_type": "船费服务",
+          "service_name": "江清月近人白天场",
+          "main_products": [
+            "江清月近人白天场"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 496,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、灵栖洞西游魔毯上行价格政策：\n\n|  |  |  |\n| --- | --- | --- |\n| 价格政策 | 单价 | 有效期 |\n| 门市价 | 100 | 2025年1月1日-12月31日 |\n| 协议成团价 | 30 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 30 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 100 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 100 | 2025年1月1日-12月31日 |\n| 老年团队价 | 30 | 2025年1月1日-12月31日 |\n| 学生团队价 | 30 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 30 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 30 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 30 | 2025年1月1日-12月31日 |",
+        "predict": {
+          "service_type": "景区门票",
+          "service_name": "灵栖洞西游魔毯上行",
+          "main_products": [
+            "灵栖洞西游魔毯上行"
+          ]
+        },
+        "label": {
+          "service_type": "索道服务",
+          "service_name": "灵栖洞西游魔毯",
+          "main_products": [
+            "灵栖洞西游魔毯"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 498,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、七里扬帆小火车单程价格政策：\n\n|  |  |  |  |\n| --- | --- | --- | --- |\n| 价格政策 | 小火车单程 | 小火车往返 | 有效期 |\n| 门市价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 协议成团价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 老年/学生团队价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 15 | 30 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 10 | 20 | 2025年1月1日-12月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "索道服务",
+          "service_name": "七里扬帆小火车",
+          "main_products": [
+            "七里扬帆小火车单程",
+            "七里扬帆小火车往返"
+          ]
+        },
+        "label": {
+          "service_type": "船费服务",
+          "service_name": "七里扬帆小火车",
+          "main_products": [
+            "小火车单程",
+            "小火车往返"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 500,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、汉庭酒店住宿价格政策\n\n|  |  |  |\n| --- | --- | --- |\n| 房型 | 单价 | 有效期 |\n| 家庭房 | 249 | 2025年1月1日-12月31日 |\n| 高级大床房 | 189 | 2025年1月1日-12月31日 |\n| 双床房 | 199 | 2025年1月1日-12月31日 |\n| 大床房 | 169 | 2025年1月1日-12月31日 |",
+        "predict": {
+          "service_type": "酒店住宿",
+          "service_name": "汉庭酒店住宿",
+          "main_products": [
+            "家庭房",
+            "高级大床房",
+            "双床房",
+            "大床房"
+          ]
+        },
+        "label": {
+          "service_type": "酒店住宿",
+          "service_name": "汉庭酒店住宿价格政策",
+          "main_products": [
+            "家庭房",
+            "高级大床房",
+            "双床房",
+            "大床房"
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 507,
+        "instruction": "请分析以下价格政策文档，识别服务类型和主要产品：\n\n请按以下JSON格式返回：\n{\n    \"service_type\": \"服务类型\",\n    \"service_name\": \"项目名称\", \n    \"main_products\": [\"主要产品1\", \"主要产品2\", ...]\n}\n\n【重要说明】\n- \"主要产品\"是指具体的服务项目名称，不是价格类型、地区条件或时间限定\n- \"主要产品\"应该是游客可以购买/体验的具体服务，如\"大慈岩门票\"、\"玻璃栈道\"、\"游船体验\"等\n- 价格类型（如\"门市价\"、\"协议价\"）、地区条件（如\"江浙沪地区\"）、时间限定（如\"淡旺季\"）都不属于主要产品\n\n服务类型判断规则（按优先级排序）：\n\n1. 联票套餐（最高优先级）\n   - 包含3个或以上不同项目\n   - 包含2个不同类别的项目\n   - 用\"-\"、\"+\"等符号连接多个项目\n   示例：大慈岩门票-玻璃栈道-丛林速滑 → 联票套餐\n\n2. 产品细分（次优先级）\n   - 同一服务下的产品线细分\n   - 格式：产品价格政策：子产品1，子产品2\n   - 产品的不同的价格情况（协议成团价,...），不同的地区条件（江浙沪地区,...）,不同的时间限定（周末,淡旺季,...）不属于产品细分\n   - 如果文档中存在产品的所属关系，如果有则存在产品细分\n   示例：新安江游船价格政策：梦幻新安江，江清月近人 → 船费服务\n\n3. 单个服务类型\n   - 景区门票：景区门票价格政策（如：大慈岩门票、千岛湖门票等）\n   - 酒店住宿：酒店房型、住宿价格政策\n   - 索道服务：索道、滑道、玻璃栈道、玻璃水滑道等高空/滑行设施价格政策\n   - 体验活动：体验项目价格政策（如：丛林探险、豆腐包制作等）\n   - 船费服务：游船、船票等水上项目价格政策\n\n判断步骤：\n1. 检查是否为产品细分（同一服务下的产品）\n2. 数一数文档中有多少个不同的项目，注意区分不同项目还是同一个项目下不同产品\n3. 如果≥3个项目或2个不同类别项目 → 联票套餐\n4. 否则根据项目类型判断单个服务类型\n\n【服务类型判断指导】\n- 如果文档标题包含\"门票\" → 景区门票\n- 如果文档标题包含\"玻璃栈道\"、\"索道\"、\"滑道\"、\"丛林速滑\" → 索道服务\n- 如果文档标题包含\"游船\"、\"船费\"、\"帆船\" → 船费服务\n- 如果文档标题包含\"体验\"、\"制作\"、\"探险\" → 体验活动\n- 如果文档标题包含\"酒店\"、\"住宿\"、\"房间\" → 酒店住宿\n\n【主要产品识别示例】\n正确示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"大慈岩门票\"]\n- 文档：新安江游船价格政策：梦幻新安江，江清月近人 → main_products: [\"梦幻新安江\", \"江清月近人\"]\n- 文档：大慈岩门票-玻璃栈道-丛林速滑 → main_products: [\"大慈岩门票\", \"玻璃栈道\", \"丛林速滑\"]\n \n错误示例：\n- 文档：大慈岩门票价格政策 → main_products: [\"门市价\", \"协议价\"] ❌（这些是价格类型，不是产品）\n- 文档：大慈岩门票价格政策 → main_products: [\"江浙沪地区\", \"淡旺季\"] ❌（这些是条件，不是产品）\n- 文档：大慈岩玻璃栈道价格政策 → main_products: [\"大慈岩门票\", \"玻璃栈道\"] ❌（错误拆分，应该是一个完整产品）\n\n【识别要点】\n1. 先看文档标题，确定主要服务项目\n2. 主要产品应该是名词，不是形容词或条件\n3. 如果文档只提到一个主要服务，main_products数组就只包含这一个\n4. 如果文档提到多个相关服务，main_products数组包含所有相关服务\n5. 价格、地区、时间等条件信息不属于主要产品\n6. 产品名称要保持完整性，不要随意拆分（如\"大慈岩玻璃栈道\"是一个完整产品，不要拆分为\"大慈岩门票\"和\"玻璃栈道\"）\n7. 特殊情况下可以拆分：\n   - 索道服务：如果明确提到不同的索道项目，则拆分为具体项目\n   - 游船服务：如果明确提到不同的游船项目，则拆分为具体项目\n   - 体验活动：如果明确提到不同的体验项目，则拆分为具体项目\n\n\n只返回JSON，不要其他解释。",
+        "input": "一、七里扬帆小火车单程价格政策：\n\n|  |  |  |  |\n| --- | --- | --- | --- |\n| 价格政策 | 小火车单程 | 小火车往返 | 有效期 |\n| 门市价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 协议成团价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 协议不成团价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 非协议成团价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 非协议不成团价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 老年/学生团队价 | 10 | 20 | 2025年1月1日-12月31日 |\n| 中远程及新增市场价格 | 15 | 30 | 2025年1月1日-12月31日 |\n| 景酒打包价 | 15 | 30 | 2025年1月1日-12月31日 |\n| 旅投员工价 | 10 | 20 | 2025年1月1日-12月31日 |\n\n二、注释：\n\n1.门市价：即散客价\n\n2.成团价：购票人数≥10人即为成团\n\n3.协议成团价：协议客户享受的成团单价\n\n4.协议不成团价：协议客户享受的不成团单价（协议散客价）\n\n5.非协议成团价：未签署过协议的客户的成团单价（只要出示导游证/任务单/计划书）\n\n6.非协议不成团价：未签署过协议的客户的不成团单价（非协议散客价）\n\n7.老年团队价：年龄达 55 周岁以上老人占整团人数 70%以上。\n\n8.学生团队价：学生人数占整团人数 80%以上（需要相关文件证明）\n\n9.中远程及新增市场价格：指江浙沪以外的市场（盐城、淮安、宿迁、连云港、徐州等苏北地区也享受该价格政策），有效证件人数占整团人数80%以上,即享受中远程市场优惠价格政策。是团队价\n\n10.景酒打包价：住与旅投合作的酒店民宿宾馆享受景区的协议成团价（表现形式可以是住酒店免门票，但是会要酒店支付给我们协议团队价的价格）--打钩实现\n\n11.旅投员工价：旅投员工以及带的人享受的散客价（员工直系亲属免门票）-打钩实现",
+        "predict": {
+          "service_type": "索道服务",
+          "service_name": "七里扬帆小火车",
+          "main_products": [
+            "七里扬帆小火车单程",
+            "七里扬帆小火车往返"
+          ]
+        },
+        "label": {
+          "service_type": "船费服务",
+          "service_name": "七里扬帆小火车",
+          "main_products": [
+            "小火车单程",
+            "小火车往返"
+          ]
+        },
+        "correct": false
+      }
+    ]
+  },
+  "node_name": {
+    "total_samples": 7,
+    "correct_samples": 4,
+    "error_samples": 3,
+    "accuracy": 0.5714285714285714,
+    "correct_examples": [
+      {
+        "line": 503,
+        "instruction": "分析以下船费价格政策文档，识别产品\"大慈岩门票\"的所有价格条件：\n\n请返回JSON格式：\n{\n    \"node_name\": \"大慈岩门票\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件名称\",\n                    \"condition_value\": \"条件值\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"限制类型\",\n                            \"operator\": \"操作符\",\n                            \"value\": \"限制值\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n\n【重要说明】\n1. **价格条件**：指能够影响价格的因素，如\"门市价\"、\"协议成团价\"、\"老年团队价\"、\"旺季价\"、\"淡季价\"等\n2. **表格列标题不是价格条件**：如\"适用对象\"、\"有效期\"、\"备注\"等是表格结构，不是价格条件\n3. **简单价格结构**：如果文档只有一个固定价格，没有不同的价格类型，则conditions为空数组\n4. **限制条件**：指对价格条件的内部限制说明，如\"团队人数≥10人\"、\"年龄≥55岁\"等\n5. **提取准则**：如果文档中有多种价格类型但价格相同，也需要创建多个price_conditions项\n\n【判断标准】\n- 如果文档中只有一个价格，没有提到\"门市价\"、\"团队价\"、\"旺季价\"等不同价格类型，则conditions为空数组\n- 如果文档提到多种价格类型（如门市价、协议价、团队价），则每个价格类型创建一个condition\n- 表格的列标题（如\"适用对象\"、\"有效期\"、\"备注\"）不属于价格条件\n\nFew-shot示例：\n\n示例1 - 简单价格（无价格条件）：\n{\n    \"price\": 30,\n    \"unit\": \"人次\",\n    \"conditions\": []  // 只有一个固定价格，无价格条件\n}\n\n示例2 - 单价格条件（无条件限制）：\n{\n    \"price\": 120,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"门市价\",\n            \"condition_value\": \"门市价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n示例3 - 单价格条件（有条件限制）：\n{\n    \"price\": 80,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"协议成团价\",\n            \"condition_value\": \"协议成团价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"团队人数\",\n                    \"operator\": \"≥\",\n                    \"value\": \"10人\"\n                }\n            ]\n        }\n    ]\n}\n\n示例4 - 多价格条件组合：\n{\n    \"price\": 60,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"季节\",\n            \"condition_value\": \"旺季\",\n            \"restrictions\": []\n        },\n        {\n            \"condition_name\": \"协议成团价\",\n            \"condition_value\": \"协议成团价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"团队人数\",\n                    \"operator\": \"≥\",\n                    \"value\": \"15人\"\n                }\n            ]\n        }\n    ]\n}\n\n示例5 - 多种价格类型（重要示例）：\n如果文档中有多种价格类型但价格相同，应该这样处理：\n{\n    \"node_name\": \"船票\",\n    \"price_conditions\": [\n        {\n            \"price\": 15,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"门市价\",\n                    \"condition_value\": \"门市价\",\n                    \"restrictions\": []\n                }\n            ]\n        },\n        {\n            \"price\": 15,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"协议成团价\",\n                    \"condition_value\": \"协议成团价\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"团队人数\",\n                            \"operator\": \"≥\",\n                            \"value\": \"10人\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"price\": 15,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"老年团队价\",\n                    \"condition_value\": \"老年团队价\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"年龄\",\n                            \"operator\": \"≥\",\n                            \"value\": \"55岁\"\n                        },\n                        {\n                            \"restriction_type\": \"老年人占比\",\n                            \"operator\": \"≥\",\n                            \"value\": \"70%\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n\n【关键点】\n- 每个价格类型都应该创建独立的price_conditions项\n- 不要将所有价格类型放在同一个price_conditions的conditions数组中\n- 即使价格相同，不同的价格类型也要分开处理\n\n注意：\n1. 单位统一使用\"人次\"\n2. 条件名称应该是价格政策名称（如门市价、团队价、旺季价等），不是表格列标题\n3. 如果文档只有一个固定价格，conditions为空数组\n4. 每个价格类型创建独立的price_conditions项\n5. 只返回JSON，不要其他解释。",
+        "input": "|  |  |  |  |\n| --- | --- | --- | --- |\n| 资源 | 适用对象 | 有效期 | 价格 |\n| 大慈岩门票-新安江游船 | 苏州快乐三义国际旅行社有限公司 | 2025年1月1日-2025年12月31日 | 大慈岩门票：35 |\n| 新安江游船-梦幻新安江：35 |\n| 大慈岩门票-新安江游船 | 天天在线（苏州）国际旅行社有限公司 | 2025年1月1日-2025年12月31日 | 大慈岩门票：35 |\n| 新安江游船-梦幻新安江：35 |",
+        "predict": {
+          "node_name": "大慈岩门票",
+          "price_conditions": [
+            {
+              "price": 35,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "label": {
+          "node_name": "大慈岩门票",
+          "price_conditions": [
+            {
+              "price": 35,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "correct": true
+      },
+      {
+        "line": 505,
+        "instruction": "分析以下船费价格政策文档，识别产品\"江清月近人白天场\"的所有价格条件：\n\n请返回JSON格式：\n{\n    \"node_name\": \"江清月近人白天场\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件名称\",\n                    \"condition_value\": \"条件值\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"限制类型\",\n                            \"operator\": \"操作符\",\n                            \"value\": \"限制值\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n\n【重要说明】\n1. **价格条件**：指能够影响价格的因素，如\"门市价\"、\"协议成团价\"、\"老年团队价\"、\"旺季价\"、\"淡季价\"等\n2. **表格列标题不是价格条件**：如\"适用对象\"、\"有效期\"、\"备注\"等是表格结构，不是价格条件\n3. **简单价格结构**：如果文档只有一个固定价格，没有不同的价格类型，则conditions为空数组\n4. **限制条件**：指对价格条件的内部限制说明，如\"团队人数≥10人\"、\"年龄≥55岁\"等\n\n【判断标准】\n- 如果文档中只有一个价格，没有提到\"门市价\"、\"团队价\"、\"旺季价\"等不同价格类型，则conditions为空数组\n- 如果文档提到多种价格类型（如门市价、协议价、团队价），则每个价格类型创建一个condition\n- 表格的列标题（如\"适用对象\"、\"有效期\"、\"备注\"）不属于价格条件\n\nFew-shot示例：\n\n示例1 - 简单价格（无价格条件）：\n{\n    \"price\": 30,\n    \"unit\": \"人次\",\n    \"conditions\": []  // 只有一个固定价格，无价格条件\n}\n\n示例2 - 单价格条件（无条件限制）：\n{\n    \"price\": 120,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"门市价\",\n            \"condition_value\": \"门市价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n示例3 - 单价格条件（有条件限制）：\n{\n    \"price\": 80,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"协议成团价\",\n            \"condition_value\": \"协议成团价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"团队人数\",\n                    \"operator\": \"≥\",\n                    \"value\": \"10人\"\n                }\n            ]\n        }\n    ]\n}\n\n示例4 - 多价格条件组合：\n{\n    \"price\": 60,\n    \"unit\": \"人次\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"季节\",\n            \"condition_value\": \"旺季\",\n            \"restrictions\": []\n        },\n        {\n            \"condition_name\": \"协议成团价\",\n            \"condition_value\": \"协议成团价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"团队人数\",\n                    \"operator\": \"≥\",\n                    \"value\": \"15人\"\n                }\n            ]\n        }\n    ]\n}\n\n注意：\n1. 单位统一使用\"人次\"\n2. 条件名称应该是价格政策名称（如门市价、团队价、旺季价等），不是表格列标题\n3. 如果文档只有一个固定价格，conditions为空数组\n4. 只返回JSON，不要其他解释。",
+        "input": "|  |  |  |  |  |\n| --- | --- | --- | --- | --- |\n| 资源 | 适用对象 | 有效期 | 价格 | 备注 |\n| 江清月近人白天场 | 所有 | 2025年1月1日-2025年12月31日 | 江清月近人白天场：30 | 研学团",
+        "predict": {
+          "node_name": "江清月近人白天场",
+          "price_conditions": [
+            {
+              "price": 30,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "label": {
+          "node_name": "江清月近人白天场",
+          "price_conditions": [
+            {
+              "price": 30,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "correct": true
+      },
+      {
+        "line": 509,
+        "instruction": "分析以下联票套餐价格政策文档，识别产品\"大慈岩豆腐包制作体验\"的价格信息：\n\n请返回JSON格式：\n{\n    \"node_name\": \"大慈岩豆腐包制作体验\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件\",\n                    \"condition_value\": \"条件名称\",\n                    \"restrictions\": []\n                }\n            ]\n        }\n    ]\n}\n\n注意：\n1. 单位统一使用\"人次\"\n2. 从表格中提取产品\"大慈岩豆腐包制作体验\"对应的价格数值\n3. 联票套餐中每个产品通常只有一个价格\n4. 如果没有特殊条件，conditions可以为空数组\n5. \"conditions\"中的条件可以是对应的子产品，也可以是适用的地区时间等限制条件，没有可以不填写，直接为空数组\n5. 只返回JSON，不要其他解释",
+        "input": "|  |  |  |  |  |\n| 资源 | 适用对象 | 有效期 | 价格 |\n| 灵栖洞手划船-灵栖洞门票-大慈岩豆腐包制作体验 | 所有 | 2025年1月1日-2025年12月31日 | 灵栖洞手划船：15 |\n| 灵栖洞门票：25 |\n| 大慈岩豆腐包制作体验：20 |",
+        "predict": {
+          "node_name": "大慈岩豆腐包制作体验",
+          "price_conditions": [
+            {
+              "price": 20,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "label": {
+          "node_name": "大慈岩豆腐包制作体验",
+          "price_conditions": [
+            {
+              "price": 20,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 502,
+        "instruction": "分析以下联票套餐价格政策文档，识别产品\"新安江游船\"的价格信息：\n\n请返回JSON格式：\n{\n    \"node_name\": \"新安江游船\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"人次\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件\",\n                    \"condition_value\": \"条件名称\",\n                    \"restrictions\": []\n                }\n            ]\n        }\n    ]\n}\n\n注意：\n1. 单位统一使用\"人次\"\n2. 从表格中提取产品\"新安江游船\"对应的价格数值\n3. 联票套餐中每个产品通常只有一个价格\n4. 如果没有特殊条件，conditions可以为空数组\n5. \"conditions\"中的条件可以是对应的子产品，也可以是适用的地区时间等限制条件，没有可以不填写，直接为空数组\n5. 只返回JSON，不要其他解释。",
+        "input": "|  |  |  |  |\n| --- | --- | --- | --- |\n| 资源 | 适用对象 | 有效期 | 价格 |\n| 大慈岩门票-大慈岩豆腐包制作体验-新安江游船 | 所有 | 2025年1月1日-2025年12月31日 | 大慈岩门票：25 |\n| 大慈岩豆腐包制作体验：20 |\n| 新安江游船-梦幻新安江：40 |",
+        "predict": {
+          "node_name": "新安江游船",
+          "price_conditions": [
+            {
+              "price": 40,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "label": {
+          "node_name": "梦幻新安江",
+          "price_conditions": [
+            {
+              "price": 40,
+              "unit": "人次",
+              "conditions": []
+            }
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 504,
+        "instruction": "分析以下酒店住宿价格政策文档，识别房型\"高级大床房\"的所有价格条件：\n\n请返回JSON格式：\n{\n    \"node_name\": \"高级大床房\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"房，晚\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件名称\",\n                    \"condition_value\": \"条件值\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"限制类型\",\n                            \"operator\": \"操作符\",\n                            \"value\": \"限制值\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n\n【重要说明】\n1. **价格条件**：指能够影响价格的因素，如\"标准价\"、\"旺季价\"、\"淡季价\"、\"团队价\"、\"周末价\"等\n2. **表格列标题不是价格条件**：如\"适用对象\"、\"有效期\"、\"备注\"等是表格结构，不是价格条件\n3. **简单价格结构**：如果文档只有一个固定价格，没有不同的价格类型，则conditions为空数组\n4. **限制条件**：指对价格条件的内部限制说明，如\"旺季时间\"、\"团队人数≥10间\"等\n\n【判断标准】\n- 如果文档中只有一个价格，没有提到\"标准价\"、\"旺季价\"、\"团队价\"等不同价格类型，则conditions为空数组\n- 如果文档提到多种价格类型（如标准价、旺季价、淡季价），则每个价格类型创建一个condition\n- 表格的列标题（如\"适用对象\"、\"有效期\"、\"备注\"）不属于价格条件\n\nFew-shot示例：\n\n示例1 - 简单价格（无价格条件）：\n{\n    \"price\": 300,\n    \"unit\": \"房，晚\",\n    \"conditions\": []  // 只有一个固定价格，无价格条件\n}\n\n示例2 - 单价格条件（无条件限制）：\n{\n    \"price\": 300,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"标准价\",\n            \"condition_value\": \"标准价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n示例3 - 单价格条件（有条件限制）：\n{\n    \"price\": 500,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"旺季价\",\n            \"condition_value\": \"旺季价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"旺季时间\",\n                    \"operator\": \"=\",\n                    \"value\": \"7-8月\"\n                }\n            ]\n        }\n    ]\n}\n\n示例4 - 双价格条件组合：\n{\n    \"price\": 250,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"季节\",\n            \"condition_value\": \"淡季\",\n            \"restrictions\": []\n        },\n        {\n            \"condition_name\": \"周末价\",\n            \"condition_value\": \"周末价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n注意：\n1. 单位统一使用\"房，晚\"\n2. 条件名称应该是价格政策名称（如标准价、旺季价、淡季价等），不是表格列标题\n3. 如果文档只有一个固定价格，conditions为空数组\n4. 只返回JSON，不要其他解释。",
+        "input": "一、汉庭酒店住宿价格政策\n\n|  |  |  |\n| --- | --- | --- |\n| 房型 | 单价 | 有效期 |\n| 家庭房 | 249 | 2025年1月1日-12月31日 |\n| 高级大床房 | 189 | 2025年1月1日-12月31日 |\n| 双床房 | 199 | 2025年1月1日-12月31日 |\n| 大床房 | 169 | 2025年1月1日-12月31日 |",
+        "predict": {
+          "node_name": "高级大床房",
+          "price_conditions": [
+            {
+              "price": 189,
+              "unit": "房，晚",
+              "conditions": [
+                {
+                  "condition_name": "标准价",
+                  "condition_value": "标准价",
+                  "restrictions": []
+                }
+              ]
+            }
+          ]
+        },
+        "label": {
+          "node_name": "高级大床房",
+          "price_conditions": [
+            {
+              "condition_name": "标准价",
+              "condition_value": "标准价",
+              "restrictions": []
+            }
+          ]
+        },
+        "correct": false
+      },
+      {
+        "line": 511,
+        "instruction": "分析以下酒店住宿价格政策文档，识别房型\"双床房\"的所有价格条件：\n\n请返回JSON格式：\n{\n    \"node_name\": \"双床房\",\n    \"price_conditions\": [\n        {\n            \"price\": 价格数值,\n            \"unit\": \"房，晚\",\n            \"conditions\": [\n                {\n                    \"condition_name\": \"条件名称\",\n                    \"condition_value\": \"条件值\",\n                    \"restrictions\": [\n                        {\n                            \"restriction_type\": \"限制类型\",\n                            \"operator\": \"操作符\",\n                            \"value\": \"限制值\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n\n【重要说明】\n1. **价格条件**：指能够影响价格的因素，如\"标准价\"、\"旺季价\"、\"淡季价\"、\"团队价\"、\"周末价\"等\n2. **表格列标题不是价格条件**：如\"适用对象\"、\"有效期\"、\"备注\"等是表格结构，不是价格条件\n3. **简单价格结构**：如果文档只有一个固定价格，没有不同的价格类型，则conditions为空数组\n4. **限制条件**：指对价格条件的内部限制说明，如\"旺季时间\"、\"团队人数≥10间\"等\n\n【判断标准】\n- 如果文档中只有一个价格，没有提到\"标准价\"、\"旺季价\"、\"团队价\"等不同价格类型，则conditions为空数组\n- 如果文档提到多种价格类型（如标准价、旺季价、淡季价），则每个价格类型创建一个condition\n- 表格的列标题（如\"适用对象\"、\"有效期\"、\"备注\"）不属于价格条件\n\nFew-shot示例：\n\n示例1 - 简单价格（无价格条件）：\n{\n    \"price\": 300,\n    \"unit\": \"房，晚\",\n    \"conditions\": []  // 只有一个固定价格，无价格条件\n}\n\n示例2 - 单价格条件（无条件限制）：\n{\n    \"price\": 300,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"标准价\",\n            \"condition_value\": \"标准价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n示例3 - 单价格条件（有条件限制）：\n{\n    \"price\": 500,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"旺季价\",\n            \"condition_value\": \"旺季价\",\n            \"restrictions\": [\n                {\n                    \"restriction_type\": \"旺季时间\",\n                    \"operator\": \"=\",\n                    \"value\": \"7-8月\"\n                }\n            ]\n        }\n    ]\n}\n\n示例4 - 双价格条件组合：\n{\n    \"price\": 250,\n    \"unit\": \"房，晚\",\n    \"conditions\": [\n        {\n            \"condition_name\": \"季节\",\n            \"condition_value\": \"淡季\",\n            \"restrictions\": []\n        },\n        {\n            \"condition_name\": \"周末价\",\n            \"condition_value\": \"周末价\",\n            \"restrictions\": []\n        }\n    ]\n}\n\n注意：\n1. 单位统一使用\"房，晚\"\n2. 条件名称应该是价格政策名称（如标准价、旺季价、淡季价等），不是表格列标题\n3. 如果文档只有一个固定价格，conditions为空数组\n4. 只返回JSON，不要其他解释。",
+        "input": "一、汉庭酒店住宿价格政策\n\n|  |  |  |\n| --- | --- | --- |\n| 房型 | 单价 | 有效期 |\n| 家庭房 | 249 | 2025年1月1日-12月31日 |\n| 高级大床房 | 189 | 2025年1月1日-12月31日 |\n| 双床房 | 199 | 2025年1月1日-12月31日 |\n| 大床房 | 169 | 2025年1月1日-12月31日 |",
+        "predict": {
+          "node_name": "双床房",
+          "price_conditions": [
+            {
+              "price": 199,
+              "unit": "房，晚",
+              "conditions": [
+                {
+                  "condition_name": "标准价",
+                  "condition_value": "标准价",
+                  "restrictions": [
+                    {
+                      "restriction_type": "有效期",
+                      "operator": "=",
+                      "value": "2025年1月1日-12月31日"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "label": {
+          "node_name": "双床房",
+          "price_conditions": [
+            {
+              "price": 199,
+              "unit": "房，晚",
+              "conditions": []
+            }
+          ]
+        },
+        "correct": false
+      }
+    ]
+  },
+  "re_rank": {
+    "total_samples": 52,
+    "correct_samples": 50,
+    "error_samples": 2,
+    "accuracy": 0.9615384615384616,
+    "correct_examples": [
+      {
+        "line": 513,
+        "instruction": "基于以下候选API，请进行re-rank并选择最合适的API来完成query。\n**注意**: 你必须优先根据API的\"描述\"来判断其功能是否符合query需求。\n候选API列表:\nanalyze_revenue_by_type (1): 分析各类业态收入占比，返回饼图格式数据\nanalyze_payment_methods (2): 分析各支付方式占比，返回饼图格式数据\nget_scenic_spot_revenue (3): 分析各景区收入趋势，返回折线图格式数据\nanalyze_order_trends (4): 分析订单数量趋势，返回折线图格式数据\ncalculate_order_distribution (5): 分析订单状态分布，返回饼图格式数据\nlist_order_resource_status_distribution (6): 根据订单id查询订单的资源状态分布\nintelligent_route_analysis (7): 基于数字映射的智能页面路由工具，通过输入1-10的数字快速跳转到对应的业务功能页面。\nget_approval_list (8): 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\ncasbin_policy_list (9): 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\ncasbin_policy_get (10): 根据策略ID获取单个权限策略的详细信息\ncasbin_policy_create (11): 为指定的部门和角色创建一个新的权限策略。须提供部门ID、角色ID、资源路径和操作方法。\ncasbin_policy_delete (12): 根据策略ID删除指定的权限策略\ncasbin_policy_check (13): 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n请严格按照以下格式输出结果，不要添加任何其他内容、解释或分析:\nRe-rank结果:\n1. API名称 (API ID)\n...\n\n例如：\n1. analyze_text (3)",
+        "input": "2025年7月第一周整体主流支付方式占比如何？现金是否低于10%？",
+        "predict": "analyze_payment_methods",
+        "label": "analyze_payment_methods",
+        "correct": true
+      },
+      {
+        "line": 514,
+        "instruction": "基于以下候选API，请进行re-rank并选择最合适的API来完成query。\n**注意**: 你必须优先根据API的\"描述\"来判断其功能是否符合query需求。\n候选API列表:\nanalyze_revenue_by_type (1): 分析各类业态收入占比，返回饼图格式数据\nanalyze_payment_methods (2): 分析各支付方式占比，返回饼图格式数据\nget_scenic_spot_revenue (3): 分析各景区收入趋势，返回折线图格式数据\nanalyze_order_trends (4): 分析订单数量趋势，返回折线图格式数据\ncalculate_order_distribution (5): 分析订单状态分布，返回饼图格式数据\nlist_order_resource_status_distribution (6): 根据订单id查询订单的资源状态分布\nintelligent_route_analysis (7): 基于数字映射的智能页面路由工具，通过输入1-10的数字快速跳转到对应的业务功能页面。\nget_approval_list (8): 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\ncasbin_policy_list (9): 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\ncasbin_policy_get (10): 根据策略ID获取单个权限策略的详细信息\ncasbin_policy_create (11): 为指定的部门和角色创建一个新的权限策略。须提供部门ID、角色ID、资源路径和操作方法。\ncasbin_policy_delete (12): 根据策略ID删除指定的权限策略\ncasbin_policy_check (13): 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n请严格按照以下格式输出结果，不要添加任何其他内容、解释或分析:\nRe-rank结果:\n1. API名称 (API ID)\n...\n\n例如：\n1. analyze_text (3)",
+        "input": "杭州飞联旅行社有限公司上周订单中，取消/退款是否出现异常峰值？",
+        "predict": "calculate_order_distribution",
+        "label": "calculate_order_distribution",
+        "correct": true
+      },
+      {
+        "line": 515,
+        "instruction": "基于以下候选API，请进行re-rank并选择最合适的API来完成query。\n**注意**: 你必须优先根据API的\"描述\"来判断其功能是否符合query需求。\n候选API列表:\nanalyze_revenue_by_type (1): 分析各类业态收入占比，返回饼图格式数据\nanalyze_payment_methods (2): 分析各支付方式占比，返回饼图格式数据\nget_scenic_spot_revenue (3): 分析各景区收入趋势，返回折线图格式数据\nanalyze_order_trends (4): 分析订单数量趋势，返回折线图格式数据\ncalculate_order_distribution (5): 分析订单状态分布，返回饼图格式数据\nlist_order_resource_status_distribution (6): 根据订单id查询订单的资源状态分布\nintelligent_route_analysis (7): 基于数字映射的智能页面路由工具，通过输入1-10的数字快速跳转到对应的业务功能页面。\nget_approval_list (8): 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\ncasbin_policy_list (9): 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\ncasbin_policy_get (10): 根据策略ID获取单个权限策略的详细信息\ncasbin_policy_create (11): 为指定的部门和角色创建一个新的权限策略。须提供部门ID、角色ID、资源路径和操作方法。\ncasbin_policy_delete (12): 根据策略ID删除指定的权限策略\ncasbin_policy_check (13): 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n请严格按照以下格式输出结果，不要添加任何其他内容、解释或分析:\nRe-rank结果:\n1. API名称 (API ID)\n...\n\n例如：\n1. analyze_text (3)",
+        "input": "部门7的角色1是否有权限查看数据看板“/api/analytics/dashboard”的GET？",
+        "predict": "casbin_policy_check",
+        "label": "casbin_policy_check",
+        "correct": true
+      }
+    ],
+    "error_examples": [
+      {
+        "line": 538,
+        "instruction": "基于以下候选API，请进行re-rank并选择最合适的API来完成query。\n**注意**: 你必须优先根据API的\"描述\"来判断其功能是否符合query需求。\n候选API列表:\nanalyze_revenue_by_type (1): 分析各类业态收入占比，返回饼图格式数据\nanalyze_payment_methods (2): 分析各支付方式占比，返回饼图格式数据\nget_scenic_spot_revenue (3): 分析各景区收入趋势，返回折线图格式数据\nanalyze_order_trends (4): 分析订单数量趋势，返回折线图格式数据\ncalculate_order_distribution (5): 分析订单状态分布，返回饼图格式数据\nlist_order_resource_status_distribution (6): 根据订单id查询订单的资源状态分布\nintelligent_route_analysis (7): 基于数字映射的智能页面路由工具，通过输入1-10的数字快速跳转到对应的业务功能页面。\nget_approval_list (8): 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\ncasbin_policy_list (9): 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\ncasbin_policy_get (10): 根据策略ID获取单个权限策略的详细信息\ncasbin_policy_create (11): 为指定的部门和角色创建一个新的权限策略。须提供部门ID、角色ID、资源路径和操作方法。\ncasbin_policy_delete (12): 根据策略ID删除指定的权限策略\ncasbin_policy_check (13): 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n请严格按照以下格式输出结果，不要添加任何其他内容、解释或分析:\nRe-rank结果:\n1. API名称 (API ID)\n...\n\n例如：\n1. analyze_text (3)",
+        "input": "查询角色11在报表模块“/api/reports/*”上的POST权限（允许的）。",
+        "predict": "casbin_policy_check",
+        "label": "casbin_policy_list",
+        "correct": false
+      },
+      {
+        "line": 556,
+        "instruction": "基于以下候选API，请进行re-rank并选择最合适的API来完成query。\n**注意**: 你必须优先根据API的\"描述\"来判断其功能是否符合query需求。\n候选API列表:\nanalyze_revenue_by_type (1): 分析各类业态收入占比，返回饼图格式数据\nanalyze_payment_methods (2): 分析各支付方式占比，返回饼图格式数据\nget_scenic_spot_revenue (3): 分析各景区收入趋势，返回折线图格式数据\nanalyze_order_trends (4): 分析订单数量趋势，返回折线图格式数据\ncalculate_order_distribution (5): 分析订单状态分布，返回饼图格式数据\nlist_order_resource_status_distribution (6): 根据订单id查询订单的资源状态分布\nintelligent_route_analysis (7): 基于数字映射的智能页面路由工具，通过输入1-10的数字快速跳转到对应的业务功能页面。\nget_approval_list (8): 查询指定用户ID的审批列表，可以根据用户是申请人还是审批人，以及审批状态进行筛选。\ncasbin_policy_list (9): 查询权限策略列表，支持分页和条件筛选。可根据策略ID、部门ID、角色ID、资源路径、操作方法、效果和策略类型等多个条件进行组合查询。\ncasbin_policy_get (10): 根据策略ID获取单个权限策略的详细信息\ncasbin_policy_create (11): 为指定的部门和角色创建一个新的权限策略。须提供部门ID、角色ID、资源路径和操作方法。\ncasbin_policy_delete (12): 根据策略ID删除指定的权限策略\ncasbin_policy_check (13): 检查特定角色和部门对资源的权限，验证是否有执行指定操作的权限\n请严格按照以下格式输出结果，不要添加任何其他内容、解释或分析:\nRe-rank结果:\n1. API名称 (API ID)\n...\n\n例如：\n1. analyze_text (3)",
+        "input": "筛选部门8中被拒绝的策略，按50条每页给第1页数据。",
+        "predict": "get_approval_list",
+        "label": "casbin_policy_list",
+        "correct": false
+      }
+    ]
+  }
+}

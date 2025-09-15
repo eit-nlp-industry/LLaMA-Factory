@@ -230,6 +230,7 @@ class SharegptDatasetConverter(DatasetConverter):
 DATASET_CONVERTERS = {
     "alpaca": AlpacaDatasetConverter,
     "sharegpt": SharegptDatasetConverter,
+    "custom_context": None,  # 延迟导入，避免循环依赖
 }
 
 
@@ -245,6 +246,11 @@ def get_dataset_converter(name: str, dataset_attr: "DatasetAttr", data_args: "Da
     r"""Get a dataset converter."""
     if name not in DATASET_CONVERTERS:
         raise ValueError(f"Dataset converter {name} not found.")
+    
+    # 延迟导入custom_context转换器
+    if name == "custom_context" and DATASET_CONVERTERS[name] is None:
+        from .converter_custom import CustomContextDatasetConverter
+        DATASET_CONVERTERS[name] = CustomContextDatasetConverter
 
     return DATASET_CONVERTERS[name](dataset_attr, data_args)
 

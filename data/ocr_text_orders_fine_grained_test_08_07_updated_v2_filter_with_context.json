@@ -1,0 +1,2606 @@
+[
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"end_date\": \"2025-07-17 00:00:00\"}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "二车杭州天翼7月15日+七里扬\n帆。人数：30人。导游联系人：童益\n梅1885718254\n晚上10:45\n游客信息模板7月15日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+    "output": "{\"team_size\": 30}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞西游魔毯的详细信息。\n\n提取字段及可选值：\nrecreational_combo (娱乐套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nrecreational_items (娱乐项目): \"西游魔毯\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"recreational_combo\": 选择值或null,\n    \"recreational_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_detail\": {\"recreational_combo\": null, \"recreational_items\": \"西游魔毯\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "三车 杭州天翼7月15日，+七里扬\n帆。人数：36人。导游联系人：奚侃\n18158519227\n游客信息模板7月15日奚侃36\n人.xls X\n26.0 KB\n微信电脑版",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n日期7.16\n人数74\n三江口游船，\n七郎庙码头9点40\n导游张敏18321659892\n导游王勇18221218081",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"team_size\": 50}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n日期7.16\n人数74\n三江口游船，\n七郎庙码头9点40\n导游张敏18321659892\n导游王勇18221218081",
+    "output": "{\"team_size\": 74}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"team_size\": 19}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月15日，+七里扬\n帆。人数：40人。导游联系人：孙婷\n13819120723\n游客信息模板7月15日千孙婷\n40人.xlsx X\n11.7 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-15 00:00:00\"}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"end_date\": \"2025-07-15 00:00:00\"}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_detail\": {\"ship_combo\": \"正常价\", \"ship_items\": \"船票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "三车 杭州天翼7月15日，+七里扬\n帆。人数：36人。导游联系人：奚侃\n18158519227\n游客信息模板7月15日奚侃36\n人.xls X\n26.0 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月15日，+七里扬\n帆。人数：40人。导游联系人：孙婷\n13819120723\n游客信息模板7月15日千孙婷\n40人.xlsx X\n11.7 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null}}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"end_date\": \"2025-07-16 00:00:00\"}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"team_size\": 25}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n日期7.16\n人数74\n三江口游船，\n七郎庙码头9点40\n导游张敏18321659892\n导游王勇18221218081",
+    "output": "{\"resource_team_size\": 74}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞西游魔毯的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中江清月近人实景演艺门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"江清月近人\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"江清月近人\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "二车杭州天翼7月15日+七里扬\n帆。人数：30人。导游联系人：童益\n梅1885718254\n晚上10:45\n游客信息模板7月15日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-15 00:00:00\"}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月15日，+七里扬\n帆。人数：40人。导游联系人：孙婷\n13819120723\n游客信息模板7月15日千孙婷\n40人.xlsx X\n11.7 KB\n微信电脑版",
+    "output": "{\"team_size\": 40}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_detail\": {\"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，邓总13867126741，7月16日。好运岛，新安江梦幻，人数50人",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"resource_team_size\": 19}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "二车杭州天翼7月15日+七里扬\n帆。人数：30人。导游联系人：童益\n梅1885718254\n晚上10:45\n游客信息模板7月15日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "冯珠奶\n330721194302226748\n沙利亚\n330721196009037218\n沙于冬\n110108201712038633\n胡兰英\n330721196112297229\n建德光大唐飞13968136568\n明天上午好运岛 导游：唐飞\n13968136568",
+    "output": "{\"end_date\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "二车杭州天翼7月15日+七里扬\n帆。人数：30人。导游联系人：童益\n梅1885718254\n晚上10:45\n游客信息模板7月15日童益梅\n30人.xls X\n25.5 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "旅行社：金华和誉\n7月23日灵栖洞\n人数：45人\n导游：卢琴琴13858969879\n备注：预约一个景讲",
+    "output": "{\"team_size\": 45}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "三车 杭州天翼7月15日，+七里扬\n帆。人数：36人。导游联系人：奚侃\n18158519227\n游客信息模板7月15日奚侃36\n人.xls X\n26.0 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-15 00:00:00\"}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "三车 杭州天翼7月15日，+七里扬\n帆。人数：36人。导游联系人：奚侃\n18158519227\n游客信息模板7月15日奚侃36\n人.xls X\n26.0 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程，7月22日，灵栖洞\n萧山人免门票，船票15，魔毯30，\n导游：胡佳南15706842264，预计25人",
+    "output": "{\"resource_detail\": {\"ticket_combo\": \"萧山、临平、西湖管委会免票\", \"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月15日，灵栖洞，许岚13968126970人数19人",
+    "output": "{\"resource_team_size\": 19}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美旅行社\n日期7.16\n人数74\n三江口游船，\n七郎庙码头9点40\n导游张敏18321659892\n导游王勇18221218081",
+    "output": "{\"end_date\": \"2025-07-16 00:00:00\"}",
+    "context_time": "7月16日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月15日，+七里扬\n帆。人数：40人。导游联系人：孙婷\n13819120723\n游客信息模板7月15日千孙婷\n40人.xlsx X\n11.7 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月15日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中宿江公司-江清月近人实景演艺门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，34人，\n7.15日江清\n7.16日葫芦峡漂流\n7.17日灵栖洞\n导游：沈琳15925620689",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月17日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"team_size\": 20}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"team_size\": 11}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "二车杭州天翼7月27日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月27日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_detail\": {\"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "二车杭州天翼7月27日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月27日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 20}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"team_size\": 40}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月28日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月28日童益梅\n36人.xls X\n26.0KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"resource_team_size\": 11}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月28日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月28日童益梅\n36人.xls X\n26.0KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-28 00:00:00\"}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"resource_team_size\": 72}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 20}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 65}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "二车杭州天翼7月27日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月27日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"resource_detail\": {\"ticket_combo\": \"中远程及新增市场价格\", \"ticket_items\": \"门票\"}}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 65}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "二车杭州天翼7月27日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月27日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"resource_team_size\": 34}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"team_size\": 72}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n金华和誉\n起\n在\n7.27日 七里扬帆11人60元/人 LOVE\n领队：李鹏15021200134\n（价格保密，旅行社扫码付款）",
+    "output": "{\"resource_team_size\": 11}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"resource_team_size\": 54}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"resource_team_size\": 54}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 20}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"team_size\": 65}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"team_size\": 34}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"team_size\": 30}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"team_size\": 54}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月28日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月28日童益梅\n36人.xls X\n26.0KB\n微信电脑版",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德天马米张倩18968113472\n杭州天马吉翔\n日期：7.27\n人数：65\n导游：杨15167085481\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美\n7.27号灵栖洞\n人数34人\n王亚松13346889519",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "旅行社：芜湖瑞虹\n日期：7.28\n人数：30\n导游：15968151824童琪\n行程：28号：七里扬帆\n60，中远程",
+    "output": "{\"end_date\": \"2025-07-28 00:00:00\"}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "With you\n旅行社：金华七天\n你\n日期：7.27 LOV6\n景点： 灵栖洞\n导游： 傅丽莉15869051599\n人数：约54人",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "With you\n旅行社： 金华和誉\n你\n7月27日灵栖洞 LOV\n人数：72人\n导游：叶燕18757875520\n备注：预约一名景讲，麻烦落实",
+    "output": "{\"resource_team_size\": 72}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月27日，葫芦侠\n+七里扬帆。人数：20人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n27日.xlS X\n23.5KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-27 00:00:00\"}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，7月28日明天下午\n好运岛，晚上夜游，大约40\n人，人数40人， 导游邓\n13867126741 发送",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月27日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月28日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月28日童益梅\n36人.xls X\n26.0KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月28日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：41\n日期：7.23\n景区：三江口游船\n导游章17701783271",
+    "output": "{\"team_size\": 41}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_team_size\": 6}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"team_size\": 16}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"team_size\": 53}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"team_size\": 16}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：41\n日期：7.23\n景区：三江口游船\n导游章17701783271",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月23日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月23日童益梅\n36 人.xls X\n25.5KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"resource_team_size\": 16}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_team_size\": 6}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"team_size\": 51}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"resource_team_size\": 16}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩-大慈岩门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_team_size\": 53}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "二车 杭州天翼7月23日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月23日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "二车 杭州天翼7月22日，+七里扬\n帆。人数：54人。导游联系人：孙婷\n13819120723\n游客信息模板7月22日千孙婷\n54人.xlsx X\n12.4 KB\n微信中脑版",
+    "output": "{\"team_size\": 54}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月23日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月23日童益梅\n36 人.xls X\n25.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，7月23日，30人梦幻，导游：吴海彬手机：18058710054，",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "二车 杭州天翼7月22日，+七里扬\n帆。人数：54人。导游联系人：孙婷\n13819120723\n游客信息模板7月22日千孙婷\n54人.xlsx X\n12.4 KB\n微信中脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月23日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月23日童益梅\n36 人.xls X\n25.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_team_size\": 53}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"协议不成团价\"、\"协议成团价\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"门市价\"、\"青少年优惠\"、\"非协议不成团价\"、\"非协议成团价\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州运通，7月23日，30人梦幻，导游：吴海彬手机：18058710054，",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，7月23日，30人梦幻，导游：吴海彬手机：18058710054，",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州运通，7月23日，30人梦幻，导游：吴海彬手机：18058710054，",
+    "output": "{\"team_size\": 30}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "二车 杭州天翼7月22日，+七里扬\n帆。人数：54人。导游联系人：孙婷\n13819120723\n游客信息模板7月22日千孙婷\n54人.xlsx X\n12.4 KB\n微信中脑版",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"resource_detail\": {\"ship_combo\": \"中远程及新增市场价格\", \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"resource_team_size\": 51}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，53人，张红英13588355907，22号灵栖洞，23号大慈岩",
+    "output": "{\"resource_team_size\": 53}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，孙婷51人，电话13819120723，7月22日，好运岛",
+    "output": "{\"resource_team_size\": 51}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "二车 杭州天翼7月23日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月23日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "二车 杭州天翼7月22日，+七里扬\n帆。人数：54人。导游联系人：孙婷\n13819120723\n游客信息模板7月22日千孙婷\n54人.xlsx X\n12.4 KB\n微信中脑版",
+    "output": "{\"resource_team_size\": 43}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_team_size\": 6}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "二车 杭州天翼7月23日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月23日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：41\n日期：7.23\n景区：三江口游船\n导游章17701783271",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：41\n日期：7.23\n景区：三江口游船\n导游章17701783271",
+    "output": "{\"resource_team_size\": 41}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"end_date\": \"2025-07-26 00:00:00\"}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_team_size\": 16}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "汪舟媛\n7.26灵栖洞单点成人团：16人左右导游信息：楼\n姣姣18814814968",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月26日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_team_size\": 16}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 16人\n导游姓名 王美红 导游电话 18906521212\n出团日期 2025年7月23日 计调电话 小吉：0571-86997619、18969107298\n景点1 七里扬帆+漂流 团队价 现付 景区联系人",
+    "output": "{\"resource_team_size\": 16}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "二车 杭州天翼7月23日，+七里扬\n帆。人数：36人。导游联系人：孙婷\n13819120723\n游客信息模板7月23日千孙婷\n36 人.xlsx X\n11.9 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州运通，7月22日，周慧芬13600501190，两个70岁以上老人，一个1.1的儿童，一个1.5的儿童，另外两人漂流。共6人，今天10点30七里扬帆漂流",
+    "output": "{\"team_size\": 6}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月23日+七里扬\n帆。人数：36人。导游联系人：童益\n梅1885718254\n游客信息模板7月23日童益梅\n36 人.xls X\n25.5KB\n微信电脑版",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"resource_team_size\": 52}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_team_size\": 2}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"resource_detail\": {\"ticket_combo\": \"中远程及新增市场价格\", \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大，9人，7月22日大慈岩导游：陈小凤13868129832",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"team_size\": 52}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"team_size\": 11}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日+七里扬\n帆。人数：37人。导游联系人：童益\n梅1885718254\n游客信息模板7月22日童益梅\n37人.xls X\n25.0KB\n微信电脑版",
+    "output": "{\"team_size\": 37}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：92\n日期:7.22\n景区：三江口游船\n导游小季：15861110941\n导游张敏18321659892",
+    "output": "{\"team_size\": 92}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月22日+七里扬\n帆。人数：37人。导游联系人：童益\n梅1885718254\n游客信息模板7月22日童益梅\n37人.xls X\n25.0KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：92\n日期:7.22\n景区：三江口游船\n导游小季：15861110941\n导游张敏18321659892",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"resource_team_size\": 11}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"team_size\": 45}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日+七里扬\n帆。人数：37人。导游联系人：童益\n梅1885718254\n游客信息模板7月22日童益梅\n37人.xls X\n25.0KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 37}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "?\n建德光大，3人，7.22日梦幻新安江导游：程梅香13429101348",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大，9人，7月22日大慈岩导游：陈小凤13868129832",
+    "output": "{\"team_size\": 9}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"team_size\": 2}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "?\n建德光大，3人，7.22日梦幻新安江导游：程梅香13429101348",
+    "output": "{\"resource_team_size\": 3}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"协议不成团价\"、\"协议成团价\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"门市价\"、\"青少年优惠\"、\"非协议不成团价\"、\"非协议成团价\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，9人，7月22日大慈岩导游：陈小凤13868129832",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩-大慈岩门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，9人，7月22日大慈岩导游：陈小凤13868129832",
+    "output": "{\"resource_team_size\": 9}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"resource_team_size\": 52}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"end_date\": \"2025-07-23 00:00:00\"}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"team_size\": 10}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"resource_team_size\": 11}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月22日+七里扬\n帆。人数：37人。导游联系人：童益\n梅1885718254\n游客信息模板7月22日童益梅\n37人.xls X\n25.0KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "?\n建德光大，3人，7.22日梦幻新安江导游：程梅香13429101348",
+    "output": "{\"team_size\": 3}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：92\n日期:7.22\n景区：三江口游船\n导游小季：15861110941\n导游张敏18321659892",
+    "output": "{\"resource_team_size\": 92}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：11人\n导游：汪丽娟13588364181\n行程：灵栖洞（远程市场）",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_team_size\": 2}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n日期7.23\n人数52\n好运岛\n沪FJ5573\n陈师傅15256460098",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月23日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "?\n建德光大，3人，7.22日梦幻新安江导游：程梅香13429101348",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_team_size\": 2}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，7月22日，七里扬帆\n+葫芦峡漂流，导游联系人：杨珏\n佳，15088610329 发送",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美国际旅行社有限公司\n人数：92\n日期:7.22\n景区：三江口游船\n导游小季：15861110941\n导游张敏18321659892",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月22日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：封安昌15257115889\n七里+葫芦游客信息模板7月\n22日.xls X\n22.0KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程7.21日45人，灵栖洞\n导游：杨小燕18879402311",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，7.21日，2人，七里扬帆+葫芦峡漂流，125元/人。联系人：麻13429101828",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"team_size\": 18}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大，7.20日，大慈岩，2人\n导游：凌道清18857881546",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"resource_team_size\": 57}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"team_size\": null}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"team_size\": 57}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"team_size\": 13}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 18}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程，7月21号灵栖洞景区57人\n全陪导游：13857745880顾红娟\n备注：预约一位景区讲解员",
+    "output": "{\"resource_team_size\": 57}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"resource_team_size\": 48}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"team_size\": 53}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"resource_team_size\": 53}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"resource_team_size\": 17}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩-大慈岩门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，7.20日，大慈岩，2人\n导游：凌道清18857881546",
+    "output": "{\"resource_team_size\": 2}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 20}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大，7.20日，大慈岩，2人\n导游：凌道清18857881546",
+    "output": "{\"team_size\": 2}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"team_size\": 17}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"resource_team_size\": 48}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 18}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"team_size\": 48}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 18}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_team_size\": 13}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"team_size\": 40}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 20}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_team_size\": 13}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "午1:36\n凤凰假期~短线~小可15336936586\n7.21灵栖洞一日\n人数：48人\n导游：陈世云13306812292\n车牌：浙GD0016",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"resource_team_size\": 40}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"协议不成团价\"、\"协议成团价\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"门市价\"、\"青少年优惠\"、\"非协议不成团价\"、\"非协议成团价\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，7.20日，大慈岩，2人\n导游：凌道清18857881546",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_team_size\": 13}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆\n日期：7.21\n人数：20人\n导游：商鑫儿17855813695\n行程：灵栖洞",
+    "output": "{\"team_size\": 20}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，童益梅53人，电话18857188254，7\n月20日好运岛",
+    "output": "{\"resource_team_size\": 53}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "07382240\n7月21日单灵栖洞，导游张燕华\n13957339330、余丹凤15858174356\n米兰票务沈13867382240\n7-21名单.docx\n23.6KB W\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "安徽海屯国际旅行社40余人\nL7\n21号：灵栖洞，导游：江津\n15705813006。 发送\n2 3\n分词 ABC DEF X",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "浙江吉程\n7.20日七+漂 125元/人11\n大2小 领队：陈佳薇\n13262546065 价格保密，旅\n行社扫码付款",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，7.20日，灵栖洞约17人，导游\n胡锦辉15267025048",
+    "output": "{\"resource_team_size\": 17}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月20日，葫芦侠\n+七里扬帆。人数：18人。导游联系\n人：陈前程13073686967\n我搞一份身份证信息哈，我都不知道\n有这个团\n七里+葫芦游客信息模板7月\n20日.xls X\n22.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"协议不成团价\"、\"协议成团价\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"门市价\"、\"青少年优惠\"、\"非协议不成团价\"、\"非协议成团价\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德中旅，3人游梦幻，7.19日\n导游：洪宇：13588024400，\n8点的船，费用我付",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"team_size\": 35}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_team_size\": 12}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_detail\": {\"ship_items\": \"船票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_team_size\": 6}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"team_size\": 12}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_team_size\": 12}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中宿江公司-江清月近人实景演艺门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"team_size\": 23}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中江清月近人实景演艺门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"江清月近人\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"江清月近人\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日 +七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月20日童益梅\n50人.xls X\n26.0 KB\n微信电脑版\nの",
+    "output": "{\"team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中大慈岩-大慈岩门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德中旅，3人游梦幻，7.19日\n导游：洪宇：13588024400，\n8点的船，费用我付",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"team_size\": 6}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_detail\": {\"ship_items\": \"船票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"resource_team_size\": 35}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月20日 +七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月20日童益梅\n50人.xls X\n26.0 KB\n微信电脑版\nの",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月20日 +七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月20日童益梅\n50人.xls X\n26.0 KB\n微信电脑版\nの",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德中旅，3人游梦幻，7.19日\n导游：洪宇：13588024400，\n8点的船，费用我付",
+    "output": "{\"resource_team_size\": 3}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"resource_team_size\": 23}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"resource_team_size\": 23}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"resource_detail\": {\"ship_items\": \"船票\"}}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月20日 +七里扬\n帆。人数：50人。导游联系人：童益\n梅1885718254\n游客信息模板7月20日童益梅\n50人.xls X\n26.0 KB\n微信电脑版\nの",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_team_size\": 6}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"resource_team_size\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "江苏聚庆，人数35人，导游叶帆19858169144，七里扬帆，7月20日下午",
+    "output": "{\"resource_team_size\": 35}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"team_size\": 30}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "22日：灵栖洞，23日：大慈岩，导游：宁璟\n15968887856",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州天翼，奚凯23人7月19日电话\n18158519227，好运岛",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "扬帆旅行社，6人，7月19日，七\n里扬帆，联系人：张立其，联系电\n话15958042909。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德中旅，7月19日，12人，灵栖洞、梦\n幻新安江，导游翁巧君13805701560",
+    "output": "{\"resource_team_size\": 12}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "对接函（景区留存）\n建德市新安旅游投资有限公司：\n我公司于_2025_年_Z月日，有入住在航川村民宿\n前报备，望接洽！\n团队联系人： 齐小军13584250157\n家味航川（杭州）文旅发展\nS\n7月",
+    "output": "{\"end_date\": null}",
+    "context_time": "未知时间"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日散客班，30人;\n灵栖洞+江清月近人演艺秀。导游：梁慧13958691920",
+    "output": "{\"resource_team_size\": 30}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "上海歆美旅行社\n7.20\n50人\n七里扬帆+漂流\n18338288033杨飞",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德中旅，3人游梦幻，7.19日\n导游：洪宇：13588024400，\n8点的船，费用我付",
+    "output": "{\"team_size\": 3}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"resource_team_size\": 13}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"team_size\": 33}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"team_size\": 25}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"resource_team_size\": 4}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_team_size\": 33}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"end_date\": \"2025-07-22 00:00:00\"}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"resource_team_size\": 4}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"team_size\": 25}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_detail\": {\"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"resource_team_size\": 13}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中江清月近人实景演艺门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"江清月近人\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"江清月近人\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"team_size\": 45}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中三江口游线（游船）的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"三江口游线\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月19日，+七里扬\n帆。人数：54人。导游联系人：奚侃\n18158519227\n游客信息模板7月19日奚侃54\n人.xls X\n26.5KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"三江口游线\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"team_size\": 10}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"team_size\": 50}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"end_date\": \"2025-07-20 00:00:00\"}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"team_size\": 36}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 10}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"resource_team_size\": 50}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"team_size\": 4}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，+七里扬\n帆。人数：54人。导游联系人：奚侃\n18158519227\n游客信息模板7月19日奚侃54\n人.xls X\n26.5KB\n微信电脑版",
+    "output": "{\"team_size\": 54}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"七里扬帆游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"七里扬帆游船\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"研学团\"、\"老年团队价\"\nship_items (船只类型): \"新安江竹筏漂流\"、\"新安江龙舟漂游\"、\"梦幻新安江\"、\"江清月近人实景演艺船票\"、\"诗韵新安江（新安江-严州古城航线含自助茶歇、简餐）\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_detail\": {\"ship_items\": \"梦幻新安江\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中宿江公司-江清月近人实景演艺门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"end_date\": \"2025-07-21 00:00:00\"}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛游船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"中远程及新增市场价格\"、\"学生团队价\"、\"广德\"、\"旅投员工价\"、\"景酒打包价\"、\"老年团队价\"\nship_items (船只类型): \"千岛湖好运岛游船\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_detail\": {\"ship_items\": \"千岛湖好运岛游船\"}}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"end_date\": \"2025-07-18 00:00:00\"}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_team_size\": 33}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-七里扬帆葫芦峡漂流的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_team_size\": 33}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞手划船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆葫芦峡漂流的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"建德市民\"\nship_items (船只类型): \"葫芦峡漂流\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_detail\": {\"ship_items\": \"葫芦峡漂流\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "单位名称 浙江吉程国际旅行社有限公司 团队性质 成人团\n线路名称 建德一日游 协议人数 33人\n导游姓名 范霞芳 导游电话 18516547319\n出团日期 2025年7月19日 计调电话 小程：0571-86997619、18969107298\n景点1 七里扬帆十漂流 团队价 现付 景区联系人\n景占2 团队价 景区联系人",
+    "output": "{\"resource_detail\": {\"ticket_combo\": null, \"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大7.19日4人灵栖洞\n陈敏丽13758671199取票\n票款建德光大唐飞支付",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆-三江口游线（游船）的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "一车杭州天翼7月19日，+七里扬\n帆。人数：54人。导游联系人：奚侃\n18158519227\n游客信息模板7月19日奚侃54\n人.xls X\n26.5KB\n微信电脑版",
+    "output": "{\"resource_team_size\": 54}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"广德\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德光大，7月21日，灵栖洞 25人\n全陪：殷晓洪15268794414",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月21日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中千岛湖好运岛-千岛湖好运岛门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "安徽郜氏，45人\n1号车导游刘琪13966784743\n抵达日期：7月21日新安江十江清月近人，\n7月22日好运岛",
+    "output": "{\"resource_team_size\": 45}",
+    "context_time": "7月22日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_detail\": {\"ship_items\": \"船票\"}}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中七里扬帆门票的详细信息。\n\n提取字段及可选值：\nticket_combo (门票套餐类型): \"30年教师证\"、\"70周岁\"、\"中远程及新增市场价格\"、\"儿童\"、\"其他\"、\"军官证\"、\"在校大学生\"、\"学生团队价\"、\"导游证\"、\"建德就业\"、\"建德市民\"、\"接待免票\"、\"新闻记者证\"、\"旅投员工价\"、\"景酒打包价\"、\"杭州市民卡\"、\"杭州文旅卡/惠民卡\"、\"残疾证\"、\"消防员证\"、\"献血荣誉证\"、\"病故军属家人\"、\"研学团\"、\"老年团队价\"、\"萧山、临平、西湖管委会免票\"、\"退役证\"、\"钱江分免票\"、\"青少年优惠\"、\"非建德户籍免票\"、\"高层次人才\"\nticket_items (票型): \"门票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ticket_combo\": 选择值或null,\n    \"ticket_items\": 选择值或null\n  }\n}",
+    "input": "一车杭州天翼7月19日，葫芦侠\n+七里扬帆。人数：10人。导游联系\n人：陈前程13073686967\n七里+葫芦游客信息模板7月\n13日.xls X\n22.0 KB\n微信电脑版",
+    "output": "{\"resource_detail\": {\"ticket_items\": \"门票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的总人数信息。\n\n严格按照以下JSON格式输出：\n{\n  \"team_size\": 整数或null\n}",
+    "input": "杭州运通，吴海彬18058710054，13人，好运岛，7月18日",
+    "output": "{\"team_size\": 13}",
+    "context_time": "7月18日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞-灵栖洞门票的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "建德旅投姜钰炎17605823475\n7.20号灵栖洞正常团队价25人左右导游：张波英\n17705851656",
+    "output": "{\"resource_team_size\": 25}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中新安江-新安江游船的使用人数。\n\n严格按照以下JSON格式输出：\n{\n  \"resource_team_size\": 整数或null\n}",
+    "input": "台州天虹，7.19-20日，人数:36\n人，梦幻新安江夜景+灵栖洞\n导游翁高峰13757671007。 发送\n2 3\n分词 ABC DEF",
+    "output": "{\"resource_team_size\": 36}",
+    "context_time": "7月20日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单中灵栖洞手划船的详细信息。\n\n提取字段及可选值：\nship_combo (船票套餐类型): \"正常价\"、\"特殊价\"\nship_items (船只类型): \"船票\"\n\n严格按照以下JSON格式输出：\n{\n  \"resource_detail\": {\n    \"ship_combo\": 选择值或null,\n    \"ship_items\": 选择值或null\n  }\n}",
+    "input": "建德天马：张倩18968113472\n杭州天马吉翔\n日期：7.19\n人数：50\n导游：杨华武15167085481\n行程：灵栖洞",
+    "output": "{\"resource_detail\": {\"ship_combo\": null, \"ship_items\": \"船票\"}}",
+    "context_time": "7月19日"
+  },
+  {
+    "instruction": "请从OCR文本中抽取旅行订单的结束日期信息。\n\n严格按照以下JSON格式输出：\n{\n  \"end_date\": \"YYYY-MM-DD\"或null\n}",
+    "input": "一车杭州天翼7月19日，+七里扬\n帆。人数：54人。导游联系人：奚侃\n18158519227\n游客信息模板7月19日奚侃54\n人.xls X\n26.5KB\n微信电脑版",
+    "output": "{\"end_date\": \"2025-07-19 00:00:00\"}",
+    "context_time": "7月19日"
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "accuracies": {
+    "overall": 0.35714285714285715,
+    "task_team_size": 1.0,
+    "task_end_date": 1.0,
+    "task_other": 0.0,
+    "task_ship_info": 0.9411764705882353,
+    "task_ticket_info": 0.96,
+    "task_recreational_info": 1.0,
+    "field_team_size": 1.0,
+    "field_end_date": 1.0,
+    "field_resource_detail.ship_combo": 0.9545454545454546,
+    "field_resource_detail.ship_items": 0.9696969696969697,
+    "field_resource_detail.ticket_items": 1.0,
+    "field_resource_detail.ticket_combo": 0.9285714285714286,
+    "field_resource_detail.recreational_combo": 1.0,
+    "field_resource_detail.recreational_items": 1.0
+  },
+  "task_stats": {
+    "team_size": {
+      "correct": 93,
+      "total": 93
+    },
+    "end_date": {
+      "correct": 30,
+      "total": 30
+    },
+    "other": {
+      "correct": 0,
+      "total": 321
+    },
+    "ship_info": {
+      "correct": 32,
+      "total": 34
+    },
+    "ticket_info": {
+      "correct": 24,
+      "total": 25
+    },
+    "recreational_info": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "field_stats": {
+    "team_size": {
+      "correct": 93,
+      "total": 93
+    },
+    "end_date": {
+      "correct": 30,
+      "total": 30
+    },
+    "resource_detail.ship_combo": {
+      "correct": 21,
+      "total": 22
+    },
+    "resource_detail.ship_items": {
+      "correct": 32,
+      "total": 33
+    },
+    "resource_detail.ticket_items": {
+      "correct": 25,
+      "total": 25
+    },
+    "resource_detail.ticket_combo": {
+      "correct": 13,
+      "total": 14
+    },
+    "resource_detail.recreational_combo": {
+      "correct": 1,
+      "total": 1
+    },
+    "resource_detail.recreational_items": {
+      "correct": 1,
+      "total": 1
+    }
+  }
+}

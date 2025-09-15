@@ -8,6 +8,68 @@
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
   },
+  "ocr_text_orders": {
+    "file_name": "ocr_text_orders.json"
+  },
+  "ocr_text_orders_fine_grained": {
+    "file_name": "ocr_text_orders_fine_grained.json"
+  },
+  "ocr_text_orders_20250101_20250715": {
+    "file_name": "ocr_text_orders_20250101_20250715.json"
+  },
+  "ocr_text_orders_20250101_20250715_fine_grained": {
+    "file_name": "ocr_text_orders_20250101_20250715_fine_grained.json"
+  },
+  "ocr_text_orders_20250101_20250715_fine_grained_test": {
+    "file_name": "ocr_text_orders_20250101_20250715_fine_grained_test.json"
+  },
+  "ocr_text_orders_20250101_20250715_fine_grained_test_08_06": {
+    "file_name": "ocr_text_orders_20250101_20250715_fine_grained_test_08_06.json"
+  },
+  "oct_idcards_orders": {
+    "file_name": "oct_idcards_orders.json"
+  },
+  "ocr_text_orders_20250101_20250715_label_balance": {
+    "file_name": "ocr_text_orders_20250101_20250715_label_balance.json"
+  },
+  "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter_context": {
+    "file_name": "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter.json",
+    "formatting": "custom_context"
+  },
+  "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter_enhanced": {
+    "file_name": "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter_enhanced.json"
+  },
+  "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter_with_context": {
+    "file_name": "ocr_text_orders_fine_grained_test_08_07_updated_v2_filter_with_context.json",
+    "formatting": "custom_context"
+  },
+  "8_30_all_testdata": {
+    "file_name": "8_30_all_testdata.json",
+    "formatting": "custom_context"
+  },
+  "ocr_text_orders_fine_grained_test_08_07_updated_v2_with_context_object": {
+    "file_name": "ocr_text_orders_fine_grained_test_08_07_updated_v2_with_context_object.json",
+    "formatting": "custom_context"
+  },
+  "test_data_for_eval": {
+    "file_name": "8_30_all_evaldata.json",
+    "formatting": "custom_context"
+  },
+  "test_data_for_eval_v2": {
+    "file_name": "text_idcards_8_18_eval.json",
+    "formatting": "custom_context",
+    "metrics": [
+      "accuracy"
+    ]
+  },
+  "test_data": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_14/merged_dataset_test_09_14.json",
+    "formatting": "custom_context"
+  },
+  "ocr_text_orders_08_14_test": {
+    "file_name": "ocr_text_orders_08_14_test_v4.json",
+    "formatting": "custom_context"
+  },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",
     "formatting": "sharegpt",
@@ -21,6 +83,41 @@
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
+      "tools": "tools"
+    }
+  },
+  "function_call_demo_qwen3": {
+    "file_name": "function_call_demo_qwen3.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "tools": "tools"
+    }
+  },
+  "function_call_train": {
+    "file_name": "dataset/9_10/function_call_data/function_call_train.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
+  },
+  "function_call_test": {
+    "file_name": "dataset/9_10/function_call_data/function_call_test_small.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
+  },
+  "function_call_full": {
+    "file_name": "function_call_data/function_call_full.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
       "tools": "tools"
     }
   },
@@ -714,5 +811,31 @@
       "prompt": "content"
     },
     "folder": "python"
+  },
+  "mixed_training_data": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_14/mixed_training_data.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
+  },
+  "function_call_combined": {
+    "file_name": "dataset/function_call_combined.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
+  },
+  "custom_context_combined": {
+    "file_name": "dataset/custom_context_combined.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system"
+    }
   }
 }
