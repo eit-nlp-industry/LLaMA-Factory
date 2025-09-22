@@ -46,56 +46,209 @@ class SupervisedDatasetProcessor(DatasetProcessor):
         )
         encoded_pairs = self.template.encode_multiturn(self.tokenizer, messages, system, tools)
         total_length = len(input_ids) + (1 if self.template.efficient_eos else 0)
+        
+        # 添加详细日志记录
+        import os
+        from datetime import datetime
+        
+        def log_debug(msg):
+            """简单的调试日志函数"""
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            log_entry = f"{timestamp} | INFO | {msg}\n"
+            
+            # 写入日志文件
+            log_file = "/home/ziqiang/LLaMA-Factory/sharegpt_pair_debug.log"
+            try:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(log_entry)
+                    f.flush()  # 立即刷新到文件
+            except:
+                pass  # 忽略写文件错误
+                
+            # 只写入日志文件，不输出到控制台
+        
+        log_debug("\n" + "🔧 " + "=" * 78)
+        log_debug("🔧 ShareGPT数据处理器 - _encode_data_example开始")
+        log_debug("🔧 " + "=" * 78)
+        
+        log_debug(f"📊 开始处理数据样本")
+        log_debug(f"📊 原始conversations长度: {len(prompt + response)} 条消息")
+        log_debug(f"📊 编码后的pairs数量: {len(encoded_pairs)}")
+        log_debug(f"📊 初始total_length: {total_length}")
+        log_debug(f"📊 cutoff_len: {self.data_args.cutoff_len}")
+        log_debug(f"📊 mask_history: {self.data_args.mask_history}")
+        log_debug(f"📊 train_on_prompt: {self.data_args.train_on_prompt}")
+        
         if self.data_args.mask_history:
             encoded_pairs = encoded_pairs[::-1]  # high priority for last turns
+            log_debug(f"🔄 启用mask_history，pairs顺序已反转")
+
+        log_debug("\n" + "📋 " + "-" * 76)
+        log_debug("📋 开始处理每个Pair")
+        log_debug("📋 " + "-" * 76)
 
         for turn_idx, (source_ids, target_ids) in enumerate(encoded_pairs):
+            original_source_len = len(source_ids)
+            original_target_len = len(target_ids)
+            remaining_budget = self.data_args.cutoff_len - total_length
+            
+            log_debug(f"\n🔄 === 处理Pair {turn_idx + 1} ===")
+            log_debug(f"📏 原始长度: source={original_source_len}, target={original_target_len}")
+            log_debug(f"💰 剩余预算: {remaining_budget}")
+            
             if total_length >= self.data_args.cutoff_len:
+                log_debug(f"❌ 预算耗尽，丢弃剩余pairs")
                 break
 
             source_len, target_len = infer_seqlen(
-                len(source_ids), len(target_ids), self.data_args.cutoff_len - total_length
+                original_source_len, original_target_len, remaining_budget
             )
+            
+            log_debug(f"✂️ 截断后长度: source={original_source_len}->{source_len}, target={original_target_len}->{target_len}")
+            
+            if source_len < original_source_len:
+                log_debug(f"⚠️ source被截断: {original_source_len - source_len} tokens")
+            if target_len < original_target_len:
+                log_debug(f"⚠️ target被截断: {original_target_len - target_len} tokens")
+            
             source_ids = source_ids[:source_len]
             target_ids = target_ids[:target_len]
             total_length += source_len + target_len
+            
+            log_debug(f"📈 当前累计长度: {total_length}/{self.data_args.cutoff_len} ({total_length/self.data_args.cutoff_len*100:.1f}%)")
 
+            # 生成标签
             if self.data_args.train_on_prompt:
                 source_label = source_ids
+                log_debug(f"🏷️ train_on_prompt=True, source_label使用原始tokens")
+                log_debug(f"   📊 source_label长度: {len(source_label)} tokens")
+                if len(source_label) > 0:
+                    source_label_preview = self.tokenizer.decode(source_label[:min(20, len(source_label))], skip_special_tokens=False)
+                    source_label_clean = source_label_preview.replace(chr(10), '\\n')
+                    log_debug(f"   📄 source_label预览: {source_label_clean[:100]}...")
             elif self.template.efficient_eos:
                 source_label = [self.tokenizer.eos_token_id] + [IGNORE_INDEX] * (source_len - 1)
+                log_debug(f"🏷️ efficient_eos=True, source_label=[eos_token, {source_len-1}*IGNORE_INDEX]")
+                log_debug(f"   📊 source_label长度: {len(source_label)} tokens")
+                log_debug(f"   🔍 eos_token_id: {self.tokenizer.eos_token_id}")
+                log_debug(f"   🔍 IGNORE_INDEX: {IGNORE_INDEX}")
             else:
                 source_label = [IGNORE_INDEX] * source_len
+                log_debug(f"🏷️ source_label={source_len}*IGNORE_INDEX")
+                log_debug(f"   📊 source_label长度: {len(source_label)} tokens")
+                log_debug(f"   🔍 IGNORE_INDEX: {IGNORE_INDEX}")
 
             if self.data_args.mask_history and turn_idx != 0:  # train on the last turn only
                 target_label = [IGNORE_INDEX] * target_len
+                log_debug(f"🏷️ mask_history=True且turn_idx!=0, target_label={target_len}*IGNORE_INDEX")
+                log_debug(f"   📊 target_label长度: {len(target_label)} tokens")
+                log_debug(f"   🔍 IGNORE_INDEX: {IGNORE_INDEX}")
             else:
                 target_label = target_ids
+                log_debug(f"🏷️ target_label使用原始tokens")
+                log_debug(f"   📊 target_label长度: {len(target_label)} tokens")
+                if len(target_label) > 0:
+                    target_label_preview = self.tokenizer.decode(target_label[:min(20, len(target_label))], skip_special_tokens=False)
+                    target_label_clean = target_label_preview.replace(chr(10), '\\n')
+                    log_debug(f"   📄 target_label预览: {target_label_clean[:100]}...")
 
             if self.data_args.mask_history:  # reversed sequences
                 input_ids = source_ids + target_ids + input_ids
                 labels = source_label + target_label + labels
+                log_debug(f"🔄 mask_history=True, 序列已反转拼接")
+                log_debug(f"   📊 拼接后input_ids长度: {len(input_ids)}")
+                log_debug(f"   📊 拼接后labels长度: {len(labels)}")
             else:
                 input_ids += source_ids + target_ids
                 labels += source_label + target_label
+                log_debug(f"➡️ 正常顺序拼接")
+                log_debug(f"   📊 拼接后input_ids长度: {len(input_ids)}")
+                log_debug(f"   📊 拼接后labels长度: {len(labels)}")
+            
+            # 显示当前labels中的有效token统计
+            valid_labels_count = sum(1 for label in labels if label != IGNORE_INDEX)
+            total_labels_count = len(labels)
+            valid_percentage = (valid_labels_count / total_labels_count * 100) if total_labels_count > 0 else 0
+            log_debug(f"   📊 当前有效labels: {valid_labels_count}/{total_labels_count} ({valid_percentage:.1f}%)")
+            
+            # 显示labels的详细组成
+            if len(labels) > 0:
+                unique_labels = set(labels)
+                label_stats = {}
+                for label in unique_labels:
+                    count = labels.count(label)
+                    if label == IGNORE_INDEX:
+                        label_stats[f"IGNORE_INDEX({label})"] = count
+                    elif label == self.tokenizer.eos_token_id:
+                        label_stats[f"EOS_TOKEN({label})"] = count
+                    else:
+                        label_stats[f"TOKEN_{label}"] = count
+                
+                log_debug(f"   📊 Labels组成: {dict(list(label_stats.items())[:5])}")  # 只显示前5个
 
         if self.template.efficient_eos:
             input_ids += [self.tokenizer.eos_token_id]
             labels += [self.tokenizer.eos_token_id]
+            total_length += 1
+            log_debug(f"🔚 添加eos_token, total_length={total_length}")
+
+        log_debug("\n" + "🎯 " + "=" * 76)
+        log_debug("🎯 最终结果统计")
+        log_debug("🎯 " + "=" * 76)
+        log_debug(f"📊 最终input_ids长度: {len(input_ids)}")
+        log_debug(f"📊 最终labels长度: {len(labels)}")
+        log_debug(f"📊 最终total_length: {total_length}")
+        log_debug(f"📊 使用率: {total_length}/{self.data_args.cutoff_len} ({total_length/self.data_args.cutoff_len*100:.1f}%)")
+        
+        # 统计有效标签数量
+        valid_labels = [l for l in labels if l != IGNORE_INDEX]
+        log_debug(f"📊 有效标签数量: {len(valid_labels)}/{len(labels)} ({len(valid_labels)/len(labels)*100:.1f}%)")
+        
+        log_debug("🔧 " + "=" * 78)
+        log_debug("🔧 _encode_data_example处理完成")
+        log_debug("🔧 " + "=" * 78)
 
         return input_ids, labels
 
     def preprocess_dataset(self, examples: dict[str, list[Any]]) -> dict[str, list[Any]]:
         # build inputs with format `<bos> X Y <eos>` and labels with format `<ignore> ... <ignore> Y <eos>`
         # for multiturn examples, we only mask the prompt part in each prompt-response pair.
+        
+        # 添加日志记录
+        import os
+        from datetime import datetime
+        
+        def log_debug(msg):
+            """简单的调试日志函数"""
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            log_entry = f"{timestamp} | INFO | {msg}\n"
+            
+            # 写入日志文件
+            log_file = "/home/ziqiang/LLaMA-Factory/sharegpt_pair_debug.log"
+            try:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(log_entry)
+                    f.flush()  # 立即刷新到文件
+            except:
+                pass  # 忽略写文件错误
+        
+        log_debug("\n" + "🚀 " + "=" * 78)
+        log_debug("🚀 SupervisedDatasetProcessor.preprocess_dataset 开始")
+        log_debug("🚀 " + "=" * 78)
+        log_debug(f"📊 处理样本数量: {len(examples['_prompt'])}")
+        
         model_inputs = defaultdict(list)
         for i in range(len(examples["_prompt"])):
+            log_debug(f"\n🔄 处理样本 {i+1}/{len(examples['_prompt'])}")
+            
             if len(examples["_prompt"][i]) % 2 != 1 or len(examples["_response"][i]) != 1:
+                log_debug(f"❌ 样本 {i+1} 格式无效，跳过")
                 logger.warning_rank0(
                     "Dropped invalid example: {}".format(examples["_prompt"][i] + examples["_response"][i])
                 )
                 continue
 
+            log_debug(f"✅ 样本 {i+1} 格式有效，开始编码")
             input_ids, labels = self._encode_data_example(
                 prompt=examples["_prompt"][i],
                 response=examples["_response"][i],
@@ -105,12 +258,19 @@ class SupervisedDatasetProcessor(DatasetProcessor):
                 videos=examples["_videos"][i] or [],
                 audios=examples["_audios"][i] or [],
             )
+            log_debug(f"✅ 样本 {i+1} 编码完成，input_ids长度: {len(input_ids)}, labels长度: {len(labels)}")
             model_inputs["input_ids"].append(input_ids)
             model_inputs["attention_mask"].append([1] * len(input_ids))
             model_inputs["labels"].append(labels)
             model_inputs["images"].append(examples["_images"][i])
             model_inputs["videos"].append(examples["_videos"][i])
             model_inputs["audios"].append(examples["_audios"][i])
+
+        log_debug("\n" + "🎯 " + "=" * 76)
+        log_debug("🎯 preprocess_dataset 处理完成")
+        log_debug("🎯 " + "=" * 76)
+        log_debug(f"📊 最终处理样本数量: {len(model_inputs['input_ids'])}")
+        log_debug("🚀 " + "=" * 78)
 
         return model_inputs
 

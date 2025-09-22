@@ -80,7 +80,77 @@ class Template:
     ) -> list[tuple[list[int], list[int]]]:
         r"""Return multiple pairs of token ids representing prompts and responses respectively."""
         encoded_messages = self._encode(tokenizer, messages, system, tools)
-        return [(encoded_messages[i], encoded_messages[i + 1]) for i in range(0, len(encoded_messages), 2)]
+        
+        # 添加详细日志记录
+        import os
+        from datetime import datetime
+        
+        def log_debug(msg):
+            """简单的调试日志函数"""
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            log_entry = f"{timestamp} | INFO | {msg}\n"
+            
+            # 写入日志文件
+            log_file = "/home/ziqiang/LLaMA-Factory/sharegpt_pair_debug.log"
+            try:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(log_entry)
+                    f.flush()  # 立即刷新到文件
+            except:
+                pass  # 忽略写文件错误
+                
+            # 只写入日志文件，不输出到控制台
+        
+        log_debug("=" * 80)
+        log_debug("🔄 ShareGPT数据处理 - encode_multiturn开始")
+        log_debug("=" * 80)
+        
+        log_debug(f"📥 输入messages数量: {len(messages)}")
+        
+        # 打印原始消息内容
+        for i, msg in enumerate(messages):
+            role = msg.get('role', 'unknown')
+            content_preview = msg.get('content', '')[:100].replace('\n', '\\n')
+            log_debug(f"  📝 Message {i+1}: {role} - {content_preview}...")
+        
+        log_debug(f"🔢 编码后messages数量: {len(encoded_messages)}")
+        
+        # 打印编码后的每个消息段
+        for i, encoded in enumerate(encoded_messages):
+            log_debug(f"  🧮 编码段 {i+1}: {len(encoded)} tokens")
+            if len(encoded) > 0:
+                # 解码前50个token看内容
+                preview = tokenizer.decode(encoded[:min(50, len(encoded))], skip_special_tokens=False)
+                preview = preview.replace("\n", "\\n")
+                log_debug(f"    📄 内容预览: {preview}...")
+        
+        pairs = [(encoded_messages[i], encoded_messages[i + 1]) for i in range(0, len(encoded_messages), 2)]
+        
+        log_debug("\n" + "=" * 80)
+        log_debug("✂️  Pair分割结果")
+        log_debug("=" * 80)
+        log_debug(f"📊 生成的pairs数量: {len(pairs)}")
+        
+        for i, (source_ids, target_ids) in enumerate(pairs):
+            log_debug(f"\n--- Pair {i+1} ---")
+            log_debug(f"📏 Pair {i+1}: source={len(source_ids)} tokens, target={len(target_ids)} tokens")
+            
+            # 解码source和target内容
+            if len(source_ids) > 0:
+                source_text = tokenizer.decode(source_ids, skip_special_tokens=False)
+                source_preview = source_text[:2000].replace("\n", "\\n")
+                log_debug(f"  📤 Source内容: {source_text}...")
+            
+            if len(target_ids) > 0:
+                target_text = tokenizer.decode(target_ids, skip_special_tokens=False)
+                target_preview = target_text[:2000].replace("\n", "\\n")
+                log_debug(f"  📥 Target内容: {target_text}...")
+        
+        log_debug("=" * 80)
+        log_debug("✅ encode_multiturn完成")
+        log_debug("=" * 80)
+        
+        return pairs
 
     def extract_tool(self, content: str) -> Union[str, list["FunctionCall"]]:
         r"""Extract tool message."""
@@ -148,6 +218,22 @@ class Template:
                 if system or tools:
                     tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
                     elements += self.format_system.apply(content=(system + tool_text))
+            elif message["role"] == Role.OBSERVATION:
+                # 对于observation消息，添加system信息（不包含tools）
+                if system:
+                    elements += self.format_system.apply(content=system)
+                
+                # 查找最近的human消息，将其内容添加到observation中
+                human_content = ""
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.USER:
+                        human_content = messages[j]["content"]
+                        break
+                
+                if human_content:
+                    # 在observation内容前添加human的value
+                    enhanced_content = f"用户查询: {human_content}\n\n工具返回结果: {message['content']}"
+                    message = {**message, "content": enhanced_content}
 
             if message["role"] == Role.USER:
                 elements += self.format_user.apply(content=message["content"], idx=str(i // 2))
@@ -354,7 +440,19 @@ class Llama2Template(Template):
             elif message["role"] == Role.ASSISTANT:
                 elements += self.format_assistant.apply(content=message["content"])
             elif message["role"] == Role.OBSERVATION:
-                elements += self.format_observation.apply(content=message["content"])
+                # 查找最近的human消息，将其内容添加到observation中
+                human_content = ""
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.USER:
+                        human_content = messages[j]["content"]
+                        break
+                
+                if human_content:
+                    # 在observation内容前添加human的value
+                    enhanced_content = f"用户查询: {human_content}\n\n工具返回结果: {message['content']}"
+                    elements += self.format_observation.apply(content=enhanced_content)
+                else:
+                    elements += self.format_observation.apply(content=message["content"])
             elif message["role"] == Role.FUNCTION:
                 elements += self.format_function.apply(content=message["content"])
             else:
@@ -434,23 +532,95 @@ class ReasoningTemplate(Template):
         system: Optional[str] = None,
         tools: Optional[str] = None,
     ) -> list[tuple[list[int], list[int]]]:
+        # 添加详细日志记录
+        import os
+        from datetime import datetime
+        
+        def log_debug(msg):
+            """简单的调试日志函数"""
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            log_entry = f"{timestamp} | INFO | {msg}\n"
+            
+            # 写入日志文件
+            log_file = "/home/ziqiang/LLaMA-Factory/sharegpt_pair_debug.log"
+            try:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(log_entry)
+                    f.flush()  # 立即刷新到文件
+            except:
+                pass  # 忽略写文件错误
+                
+            # 只写入日志文件，不输出到控制台
+        
+        log_debug("=" * 80)
+        log_debug("🔄 ReasoningTemplate数据处理 - encode_multiturn开始")
+        log_debug("=" * 80)
+        
+        log_debug(f"📥 输入messages数量: {len(messages)}")
+        log_debug(f"🧠 enable_thinking: {self.enable_thinking}")
+        
+        # 打印原始消息内容
+        for i, msg in enumerate(messages):
+            role = msg.get('role', 'unknown')
+            content_preview = msg.get('content', '')[:8000].replace('\n', '\\n')
+            log_debug(f"  📝 Message {i+1}: {role} - {content_preview}...")
+        
         messages = deepcopy(messages)
         if self.enable_thinking is False:  # remove all cot
             for i in range(1, len(messages), 2):
                 messages[i]["content"] = self.remove_thought(messages[i]["content"])
+                log_debug(f"  🧹 移除了Message {i+1}中的思考内容")
 
         encoded_messages = self._encode(tokenizer, messages, system, tools)
+        log_debug(f"🔢 编码后messages数量: {len(encoded_messages)}")
+        
+        # 打印编码后的每个消息段
+        for i, encoded in enumerate(encoded_messages):
+            log_debug(f"  🧮 编码段 {i+1}: {len(encoded)} tokens")
+            if len(encoded) > 0:
+                # 解码前50个token看内容
+                preview = tokenizer.decode(encoded[:min(50, len(encoded))], skip_special_tokens=False)
+                preview = preview.replace("\n", "\\n")
+                log_debug(f"    📄 内容预览: {preview}...")
+        
         for i in range(0, len(messages), 2):
             if (
                 self.thought_words[0] not in messages[i + 1]["content"]
                 and self.thought_words[1] not in messages[i + 1]["content"]
             ):  # add empty cot
+                log_debug(f"  💭 为Message {i+2}添加空思考标签")
                 if not self.enable_thinking:  # do not compute loss
                     encoded_messages[i] += self.get_thought_word_ids(tokenizer)
                 else:  # do compute loss
                     encoded_messages[i + 1] = self.get_thought_word_ids(tokenizer) + encoded_messages[i + 1]
 
-        return [(encoded_messages[i], encoded_messages[i + 1]) for i in range(0, len(encoded_messages), 2)]
+        pairs = [(encoded_messages[i], encoded_messages[i + 1]) for i in range(0, len(encoded_messages), 2)]
+        
+        log_debug("\n" + "=" * 80)
+        log_debug("✂️  Pair分割结果")
+        log_debug("=" * 80)
+        log_debug(f"📊 生成的pairs数量: {len(pairs)}")
+        
+        for i, (source_ids, target_ids) in enumerate(pairs):
+            log_debug(f"\n--- Pair {i+1} ---")
+            log_debug(f"📏 Pair {i+1}: source={len(source_ids)} tokens, target={len(target_ids)} tokens")
+            
+            # 解码source和target内容
+            if len(source_ids) > 0:
+                source_text = tokenizer.decode(source_ids, skip_special_tokens=False)
+                source_preview = source_text[:2000].replace("\n", "\\n")
+                log_debug(f"  📤 Source内容: {source_text}...")
+            
+            if len(target_ids) > 0:
+                target_text = tokenizer.decode(target_ids, skip_special_tokens=False)
+                target_preview = target_text[:2000].replace("\n", "\\n")
+                log_debug(f"  📥 Target内容: {target_text}...")
+        
+        log_debug("=" * 80)
+        log_debug("✅ ReasoningTemplate encode_multiturn完成")
+        log_debug("=" * 80)
+
+        return pairs
 
 
 TEMPLATES: dict[str, "Template"] = {}
