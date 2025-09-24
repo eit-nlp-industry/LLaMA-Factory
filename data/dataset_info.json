@@ -813,7 +813,7 @@
     "folder": "python"
   },
   "mixed_training_data": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_14/mixed_training_data.json",
+    "file_name": "dataset/9_14/mixed_training_data.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
