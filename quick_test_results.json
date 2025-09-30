@@ -1,0 +1,302 @@
+{
+  "evaluation_results": [
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2252,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展示，用于收入结构分析和业态表现评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "analyze_revenue_by_type",
+          "missing_args": [
+            "start_date",
+            "end_date",
+            "report_number"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\":\"analyze_revenue_by_type\",\"description\":\"收入类型构成分析工具，基于财务报表数据分析门票、交通、餐饮、住宿、导游、其他等6类业态收入占比和金额分布，返回饼图格式数据，支持按报表编号和旅行社筛选，适用于收入结构分析和业态表现评估\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"start_date\":{\"type\":\"string\",\"description\":\"分析开始日期，格式为YYYY-MM-DD\",\"format\":\"date\"},\"end_date\":{\"type\":\"string\",\"description\":\"分析结束日期，格式为YYYY-MM-DD，须晚于开始日期\",\"format\":\"date\"},\"report_number\":{\"type\":\"string\",\"description\":\"可选：报表编号筛选，格式通常为字母+日期（如：A20241201），部分情况下可能包含编号（如：A20241201001）\"},\"travel_agency_filter\":{\"type\":\"string\",\"description\":\"可选：旅行社名称筛选，支持模糊匹配，用于分析特定旅行社的收入构成\"}},\"required\":[\"start_date\",\"end_date\"]},\"category\":\"analysis\",\"deprecated\":false,\"experimental\":false},{\"name\":\"analyze_payment_methods\",\"description\":\"支付方式构成分析工具，基于财务报表数据分析二维码支付、现金支付、记账支付三种支付方式的金额占比和分布情况，返回饼图格式数据，支持按报表编号和旅行社筛选，适用于支付渠道优化和收款方式分析\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"start_date\":{\"type\":\"string\",\"description\":\"分析开始日期，格式为YYYY-MM-DD\",\"format\":\"date\"},\"end_date\":{\"type\":\"string\",",
+          "source_length": 4477,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"analyze_revenue_by_type\", \"arguments\": {\"start_date\": \"2025-06-01\", \"end_date\": \"2025-08-17\", \"report_number\": \"L20250611\"}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {},
+          "source_preview": "<|im_start|>user\n<tool_response>\n{\"result\":{\"result\":[{\"type\":\"text\",\"text\":\"收入类型分析报告\\n\\n分析期间：2025-06-01 至 2025-08-17\\n总收入：¥1,285,893.00\\n\\n各业态收入分布：\\n• 门票: ¥605,697.00 (47.1%)\\n• 交通: ¥650,221.00 (50.6%)\\n• 餐饮: ¥5,440.00 (0.4%)\\n• 住宿: ¥24,535.00 (1.9%)\\n• 其他: ¥0.00 (0.0%)\\n\\n主要收入来源：交通，贡献了50.6%的收入\"},{\"type\":\"chart_data\",\"chart_type\":\"pie\",\"title\":\"收入类型分析\",\"items\":[{\"label\":\"门票\",\"value\":605697.0,\"percentage\":47.1},{\"label\":\"交通\",\"value\":650221.0,\"percentage\":50.57},{\"label\":\"餐饮\",\"value\":5440.0,\"percentage\":0.42},{\"label\":\"住宿\",\"value\":24535.0,\"percentage\":1.91},{\"label\":\"其他\",\"value\":0.0,\"percentage\":0.0}],\"total\":1285893.0,\"unit\":\"元\"}]},\"markdown\":\"label: 门票 | value: 605697.0 | percentage: 47.1 | label: 交通 | value: 650221.0 | percentage: 50.57 | label: 餐饮 | value: 5440.0 | percentage: 0.42 | label: 住宿 | value: 24535.0 | percentage: 1.91 | label: 其他 | value: 0.0 | percentage: 0.0\"}\n</tool_response><|im_end|>\n<|im_start|>assistant\n",
+          "source_length": 938,
+          "predicted_full": "",
+          "expected_full": "根据报表编号L20250611的数据，以下是收入类型分布情况：\n\n## 收入类型分析报告\n\n**分析期间：** 2025-06-01 至 2025-08-17  \n**总收入：** ¥1,285,893.00\n\n### 各业态收入分布：\n\n- **交通：** ¥650,221.00 (50.6%) - 主要收入来源\n- **门票：** ¥605,697.00 (47.1%) \n- **住宿：** ¥24,535.00 (1.9%)\n- **餐饮：** ¥5,440.00 (0.4%)\n- **其他：** ¥0.00 (0.0%)\n\n### 主要特点：\n交通收入是最大的收入来源，占总收入的50.6%，其次是门票收入占47.1%。这两项业务合计贡献了97.7%的总收入，而餐饮和住宿收入相对较少。<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2268,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，用于订单流程监控和业务健康度评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "calculate_order_distribution",
+          "missing_args": [
+            "start_date",
+            "end_date",
+            "scenic_spot_filter",
+            "travel_agency_filter"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\":\"calculate_order_distribution\",\"description\":\"订单状态分布分析工具，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，返回饼图格式数据，支持景区和旅行社双重筛选，适用于订单流程监控和业务健康度评估\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"start_date\":{\"type\":\"string\",\"description\":\"分析开始日期，格式为YYYY-MM-DD，基于订单创建时间筛选\",\"format\":\"date\"},\"end_date\":{\"type\":\"string\",\"description\":\"分析结束日期，格式为YYYY-MM-DD，须晚于开始日期\",\"format\":\"date\"},\"scenic_spot_filter\":{\"type\":\"string\",\"description\":\"可选：景区名称筛选，支持模糊匹配，用于分析特定景区的订单状态分布\"},\"travel_agency_filter\":{\"type\":\"string\",\"description\":\"可选：旅行社名称筛选，支持模糊匹配，用于分析特定旅行社的订单处理情况\"}},\"required\":[\"start_date\",\"end_date\"]},\"category\":\"analysis\",\"deprecated\":false,\"experimental\":false},{\"name\":\"analyze_order_trends\",\"description\":\"订单数量趋势分析工具，基于财务报表数据按日统计各景区订单数量变化趋势，返回折线图格式的时间序列数据，支持多景区对比和旅行社筛选，适用于业务量监控、需求预测和运营规划\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"start_date\":{\"type\":\"string\",\"description\":\"分析开始日期，格式为YYYY-MM-DD\",\"format\":\"date\"},\"end_date\":{\"type\":\"string\",\"description\":\"分析",
+          "source_length": 3971,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"calculate_order_distribution\", \"arguments\": {\"start_date\": \"2025-07-01\", \"end_date\": \"2025-08-17\", \"scenic_spot_filter\": \"新叶古村\", \"travel_agency_filter\": \"建德市光大国际旅行社有限公司\"}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {},
+          "source_preview": "<|im_start|>user\n<tool_response>\n{\"result\":{\"result\":[{\"type\":\"text\",\"text\":\"订单状态分布分析\\n\\n总订单数：5个\\n\\n各状态分布：\\n• 执行中: 4个 (80.0%)\\n• 已完成: 1个 (20.0%)\\n\\n主要状态：执行中，占总订单的80.0%\"},{\"type\":\"chart_data\",\"chart_type\":\"pie\",\"title\":\"订单状态分布\",\"items\":[{\"label\":\"执行中\",\"value\":4.0,\"percentage\":80.0},{\"label\":\"已完成\",\"value\":1.0,\"percentage\":20.0}],\"total\":5.0,\"unit\":\"个\"}]},\"markdown\":\"label: 执行中 | value: 4.0 | percentage: 80.0 | label: 已完成 | value: 1.0 | percentage: 20.0\"}\n</tool_response><|im_end|>\n<|im_start|>assistant\n",
+          "source_length": 506,
+          "predicted_full": "",
+          "expected_full": "根据查询结果，新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日期间的合作订单状态如下：\n\n**订单状态分布分析**\n\n总订单数：5个\n\n**各状态分布：**\n• 执行中: 4个 (80.0%)\n• 已完成: 1个 (20.0%)\n\n**主要状态：** 执行中，占总订单的80.0%\n\n从数据可以看出，两家机构在此期间的合作订单主要处于执行中状态，说明大部分订单正在正常进行中，只有少部分订单已经完成。这表明合作关系活跃，业务进展良好。<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2253,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "calculate_order_distribution",
+          "missing_args": [
+            "start_date",
+            "end_date",
+            "scenic_spot_filter"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\":\"monitor_business_operations\",\"description\":\"业务运营监控工具，支持订单状态监控、取消统计、订单量监控、实时指标等业务运营全方位实时监控功能\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"monitoring_type\":{\"type\":\"string\",\"description\":\"监控类型: order_status|cancellation_count|order_volume|operational_status|real_time_metrics\",\"enum\":[\"order_status\",\"cancellation_count\",\"order_volume\",\"operational_status\",\"real_time_metrics\"]},\"resort_filter\":{\"type\":\"string\",\"description\":\"景区筛选\"},\"status_filter\":{\"type\":\"string\",\"description\":\"状态筛选: executing|cancelled|completed|all\",\"default\":\"all\",\"enum\":[\"executing\",\"cancelled\",\"completed\",\"all\"]},\"time_scope\":{\"type\":\"string\",\"description\":\"时间范围: current_month|real_time|specific_period\",\"default\":\"current_month\",\"enum\":[\"current_month\",\"real_time\",\"specific_period\"]},\"time_filter\":{\"type\":\"object\",\"description\":\"时间筛选\"},\"include_trends\":{\"type\":\"boolean\",\"description\":\"是否包含趋势\",\"default\":false},\"alert_threshold\":{\"type\":\"number\",\"description\":\"告警阈值\"},\"group_",
+          "source_length": 3762,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"calculate_order_distribution\", \"arguments\": {\"start_date\": \"2025-07-05\", \"end_date\": \"2025-08-03\", \"scenic_spot_filter\": \"宿江公司\"}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {
+            "accuracy": 0.0,
+            "completeness": 0.0,
+            "relevance": 0.0,
+            "clarity": 0.0,
+            "overall": 0.0
+          },
+          "source_preview": "<|im_start|>user\n<tool_response>\n{\"result\":{\"result\":[{\"type\":\"text\",\"text\":\"订单状态分布分析\\n\\n总订单数：93个\\n\\n各状态分布：\\n• 已确认: 31个 (33.3%)\\n• 待提交: 31个 (33.3%)\\n• 执行中: 16个 (17.2%)\\n• 待确认: 14个 (15.1%)\\n• 已作废: 1个 (1.1%)\\n\\n主要状态：已确认，占总订单的33.3%\"},{\"type\":\"chart_data\",\"chart_type\":\"pie\",\"title\":\"订单状态分布\",\"items\":[{\"label\":\"已确认\",\"value\":31.0,\"percentage\":33.33},{\"label\":\"待提交\",\"value\":31.0,\"percentage\":33.33},{\"label\":\"执行中\",\"value\":16.0,\"percentage\":17.2},{\"label\":\"待确认\",\"value\":14.0,\"percentage\":15.05},{\"label\":\"已作废\",\"value\":1.0,\"percentage\":1.08}],\"total\":93.0,\"unit\":\"个\"}]},\"markdown\":\"label: 已确认 | value: 31.0 | percentage: 33.33 | label: 待提交 | value: 31.0 | percentage: 33.33 | label: 执行中 | value: 16.0 | percentage: 17.2 | label: 待确认 | value: 14.0 | percentage: 15.05 | label: 已作废 | value: 1.0 | percentage: 1.08\"}\n</tool_response><|im_end|>\n<|im_start|>assistant\n",
+          "source_length": 855,
+          "predicted_full": "",
+          "expected_full": "根据查询结果，宿江公司在2025年7月5日到8月3日期间的订单状态分布如下：\n\n**总订单数：93个**\n\n**各状态分布：**\n- **已确认**：31个（33.3%）\n- **待提交**：31个（33.3%）\n- **执行中**：16个（17.2%）\n- **待确认**：14个（15.1%）\n- **已作废**：1个（1.1%）\n\n**分析要点：**\n- 已确认和待提交订单各占33.3%，是主要的订单状态\n- 执行中订单占17.2%，说明有一定比例的订单正在处理中\n- 待确认订单占15.1%，需要关注及时确认\n- 已作废订单仅1个，订单质量较好\n\n整体来看，该时间段内宿江公司的订单处理情况良好，大部分订单处于正常流<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2238,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对审批流模板中的审批人和抄送人进行新增、更新、删除等操作\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "update_approval_template",
+          "missing_args": [
+            "approval_template_id",
+            "operate_entity",
+            "entity_type",
+            "operate_type",
+            "target_values"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\":\"update_approval_template\",\"description\":\"对审批流模板中的审批人和抄送人进行新增、更新、删除等操作\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"approval_template_id\":{\"type\":\"integer\",\"description\":\"要编辑的审批模板对应唯一标识ID，是一个大于0的整数。\"},\"operate_entity\":{\"type\":\"string\",\"description\":\"要操作的对象，可以是操作对象的name或者代表其位置的序列号或者空字符串（默认末尾增加）。如果是name，则值是包含2-4个中文字符的字符串；如果是序列号，则是一个可以转换为大于0的整型的字符串\",\"examples\":[\"张三\",\"1\",\"\"]},\"entity_type\":{\"type\":\"string\",\"description\":\"要操作的对象对应的类型，分为审批人：approver、抄送人：cc\",\"enum\":[\"approver\",\"cc\"],\"examples\":[\"approver\"]},\"operate_type\":{\"type\":\"string\",\"description\":\"操作类型，即增删改\",\"enum\":[\"create\",\"update\",\"delete\"],\"examples\":[\"create\"]},\"target_values\":{\"type\":\"list\",\"description\":\"操作的目标值列表，即审批人/抄送人的name列表。删除操作时为空。\",\"examples\":[[\"张三\",\"李四\"]]}},\"required\":[\"approval_template_id\",\"operate_entity\",\"entity_type\",\"operate_type\",\"target_values\"]},\"category\":\"approval\",\"deprecated\":false,\"experimental\":false},{\"name\":\"batch_permission_operation\",\"description\":\"执行批量权限管理操作，",
+          "source_length": 5783,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"update_approval_template\", \"arguments\": {\"approval_template_id\": 1, \"operate_entity\": \"\", \"entity_type\": \"cc\", \"operate_type\": \"create\", \"target_values\": [\"姜钰炎\"]}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {
+            "accuracy": 0.0,
+            "completeness": 0.0,
+            "relevance": 0.0,
+            "clarity": 0.0,
+            "overall": 0.0
+          },
+          "source_preview": "<|im_start|>user\n<tool_response>\n{\"result\":[{\"type\":\"text\",\"text\":\"update_approval_template 服务调用完成\"},{\"type\":\"service_data\",\"data\":\"在对应位置新增抄送人姜钰炎成功！\",\"msg\":\"success\",\"status_code\":2000,\"success\":true}],\"markdown\":\"type: text | text: update_approval_template 服务调用完成 | type: service_data | data: 在对应位置新增抄送人姜钰炎成功！ | msg: success | success: True\"}\n</tool_response><|im_end|>\n<|im_start|>assistant\n",
+          "source_length": 393,
+          "predicted_full": "",
+          "expected_full": "已成功为模板1添加姜钰炎作为抄送人！<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2242,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"在文旅图片库中，语义搜索灵栖洞的景色图片。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "search_travel_images",
+          "missing_args": [
+            "query",
+            "location_filter"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\":\"search_travel_images\",\"description\":\"在文旅图片库中，根据用户描述进行语义搜索。支持按景区名称过滤，并可指定返回图片的数量。\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的完整问题或需求描述，但应从中移除已识别出的地理位置或景区名称。移除后此参数应保留原始查询的上下文，如数量、形容词等，不得有任何修改及增减。例如，如果用户说'给我找3张大慈岩的风景照'，`location_filter`应为'大慈岩'，而此`query`参数应为'给我找3张的风景照'。\",\"examples\":[\"田野风光\",\"建筑\"]},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关图片的数量。\",\"default\":5,\"examples\":[3]},\"location_filter\":{\"type\":\"string\",\"description\":\"可选：从用户查询中识别出的唯一地理位置、景区或建筑名称。此参数用于精确过滤图片地点。AI应将识别出的地名填入此字段，并将其从`query`参数中移除。\",\"examples\":[\"新安江\",\"七里扬帆\"]}},\"required\":[\"query\"]},\"category\":\"image\",\"deprecated\":false,\"experimental\":false},{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter",
+          "source_length": 4111,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"search_travel_images\", \"arguments\": {\"query\": \"里面的景色怎么样，给我看看照片\", \"location_filter\": \"灵栖洞\"}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {},
+          "source_preview": "<|im_start|>user\n<tool_response>\n{\"result\":{\"success\":true,\"message\":\"搜索完成\",\"total\":5,\"results\":[{\"url\":\"http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/洞内游客照/普通游客照/游客照16.jpg\",\"image_path\":\"/data/建德/建德旅投/资源库（一级二级）/一级资源/灵栖洞/洞内游客照/普通游客照/游客照16.jpg\"},{\"url\":\"http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞内模特精修图/407A3907.jpg\",\"image_path\":\"/data/建德/建德旅投/资源库（一级二级）/一级资源/灵栖洞/灵栖洞内模特精修图/407A3907.jpg\"},{\"url\":\"http://localhost:8030/static/产品库/灵栖洞/游客照（魔毯加滑道）.jpg\",\"image_path\":\"/data/建德/建德旅投/产品库/灵栖洞/游客照（魔毯加滑道）.jpg\"},{\"url\":\"http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/时光隧道.jpg\",\"image_path\":\"/data/建德/建德旅投/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/时光隧道.jpg\"},{\"url\":\"http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/大千世界.jpg\",\"image_path\":\"/data/建德/建德旅投/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/大千世界.jpg\"}]},\"markdown\":\"url: http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/洞内游客照/普通游客照/游客照16.jpg | image_path: /data/建德/建德旅投/资源库（一级二级）/一级资源/灵栖洞/洞内游客照/普通游客照/游客照16.jpg | url: http://loc",
+          "source_length": 1596,
+          "predicted_full": "",
+          "expected_full": "根据搜索结果，我为您找到了5张灵栖洞内的照片，展现了洞内的美丽景色：\n\n![游客照16](http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/洞内游客照/普通游客照/游客照16.jpg)\n\n![灵栖洞内模特精修图](http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞内模特精修图/407A3907.jpg)\n\n![游客照（魔毯加滑道）](http://localhost:8030/static/产品库/灵栖洞/游客照（魔毯加滑道）.jpg)\n\n![时光隧道](http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/时光隧道.jpg)\n\n![大千世界](http://localhost:8030/static/资源库（一级二级）/一级资源/灵栖洞/灵栖洞洞内/已命名的洞内风景照/大千世界.jpg)\n\n从这些照片可以看出，灵栖洞内景色非常壮观，有着丰富的钟乳石景观。洞内有著名的景点如\"时光隧道\"和\"大千世界\"，还配备了现代化的游览设施如魔毯和滑道，为游客提供了舒适的游览体验。洞内的灯光效果营造出神秘而美丽的氛围，是一个值得游览的自然奇观。<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    }
+  ],
+  "statistics": {
+    "function_call": {
+      "total": 10,
+      "name_accuracy": 0.0,
+      "args_accuracy": 0.0,
+      "overall_accuracy": 0.0
+    },
+    "assistant_response": {
+      "total": 5,
+      "average_score": 0.0,
+      "score_distribution": {
+        "1.0-2.0": 5,
+        "2.0-3.0": 0,
+        "3.0-4.0": 0,
+        "4.0-5.0": 0
+      }
+    }
+  },
+  "timestamp": "2025-09-20T02:10:41.571853"
+}

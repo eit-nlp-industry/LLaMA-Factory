@@ -15,6 +15,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
+import re
 
 from ...extras import logging
 from ...extras.constants import IGNORE_INDEX
@@ -259,9 +260,13 @@ class SupervisedDatasetProcessor(DatasetProcessor):
                 audios=examples["_audios"][i] or [],
             )
             log_debug(f"✅ 样本 {i+1} 编码完成，input_ids长度: {len(input_ids)}, labels长度: {len(labels)}")
+            
+            # 应用user_id mask
+            masked_labels = self._mask_user_id_tokens(input_ids, labels)
+            
             model_inputs["input_ids"].append(input_ids)
             model_inputs["attention_mask"].append([1] * len(input_ids))
-            model_inputs["labels"].append(labels)
+            model_inputs["labels"].append(masked_labels)
             model_inputs["images"].append(examples["_images"][i])
             model_inputs["videos"].append(examples["_videos"][i])
             model_inputs["audios"].append(examples["_audios"][i])
@@ -280,6 +285,93 @@ class SupervisedDatasetProcessor(DatasetProcessor):
         print("inputs:\n{}".format(self.tokenizer.decode(example["input_ids"], skip_special_tokens=False)))
         print("label_ids:\n{}".format(example["labels"]))
         print(f"labels:\n{self.tokenizer.decode(valid_labels, skip_special_tokens=False)}")
+
+    def _mask_user_id_tokens(self, input_ids: list[int], labels: list[int]) -> list[int]:
+        """
+        在labels中mask掉user_id对应的token位置
+        
+        Args:
+            input_ids: 输入的token ID列表
+            labels: 标签列表
+            
+        Returns:
+            list[int]: mask后的labels
+        """
+        masked_labels = labels.copy()
+        
+        # 将input_ids解码为文本
+        text = self.tokenizer.decode(input_ids, skip_special_tokens=False)
+        
+        # 定义user_id的模式
+        user_id_patterns = [
+            r'"user_id"\s*:\s*\d+',  # "user_id": 136451106
+            r'"user_id"\s*:\s*"(\d+)"',  # "user_id": "136451106"
+        ]
+        
+        # 找到user_id的位置
+        user_id_positions = []
+        for pattern in user_id_patterns:
+            matches = list(re.finditer(pattern, text))
+            for match in matches:
+                start_char, end_char = match.span()
+                
+                # 使用更精确的方法找到token位置
+                try:
+                    # 获取user_id部分的文本
+                    user_id_text = text[start_char:end_char]
+                    
+                    # 在input_ids中搜索这个文本对应的token序列
+                    # 先尝试直接匹配
+                    user_id_tokens = self.tokenizer.encode(user_id_text, add_special_tokens=False)
+                    
+                    # 在input_ids中查找这个token序列
+                    for i in range(len(input_ids) - len(user_id_tokens) + 1):
+                        if input_ids[i:i+len(user_id_tokens)] == user_id_tokens:
+                            user_id_positions.extend(range(i, i+len(user_id_tokens)))
+                            print(f"🔒 找到user_id token位置: {i} 到 {i+len(user_id_tokens)-1}")
+                            print(f"   user_id文本: {user_id_text}")
+                            print(f"   user_id tokens: {user_id_tokens}")
+                            break
+                    
+                    # 如果直接匹配失败，尝试更宽松的匹配
+                    if not user_id_positions:
+                        # 提取数字部分
+                        numbers = re.findall(r'\d+', user_id_text)
+                        for num in numbers:
+                            num_tokens = self.tokenizer.encode(num, add_special_tokens=False)
+                            for i in range(len(input_ids) - len(num_tokens) + 1):
+                                if input_ids[i:i+len(num_tokens)] == num_tokens:
+                                    user_id_positions.extend(range(i, i+len(num_tokens)))
+                                    print(f"🔒 找到数字token位置: {i} 到 {i+len(num_tokens)-1}")
+                                    print(f"   数字: {num}")
+                                    print(f"   数字tokens: {num_tokens}")
+                                    break
+                            if user_id_positions:
+                                break
+                                
+                except Exception as e:
+                    print(f"⚠️ user_id mask失败: {e}")
+                    continue
+        
+        # 将user_id位置的labels设为IGNORE_INDEX
+        for pos in user_id_positions:
+            if 0 <= pos < len(masked_labels):
+                masked_labels[pos] = IGNORE_INDEX
+        
+        # 记录mask信息
+        original_trainable = sum(1 for label in labels if label != IGNORE_INDEX)
+        masked_trainable = sum(1 for label in masked_labels if label != IGNORE_INDEX)
+        masked_count = original_trainable - masked_trainable
+        
+        if masked_count > 0:
+            print(f"🔒 已mask {masked_count} 个user_id相关token")
+            print(f"   原始可训练token: {original_trainable}")
+            print(f"   mask后可训练token: {masked_trainable}")
+        else:
+            print(f"⚠️ 未找到user_id token进行mask")
+            print(f"   文本内容: {text[:200]}...")
+        
+        return masked_labels
 
 
 @dataclass
@@ -312,10 +404,13 @@ class PackedSupervisedDatasetProcessor(SupervisedDatasetProcessor):
             if length > self.data_args.cutoff_len:
                 logger.warning_rank0(f"Dropped lengthy example with length {length} > {self.data_args.cutoff_len}.")
             else:
+                # 应用user_id mask
+                masked_labels = self._mask_user_id_tokens(input_ids, labels)
+                
                 lengths.append(length)
                 length2indexes[length].append(valid_num)
                 batch_input_ids.append(input_ids)
-                batch_labels.append(labels)
+                batch_labels.append(masked_labels)
                 batch_images.append(examples["_images"][i] or [])
                 batch_videos.append(examples["_videos"][i] or [])
                 batch_audios.append(examples["_audios"][i] or [])

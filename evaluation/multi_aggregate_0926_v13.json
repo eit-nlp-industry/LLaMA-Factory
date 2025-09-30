@@ -1,0 +1,106 @@
+{
+  "input_file": "data/dataset/9_17/demo_step1.json",
+  "models": [
+    "/data/models/Qwen3-8B",
+    "my_lora"
+  ],
+  "baseline_model": "/data/models/Qwen3-8B",
+  "runs": {
+    "/data/models/Qwen3-8B": {
+      "output_file": "evaluation/multi_0926_v13/result__data_models_Qwen3-8B.json",
+      "summary": {
+        "total_conversations": 10,
+        "total_pairs": 10,
+        "pair_metrics": {
+          "pair1": {
+            "total": 10,
+            "accuracy": 0.6,
+            "precision@1": 0.9
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 0,
+          "recall@5_1": 0,
+          "recall@5_0": 0,
+          "recall_rate": 0.0
+        },
+        "overall_metrics": {
+          "total": 10,
+          "accuracy": 0.6,
+          "precision@1": 0.9,
+          "answer_score": 0.0
+        },
+        "baseline": {
+          "enabled": true,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "my_lora"
+        }
+      }
+    },
+    "my_lora": {
+      "output_file": "evaluation/multi_0926_v13/result_my_lora.json",
+      "summary": {
+        "total_conversations": 10,
+        "total_pairs": 10,
+        "pair_metrics": {
+          "pair1": {
+            "total": 10,
+            "accuracy": 0.675,
+            "precision@1": 1.0
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 0,
+          "recall@5_1": 0,
+          "recall@5_0": 0,
+          "recall_rate": 0.0
+        },
+        "overall_metrics": {
+          "total": 10,
+          "accuracy": 0.675,
+          "precision@1": 1.0,
+          "answer_score": 0.0
+        },
+        "baseline": {
+          "enabled": true,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "my_lora"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "/data/models/Qwen3-8B": {
+      "overall_metrics": {
+        "total": 10,
+        "accuracy": 0.6,
+        "precision@1": 0.9,
+        "answer_score": 0.0
+      },
+      "pair1": {
+        "total": 10,
+        "accuracy": 0.6,
+        "precision@1": 0.9
+      },
+      "pair2": {},
+      "pair3": {}
+    },
+    "my_lora": {
+      "overall_metrics": {
+        "total": 10,
+        "accuracy": 0.675,
+        "precision@1": 1.0,
+        "answer_score": 0.0
+      },
+      "pair1": {
+        "total": 10,
+        "accuracy": 0.675,
+        "precision@1": 1.0
+      },
+      "pair2": {},
+      "pair3": {}
+    }
+  }
+}

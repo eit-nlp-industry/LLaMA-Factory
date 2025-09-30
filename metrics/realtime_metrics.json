@@ -1,0 +1,35 @@
+{
+  "total_conversations": 397,
+  "total_pairs": 1191,
+  "pair1": {
+    "total": 397,
+    "accuracy": 0.895,
+    "precision@1": 1.0
+  },
+  "pair2": {
+    "total": 397,
+    "accuracy": 0.779,
+    "precision@1": 0.872
+  },
+  "pair2_consider_recall": {
+    "total": 333,
+    "accuracy": 0.791,
+    "precision@1": 0.895
+  },
+  "pair3": {
+    "total": 397,
+    "answer_score": 0.218
+  },
+  "recall_metrics": {
+    "total_pairs": 397,
+    "recall@5_1": 333,
+    "recall@5_0": 64,
+    "recall_rate": 0.839
+  },
+  "overall": {
+    "total": 1191,
+    "accuracy": 0.837,
+    "precision@1": 0.936,
+    "answer_score": 0.218
+  }
+}

@@ -199,6 +199,5 @@ if __name__ == "__main__":
     python //home/ziqiang/LLaMA-Factory/data/dataset/preprocess_dara/merge_and_convert_data.py \
     --input  /home/ziqiang/LLaMA-Factory/data/dataset/9_14/text_idcards_8_18.json /home/ziqiang/LLaMA-Factory/data/dataset/9_14/price_cal_train_09_14.json /home/ziqiang/LLaMA-Factory/data/dataset/9_14/price_policy_train_09_14.json\
     --output /home/ziqiang/LLaMA-Factory/data/dataset/9_17/price_service_train_dataset_v0.json \
-    --convert-to-sharegpt \
-    --update-dataset-info    
+    --convert-to-sharegpt  
     '''

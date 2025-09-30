@@ -1,0 +1,595 @@
+{
+  "summary": {
+    "total_conversations": 10,
+    "total_pairs": 10,
+    "pair_metrics": {
+      "pair1": {
+        "total": 10,
+        "accuracy": 0.738,
+        "precision@1": 1.0
+      }
+    },
+    "recall_metrics": {
+      "total_pairs": 0,
+      "recall@5_1": 0,
+      "recall@5_0": 0,
+      "recall_rate": 0.0
+    },
+    "overall_metrics": {
+      "total": 10,
+      "accuracy": 0.738,
+      "precision@1": 1.0,
+      "answer_score": 0.0
+    },
+    "baseline": {
+      "enabled": false,
+      "is_baseline": false,
+      "baseline_model": "/data/models/Qwen3-8B",
+      "current_model": "my_lora"
+    }
+  },
+  "detailed_results": {
+    "pair1": [
+      {
+        "conversation_id": 1,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 报表编号L20250611的收入类型分布情况能给我看看吗",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展示，用于收入结构分析和业态表现评估。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询报表编号L20250611的收入类型分布情况\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询报表编号L20250611的收入类型分布情况\", \"source_fi...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展示，用于收入结构分析和业态表现评估。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "查询报表编号L20250611的收入类型分布情况",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展示，用于收入结构分析和业态表现评估。",
+              "predict": "查询报表编号L20250611的收入类型分布情况",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 2,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日的合作订单状态",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，用于订单流程监控和业务健康度评估。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"根据订单状态查询条件，对新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日的订单状态进行分析，返回待提交、待确认、已确认、执行中、已完成、已作废、已过期等状态的订单数量分布，以及订单状态的汇总分析结果。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"根据订单状态查询条件，对新叶古村和建德市光大国际旅行社有限公司在2025年...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，用于订单流程监控和业务健康度评估。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "根据订单状态查询条件，对新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日的订单状态进行分析，返回待提交、待确认、已确认、执行中、已完成、已作废、已过期等状态的订单数量分布，以及订单状态的汇总分析结果。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，用于订单流程监控和业务健康度评估。",
+              "predict": "根据订单状态查询条件，对新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日的订单状态进行分析，返回待提交、待确认、已确认、执行中、已完成、已作废、已过期等状态的订单数量分布，以及订单状态的汇总分析结果。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 3,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 宿江公司相关的订单在2025年7月5日到8月3日的状态分布",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析宿江公司相关的订单状态分布，基于订单状态字段的统计结果，计算待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量占比，以饼图形式展示订单状态分布，支持按状态类型筛选和排序。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析宿江公司相关的订单状态分布，基于订单状态字段的统计结果，计算待提交、待...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "分析宿江公司相关的订单状态分布，基于订单状态字段的统计结果，计算待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量占比，以饼图形式展示订单状态分布，支持按状态类型筛选和排序。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。",
+              "predict": "分析宿江公司相关的订单状态分布，基于订单状态字段的统计结果，计算待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量占比，以饼图形式展示订单状态分布，支持按状态类型筛选和排序。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 4,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 给模板1添加姜钰炎作为抄送人",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"对审批流模板中的审批人和抄送人进行新增、更新、删除等操作\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"更新模板1的抄送人列表，添加姜钰炎\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"对审批流模板中的审批人和抄送人进行新增、更新、删除等操作\",\"source_filter\":\"toolli...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"更新模板1的抄送人列表，添加姜钰炎\", \"source_filter\": ...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "对审批流模板中的审批人和抄送人进行新增、更新、删除等操作",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "更新模板1的抄送人列表，添加姜钰炎",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "对审批流模板中的审批人和抄送人进行新增、更新、删除等操作",
+              "predict": "更新模板1的抄送人列表，添加姜钰炎",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 5,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 灵栖洞里面的景色怎么样，给我看看照片",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"在文旅图片库中，语义搜索灵栖洞的景色图片。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对灵栖洞的风景进行图片检索，展示代表性景观图片，包括洞内钟乳石景观、地下河、溶洞地貌等特色景观，以及洞口自然景观和周边环境。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"在文旅图片库中，语义搜索灵栖洞的景色图片。\",\"source_filter\":\"toollist\",\"us...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对灵栖洞的风景进行图片检索，展示代表性景观图片，包括洞内钟乳石景观、地下河...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "在文旅图片库中，语义搜索灵栖洞的景色图片。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "对灵栖洞的风景进行图片检索，展示代表性景观图片，包括洞内钟乳石景观、地下河、溶洞地貌等特色景观，以及洞口自然景观和周边环境。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "在文旅图片库中，语义搜索灵栖洞的景色图片。",
+              "predict": "对灵栖洞的风景进行图片检索，展示代表性景观图片，包括洞内钟乳石景观、地下河、溶洞地貌等特色景观，以及洞口自然景观和周边环境。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 6,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 列出宁波欢朋国际旅行社有限公司的所有订单，并显示资源信息。",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"订单列表查询，按客户名称筛选宁波欢朋国际旅行社有限公司的订单，显示基础订单信息。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对宁波欢朋国际旅行社有限公司的订单进行查询，以获取订单列表和相关资源信息。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"订单列表查询，按客户名称筛选宁波欢朋国际旅行社有限公司的订单，显示基础订单信息。\",\"source_fil...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对宁波欢朋国际旅行社有限公司的订单进行查询，以获取订单列表和相关资源信息。...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "订单列表查询，按客户名称筛选宁波欢朋国际旅行社有限公司的订单，显示基础订单信息。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "对宁波欢朋国际旅行社有限公司的订单进行查询，以获取订单列表和相关资源信息。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "订单列表查询，按客户名称筛选宁波欢朋国际旅行社有限公司的订单，显示基础订单信息。",
+              "predict": "对宁波欢朋国际旅行社有限公司的订单进行查询，以获取订单列表和相关资源信息。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 7,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.625,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 有哪些订单处理时长超过3天了？",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"订单状态查询和分析，进行异常检测，筛选处理时长超过3天的订单。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析订单状态，筛选处理时长超过3天的订单，并按照订单号、客户名称、订单状态、预计处理完成时间进行排序。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 10}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"订单状态查询和分析，进行异常检测，筛选处理时长超过3天的订单。\",\"source_filter\":\"too...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析订单状态，筛选处理时长超过3天的订单，并按照订单号、客户名称、订单状态...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "订单状态查询和分析，进行异常检测，筛选处理时长超过3天的订单。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "分析订单状态，筛选处理时长超过3天的订单，并按照订单号、客户名称、订单状态、预计处理完成时间进行排序。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 10
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "订单状态查询和分析，进行异常检测，筛选处理时长超过3天的订单。",
+              "predict": "分析订单状态，筛选处理时长超过3天的订单，并按照订单号、客户名称、订单状态、预计处理完成时间进行排序。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 10,
+              "match": false
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 8,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 帮我看下长城景区的已支付订单。",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"查询长城景区的订单状态，并进行支付状态管理和已支付订单的状态筛选。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询用户订单状态，根据订单编号或游客姓名进行订单状态查询，支持订单状态筛选，如待支付、已支付、已完成、已作废等状态，提供订单明细和支付记录查询功能。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"查询长城景区的订单状态，并进行支付状态管理和已支付订单的状态筛选。\",\"source_filter\":\"t...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询用户订单状态，根据订单编号或游客姓名进行订单状态查询，支持订单状态筛选...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "查询长城景区的订单状态，并进行支付状态管理和已支付订单的状态筛选。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "查询用户订单状态，根据订单编号或游客姓名进行订单状态查询，支持订单状态筛选，如待支付、已支付、已完成、已作废等状态，提供订单明细和支付记录查询功能。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "查询长城景区的订单状态，并进行支付状态管理和已支付订单的状态筛选。",
+              "predict": "查询用户订单状态，根据订单编号或游客姓名进行订单状态查询，支持订单状态筛选，如待支付、已支付、已完成、已作废等状态，提供订单明细和支付记录查询功能。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 9,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 排除掉已发货的订单，再给我看看那些未支付的。",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"进行订单状态查询和分析，通过状态筛选排除已发货订单，并利用支付状态管理功能查看未支付订单。\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析订单状态，排除已发货状态，筛选未支付状态的订单记录\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"进行订单状态查询和分析，通过状态筛选排除已发货订单，并利用支付状态管理功能查看未支付订单。\",\"sourc...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析订单状态，排除已发货状态，筛选未支付状态的订单记录\", \"source...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "进行订单状态查询和分析，通过状态筛选排除已发货订单，并利用支付状态管理功能查看未支付订单。",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "分析订单状态，排除已发货状态，筛选未支付状态的订单记录",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "进行订单状态查询和分析，通过状态筛选排除已发货订单，并利用支付状态管理功能查看未支付订单。",
+              "predict": "分析订单状态，排除已发货状态，筛选未支付状态的订单记录",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      },
+      {
+        "conversation_id": 10,
+        "pair_id": 1,
+        "pair_type": "tool_call",
+        "score": 0.75,
+        "tool_name_score": 1.0,
+        "source": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools>\n</tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中存在相同工具调用且已有返回结果，必须基于该结果生成答案\n- 如果上一次调用失败，应分析失败原因并解释给用户，而不是重试\n记住：基于对话流程历史判断当前阶段，一旦能够生成答案就立即输出，避免无意义的工具重复调用。\n\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"retrieval_tool\", \"description\": \"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\", \"category\": \"nlp\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"用户的查询内容或问题\"}, \"top_k\": {\"type\": \"integer\", \"description\": \"可选：需要返回的最相关结果的数量\", \"default\": 3}, \"source_filter\": {\"type\": \"string\", \"description\": \"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\", \"examples\": [\"toollist\", \"jiande\"], \"enum\": [\"toollist\", \"jiande\", \"xinchang\"]}, \"user_id\": {\"type\": \"integer\", \"description\": \"必选，用户的ID，用于确认身份\"}}, \"required\": [\"query\", \"source_filter\", \"user_id\"]}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\nUser: 帮我看下2025年7月1日到2025年7月31日'乌镇'景区的订单情况，按周统计。",
+        "target": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\",\"source_filter\":\"toollist\",\"user_id\":136451106,\"top_k\":5}}",
+        "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"按时间段查询订单数据，支持按日、周、月维度展示订单量趋势，分析订单量变化情况，适用于评估业务表现和预测需求。\", \"source_filter\": \"toollist\", \"user_id\": 1, \"top_k\": 5}}\n</tool_call>",
+        "target_preview": "{\"name\":\"retrieval_tool\",\"arguments\":{\"query\":\"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能...",
+        "predict_preview": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"按时间段查询订单数据，支持按日、周、月维度展示订单量趋势，分析订单量变化情...",
+        "details": {
+          "target_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+              "source_filter": "toollist",
+              "user_id": 136451106,
+              "top_k": 5
+            }
+          },
+          "predict_call": {
+            "name": "retrieval_tool",
+            "arguments": {
+              "query": "按时间段查询订单数据，支持按日、周、月维度展示订单量趋势，分析订单量变化情况，适用于评估业务表现和预测需求。",
+              "source_filter": "toollist",
+              "user_id": 1,
+              "top_k": 5
+            }
+          },
+          "tool_name_match": true,
+          "arguments_match": false,
+          "argument_details": {
+            "query": {
+              "target": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+              "predict": "按时间段查询订单数据，支持按日、周、月维度展示订单量趋势，分析订单量变化情况，适用于评估业务表现和预测需求。",
+              "match": false
+            },
+            "source_filter": {
+              "target": "toollist",
+              "predict": "toollist",
+              "match": true
+            },
+            "user_id": {
+              "target": 136451106,
+              "predict": 1,
+              "match": false
+            },
+            "top_k": {
+              "target": 5,
+              "predict": 5,
+              "match": true
+            }
+          }
+        }
+      }
+    ]
+  }
+}

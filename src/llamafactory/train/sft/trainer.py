@@ -77,6 +77,27 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
 
             self.accelerator.clip_grad_norm_ = MethodType(clip_grad_norm_old_version, self.accelerator)
             self.add_callback(BAdamCallback)
+        # 添加标签预测监控回调
+        from ..callbacks import LabelPredictionMonitorCallback
+        monitor_callback = LabelPredictionMonitorCallback(
+            output_dir=self.args.output_dir,
+            log_interval=5,
+            save_detailed_logs=True
+        )
+        self.add_callback(monitor_callback)
+        
+        # 设置tokenizer到监控回调
+        if hasattr(self, 'tokenizer') and self.tokenizer is not None:
+            monitor_callback.set_tokenizer(self.tokenizer)
+        elif hasattr(self, 'processing_class') and self.processing_class is not None:
+            monitor_callback.set_tokenizer(self.processing_class)
+
+
+        # 检查是否有use_dft_loss属性，如果没有则跳过
+        if hasattr(finetuning_args, 'use_dft_loss') and finetuning_args.use_dft_loss:
+            from ..trainer_utils import dft_loss_func
+
+            self.compute_loss_func = dft_loss_func
 
     @override
     def create_optimizer(self) -> "torch.optim.Optimizer":
@@ -100,6 +121,25 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
 
     @override
     def compute_loss(self, model, inputs, *args, **kwargs):
+        # 调用监控回调分析token（每次训练步骤都调用）
+        for callback in self.callback_handler.callbacks:
+            if hasattr(callback, 'analyze_training_tokens'):
+                try:
+                    labels = inputs.get('labels')
+                    if labels is not None:
+                        callback.analyze_training_tokens(model, inputs, labels)
+                except Exception as e:
+                    logger.warning(f"⚠️ Token分析失败: {e}")
+            
+            # 调用预测分析（每次训练步骤都调用）
+            if hasattr(callback, 'analyze_model_predictions'):
+                try:
+                    labels = inputs.get('labels')
+                    if labels is not None:
+                        callback.analyze_model_predictions(model, inputs, labels)
+                except Exception as e:
+                    logger.warning(f"⚠️ 预测分析失败: {e}")
+        
         return super().compute_loss(model, inputs, *args, **kwargs)
 
     @override

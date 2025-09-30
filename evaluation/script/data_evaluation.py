@@ -13,11 +13,15 @@ import sys
 import os
 import time
 import requests
+import argparse
 from typing import List, Dict, Tuple, Any, Optional
 from dataclasses import dataclass, asdict
 from loguru import logger
 from pathlib import Path
 from collections import defaultdict
+import aiohttp
+from concurrent.futures import ThreadPoolExecutor
+import signal
 
 # 递归保留浮点到小数点后三位
 def _round_floats(obj: Any, ndigits: int = 3) -> Any:
@@ -32,16 +36,30 @@ def _round_floats(obj: Any, ndigits: int = 3) -> Any:
 # Gemini API Key
 GEMINI_API_KEY = "AIzaSyDikJjktaSUq3sJCAHUIu7JmMEgP1DeHSI"
 
-# Qwen API 配置
-QWEN_API_URL = "http://125.122.38.32:8021/v1/chat/completions"
-QWEN_MODEL_NAME = "/data/models/Qwen3-8B"
+# vLLM/OpenAI 兼容 Chat Completions 配置（可通过环境变量覆盖）
+# VLLM_BASE_URL 例如: http://127.0.0.1:8000
+VLLM_BASE_URL = os.getenv("VLLM_BASE_URL", "http://125.122.38.32:8021")
+VLLM_API_KEY = os.getenv("VLLM_API_KEY", "")
 
+QWEN_MODEL_NAME = "my_lora"
+#QWEN_MODEL_NAME = "/data/models/Qwen3-8B"
+
+# 统一的 Chat Completions 端点（vLLM/OpenAI 兼容）
+QWEN_API_URL = f"{VLLM_BASE_URL.rstrip('/')}/v1/chat/completions"
 # Retrieval Tool API 配置
-RETRIEVAL_ENDPOINT = "http://125.122.38.32:8084/v1/databoard/tools/call"
+RETRIEVAL_ENDPOINT = "http://125.122.38.32:8024/retrieval_tool"
 RETRIEVAL_HEADERS = {
-    "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuaWNrbmFtZSI6IkpvaG4iLCJyb2xlX2lkIjoxfQ.NFkENyI182Q3XPcGiTOCXWN21ZQoDP40SRGHYQ25vVw",
+    "accept": "application/json",
     "Content-Type": "application/json",
 }
+
+# 临时开关：跳过调用 8024 检索服务与相关 recall 指标统计
+DISABLE_RECALL = str(os.getenv("EVAL_DISABLE_RECALL", "0")).lower() in ("1", "true", "yes")
+
+# 并发控制配置
+MAX_CONCURRENT_CONVERSATIONS = int(os.getenv("MAX_CONCURRENT_CONVERSATIONS", "5"))  # 最大并发对话数
+MAX_CONCURRENT_PAIRS = int(os.getenv("MAX_CONCURRENT_PAIRS", "10"))  # 最大并发pair数
+MAX_CONCURRENT_API_CALLS = int(os.getenv("MAX_CONCURRENT_API_CALLS", "20"))  # 最大并发API调用数
 
 @dataclass
 class EvaluationPair:
@@ -133,13 +151,52 @@ class DataProcessor:
                 original_query = msg["value"]
                 break
         
-        # 使用原始的system prompt，并插入tools
+        # 使用原始的system prompt，并注入tools内容（兼容空标签/已有内容）
+        try:
+            tools_str = tools if isinstance(tools, str) else json.dumps(tools, ensure_ascii=False)
+        except Exception:
+            tools_str = str(tools)
+
         if '<tools>' in system_prompt and '</tools>' in system_prompt:
-            # 替换空的tools标签为实际的tools内容
-            base_system = system_prompt.replace('<tools>\n</tools>', f'<tools>\n{tools}\n</tools>')
+            # 与训练对齐：中文段落中的 <tools></tools> 保持为空，避免与英文段落重复
+            try:
+                base_system = re.sub(r'<tools>\s*[\s\S]*?</tools>', '<tools>\n</tools>', system_prompt)
+            except Exception:
+                base_system = system_prompt.replace('<tools>\n</tools>', '<tools>\n</tools>').replace('<tools></tools>', '<tools>\n</tools>')
         else:
             # 如果没有tools标签，直接使用原始system
             base_system = system_prompt
+
+        # 追加英文模板与英文 <tools>（与训练模板对齐）
+        try:
+            parsed_tools = json.loads(tools) if isinstance(tools, str) else tools
+        except Exception:
+            parsed_tools = tools
+
+        try:
+            if isinstance(parsed_tools, list) and parsed_tools and isinstance(parsed_tools[0], dict):
+                english_tools_obj = {"type": "function", "function": parsed_tools[0]}
+                english_tools_str = json.dumps(english_tools_obj, ensure_ascii=False)
+            else:
+                english_tools_str = tools_str
+        except Exception:
+            english_tools_str = tools_str
+
+        # 英文模板固定化，逐字对齐训练日志
+        english_tail = (
+            "\n\n# Tools\n\n"
+            "You may call one or more functions to assist with the user query.\n\n"
+            "You are provided with function signatures within <tools></tools> XML tags:\n"
+            "<tools>\n"
+            f"{english_tools_str}\n"
+            "</tools>\n\n"
+            "For each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n"
+            "<tool_call>\n"
+            "{\"name\": <function-name>, \"arguments\": <args-json-object>}\n"
+            "</tool_call>"
+        )
+
+        base_system = f"{base_system}{english_tail}"
         
         i = 0
         while i < len(conversations):
@@ -148,6 +205,7 @@ class DataProcessor:
             if msg["from"] == "human":
                 # Pair 1: system + tools + user -> function_call
                 if i + 1 < len(conversations) and conversations[i + 1]["from"] == "function_call":
+                    # system 中不再追加“只输出一个<tool_call>...”提示
                     source = f"{base_system}\n\nUser: {msg['value']}"
                     target = conversations[i + 1]["value"]
                     pairs.append(EvaluationPair(
@@ -167,8 +225,14 @@ class DataProcessor:
                 if i + 1 < len(conversations):
                     next_msg = conversations[i + 1]
                     if next_msg["from"] == "function_call":
-                        # Pair 2: system + tools + user + observation -> function_call
-                        source = f"{base_system}\n\nUser: {original_query}\n\nTool Response: {msg['value']}"
+                        # Pair 2: system + <tool_response>...</tool_response> -> function_call（对齐训练日志风格）
+                        tool_resp_block = (
+                            f"<tool_response>\n"
+                            f"用户查询: {original_query}\n\n"
+                            f"工具返回结果: {msg['value']}\n"
+                            f"</tool_response>"
+                        )
+                        source = f"{base_system}\n\n{tool_resp_block}"
                         target = next_msg["value"]
                         pairs.append(EvaluationPair(
                             pair_id=pair_id,
@@ -180,8 +244,14 @@ class DataProcessor:
                         pair_id += 1
                         i += 2
                     elif next_msg["from"] == "gpt":
-                        # Pair 3: system + tools + user + observation -> gpt
-                        source = f"{base_system}\n\nUser: {original_query}\n\nTool Response: {msg['value']}"
+                        # Pair 3: system + <tool_response>...</tool_response> -> gpt（对齐训练日志风格）
+                        tool_resp_block = (
+                            f"<tool_response>\n"
+                            f"用户查询: {original_query}\n\n"
+                            f"工具返回结果: {msg['value']}\n"
+                            f"</tool_response>"
+                        )
+                        source = f"{base_system}\n\n{tool_resp_block}"
                         target = next_msg["value"]
                         pairs.append(EvaluationPair(
                             pair_id=pair_id,
@@ -207,15 +277,17 @@ class LLMPredictor:
     
     def __init__(self, model_type: str = "qwen3"):
         self.model_type = QWEN_MODEL_NAME  # 使用全局配置的模型名称
-        self.max_retries = 3
-        self.retry_delay = 5
+        self.max_retries = 5
+        self.retry_delay = 10
         logger.info(f"初始化LLM预测模块，使用模型: {self.model_type}")
     
-    def call_qwen_api(self, prompt: List[Dict], temperature: float = 0.0, top_p: float = 1.0) -> str:
-        """调用Qwen API生成预测"""
+    async def call_qwen_api(self, session: aiohttp.ClientSession, prompt: List[Dict], temperature: float = 0.0, top_p: float = 1.0) -> str:
+        """异步调用Qwen API生成预测"""
         headers = {
             "Content-Type": "application/json"
         }
+        if VLLM_API_KEY:
+            headers["Authorization"] = f"Bearer {VLLM_API_KEY}"
         
         data = {
             "model": self.model_type,
@@ -223,59 +295,102 @@ class LLMPredictor:
             "temperature": temperature,
             "top_p": top_p,
             "stream": False,
-            # 对于多数 OpenAI 兼容服务，需要通过 extra_body 传递厂商自定义参数
-            "extra_body": {
-                "enable_thinking": False,
-                "max_thought_tokens": 0
+            "chat_template_kwargs": {
+                "enable_thinking": False
             }
         }
         
         # 重试逻辑
         for attempt in range(self.max_retries):
             try:
-                response = requests.post(QWEN_API_URL, headers=headers, json=data, timeout=30)
-                if response.status_code == 200:
-                    result = response.json()
-                    content = result['choices'][0]['message']['content']
-                    # 保险起见，去除可能残留的 <think> 块
-                    try:
-                        content = re.sub(r"<think>[\s\S]*?</think>", "", content, flags=re.IGNORECASE)
-                    except Exception:
-                        pass
-                    return content.strip()
-                else:
-                    error_msg = f"API调用失败，状态码: {response.status_code}, 响应: {response.text}"
-                    if attempt < self.max_retries - 1:
-                        logger.warning(f"第{attempt+1}次尝试失败，{error_msg}，正在重试...")
-                        time.sleep(2 ** attempt)  # 指数退避：2^0, 2^1, 2^2秒
+                async with session.post(QWEN_API_URL, headers=headers, json=data, timeout=aiohttp.ClientTimeout(total=120)) as response:
+                    if response.status == 200:
+                        result = await response.json()
+                        content = result['choices'][0]['message']['content']
+                        # 保险起见，去除可能残留的 <think> 块
+                        try:
+                            content = re.sub(r"<think>[\s\S]*?</think>", "", content, flags=re.IGNORECASE)
+                        except Exception:
+                            pass
+                        logger.debug(f"LLM 返回片段: {content[:400]}")
+                        return content.strip()
                     else:
-                        raise Exception(error_msg)
-            except requests.exceptions.RequestException as e:
+                        error_msg = f"API调用失败，状态码: {response.status}, 响应: {await response.text()}"
+                        if attempt < self.max_retries - 1:
+                            logger.warning(f"第{attempt+1}次尝试失败，{error_msg}，正在重试...")
+                            await asyncio.sleep(2 ** attempt)  # 指数退避：2^0, 2^1, 2^2秒
+                        else:
+                            raise Exception(error_msg)
+            except (aiohttp.ClientError, asyncio.TimeoutError) as e:
                 error_msg = f"网络请求异常: {str(e)}"
                 if attempt < self.max_retries - 1:
                     logger.warning(f"第{attempt+1}次尝试失败，{error_msg}，正在重试...")
-                    time.sleep(2 ** attempt)
+                    await asyncio.sleep(2 ** attempt)
                 else:
                     raise Exception(error_msg)
         
         return ""
     
-    async def predict(self, source: str, pair_type: str) -> str:
-        """根据source生成预测"""
+    async def predict(self, session: aiohttp.ClientSession, source: str, pair_type: str) -> str:
+        """根据source生成预测：将用户内容放到 user 角色，system 仅保留指令与工具。"""
         try:
-            # 构建提示词
+            system_content = source
+            user_content = None
+
+            # 规则1（优先）：如果包含 "\n\nUser: "，优先将其之后的原始问题作为 user（保证 Pair 1 正确）
+            if "\n\nUser: " in source:
+                parts = source.split("\n\nUser: ", 1)
+                system_content = parts[0]
+                user_content = parts[1]
+                # 保持原始用户问题不变，不进行任何修改
+
+            # 规则2（其次）：如果包含 <tool_response>，提取用户查询和工具返回结果作为 user 内容（适用于 Pair 2/3）
+            if user_content is None:
+                tool_resp_match = re.search(r'<tool_response>[\s\S]*?</tool_response>', source)
+                if tool_resp_match:
+                    tool_resp_content = tool_resp_match.group(0)
+                    # 从tool_response中提取用户查询和工具返回结果
+                    user_query_match = re.search(r'用户查询:\s*(.+?)(?:\n\n|$)', tool_resp_content)
+                    tool_result_match = re.search(r'工具返回结果:\s*(.+?)(?:\n|$)', tool_resp_content, re.DOTALL)
+                    
+                    if user_query_match and tool_result_match:
+                        user_query = user_query_match.group(1).strip()
+                        tool_result = tool_result_match.group(1).strip()
+                        user_content = f"用户问题：{user_query}\n\n工具返回结果：{tool_result}"
+                    else:
+                        # 如果无法解析，使用原始tool_response内容
+                        user_content = tool_resp_content
+                    
+                    system_content = source.replace(tool_resp_content, "").strip()
+
+            # 清理：确保 system 不包含任何残留的 "User: ..." 段落
+            if "\n\nUser: " in system_content:
+                system_content = system_content.split("\n\nUser: ", 1)[0].rstrip()
+
+            # 默认用户内容兜底
+            if user_content is None:
+                user_content = ""
+
+            # 为不同 pair 类型补充用户端约束指令
             if pair_type == "tool_call":
-                user_query = "请根据上下文调用合适的工具。"
+                if user_content.strip():
+                    # 保持原始用户问题，只添加约束指令
+                    user_content = f"{user_content}\n\n只输出一个<tool_call>，不要输出解释性文本或答案。"
+                else:
+                    user_content = "只输出一个<tool_call>，不要输出解释性文本或答案。"
             else:
-                user_query = "请根据工具返回的结果生成最终回答。"
-            
+                if not user_content.strip():
+                    user_content = "请根据工具返回的结果生成最终回答。"
+
             prompt = [
-                {"role": "system", "content": source},
-                {"role": "user", "content": user_query}
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user_content}
             ]
-            
+
+            logger.info(f"LLM prompt: {prompt}, user指令: {( 'tool_call' if pair_type=='tool_call' else 'text_generation')} ")
             # 调用Qwen API
-            result = self.call_qwen_api(prompt, temperature=0.0, top_p=1.0)
+            result = await self.call_qwen_api(session, prompt, temperature=0.0, top_p=1.0)
+            logger.info(f"LLM 输出长度: {len(result)}，预览: {result[:5000]}")
             return result
         except Exception as e:
             logger.error(f"LLM预测失败: {e}")
@@ -341,11 +456,11 @@ class RetrievalToolCaller:
             logger.error(f"从pair1预测中提取检索参数失败: {e}")
             return {}
     
-    def call_retrieval_tool(self, params: Dict[str, Any]) -> Tuple[int, Dict[str, Any]]:
-        """调用检索工具"""
+    async def call_retrieval_tool(self, session: aiohttp.ClientSession, params: Dict[str, Any]) -> Tuple[int, Dict[str, Any]]:
+        """异步调用检索工具"""
         payload = {
             "jsonrpc": "2.0",
-            "id": "id",
+            "id": "req_001",
             "method": "tools/call",
             "params": {
                 "name": "retrieval_tool",
@@ -355,17 +470,17 @@ class RetrievalToolCaller:
         
         for attempt in range(self.max_retries):
             try:
-                resp = requests.post(RETRIEVAL_ENDPOINT, headers=RETRIEVAL_HEADERS, json=payload, timeout=20)
-                code = getattr(resp, "status_code", None) or 0
-                try:
-                    data = resp.json()
-                except Exception:
-                    data = {"raw": resp.text}
-                return code, data
+                async with session.post(RETRIEVAL_ENDPOINT, headers=RETRIEVAL_HEADERS, json=payload, timeout=aiohttp.ClientTimeout(total=20)) as resp:
+                    code = resp.status
+                    try:
+                        data = await resp.json()
+                    except Exception:
+                        data = {"raw": await resp.text()}
+                    return code, data
             except Exception as e:
                 if attempt < self.max_retries - 1:
                     logger.warning(f"检索工具调用失败，第{attempt+1}次尝试: {e}")
-                    time.sleep(self.retry_delay)
+                    await asyncio.sleep(self.retry_delay)
                 else:
                     logger.error(f"检索工具调用失败，已尝试{self.max_retries}次: {e}")
                     return 0, {"error": str(e)}
@@ -454,14 +569,14 @@ class RetrievalToolCaller:
             logger.error(f"计算recall失败: {e}")
             return 0, {"error": str(e)}
 
-    def compute_recall_from_pair1_predict(self, pair1_predict: str, pair2_target: str) -> Tuple[int, Dict[str, Any]]:
+    async def compute_recall_from_pair1_predict(self, session: aiohttp.ClientSession, pair1_predict: str, pair2_target: str) -> Tuple[int, Dict[str, Any]]:
         """计算recall指标：基于 pair1 的预测调用中的 query 字段"""
         try:
             params = self.extract_query_params_from_pair1_predict(pair1_predict)
             if not params:
                 return 0, {"error": "无法从pair1预测中提取检索参数"}
 
-            status_code, response = self.call_retrieval_tool(params)
+            status_code, response = await self.call_retrieval_tool(session, params)
             if status_code != 200:
                 return 0, {"error": f"检索工具调用失败，状态码: {status_code}"}
 
@@ -519,6 +634,8 @@ class ToolCallEvaluator:
         """
         target_call = self.extract_tool_call(target)
         predict_call = self.extract_tool_call(predict)
+        if not predict_call:
+            logger.debug(f"predict 非结构化输出，无法解析为工具调用。predict预览: {predict[:300]}")
         
         details = {
             "target_call": target_call,
@@ -567,57 +684,107 @@ class ToolCallEvaluator:
         return score, tool_name_score, details
 
 class TextGenerationEvaluator:
-    """文本生成评估模块：使用Gemini进行评估"""
+    """文本生成评估模块：使用LoRA测试模型进行评估"""
     
-    def __init__(self, model_type: str = "gemini-2.5-flash"):
-        self.model_type = model_type
-        self.max_retries = 3
-        self.retry_delay = 5
-        logger.info(f"初始化文本生成评估模块，使用模型: {model_type}")
+    def __init__(self, model_type: str = "qwen3"):
+        self.model_type = QWEN_MODEL_NAME  # 使用全局配置的模型名称
+        self.max_retries = 5
+        self.retry_delay = 10
+        logger.info(f"初始化文本生成评估模块，使用模型: {self.model_type}")
     
-    def call_gemini_api(self, prompt: str, temperature: float = 0.3, top_p: float = 0.95, top_k: int = 40) -> str:
-        """调用Gemini API"""
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model_type}:generateContent?key={GEMINI_API_KEY}"
-        headers = {"Content-Type": "application/json"}
-        payload = {
-            "contents": [
-                {
-                    "role": "user",
-                    "parts": [{"text": prompt}]
-                }
-            ],
-            "generationConfig": {
-                "temperature": float(temperature),
-                "topP": float(top_p),
-                "topK": int(top_k),
-                "maxOutputTokens": 8192
+    # 注释掉Gemini相关代码，保留以备后用
+    # def call_gemini_api(self, prompt: str, temperature: float = 0.3, top_p: float = 0.95, top_k: int = 40) -> str:
+    #     """调用Gemini API"""
+    #     url = f"https://generativelanguage.googleapis.com/v2beta/models/{self.model_type}:generateContent?key={GEMINI_API_KEY}"
+    #     headers = {"Content-Type": "application/json"}
+    #     payload = {
+    #         "contents": [
+    #             {
+    #                 "role": "user",
+    #                 "parts": [{"text": prompt}]
+    #             }
+    #         ],
+    #         "generationConfig": {
+    #             "temperature": float(temperature),
+    #             "topP": float(top_p),
+    #             "topK": int(top_k),
+    #             "maxOutputTokens": 8192
+    #         }
+    #     }
+
+    #     for attempt in range(self.max_retries):
+    #         try:
+    #             response = requests.post(url, headers=headers, json=payload, timeout=60)
+    #             response.raise_for_status()
+    #             raw = response.json()
+                
+    #             # 提取文本内容
+    #             text = ""
+    #             try:
+    #                 text = raw["candidates"][0]["content"]["parts"][0]["text"]
+    #             except Exception:
+    #                 text = ""
+                
+    #             return text
+                
+    #         except Exception as e:
+    #             if attempt < self.max_retries - 1:
+    #                 time.sleep(self.retry_delay)
+    #             else:
+    #                 logger.error(f"API调用失败 (尝试 {attempt+1}/{self.max_retries}): {e}")
+    #                 return ""
+    
+    async def call_qwen_api(self, session: aiohttp.ClientSession, prompt: List[Dict], temperature: float = 0.3, top_p: float = 0.95) -> str:
+        """异步调用Qwen API进行评估"""
+        headers = {
+            "Content-Type": "application/json"
+        }
+        if VLLM_API_KEY:
+            headers["Authorization"] = f"Bearer {VLLM_API_KEY}"
+        
+        data = {
+            "model": self.model_type,
+            "messages": prompt,
+            "temperature": temperature,
+            "top_p": top_p,
+            "stream": False,
+            "chat_template_kwargs": {
+                "enable_thinking": False
             }
         }
-
+        
+        # 重试逻辑
         for attempt in range(self.max_retries):
             try:
-                response = requests.post(url, headers=headers, json=payload, timeout=60)
-                response.raise_for_status()
-                raw = response.json()
-                
-                # 提取文本内容
-                text = ""
+                # 打印完整messages以便完全复现调用
                 try:
-                    text = raw["candidates"][0]["content"]["parts"][0]["text"]
+                    logger.debug(f"LLM 调用完整messages: {json.dumps(data.get('messages', []), ensure_ascii=False) }")
                 except Exception:
-                    text = ""
-                
-                return text
-                
-            except Exception as e:
+                    pass
+                async with session.post(QWEN_API_URL, headers=headers, json=data, timeout=aiohttp.ClientTimeout(total=120)) as response:
+                    if response.status == 200:
+                        result = await response.json()
+                        content = result['choices'][0]['message']['content']
+                        # 保险起见，去除可能残留的 <think> 块
+                    else:
+                        error_msg = f"API调用失败，状态码: {response.status}, 响应: {await response.text()}"
+                        if attempt < self.max_retries - 1:
+                            logger.warning(f"第{attempt+1}次尝试失败，{error_msg}，正在重试...")
+                            await asyncio.sleep(2 ** attempt)  # 指数退避：2^0, 2^1, 2^2秒
+                        else:
+                            raise Exception(error_msg)
+            except (aiohttp.ClientError, asyncio.TimeoutError) as e:
+                error_msg = f"网络请求异常: {str(e)}"
                 if attempt < self.max_retries - 1:
-                    time.sleep(self.retry_delay)
+                    logger.warning(f"第{attempt+1}次尝试失败，{error_msg}，正在重试...")
+                    await asyncio.sleep(2 ** attempt)
                 else:
-                    logger.error(f"API调用失败 (尝试 {attempt+1}/{self.max_retries}): {e}")
-                    return ""
+                    raise Exception(error_msg)
+        
+        return ""
     
-    async def evaluate_text_generation(self, target: str, predict: str) -> Tuple[float, Dict[str, Any]]:
-        """使用Gemini评估文本生成质量"""
+    async def evaluate_text_generation(self, session: aiohttp.ClientSession, target: str, predict: str) -> Tuple[float, Dict[str, Any]]:
+        """使用LoRA测试模型评估文本生成质量"""
         judge_prompt = f"""
 请评估以下两个文本的相似度和质量，从以下几个维度进行评分（每个维度0-10分）：
 
@@ -644,8 +811,14 @@ class TextGenerationEvaluator:
 """
         
         try:
-            # 调用Gemini API
-            result = self.call_gemini_api(judge_prompt)
+            # 构建提示词
+            prompt = [
+                {"role": "system", "content": "你是一个专业的文本质量评估专家，能够客观地评估文本的相似度和质量。"},
+                {"role": "user", "content": judge_prompt}
+            ]
+            
+            # 调用Qwen API进行评估
+            result = await self.call_qwen_api(session, prompt, temperature=0.3, top_p=0.95)
             
             # 提取JSON结果
             json_match = re.search(r'\{.*\}', result, re.DOTALL)
@@ -654,11 +827,40 @@ class TextGenerationEvaluator:
                 overall_score = eval_result.get("overall_score", 0) / 10.0  # 转换为0-1分数
                 return overall_score, eval_result
             else:
-                return 0.0, {"error": "无法解析评估结果"}
+                # 如果无法解析JSON，尝试简单的文本匹配评分
+                logger.warning("无法解析JSON评估结果，使用简单文本匹配评分")
+                simple_score = self._simple_text_similarity_score(target, predict)
+                return simple_score, {"overall_score": simple_score * 10, "method": "simple_similarity"}
                 
         except Exception as e:
             logger.error(f"文本生成评估失败: {e}")
-            return 0.0, {"error": str(e)}
+            # 如果评估失败，使用简单的文本相似度评分
+            simple_score = self._simple_text_similarity_score(target, predict)
+            return simple_score, {"error": str(e), "fallback_score": simple_score * 10}
+    
+    def _simple_text_similarity_score(self, target: str, predict: str) -> float:
+        """简单的文本相似度评分（备用方法）"""
+        try:
+            # 简单的基于长度和关键词的相似度评分
+            target_words = set(target.lower().split())
+            predict_words = set(predict.lower().split())
+            
+            if not target_words:
+                return 0.0
+            
+            # 计算词汇重叠度
+            overlap = len(target_words.intersection(predict_words))
+            overlap_ratio = overlap / len(target_words)
+            
+            # 考虑长度相似度
+            length_ratio = min(len(predict), len(target)) / max(len(predict), len(target)) if max(len(predict), len(target)) > 0 else 0
+            
+            # 综合评分（0-1）
+            score = (overlap_ratio * 0.7 + length_ratio * 0.3)
+            return min(score, 1.0)
+            
+        except Exception:
+            return 0.5  # 默认中等分数
 
 class MetricsCalculator:
     """指标计算模块"""
@@ -816,25 +1018,120 @@ class MetricsCalculator:
 class TrainingDataEvaluator:
     """主评估类"""
     
-    def __init__(self, model_type: str = "qwen3"):
+    def __init__(self, model_type: str = "qwen3", baseline_enable: bool = False, baseline_model: str = "/data/models/Qwen3-8B"):
         self.data_processor = DataProcessor()
         self.llm_predictor = LLMPredictor(model_type)
         self.tool_evaluator = ToolCallEvaluator()
-        self.text_evaluator = TextGenerationEvaluator("gemini-2.5-flash")
+        self.text_evaluator = TextGenerationEvaluator(model_type)  # 使用LoRA模型而不是Gemini
         self.retrieval_caller = RetrievalToolCaller()
         self.metrics_calculator = MetricsCalculator()
+        self.baseline_enable = baseline_enable
+        self.baseline_model = baseline_model
         logger.info("训练数据评估器初始化完成")
     
-    async def evaluate_file(self, file_path: str, checkpoint_file: str = None) -> List[EvaluationResult]:
-        """评估整个文件，支持断点续传和实时指标更新"""
-        logger.info(f"开始评估文件: {file_path}")
+    async def evaluate_single_pair(self, session: aiohttp.ClientSession, pair: EvaluationPair, pair_predict_by_id: Dict[int, str], pair_toolname_score_by_id: Dict[int, float]) -> EvaluationResult:
+        """异步评估单个pair"""
+        logger.info(f"评估 Pair {pair.pair_id} (类型: {pair.pair_type})")
+        
+        try:
+            logger.debug(f"Pair {pair.pair_id} source长度: {len(pair.source)}，预览: {pair.source[:400]}")
+            logger.debug(f"Pair {pair.pair_id} target长度: {len(pair.target)}，预览: {pair.target[:200]}")
+        except Exception:
+            pass
+        
+        # 生成预测
+        predict = await self.llm_predictor.predict(session, pair.source, pair.pair_type)
+        # 记录该pair的预测，供后续pair使用
+        pair_predict_by_id[pair.pair_id] = predict
+        
+        # 根据类型选择评估方法
+        if pair.pair_type == "tool_call":
+            score, tool_name_score, details = self.tool_evaluator.evaluate_tool_call(pair.target, predict)
+            # 记录该pair的工具名称匹配分
+            pair_toolname_score_by_id[pair.pair_id] = tool_name_score
+            
+            # 确保默认初始化
+            recall = None
+            recall_details = None
+            
+            # 只有pair2才计算recall指标；当开关启用时跳过调用检索服务
+            if pair.pair_id == 2 and not DISABLE_RECALL:
+                pair1_predict = pair_predict_by_id.get(1)
+                pair1_toolname_score = pair_toolname_score_by_id.get(1)
+                if pair1_predict and pair1_toolname_score == 1.0:
+                    recall, recall_details = await self.retrieval_caller.compute_recall_from_pair1_predict(session, pair1_predict, pair.target)
+            elif pair.pair_id == 2 and DISABLE_RECALL:
+                recall, recall_details = None, None
+        else:
+            # pair3（文本生成）不涉及recall
+            score, details = await self.text_evaluator.evaluate_text_generation(session, pair.target, predict)
+            tool_name_score = 0.0
+            recall = None
+            recall_details = None
+        
+        result = EvaluationResult(
+            conversation_id=pair.conversation_id,
+            pair_id=pair.pair_id,
+            pair_type=pair.pair_type,
+            source=pair.source,
+            target=pair.target,
+            predict=predict,
+            score=score,
+            tool_name_score=tool_name_score,
+            recall=recall,
+            recall_details=recall_details,
+            details=details
+        )
+        
+        # 根据类型输出不同的日志信息（与日志字段命名保持一致）
+        if pair.pair_type == "tool_call":
+            if recall is not None:
+                logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}, recall@5: {recall}")
+            else:
+                logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}")
+        else:
+            logger.info(f"Pair {pair.pair_id} 评估完成，answer_score: {score:.3f}")
+        
+        return result
+    
+    async def evaluate_file(self, file_path: str, checkpoint_file: str = None, start_idx: int = 0, end_idx: Optional[int] = None) -> List[EvaluationResult]:
+        """异步并发评估整个文件，支持断点续传和实时指标更新
+        
+        Args:
+            file_path: 要评估的JSON文件路径
+            checkpoint_file: 断点文件路径（可选）
+            start_idx: 开始评估的对话索引（从0开始）
+            end_idx: 结束评估的对话索引（不包含，如果为None则评估到最后）
+        """
+        logger.info(f"开始异步并发评估文件: {file_path}")
+        logger.info(f"并发配置: 最大对话并发数={MAX_CONCURRENT_CONVERSATIONS}, 最大Pair并发数={MAX_CONCURRENT_PAIRS}, 最大API并发数={MAX_CONCURRENT_API_CALLS}")
+        
+        if start_idx > 0 or end_idx is not None:
+            logger.info(f"评估范围: 对话 {start_idx} 到 {end_idx if end_idx else '最后'}")
         
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
+        # 确定实际的结束索引
+        total_conversations = len(data)
+        if end_idx is None:
+            end_idx = total_conversations
+        else:
+            end_idx = min(end_idx, total_conversations)
+        
+        # 验证参数
+        if start_idx >= total_conversations:
+            logger.error(f"起始索引 {start_idx} 超出数据范围 (总共 {total_conversations} 个对话)")
+            return []
+        
+        if start_idx >= end_idx:
+            logger.error(f"起始索引 {start_idx} 不能大于等于结束索引 {end_idx}")
+            return []
+        
+        logger.info(f"实际评估范围: 对话 {start_idx} 到 {end_idx-1} (共 {end_idx - start_idx} 个对话)")
+        
         # 检查是否有断点文件
         all_results = []
-        start_idx = 0
         processed_pairs = set()  # 记录已处理的(conversation_id, pair_id)组合
         conversation_id = 1
         
@@ -857,106 +1154,150 @@ class TrainingDataEvaluator:
         # 初始化实时指标
         realtime_metrics = RealTimeMetrics()
         
-        # 从断点继续评估
-        for idx, conversation_data in enumerate(data[start_idx:], start=start_idx):
-            logger.info(f"评估对话 {idx + 1}/{len(data)} (conversation_id: {conversation_id})")
+        # 创建aiohttp会话和信号量控制并发
+        connector = aiohttp.TCPConnector(limit=MAX_CONCURRENT_API_CALLS, limit_per_host=MAX_CONCURRENT_API_CALLS)
+        timeout = aiohttp.ClientTimeout(total=300)  # 5分钟总超时
+        
+        async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
+            # 创建信号量控制并发数
+            conversation_semaphore = asyncio.Semaphore(MAX_CONCURRENT_CONVERSATIONS)
+            pair_semaphore = asyncio.Semaphore(MAX_CONCURRENT_PAIRS)
+            
+            # 创建所有需要处理的对话任务
+            conversation_tasks = []
+            for idx, conversation_data in enumerate(data[start_idx:end_idx], start=start_idx):
+                task = self._evaluate_conversation_async(
+                    session, conversation_semaphore, pair_semaphore,
+                    conversation_data, idx, conversation_id, processed_pairs
+                )
+                conversation_tasks.append(task)
+                conversation_id += 1
+            
+            # 并发执行所有对话的评估
+            logger.info(f"开始并发评估 {len(conversation_tasks)} 个对话")
+            conversation_results = await asyncio.gather(*conversation_tasks, return_exceptions=True)
+            
+            # 处理结果和异常
+            for idx, result in enumerate(conversation_results):
+                if isinstance(result, Exception):
+                    logger.error(f"对话 {start_idx + idx} 评估失败: {result}")
+                else:
+                    all_results.extend(result)
+                    
+                    # 更新实时指标
+                    realtime_metrics = self.metrics_calculator.update_realtime_metrics(realtime_metrics, all_results)
+                    self._save_realtime_metrics(realtime_metrics)
+                    
+                    # 保存断点
+                    if checkpoint_file:
+                        self._save_checkpoint(checkpoint_file, all_results, processed_pairs, start_idx + idx + 1)
+        
+        logger.info(f"异步并发评估完成，总共处理了 {len(all_results)} 个评估对")
+        return all_results
+    
+    async def _evaluate_conversation_async(self, session: aiohttp.ClientSession, conversation_semaphore: asyncio.Semaphore, 
+                                         pair_semaphore: asyncio.Semaphore, conversation_data: Dict, idx: int, 
+                                         conversation_id: int, processed_pairs: set) -> List[EvaluationResult]:
+        """异步评估单个对话"""
+        async with conversation_semaphore:
+            logger.info(f"评估对话 {idx + 1} (conversation_id: {conversation_id})")
             
             # 解析pairs
             pairs = self.data_processor.parse_conversations(conversation_data, conversation_id)
             
-            # 评估每个pair
+            # 过滤出未处理的pairs
+            unprocessed_pairs = []
+            for pair in pairs:
+                pair_key = (conversation_id, pair.pair_id)
+                if pair_key not in processed_pairs:
+                    unprocessed_pairs.append(pair)
+                else:
+                    logger.info(f"跳过已处理的 Pair {pair.pair_id}")
+            
+            if not unprocessed_pairs:
+                logger.info(f"对话 {conversation_id} 的所有pairs都已处理过")
+                return []
+            
+            # 为每个对话维护独立的预测和得分记录
             pair_predict_by_id = {}
             pair_toolname_score_by_id = {}
-            for pair in pairs:
-                # 检查是否已处理过该pair
-                pair_key = (conversation_id, pair.pair_id)
-                if pair_key in processed_pairs:
-                    logger.info(f"跳过已处理的 Pair {pair.pair_id}")
-                    continue
-                
-                logger.info(f"评估 Pair {pair.pair_id} (类型: {pair.pair_type})")
-                
-                # 生成预测
-                predict = await self.llm_predictor.predict(pair.source, pair.pair_type)
-                # 记录该pair的预测，供后续pair使用
-                pair_predict_by_id[pair.pair_id] = predict
-                
-                # 根据类型选择评估方法
-                if pair.pair_type == "tool_call":
-                    score, tool_name_score, details = self.tool_evaluator.evaluate_tool_call(pair.target, predict)
-                    # 记录该pair的工具名称匹配分
-                    pair_toolname_score_by_id[pair.pair_id] = tool_name_score
-                    
-                    # 确保默认初始化
-                    recall = None
-                    recall_details = None
-                    
-                    # 只有pair2才计算recall指标（且当pair1 precision@1==1.0 且有预测query时才计算）
-                    if pair.pair_id == 2:
-                        pair1_predict = pair_predict_by_id.get(1)
-                        pair1_toolname_score = pair_toolname_score_by_id.get(1)
-                        if pair1_predict and pair1_toolname_score == 1.0:
-                            recall, recall_details = self.retrieval_caller.compute_recall_from_pair1_predict(pair1_predict, pair.target)
-                else:
-                    # pair3（文本生成）不涉及recall
-                    score, details = await self.text_evaluator.evaluate_text_generation(pair.target, predict)
-                    tool_name_score = 0.0
-                    recall = None
-                    recall_details = None
-                
-                result = EvaluationResult(
-                    conversation_id=conversation_id,
-                    pair_id=pair.pair_id,
-                    pair_type=pair.pair_type,
-                    source=pair.source,
-                    target=pair.target,
-                    predict=predict,
-                    score=score,
-                    tool_name_score=tool_name_score,
-                    recall=recall,
-                    recall_details=recall_details,
-                    details=details
-                )
-                
-                all_results.append(result)
-                processed_pairs.add(pair_key)
-                
-                # 根据类型输出不同的日志信息（与日志字段命名保持一致）
-                if pair.pair_type == "tool_call":
-                    if recall is not None:
-                        logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}, recall@5: {recall}")
-                    else:
-                        logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}")
-                else:
-                    logger.info(f"Pair {pair.pair_id} 评估完成，answer_score: {score:.3f}")
-                
-                # 每处理一个评估对就更新实时指标并保存
-                realtime_metrics = self.metrics_calculator.update_realtime_metrics(realtime_metrics, all_results)
-                self._save_realtime_metrics(realtime_metrics)
-                
-                # 每处理一个评估对就保存一次断点
-                if checkpoint_file:
-                    # 清理pair1和pair3的recall字段
-                    cleaned_results = []
-                    for r in all_results:
-                        result_dict = asdict(r)
-                        # 对于pair1和pair3，移除recall相关字段
-                        if r.pair_id in [1, 3]:
-                            result_dict.pop('recall', None)
-                            result_dict.pop('recall_details', None)
-                        cleaned_results.append(result_dict)
-                    
-                    checkpoint_data = {
-                        "results": cleaned_results,
-                        "processed_pairs": [list(p) for p in processed_pairs],
-                        "next_conversation_id": conversation_id
-                    }
-                    with open(checkpoint_file, 'w', encoding='utf-8') as f:
-                        json.dump(checkpoint_data, f, ensure_ascii=False)
             
-            conversation_id += 1
-        
-        return all_results
+            # 需要按顺序处理tool_call类型的pairs，因为pair2依赖pair1的结果
+            # 先按pair_id排序，确保pair1在pair2之前处理
+            sorted_pairs = sorted(unprocessed_pairs, key=lambda p: p.pair_id)
+            
+            results = []
+            text_gen_pairs = []
+            
+            # 分离tool_call和text_generation类型的pairs
+            for pair in sorted_pairs:
+                if pair.pair_type == "tool_call":
+                    # tool_call类型的pairs需要串行处理，确保依赖关系
+                    result = await self._evaluate_single_pair_async(
+                        session, pair_semaphore, pair, pair_predict_by_id, pair_toolname_score_by_id
+                    )
+                    if isinstance(result, Exception):
+                        logger.error(f"Pair {pair.pair_id} 评估失败: {result}")
+                    else:
+                        results.append(result)
+                        pair_key = (conversation_id, pair.pair_id)
+                        processed_pairs.add(pair_key)
+                else:
+                    # text_generation类型的pairs收集起来并发处理
+                    text_gen_pairs.append(pair)
+            
+            # 并发处理所有text_generation类型的pairs
+            if text_gen_pairs:
+                text_gen_tasks = []
+                for pair in text_gen_pairs:
+                    task = self._evaluate_single_pair_async(
+                        session, pair_semaphore, pair, pair_predict_by_id, pair_toolname_score_by_id
+                    )
+                    text_gen_tasks.append(task)
+                
+                text_gen_results = await asyncio.gather(*text_gen_tasks, return_exceptions=True)
+                
+                # 处理text_generation的结果
+                for pair, result in zip(text_gen_pairs, text_gen_results):
+                    pair_key = (conversation_id, pair.pair_id)
+                    if isinstance(result, Exception):
+                        logger.error(f"Pair {pair.pair_id} 评估失败: {result}")
+                    else:
+                        results.append(result)
+                        processed_pairs.add(pair_key)
+            
+            return results
+    
+    async def _evaluate_single_pair_async(self, session: aiohttp.ClientSession, pair_semaphore: asyncio.Semaphore,
+                                        pair: EvaluationPair, pair_predict_by_id: Dict[int, str], 
+                                        pair_toolname_score_by_id: Dict[int, float]) -> EvaluationResult:
+        """异步评估单个pair（带信号量控制）"""
+        async with pair_semaphore:
+            return await self.evaluate_single_pair(session, pair, pair_predict_by_id, pair_toolname_score_by_id)
+    
+    def _save_checkpoint(self, checkpoint_file: str, all_results: List[EvaluationResult], 
+                        processed_pairs: set, next_conversation_id: int):
+        """保存断点文件"""
+        try:
+            # 清理pair1和pair3的recall字段
+            cleaned_results = []
+            for r in all_results:
+                result_dict = asdict(r)
+                # 对于pair1和pair3，移除recall相关字段
+                if r.pair_id in [1, 3]:
+                    result_dict.pop('recall', None)
+                    result_dict.pop('recall_details', None)
+                cleaned_results.append(result_dict)
+            
+            checkpoint_data = {
+                "results": cleaned_results,
+                "processed_pairs": [list(p) for p in processed_pairs],
+                "next_conversation_id": next_conversation_id
+            }
+            with open(checkpoint_file, 'w', encoding='utf-8') as f:
+                json.dump(checkpoint_data, f, ensure_ascii=False)
+        except Exception as e:
+            logger.error(f"保存断点文件失败: {e}")
     
     def _save_realtime_metrics(self, metrics: RealTimeMetrics):
         """保存实时指标到文件"""
@@ -1007,13 +1348,21 @@ class TrainingDataEvaluator:
         overall_metrics = metrics_calc.calculate_overall_metrics(results, "current_logic")
         
         # 构建报告
+        is_baseline = bool(self.baseline_enable and str(self.llm_predictor.model_type) == str(self.baseline_model))
+
         report = {
             "summary": {
                 "total_conversations": len(set(r.conversation_id for r in results)),
                 "total_pairs": len(results),
                 "pair_metrics": pair_metrics,
                 "recall_metrics": recall_metrics,
-                "overall_metrics": overall_metrics
+                "overall_metrics": overall_metrics,
+                "baseline": {
+                    "enabled": bool(self.baseline_enable),
+                    "is_baseline": is_baseline,
+                    "baseline_model": self.baseline_model,
+                    "current_model": self.llm_predictor.model_type
+                }
             },
             "detailed_results": {
                 f"pair{pair_id}": [
@@ -1039,41 +1388,162 @@ class TrainingDataEvaluator:
         
         return report
 
+def parse_args():
+    """解析命令行参数"""
+    parser = argparse.ArgumentParser(description="训练数据评估脚本")
+    parser.add_argument("--input_file", "-i", type=str, 
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/9_17/9.17_evaluate_data_top5_final.json",
+                       help="输入JSON文件路径 (默认: data/9.17_evaluate_data_top5_final.json)")
+    parser.add_argument("--output_file", "-o", type=str,
+                       default="evaluation/data_evaluation_demo_0929_v2.json",
+                       help="输出结果文件路径 (默认: metrics/data_evaluation_results.json)")
+    parser.add_argument("--checkpoint_file", "-c", type=str,
+                       default="evaluation/evaluation_checkpoint_demo_0929_v2.json",
+                       help="断点文件路径 (默认: metrics/evaluation_checkpoint.json)")
+    parser.add_argument("--start_idx", "-s", type=int, default=0,
+                       help="开始评估的对话索引（从0开始，默认: 0）")
+    parser.add_argument("--end_idx", "-e", type=int, default=400,
+                       help="结束评估的对话索引（不包含，默认: 10）")
+    parser.add_argument("--log_file", "-l", type=str,
+                       default="evaluation/data_evaluation_demo_0929_v2.log",
+                       help="日志文件路径 (默认: metrics/data_evaluation.log)")
+    parser.add_argument("--baseline_enable", action="store_true",
+                       help="启用基线记录（当当前模型等于 --baseline_model 时将报告标记为基线）")
+    parser.add_argument("--baseline_model", type=str, default="/data/models/Qwen3-8B",
+                       help="基线模型标识（默认: /data/models/Qwen3-8B）")
+    parser.add_argument("--models", type=str, default="",
+                       help="以逗号分隔的一组模型名（例如: /data/models/Qwen3-8B,my_lora）。提供多个时开启多模型评估模式")
+    parser.add_argument("--multi_output_dir", type=str, default="evaluation/multi",
+                       help="多模型评估输出目录（默认: evaluation/multi）")
+    parser.add_argument("--aggregate_output", type=str, default="evaluation/multi_aggregate_0929_v2.json",
+                       help="多模型聚合报告输出文件（默认: evaluation/multi_aggregate.json）")
+    
+    # 并发控制参数
+    parser.add_argument("--max_concurrent_conversations", type=int, default=5,
+                       help="最大并发对话数（默认: 5）")
+    parser.add_argument("--max_concurrent_pairs", type=int, default=10,
+                       help="最大并发pair数（默认: 10）")
+    parser.add_argument("--max_concurrent_api_calls", type=int, default=20,
+                       help="最大并发API调用数（默认: 20）")
+    
+    return parser.parse_args()
+
 async def main():
     """主函数"""
-    logger.add("metrics/data_evaluation.log", rotation="10 MB")
+    args = parse_args()
+    
+    # 更新全局并发配置
+    global MAX_CONCURRENT_CONVERSATIONS, MAX_CONCURRENT_PAIRS, MAX_CONCURRENT_API_CALLS
+    MAX_CONCURRENT_CONVERSATIONS = args.max_concurrent_conversations
+    MAX_CONCURRENT_PAIRS = args.max_concurrent_pairs
+    MAX_CONCURRENT_API_CALLS = args.max_concurrent_api_calls
+    
+    # 添加日志配置
+    logger.add(args.log_file, rotation="100 MB", level="DEBUG")
     
     # 创建输出目录
     os.makedirs("metrics", exist_ok=True)
     
-    # 配置参数
-    demo_file = "data/9.17_evaluate_data_top5_final.json"
-    output_file = "metrics/data_evaluation_results.json"
-    checkpoint_file = "metrics/evaluation_checkpoint.json"
-    realtime_file = "metrics/realtime_metrics.json"
+    logger.info("开始增强版异步并发训练数据评估")
+    logger.info(f"输入文件: {args.input_file}")
+    logger.info(f"输出文件: {args.output_file}")
+    logger.info(f"断点文件: {args.checkpoint_file}")
+    logger.info(f"评估范围: 对话 {args.start_idx} 到 {args.end_idx if args.end_idx else '最后'}")
+    logger.info(f"并发配置: 对话={MAX_CONCURRENT_CONVERSATIONS}, Pairs={MAX_CONCURRENT_PAIRS}, API={MAX_CONCURRENT_API_CALLS}")
     
-    logger.info("开始增强版训练数据评估")
-    
-    # 初始化评估器
-    evaluator = TrainingDataEvaluator()
-    
-    # 执行评估，支持断点续传和实时指标更新
-    results = await evaluator.evaluate_file(demo_file, checkpoint_file)
-    
-    # 生成最终报告
+    # 多模型模式：当 --models 指定多个模型时，循环评估并聚合
+    models_list = [m.strip() for m in (args.models or "").split(',') if m.strip()]
+    if len(models_list) > 1:
+        os.makedirs(args.multi_output_dir, exist_ok=True)
+        aggregate = {
+            "input_file": args.input_file,
+            "models": models_list,
+            "baseline_model": args.baseline_model,
+            "runs": {}
+        }
+        for model_name in models_list:
+            model_safe = re.sub(r"[^A-Za-z0-9_.-]", "_", model_name)
+            output_file = os.path.join(args.multi_output_dir, f"result_{model_safe}.json")
+            checkpoint_file = os.path.join(args.multi_output_dir, f"checkpoint_{model_safe}.json")
+            log_file = os.path.join(args.multi_output_dir, f"eval_{model_safe}.log")
+            try:
+                logger.add(log_file, rotation="100 MB", level="DEBUG")
+            except Exception:
+                pass
+
+            evaluator = TrainingDataEvaluator(
+                model_type=model_name,
+                baseline_enable=bool(args.baseline_enable),
+                baseline_model=args.baseline_model
+            )
+
+            results = await evaluator.evaluate_file(
+                args.input_file,
+                checkpoint_file,
+                args.start_idx,
+                args.end_idx
+            )
+            report = evaluator.generate_report(results)
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(_round_floats(report, 3), f, ensure_ascii=False, indent=2)
+            aggregate["runs"][model_name] = {
+                "output_file": output_file,
+                "summary": report.get("summary", {}),
+            }
+
+            if os.path.exists(checkpoint_file):
+                try:
+                    os.remove(checkpoint_file)
+                except Exception:
+                    pass
+
+        # 生成聚合对比（抽取关键指标）
+        comparison = {}
+        for model_name, run in aggregate["runs"].items():
+            summary = run.get("summary", {})
+            comparison[model_name] = {
+                "overall_metrics": summary.get("overall_metrics", {}),
+                "pair1": summary.get("pair_metrics", {}).get("pair1", {}),
+                "pair2": summary.get("pair_metrics", {}).get("pair2", {}),
+                "pair3": summary.get("pair_metrics", {}).get("pair3", {}),
+            }
+        aggregate["comparison"] = _round_floats(comparison, 3)
+
+        with open(args.aggregate_output, 'w', encoding='utf-8') as f:
+            json.dump(_round_floats(aggregate, 3), f, ensure_ascii=False, indent=2)
+        logger.info(f"多模型评估完成，聚合报告: {args.aggregate_output}")
+        
+        # 确保所有异步任务完成
+        import gc
+        gc.collect()
+        return
+
+    # 单模型模式：保持原有行为
+    evaluator = TrainingDataEvaluator(
+        model_type=QWEN_MODEL_NAME if not models_list else models_list[0],
+        baseline_enable=bool(args.baseline_enable),
+        baseline_model=args.baseline_model
+    )
+    results = await evaluator.evaluate_file(
+        args.input_file,
+        args.checkpoint_file,
+        args.start_idx,
+        args.end_idx
+    )
     report = evaluator.generate_report(results)
-    
-    # 保存结果
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(args.output_file, 'w', encoding='utf-8') as f:
         json.dump(_round_floats(report, 3), f, ensure_ascii=False, indent=2)
-    
-    # 评估完成后删除断点文件
-    if os.path.exists(checkpoint_file):
+    logger.info(f"评估完成，结果已保存到: {args.output_file}")
+    if os.path.exists(args.checkpoint_file):
         try:
-            os.remove(checkpoint_file)
-            logger.info(f"已删除断点文件: {checkpoint_file}")
+            os.remove(args.checkpoint_file)
+            logger.info(f"已删除断点文件: {args.checkpoint_file}")
         except Exception as e:
             logger.error(f"删除断点文件失败: {e}")
+    
+    # 确保所有异步任务完成
+    import gc
+    gc.collect()
     
     
 

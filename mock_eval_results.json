@@ -1,0 +1,78 @@
+{
+  "evaluation_results": [
+    {
+      "total_pairs": 3,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\\n\\n# 工具\\n\\n你可以调用一个或多个函数来协助处理用户查询。\\n\\n在 <tools></tools> XML 标签中提供了可用的函数签名：\\n<tool",
+          "predicted_full": "<think>\\n\\n</think>\\n\\n<tool_call>\\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看2025年6月到8月各种收入类型的占比情况\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 10}}\\n</tool_call>",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看2025年6月到8月各种收入类型的占比情况\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 10}}\n</tool_call><|im_end|>\n"
+        },
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "analyze_revenue_by_type",
+          "missing_args": [
+            "start_date",
+            "end_date"
+          ],
+          "wrong_args": [],
+          "pair_index": 1,
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"name\": \"calculate_revenue_statistics\", \"description\": \"收入统计计算工具，",
+          "predicted_full": "根据2025年6月到8月的收入数据分析，各种收入类型的占比情况如下：\\n\\n## 收入类型分析报告\\n\\n**分析期间：** 2025-06-01 至 2025-08-31\\n**总收入：** ¥1,285,893.00",
+          "expected_full": "<tool_call>\n{\"name\": \"analyze_revenue_by_type\", \"arguments\": {\"start_date\": \"2025-06-01\", \"end_date\": \"2025-08-31\"}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [
+        {
+          "pair_index": 2,
+          "judge_scores": {
+            "accuracy": 4.0,
+            "completeness": 4.0,
+            "relevance": 5.0,
+            "clarity": 4.0,
+            "overall": 4.0
+          },
+          "source_preview": "<|im_start|>user\n<tool_response>\n[{\"type\": \"text\", \"text\": \"收入类型分析报告\\n\\n分析期间：2025-06-01 至 2025-08-31",
+          "predicted_full": "根据2025年6月到8月的收入数据分析，各种收入类型的占比情况如下：\\n\\n## 收入类型分析报告\\n\\n**分析期间：** 2025-06-01 至 2025-08-31\\n**总收入：** ¥1,285,893.00",
+          "expected_full": "根据2025年6月到8月的收入数据分析，各种收入类型的占比情况如下：\\n\\n## 收入类型分析报告\\n\\n**分析期间：** 2025-06-01 至 2025-08-31  \\n**总收入：** ¥1,285,893.00\\n\\n### 各业态收入分布：\\n\\n- **交通：** ¥650,221.00 (50.6%) - 主要收入来源\\n- **门票：** ¥605,697.00 (47.1%) - 重要收入组成\\n- **餐饮：** ¥25,975.00 (2.0%) - 辅助收入\\n- **住宿：** ¥4,000.00 (0.3%) - 少量收入\\n\\n从数据可以看出，交通和门票是主要的收入来源，合计占比达到97.7%，其中交通收入略高于门票收入。餐饮和住宿收入相对较少，仅占总收入的2.3%。<|im_end|>\n"
+        }
+      ],
+      "overall_stats": {}
+    }
+  ],
+  "statistics": {
+    "function_call": {
+      "total": 2,
+      "name_accuracy": 0.0,
+      "args_accuracy": 0.0,
+      "overall_accuracy": 0.0
+    },
+    "assistant_response": {
+      "total": 1,
+      "average_score": 4.0,
+      "score_distribution": {
+        "1.0-2.0": 0,
+        "2.0-3.0": 0,
+        "3.0-4.0": 0,
+        "4.0-5.0": 1
+      }
+    }
+  },
+  "timestamp": "2025-09-20T01:33:04.416878"
+}

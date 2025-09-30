@@ -1,0 +1,96 @@
+{
+  "evaluation_results": [
+    {
+      "total_pairs": 1,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2252,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析报表编号L20250611的收入类型构成，基于财务报表数据分析各业态的收入占比和金额分布，以饼图格式展示，用于收入结构分析和业态表现评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 1,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2268,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"对新叶古村和建德市光大国际旅行社有限公司的合作订单进行状态分布分析，统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，用于订单流程监控和业务健康度评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [],
+      "overall_stats": {}
+    },
+    {
+      "total_pairs": 1,
+      "function_call_results": [
+        {
+          "name_match": false,
+          "args_match": false,
+          "overall_match": false,
+          "predicted_name": "",
+          "expected_name": "retrieval_tool",
+          "missing_args": [
+            "query",
+            "source_filter",
+            "user_id",
+            "top_k"
+          ],
+          "wrong_args": [],
+          "pair_index": 0,
+          "source_preview": "<|im_start|>system\n\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n\n4. **严格禁止以下行为**：\n- 在同一轮输出中同时给出函数调用和最终答案  \n- 使用完全相同的参数重复调用同一个工具\n- 在工具已经返回结果（包括空结果）后，继续调用相同工具\n- 忽略对话流程历史中已有的工具调用和响应信息\n**特别注意：通过查看下方的对话流程历史，你可以清楚地看到：**\n- 之前的User和Assistant交互\n- 已经执行过的工具调用  \n- 工具返回的具体结果\n- 当前对话进行到了哪个阶段\n\n**错误处理和数据质量判断**：\n- 如果工具返回 `success: False` 或明确的错误码（如status_code: 3001），说明操作失败\n- 如果工具返回总收入为0、空列表或空图表数据，说明查询条件下确实没有数据\n- 如果工具返回错误信息（如'资源不存在'、'参数无效'等），不应重复调用\n- 此时应该生成解释性答案，说明具体的错误原因或数据状况\n- **绝对不要**因为工具返回错误或空数据就重复调用同一工具\n\n**工具调用历史检查**：\n- 在每次调用工具前，必须检查对话历史中是否已经调用过相同工具\n- 如果历史中",
+          "source_length": 2253,
+          "predicted_full": "",
+          "expected_full": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。\", \"source_filter\": \"toollist\", \"user_id\": 136451106, \"top_k\": 5}}\n</tool_call><|im_end|>\n"
+        }
+      ],
+      "assistant_response_results": [],
+      "overall_stats": {}
+    }
+  ],
+  "statistics": {
+    "function_call": {
+      "total": 3,
+      "name_accuracy": 0.0,
+      "args_accuracy": 0.0,
+      "overall_accuracy": 0.0
+    },
+    "assistant_response": {
+      "total": 0,
+      "average_score": 0,
+      "score_distribution": {}
+    }
+  },
+  "timestamp": "2025-09-20T11:37:30.360725"
+}

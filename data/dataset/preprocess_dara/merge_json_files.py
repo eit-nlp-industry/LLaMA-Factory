@@ -75,5 +75,5 @@ def main():
 if __name__ == "__main__":
     main()
     '''
-    python /home/ziqiang/LLaMA-Factory/data/dataset/merge_json_files.py --input /home/ziqiang/LLaMA-Factory/data/dataset/9_14/text_idcards_8_18_eval.json /home/ziqiang/LLaMA-Factory/data/dataset/9_14/price_cal_test_09_14.json /home/ziqiang/LLaMA-Factory/data/dataset/9_14/price_policy_test_09_14.json --output /home/ziqiang/LLaMA-Factory/data/dataset/9_14/merged_dataset.json
+    python /home/ziqiang/LLaMA-Factory/data/dataset/preprocess_dara/merge_json_files.py --input /home/ziqiang/LLaMA-Factory/data/function_call_data/function_call_context_audit_page_irrelevant.json /home/ziqiang/LLaMA-Factory/data/function_call_data/function_call_context_audit.json /home/ziqiang/LLaMA-Factory/data/function_call_data/function_call_context_order.json /home/ziqiang/LLaMA-Factory/data/dataset/9_17/mixed_training_data_9_17.json --output /home/ziqiang/LLaMA-Factory/data/dataset/9_29/merged_dataset.json
     '''

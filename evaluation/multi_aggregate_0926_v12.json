@@ -1,0 +1,158 @@
+{
+  "input_file": "data/dataset/9_17/demo.json",
+  "models": [
+    "my_lora",
+    "/data/models/Qwen3-8B"
+  ],
+  "baseline_model": "/data/models/Qwen3-8B",
+  "runs": {
+    "my_lora": {
+      "output_file": "evaluation/multi_0926_v12/result_my_lora.json",
+      "summary": {
+        "total_conversations": 1,
+        "total_pairs": 3,
+        "pair_metrics": {
+          "pair1": {
+            "total": 1,
+            "accuracy": 0.625,
+            "precision@1": 1.0
+          },
+          "pair2": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair2_consider_recall": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair2_recall_subset": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair3": {
+            "total": 1,
+            "answer_score": 0.8
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 1,
+          "recall@5_1": 1,
+          "recall@5_0": 0,
+          "recall_rate": 1.0
+        },
+        "overall_metrics": {
+          "total": 3,
+          "accuracy": 0.646,
+          "precision@1": 1.0,
+          "answer_score": 0.8
+        },
+        "baseline": {
+          "enabled": true,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "sql-lora"
+        }
+      }
+    },
+    "/data/models/Qwen3-8B": {
+      "output_file": "evaluation/multi_0926_v12/result__data_models_Qwen3-8B.json",
+      "summary": {
+        "total_conversations": 1,
+        "total_pairs": 3,
+        "pair_metrics": {
+          "pair1": {
+            "total": 1,
+            "accuracy": 0.75,
+            "precision@1": 1.0
+          },
+          "pair2": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair2_consider_recall": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair2_recall_subset": {
+            "total": 1,
+            "accuracy": 0.667,
+            "precision@1": 1.0
+          },
+          "pair3": {
+            "total": 1,
+            "answer_score": 0.7
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 1,
+          "recall@5_1": 1,
+          "recall@5_0": 0,
+          "recall_rate": 1.0
+        },
+        "overall_metrics": {
+          "total": 3,
+          "accuracy": 0.708,
+          "precision@1": 1.0,
+          "answer_score": 0.7
+        },
+        "baseline": {
+          "enabled": true,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "sql-lora"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "my_lora": {
+      "overall_metrics": {
+        "total": 3,
+        "accuracy": 0.646,
+        "precision@1": 1.0,
+        "answer_score": 0.8
+      },
+      "pair1": {
+        "total": 1,
+        "accuracy": 0.625,
+        "precision@1": 1.0
+      },
+      "pair2": {
+        "total": 1,
+        "accuracy": 0.667,
+        "precision@1": 1.0
+      },
+      "pair3": {
+        "total": 1,
+        "answer_score": 0.8
+      }
+    },
+    "/data/models/Qwen3-8B": {
+      "overall_metrics": {
+        "total": 3,
+        "accuracy": 0.708,
+        "precision@1": 1.0,
+        "answer_score": 0.7
+      },
+      "pair1": {
+        "total": 1,
+        "accuracy": 0.75,
+        "precision@1": 1.0
+      },
+      "pair2": {
+        "total": 1,
+        "accuracy": 0.667,
+        "precision@1": 1.0
+      },
+      "pair3": {
+        "total": 1,
+        "answer_score": 0.7
+      }
+    }
+  }
+}

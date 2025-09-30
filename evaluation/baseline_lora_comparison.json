@@ -1,0 +1,158 @@
+{
+  "input_file": "/home/ziqiang/LLaMA-Factory/data/dataset/9_17/9.17_evaluate_data_top5_final.json",
+  "models": [
+    "/data/models/Qwen3-8B",
+    "my_lora"
+  ],
+  "baseline_model": "/data/models/Qwen3-8B",
+  "runs": {
+    "/data/models/Qwen3-8B": {
+      "output_file": "evaluation/multi_baseline_lora/result__data_models_Qwen3-8B.json",
+      "summary": {
+        "total_conversations": 397,
+        "total_pairs": 1191,
+        "pair_metrics": {
+          "pair1": {
+            "total": 397,
+            "accuracy": 0.895,
+            "precision@1": 1.0
+          },
+          "pair2": {
+            "total": 397,
+            "accuracy": 0.778,
+            "precision@1": 0.872
+          },
+          "pair2_consider_recall": {
+            "total": 332,
+            "accuracy": 0.789,
+            "precision@1": 0.895
+          },
+          "pair2_recall_subset": {
+            "total": 332,
+            "accuracy": 0.789,
+            "precision@1": 0.895
+          },
+          "pair3": {
+            "total": 397,
+            "answer_score": 0.217
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 397,
+          "recall@5_1": 332,
+          "recall@5_0": 65,
+          "recall_rate": 0.836
+        },
+        "overall_metrics": {
+          "total": 1191,
+          "accuracy": 0.836,
+          "precision@1": 0.936,
+          "answer_score": 0.217
+        },
+        "baseline": {
+          "enabled": false,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "my_lora"
+        }
+      }
+    },
+    "my_lora": {
+      "output_file": "evaluation/multi_baseline_lora/result_my_lora.json",
+      "summary": {
+        "total_conversations": 397,
+        "total_pairs": 1191,
+        "pair_metrics": {
+          "pair1": {
+            "total": 397,
+            "accuracy": 0.895,
+            "precision@1": 1.0
+          },
+          "pair2": {
+            "total": 397,
+            "accuracy": 0.779,
+            "precision@1": 0.872
+          },
+          "pair2_consider_recall": {
+            "total": 333,
+            "accuracy": 0.791,
+            "precision@1": 0.895
+          },
+          "pair2_recall_subset": {
+            "total": 333,
+            "accuracy": 0.791,
+            "precision@1": 0.895
+          },
+          "pair3": {
+            "total": 397,
+            "answer_score": 0.218
+          }
+        },
+        "recall_metrics": {
+          "total_pairs": 397,
+          "recall@5_1": 333,
+          "recall@5_0": 64,
+          "recall_rate": 0.839
+        },
+        "overall_metrics": {
+          "total": 1191,
+          "accuracy": 0.837,
+          "precision@1": 0.936,
+          "answer_score": 0.218
+        },
+        "baseline": {
+          "enabled": false,
+          "is_baseline": false,
+          "baseline_model": "/data/models/Qwen3-8B",
+          "current_model": "my_lora"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "/data/models/Qwen3-8B": {
+      "overall_metrics": {
+        "total": 1191,
+        "accuracy": 0.836,
+        "precision@1": 0.936,
+        "answer_score": 0.217
+      },
+      "pair1": {
+        "total": 397,
+        "accuracy": 0.895,
+        "precision@1": 1.0
+      },
+      "pair2": {
+        "total": 397,
+        "accuracy": 0.778,
+        "precision@1": 0.872
+      },
+      "pair3": {
+        "total": 397,
+        "answer_score": 0.217
+      }
+    },
+    "my_lora": {
+      "overall_metrics": {
+        "total": 1191,
+        "accuracy": 0.837,
+        "precision@1": 0.936,
+        "answer_score": 0.218
+      },
+      "pair1": {
+        "total": 397,
+        "accuracy": 0.895,
+        "precision@1": 1.0
+      },
+      "pair2": {
+        "total": 397,
+        "accuracy": 0.779,
+        "precision@1": 0.872
+      },
+      "pair3": {
+        "total": 397,
+        "answer_score": 0.218
+      }
+    }
+  }
+}
