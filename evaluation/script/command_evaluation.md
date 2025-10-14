@@ -9,39 +9,39 @@
 ## 二、评估指标
 
 ### 2.1 基本统计指标
-- **total_conversations**: 总对话数量 (397)
-- **total_pairs**: 总评估对数量 (1191)
+- **total_conversations**: 总对话数量
+- **total_pairs**: 总评估对数量
 
 ### 2.2 Pair级别指标
 
 #### Pair 1 指标
-- **pair1.total**: Pair 1 的总数量 (397)
-- **pair1.accuracy**: Pair 1 的准确率 (0.358)
-- **pair1.precision@1**: Pair 1 的工具名称精确匹配率 (0.589)
+- **pair1.total**: Pair 1 的总数量
+- **pair1.accuracy**: Pair 1 的准确率
+- **pair1.precision@1**: Pair 1 的工具名称精确匹配率
 
 #### Pair 2 指标
-- **pair2.total**: Pair 2 的总数量 (397)
-- **pair2.accuracy**: Pair 2 的准确率 (0.699)
-- **pair2.precision@1**: Pair 2 的工具名称精确匹配率 (0.814)
-- **pair2_consider_recall.total**: 考虑recall条件的Pair 2数量 (129)
-- **pair2_consider_recall.accuracy**: 考虑recall条件的Pair 2准确率 (0.754)
-- **pair2_consider_recall.precision@1**: 考虑recall条件的Pair 2工具名称精确匹配率 (0.86)
+- **pair2.total**: Pair 2 的总数量
+- **pair2.accuracy**: Pair 2 的准确率
+- **pair2.precision@1**: Pair 2 的工具名称精确匹配率
+- **pair2_consider_recall.total**: 考虑recall条件的Pair 2数量
+- **pair2_consider_recall.accuracy**: 考虑recall条件的Pair 2准确率
+- **pair2_consider_recall.precision@1**: 考虑recall条件的Pair 2工具名称精确匹配率
 
 #### Pair 3 指标
-- **pair3.total**: Pair 3 的总数量 (397)
-- **pair3.answer_score**: Pair 3 的文本生成质量得分 (0.51)
+- **pair3.total**: Pair 3 的总数量
+- **pair3.answer_score**: Pair 3 的文本生成质量得分
 
 ### 2.3 Recall指标
-- **recall_metrics.total_pairs**: 参与recall评估的pair总数 (234)
-- **recall_metrics.recall@5_1**: recall=1的pair数量 (129)
-- **recall_metrics.recall@5_0**: recall=0的pair数量 (105)
-- **recall_metrics.recall_rate**: recall率 (0.551)
+- **recall_metrics.total_pairs**: 参与recall评估的pair总数
+- **recall_metrics.recall@5_1**: recall=1的pair数量
+- **recall_metrics.recall@5_0**: recall=0的pair数量
+- **recall_metrics.recall_rate**: recall率
 
 ### 2.4 总体指标
-- **overall.total**: 总体评估对数量 (1191)
-- **overall.accuracy**: 总体准确率 (0.529)
-- **overall.precision@1**: 总体工具名称精确匹配率 (0.702)
-- **overall.answer_score**: 总体文本生成质量得分 (0.51)
+- **overall.total**: 总体评估对数量
+- **overall.accuracy**: 总体准确率
+- **overall.precision@1**: 总体工具名称精确匹配率
+- **overall.answer_score**: 总体文本生成质量得分
 
 ## 三、指标说明
 
@@ -235,4 +235,5 @@ python data_evaluation.py
    - 每个 `"human"` 消息后应跟随 `"function_call"` 消息
 
    - 每个 `"observation"` 消息后应跟随 `"function_call"` 或 `"gpt"` 消息
+
 
