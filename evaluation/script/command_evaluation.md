@@ -76,7 +76,7 @@
 
 ## 四、运行命令
 
-python Data_evaluation.py.py
+python Data_evaluation.py
 
 
 ## 五、默认输入输出
@@ -233,4 +233,5 @@ python Data_evaluation.py.py
    - 建议使用提供的示例文件作为模板
 6. **对话序列**: 确保conversations中的消息序列符合评估逻辑要求
    - 每个 `"human"` 消息后应跟随 `"function_call"` 消息
+
    - 每个 `"observation"` 消息后应跟随 `"function_call"` 或 `"gpt"` 消息
