@@ -139,7 +139,7 @@ echo "📝 日志文件: {log_files['main']}"
 echo "=" * 60
 
 # 设置环境变量 - 先使用单GPU 6
-export CUDA_VISIBLE_DEVICES=6
+export CUDA_VISIBLE_DEVICES=2
 
 # 创建输出目录
 mkdir -p "{output_dir}"
@@ -164,7 +164,7 @@ llamafactory-cli train \\
     --stage sft \\
     --do_train True \\
     --model_name_or_path /data/models/Qwen3-8B \\
-    --preprocessing_num_workers 16 \\
+    --preprocessing_num_workers 1 \\
     --finetuning_type lora \\
     --template qwen3 \\
     --flash_attn auto \\
@@ -175,7 +175,7 @@ llamafactory-cli train \\
     --num_train_epochs 5.0 \\
     --max_samples 100000 \\
     --per_device_train_batch_size 1 \\
-    --gradient_accumulation_steps 16 \\
+    --gradient_accumulation_steps 1 \\
     --lr_scheduler_type cosine \\
     --max_grad_norm 0.5 \\
     --weight_decay 0.01 \\

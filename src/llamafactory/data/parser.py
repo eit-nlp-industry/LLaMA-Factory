@@ -15,6 +15,7 @@
 import json
 import os
 from dataclasses import dataclass
+from sys import int_info
 from typing import Any, Literal, Optional
 
 from huggingface_hub import hf_hub_download
@@ -40,6 +41,8 @@ class DatasetAttr:
     # common columns
     system: Optional[str] = None
     tools: Optional[str] = None
+    time: Optional[str] = None
+    user_id: Optional[int] = None
     images: Optional[str] = None
     videos: Optional[str] = None
     audios: Optional[str] = None
@@ -78,7 +81,7 @@ class DatasetAttr:
         self.set_attr("num_samples", attr)
 
         if "columns" in attr:
-            column_names = ["prompt", "query", "response", "history", "messages", "system", "tools"]
+            column_names = ["prompt", "query", "response", "history", "messages", "system", "tools", "time", "user_id"]
             column_names += ["images", "videos", "audios", "chosen", "rejected", "kto_tag"]
             for column_name in column_names:
                 self.set_attr(column_name, attr["columns"])

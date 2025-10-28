@@ -219,7 +219,7 @@ class Template:
                     tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
                     elements += self.format_system.apply(content=(system + tool_text))
             elif message["role"] == Role.OBSERVATION:
-                # 对于observation消息，添加system信息（不包含tools）
+                # 对于正常的observation消息，添加system信息（不包含tools）
                 if system:
                     elements += self.format_system.apply(content=system)
                 
@@ -230,18 +230,52 @@ class Template:
                         human_content = messages[j]["content"]
                         break
                 
-                if human_content:
-                    # 在observation内容前添加human的value
-                    enhanced_content = f"用户查询: {human_content}\n\n工具返回结果: {message['content']}"
-                    message = {**message, "content": enhanced_content}
+                # 查找上一个FUNCTION消息
+                previous_function = None
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.FUNCTION:
+                        previous_function = messages[j]
+                        break
+                
+                # 查找最近的observation消息（用于multi-hop场景）
+                # 需要找到第一个非retrieval_tool的observation
+                previous_observation_content = ""
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.OBSERVATION:
+                        # 检查这个observation对应的FUNCTION是不是retrieval_tool
+                        is_retrieval = False
+                        for k in range(j-1, -1, -1):
+                            if messages[k]["role"] == Role.FUNCTION:
+                                if "retrieval_tool" in messages[k]["content"]:
+                                    is_retrieval = True
+                                break
+                        # 只使用非retrieval_tool的observation内容
+                        if not is_retrieval:
+                            previous_observation_content = messages[j]["content"]
+                            break
+                        # 如果是retrieval_tool的observation，继续向前查找
+                
+                # 根据是否有previous_observation_content来决定如何拼接
+                if previous_observation_content:
+                    # 如果存在之前的observation，说明这是multi-hop场景
+                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                elif human_content:
+                    # 如果没有之前的observation，说明这是single-hop场景
+                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
+                else:
+                    enhanced_content = message['content']
+                
+                message = {**message, "content": enhanced_content}
 
             if message["role"] == Role.USER:
                 elements += self.format_user.apply(content=message["content"], idx=str(i // 2))
             elif message["role"] == Role.ASSISTANT:
                 elements += self.format_assistant.apply(content=message["content"])
             elif message["role"] == Role.OBSERVATION:
+                # 前面已经处理过，这里只需要应用format_observation
                 elements += self.format_observation.apply(content=message["content"])
             elif message["role"] == Role.FUNCTION:
+                # 直接使用原始内容，不做拼接处理，避免JSON解析错误
                 elements += self.format_function.apply(content=message["content"])
             else:
                 raise NotImplementedError("Unexpected role: {}".format(message["role"]))
@@ -447,13 +481,44 @@ class Llama2Template(Template):
                         human_content = messages[j]["content"]
                         break
                 
-                if human_content:
-                    # 在observation内容前添加human的value
-                    enhanced_content = f"用户查询: {human_content}\n\n工具返回结果: {message['content']}"
+                # 查找上一个FUNCTION消息
+                previous_function = None
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.FUNCTION:
+                        previous_function = messages[j]
+                        break
+                
+                # 查找最近的observation消息（用于multi-hop场景）
+                # 需要找到第一个非retrieval_tool的observation
+                previous_observation_content = ""
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.OBSERVATION:
+                        # 检查这个observation对应的FUNCTION是不是retrieval_tool
+                        is_retrieval = False
+                        for k in range(j-1, -1, -1):
+                            if messages[k]["role"] == Role.FUNCTION:
+                                if "retrieval_tool" in messages[k]["content"]:
+                                    is_retrieval = True
+                                break
+                        # 只使用非retrieval_tool的observation内容
+                        if not is_retrieval:
+                            previous_observation_content = messages[j]["content"]
+                            break
+                        # 如果是retrieval_tool的observation，继续向前查找
+                
+                # 根据是否有previous_observation_content来决定如何拼接
+                if previous_observation_content:
+                    # 如果存在之前的observation，说明这是multi-hop场景
+                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                    elements += self.format_observation.apply(content=enhanced_content)
+                elif human_content:
+                    # 如果没有之前的observation，说明这是single-hop场景
+                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
                     elements += self.format_observation.apply(content=enhanced_content)
                 else:
                     elements += self.format_observation.apply(content=message["content"])
             elif message["role"] == Role.FUNCTION:
+                # 直接使用原始内容，不做拼接处理，避免JSON解析错误
                 elements += self.format_function.apply(content=message["content"])
             else:
                 raise NotImplementedError("Unexpected role: {}".format(message["role"]))
@@ -1027,7 +1092,7 @@ register_template(
 
 register_template(
     name="deepseek3",
-    format_user=StringFormatter(slots=["<｜User｜>{{content}}<｜Assistant｜>"]),
+    format_user=StringFormatter(slots=["{{content}}"]),
     format_prefix=EmptyFormatter(slots=[{"bos_token"}]),
 )
 
@@ -1035,7 +1100,7 @@ register_template(
 # copied from deepseek3 template
 register_template(
     name="deepseekr1",
-    format_user=StringFormatter(slots=["<｜User｜>{{content}}<｜Assistant｜>"]),
+    format_user=StringFormatter(slots=["{{content}}"]),
     format_prefix=EmptyFormatter(slots=[{"bos_token"}]),
     template_class=ReasoningTemplate,
 )
@@ -1044,7 +1109,7 @@ register_template(
 register_template(
     name="deepseekcoder",
     format_user=StringFormatter(slots=["### Instruction:\n{{content}}\n### Response:"]),
-    format_assistant=StringFormatter(slots=["\n{{content}}\n<|EOT|>\n"]),
+    format_assistant=StringFormatter(slots=["\n{{content}}\n"]),
     format_prefix=EmptyFormatter(slots=[{"bos_token"}]),
     default_system=(
         "You are an AI programming assistant, utilizing the DeepSeek Coder model, "

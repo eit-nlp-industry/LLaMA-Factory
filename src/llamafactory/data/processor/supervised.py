@@ -261,12 +261,12 @@ class SupervisedDatasetProcessor(DatasetProcessor):
             )
             log_debug(f"✅ 样本 {i+1} 编码完成，input_ids长度: {len(input_ids)}, labels长度: {len(labels)}")
             
-            # 应用user_id mask
-            masked_labels = self._mask_user_id_tokens(input_ids, labels)
+            # 应用user_id mask（已注释，user_id现在通过system prompt提供）
+            # masked_labels = self._mask_user_id_tokens(input_ids, labels)
             
             model_inputs["input_ids"].append(input_ids)
             model_inputs["attention_mask"].append([1] * len(input_ids))
-            model_inputs["labels"].append(masked_labels)
+            model_inputs["labels"].append(labels)  # 使用原始labels，不再mask user_id
             model_inputs["images"].append(examples["_images"][i])
             model_inputs["videos"].append(examples["_videos"][i])
             model_inputs["audios"].append(examples["_audios"][i])
@@ -404,13 +404,13 @@ class PackedSupervisedDatasetProcessor(SupervisedDatasetProcessor):
             if length > self.data_args.cutoff_len:
                 logger.warning_rank0(f"Dropped lengthy example with length {length} > {self.data_args.cutoff_len}.")
             else:
-                # 应用user_id mask
-                masked_labels = self._mask_user_id_tokens(input_ids, labels)
+                # 应用user_id mask（已注释，user_id现在通过system prompt提供）
+                # masked_labels = self._mask_user_id_tokens(input_ids, labels)
                 
                 lengths.append(length)
                 length2indexes[length].append(valid_num)
                 batch_input_ids.append(input_ids)
-                batch_labels.append(masked_labels)
+                batch_labels.append(labels)  # 使用原始labels，不再mask user_id
                 batch_images.append(examples["_images"][i] or [])
                 batch_videos.append(examples["_videos"][i] or [])
                 batch_audios.append(examples["_audios"][i] or [])

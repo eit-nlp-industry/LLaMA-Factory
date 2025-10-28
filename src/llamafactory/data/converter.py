@@ -119,10 +119,29 @@ class AlpacaDatasetConverter(DatasetConverter):
         else:  # unsupervised
             response = []
 
+        # 处理 system 和 time 字段
+        system = example[self.dataset_attr.system] if self.dataset_attr.system else ""
+        if self.dataset_attr.time and example.get(self.dataset_attr.time):
+            time_value = example[self.dataset_attr.time]
+            time_instruction = f"若用户的问题涉及日期但未明确指定，请自动采用{time_value}作为默认时间上下文。"
+            if system:
+                system = system + "\n\n" + time_instruction
+            else:
+                system = time_instruction
+        
+        # 处理 user_id 字段，拼接到 system 中
+        if self.dataset_attr.user_id and example.get(self.dataset_attr.user_id):
+            user_id_value = example[self.dataset_attr.user_id]
+            user_id_instruction = f"当前用户的user_id为{user_id_value}"
+            if system:
+                system = system + "\n\n" + user_id_instruction
+            else:
+                system = user_id_instruction
+
         output = {
             "_prompt": prompt,
             "_response": response,
-            "_system": example[self.dataset_attr.system] if self.dataset_attr.system else "",
+            "_system": system,
             "_tools": example[self.dataset_attr.tools] if self.dataset_attr.tools else "",
             "_images": self._find_medias(example[self.dataset_attr.images]) if self.dataset_attr.images else None,
             "_videos": self._find_medias(example[self.dataset_attr.videos]) if self.dataset_attr.videos else None,
@@ -154,6 +173,24 @@ class SharegptDatasetConverter(DatasetConverter):
             messages = messages[1:]
         else:
             system = example[self.dataset_attr.system] if self.dataset_attr.system else ""
+        
+        # 处理 time 字段，拼接到 system 中
+        if self.dataset_attr.time and example.get(self.dataset_attr.time):
+            time_value = example[self.dataset_attr.time]
+            time_instruction = f"若用户的问题涉及日期但未明确指定，请自动采用{time_value}作为默认时间上下文。"
+            if system:
+                system = system + "\n\n" + time_instruction
+            else:
+                system = time_instruction
+        
+        # 处理 user_id 字段，拼接到 system 中
+        if self.dataset_attr.user_id and example.get(self.dataset_attr.user_id):
+            user_id_value = example[self.dataset_attr.user_id]
+            user_id_instruction = f"当前用户的user_id为{user_id_value}"
+            if system:
+                system = system + "\n\n" + user_id_instruction
+            else:
+                system = user_id_instruction
 
         aligned_messages = []
         broken_data = False

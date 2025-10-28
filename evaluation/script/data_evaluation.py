@@ -245,22 +245,23 @@ class DataProcessor:
                         i += 2
                     elif next_msg["from"] == "gpt":
                         # Pair 3: system + <tool_response>...</tool_response> -> gpt（对齐训练日志风格）
-                        tool_resp_block = (
-                            f"<tool_response>\n"
-                            f"用户查询: {original_query}\n\n"
-                            f"工具返回结果: {msg['value']}\n"
-                            f"</tool_response>"
-                        )
-                        source = f"{base_system}\n\n{tool_resp_block}"
-                        target = next_msg["value"]
-                        pairs.append(EvaluationPair(
-                            pair_id=pair_id,
-                            source=source,
-                            target=target,
-                            pair_type="text_generation",
-                            conversation_id=conversation_id
-                        ))
-                        pair_id += 1
+                        # 注释掉：不再评估文本生成部分
+                        # tool_resp_block = (
+                        #     f"<tool_response>\n"
+                        #     f"用户查询: {original_query}\n\n"
+                        #     f"工具返回结果: {msg['value']}\n"
+                        #     f"</tool_response>"
+                        # )
+                        # source = f"{base_system}\n\n{tool_resp_block}"
+                        # target = next_msg["value"]
+                        # pairs.append(EvaluationPair(
+                        #     pair_id=pair_id,
+                        #     source=source,
+                        #     target=target,
+                        #     pair_type="text_generation",
+                        #     conversation_id=conversation_id
+                        # ))
+                        # pair_id += 1
                         i += 2
                     else:
                         i += 1
@@ -576,11 +577,15 @@ class RetrievalToolCaller:
             if not params:
                 return 0, {"error": "无法从pair1预测中提取检索参数"}
 
+            logger.info(f"调用检索工具 - 查询参数: {params.get('query', '')[:100]}")
+            
             status_code, response = await self.call_retrieval_tool(session, params)
             if status_code != 200:
+                logger.warning(f"检索工具调用失败，状态码: {status_code}")
                 return 0, {"error": f"检索工具调用失败，状态码: {status_code}"}
 
             retrieved_tools = self.extract_retrieved_tools(response, top_k=5)
+            logger.info(f"检索工具返回 - 获取到 {len(retrieved_tools)} 个工具: {retrieved_tools}")
 
             try:
                 pair2_call = json.loads(pair2_target)
@@ -692,47 +697,46 @@ class TextGenerationEvaluator:
         self.retry_delay = 10
         logger.info(f"初始化文本生成评估模块，使用模型: {self.model_type}")
     
-    # 注释掉Gemini相关代码，保留以备后用
-    # def call_gemini_api(self, prompt: str, temperature: float = 0.3, top_p: float = 0.95, top_k: int = 40) -> str:
-    #     """调用Gemini API"""
-    #     url = f"https://generativelanguage.googleapis.com/v2beta/models/{self.model_type}:generateContent?key={GEMINI_API_KEY}"
-    #     headers = {"Content-Type": "application/json"}
-    #     payload = {
-    #         "contents": [
-    #             {
-    #                 "role": "user",
-    #                 "parts": [{"text": prompt}]
-    #             }
-    #         ],
-    #         "generationConfig": {
-    #             "temperature": float(temperature),
-    #             "topP": float(top_p),
-    #             "topK": int(top_k),
-    #             "maxOutputTokens": 8192
-    #         }
-    #     }
+    def call_gemini_api(self, prompt: str, temperature: float = 0.3, top_p: float = 0.95, top_k: int = 40) -> str:
+         """调用Gemini API"""
+         url = f"https://generativelanguage.googleapis.com/v2beta/models/{self.model_type}:generateContent?key={GEMINI_API_KEY}"
+         headers = {"Content-Type": "application/json"}
+         payload = {
+             "contents": [
+                 {
+                     "role": "user",
+                     "parts": [{"text": prompt}]
+                 }
+             ],
+             "generationConfig": {
+                 "temperature": float(temperature),
+                 "topP": float(top_p),
+                 "topK": int(top_k),
+                 "maxOutputTokens": 8192
+             }
+         }
 
-    #     for attempt in range(self.max_retries):
-    #         try:
-    #             response = requests.post(url, headers=headers, json=payload, timeout=60)
-    #             response.raise_for_status()
-    #             raw = response.json()
+         for attempt in range(self.max_retries):
+             try:
+                 response = requests.post(url, headers=headers, json=payload, timeout=60)
+                 response.raise_for_status()
+                 raw = response.json()
                 
-    #             # 提取文本内容
-    #             text = ""
-    #             try:
-    #                 text = raw["candidates"][0]["content"]["parts"][0]["text"]
-    #             except Exception:
-    #                 text = ""
+                 # 提取文本内容
+                 text = ""
+                 try:
+                     text = raw["candidates"][0]["content"]["parts"][0]["text"]
+                 except Exception:
+                     text = ""
                 
-    #             return text
+                 return text
                 
-    #         except Exception as e:
-    #             if attempt < self.max_retries - 1:
-    #                 time.sleep(self.retry_delay)
-    #             else:
-    #                 logger.error(f"API调用失败 (尝试 {attempt+1}/{self.max_retries}): {e}")
-    #                 return ""
+             except Exception as e:
+                 if attempt < self.max_retries - 1:
+                     time.sleep(self.retry_delay)
+                 else:
+                     logger.error(f"API调用失败 (尝试 {attempt+1}/{self.max_retries}): {e}")
+                     return ""
     
     async def call_qwen_api(self, session: aiohttp.ClientSession, prompt: List[Dict], temperature: float = 0.3, top_p: float = 0.95) -> str:
         """异步调用Qwen API进行评估"""
@@ -1018,15 +1022,13 @@ class MetricsCalculator:
 class TrainingDataEvaluator:
     """主评估类"""
     
-    def __init__(self, model_type: str = "qwen3", baseline_enable: bool = False, baseline_model: str = "/data/models/Qwen3-8B"):
+    def __init__(self, model_type: str = "qwen3"):
         self.data_processor = DataProcessor()
         self.llm_predictor = LLMPredictor(model_type)
         self.tool_evaluator = ToolCallEvaluator()
         self.text_evaluator = TextGenerationEvaluator(model_type)  # 使用LoRA模型而不是Gemini
         self.retrieval_caller = RetrievalToolCaller()
         self.metrics_calculator = MetricsCalculator()
-        self.baseline_enable = baseline_enable
-        self.baseline_model = baseline_model
         logger.info("训练数据评估器初始化完成")
     
     async def evaluate_single_pair(self, session: aiohttp.ClientSession, pair: EvaluationPair, pair_predict_by_id: Dict[int, str], pair_toolname_score_by_id: Dict[int, float]) -> EvaluationResult:
@@ -1086,7 +1088,11 @@ class TrainingDataEvaluator:
         # 根据类型输出不同的日志信息（与日志字段命名保持一致）
         if pair.pair_type == "tool_call":
             if recall is not None:
+                # 提取检索到的工具列表
+                retrieved_tools = recall_details.get("retrieved_tools", []) if recall_details else []
+                target_tool = recall_details.get("target_tool", "") if recall_details else ""
                 logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}, recall@5: {recall}")
+                logger.info(f"Pair {pair.pair_id} 检索详情 - 目标工具: {target_tool}, 检索到的工具: {retrieved_tools}")
             else:
                 logger.info(f"Pair {pair.pair_id} 评估完成，accuracy: {score:.3f}, precision@1: {tool_name_score:.3f}")
         else:
@@ -1348,8 +1354,6 @@ class TrainingDataEvaluator:
         overall_metrics = metrics_calc.calculate_overall_metrics(results, "current_logic")
         
         # 构建报告
-        is_baseline = bool(self.baseline_enable and str(self.llm_predictor.model_type) == str(self.baseline_model))
-
         report = {
             "summary": {
                 "total_conversations": len(set(r.conversation_id for r in results)),
@@ -1357,12 +1361,7 @@ class TrainingDataEvaluator:
                 "pair_metrics": pair_metrics,
                 "recall_metrics": recall_metrics,
                 "overall_metrics": overall_metrics,
-                "baseline": {
-                    "enabled": bool(self.baseline_enable),
-                    "is_baseline": is_baseline,
-                    "baseline_model": self.baseline_model,
-                    "current_model": self.llm_predictor.model_type
-                }
+                "model": self.llm_predictor.model_type
             },
             "detailed_results": {
                 f"pair{pair_id}": [
@@ -1392,25 +1391,21 @@ def parse_args():
     """解析命令行参数"""
     parser = argparse.ArgumentParser(description="训练数据评估脚本")
     parser.add_argument("--input_file", "-i", type=str, 
-                       default="/home/ziqiang/LLaMA-Factory/data/dataset/9_17/9.17_evaluate_data_top5_final.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/10.22_fuzzy_data.json",
                        help="输入JSON文件路径 (默认: data/9.17_evaluate_data_top5_final.json)")
     parser.add_argument("--output_file", "-o", type=str,
-                       default="evaluation/data_evaluation_demo_0929_v2.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/data_evaluation.json",
                        help="输出结果文件路径 (默认: metrics/data_evaluation_results.json)")
     parser.add_argument("--checkpoint_file", "-c", type=str,
-                       default="evaluation/evaluation_checkpoint_demo_0929_v2.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/evaluation_checkpoint.json",
                        help="断点文件路径 (默认: metrics/evaluation_checkpoint.json)")
     parser.add_argument("--start_idx", "-s", type=int, default=0,
                        help="开始评估的对话索引（从0开始，默认: 0）")
-    parser.add_argument("--end_idx", "-e", type=int, default=400,
+    parser.add_argument("--end_idx", "-e", type=int, default=2000,
                        help="结束评估的对话索引（不包含，默认: 10）")
     parser.add_argument("--log_file", "-l", type=str,
-                       default="evaluation/data_evaluation_demo_0929_v2.log",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/data_evaluation.log",
                        help="日志文件路径 (默认: metrics/data_evaluation.log)")
-    parser.add_argument("--baseline_enable", action="store_true",
-                       help="启用基线记录（当当前模型等于 --baseline_model 时将报告标记为基线）")
-    parser.add_argument("--baseline_model", type=str, default="/data/models/Qwen3-8B",
-                       help="基线模型标识（默认: /data/models/Qwen3-8B）")
     parser.add_argument("--models", type=str, default="",
                        help="以逗号分隔的一组模型名（例如: /data/models/Qwen3-8B,my_lora）。提供多个时开启多模型评估模式")
     parser.add_argument("--multi_output_dir", type=str, default="evaluation/multi",
@@ -1419,11 +1414,11 @@ def parse_args():
                        help="多模型聚合报告输出文件（默认: evaluation/multi_aggregate.json）")
     
     # 并发控制参数
-    parser.add_argument("--max_concurrent_conversations", type=int, default=5,
+    parser.add_argument("--max_concurrent_conversations", type=int, default=1,
                        help="最大并发对话数（默认: 5）")
-    parser.add_argument("--max_concurrent_pairs", type=int, default=10,
+    parser.add_argument("--max_concurrent_pairs", type=int, default=1,
                        help="最大并发pair数（默认: 10）")
-    parser.add_argument("--max_concurrent_api_calls", type=int, default=20,
+    parser.add_argument("--max_concurrent_api_calls", type=int, default=1,
                        help="最大并发API调用数（默认: 20）")
     
     return parser.parse_args()
@@ -1458,7 +1453,6 @@ async def main():
         aggregate = {
             "input_file": args.input_file,
             "models": models_list,
-            "baseline_model": args.baseline_model,
             "runs": {}
         }
         for model_name in models_list:
@@ -1471,11 +1465,7 @@ async def main():
             except Exception:
                 pass
 
-            evaluator = TrainingDataEvaluator(
-                model_type=model_name,
-                baseline_enable=bool(args.baseline_enable),
-                baseline_model=args.baseline_model
-            )
+            evaluator = TrainingDataEvaluator(model_type=model_name)
 
             results = await evaluator.evaluate_file(
                 args.input_file,
@@ -1520,9 +1510,7 @@ async def main():
 
     # 单模型模式：保持原有行为
     evaluator = TrainingDataEvaluator(
-        model_type=QWEN_MODEL_NAME if not models_list else models_list[0],
-        baseline_enable=bool(args.baseline_enable),
-        baseline_model=args.baseline_model
+        model_type=QWEN_MODEL_NAME if not models_list else models_list[0]
     )
     results = await evaluator.evaluate_file(
         args.input_file,

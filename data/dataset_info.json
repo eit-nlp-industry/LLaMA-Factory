@@ -848,12 +848,25 @@
     }
   },
   "data_demo": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_29/merged_dataset.json",
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/10_27/multi_hop.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
       "system": "system",
-      "tools": "tools"
+      "tools": "tools",
+      "time": "time",
+      "user_id": "user_id"
+    }
+  },
+  "function_call_context_audit": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/10_22/10.22_train_data.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools",
+      "time": "time",
+      "user_id": "user_id"
     }
   }
 }
