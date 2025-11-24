@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import re
+import json
 from copy import deepcopy
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Optional, Union
@@ -177,6 +178,47 @@ class Template:
         r"""Get the token ids of thought words."""
         return tokenizer.encode(self.add_thought(), add_special_tokens=False)
 
+    def _extract_tools_from_retrieval_observation(self, observation_content: str) -> str:
+        r"""Extract tool definitions from retrieval_tool's observation.
+        
+        Only extract essential tool definition fields to reduce token usage.
+        
+        What is extracted:
+        - name: Tool name (required for calling)
+        - description: Tool description (helps model understand tool purpose)
+        - inputSchema: Input parameter schema (required for proper tool calling)
+        - category: Tool category (helps with classification)
+        
+        What is filtered out:
+        - enabled: Runtime status flag (not needed for tool definition)
+        - source: Tool source metadata (not needed for tool definition)
+        - Other metadata fields that don't affect tool calling
+        
+        Returns compressed JSON (no indentation) to minimize token usage.
+        """
+        try:
+            obs_obj = json.loads(observation_content)
+            if 'response' in obs_obj and 'result' in obs_obj['response']:
+                result = obs_obj['response']['result']
+                if isinstance(result, list):
+                    tools_list = []
+                    for tool in result:
+                        if isinstance(tool, dict):
+                            # Only keep essential tool definition fields
+                            tool_def = {
+                                'name': tool.get('name', ''),
+                                'description': tool.get('description', ''),
+                                'inputSchema': tool.get('inputSchema', {}),
+                                'category': tool.get('category', ''),
+                            }
+                            tools_list.append(tool_def)
+                    if tools_list:
+                        # Use compressed format (no indent) to minimize token usage
+                        return json.dumps(tools_list, ensure_ascii=False, separators=(',', ':'))
+        except Exception:
+            pass
+        return ""
+
     def _convert_elements_to_ids(self, tokenizer: "PreTrainedTokenizer", elements: "SLOTS") -> list[int]:
         r"""Convert elements to token ids."""
         token_ids = []
@@ -219,9 +261,17 @@ class Template:
                     tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
                     elements += self.format_system.apply(content=(system + tool_text))
             elif message["role"] == Role.OBSERVATION:
-                # 对于正常的observation消息，添加system信息（不包含tools）
+                # 对于正常的observation消息，添加system信息（保持原始行为）
                 if system:
                     elements += self.format_system.apply(content=system)
+                
+                # 检查下一条消息是否需要调用 retrieval_tool
+                # 如果是，我们会在 observation 内容中添加简洁的工具定义提示
+                next_needs_retrieval_tool = False
+                if i + 1 < len(messages) and messages[i + 1]["role"] == Role.FUNCTION:
+                    next_function_content = messages[i + 1].get("content", "")
+                    if "retrieval_tool" in next_function_content:
+                        next_needs_retrieval_tool = True
                 
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
@@ -238,8 +288,11 @@ class Template:
                         break
                 
                 # 查找最近的observation消息（用于multi-hop场景）
-                # 需要找到第一个非retrieval_tool的observation
+                # 如果下一条是business_tool，需要包含retrieval_tool的observation中的工具定义
+                # 如果下一条是retrieval_tool，则跳过retrieval_tool的observation（避免重复）
                 previous_observation_content = ""
+                retrieval_tools_extracted = ""  # 存储从retrieval_tool observation中提取的工具定义
+                
                 for j in range(i-1, -1, -1):
                     if messages[j]["role"] == Role.OBSERVATION:
                         # 检查这个observation对应的FUNCTION是不是retrieval_tool
@@ -249,21 +302,39 @@ class Template:
                                 if "retrieval_tool" in messages[k]["content"]:
                                     is_retrieval = True
                                 break
-                        # 只使用非retrieval_tool的observation内容
+                        
                         if not is_retrieval:
+                            # 非retrieval_tool的observation，直接使用
                             previous_observation_content = messages[j]["content"]
                             break
-                        # 如果是retrieval_tool的observation，继续向前查找
+                        elif not next_needs_retrieval_tool:
+                            # retrieval_tool的observation，但下一条是business_tool
+                            # 只提取工具定义部分，而不是整个observation（减少token使用）
+                            if not retrieval_tools_extracted:
+                                retrieval_tools_extracted = self._extract_tools_from_retrieval_observation(messages[j]["content"])
+                            # 继续向前查找非retrieval_tool的observation（如果有）
+                            continue
+                        # 如果是retrieval_tool的observation且下一条也是retrieval_tool，继续向前查找
+                
+                # 构建tool_hint_prefix
+                tool_hint_prefix = ""
+                if retrieval_tools_extracted:
+                    # 优先使用从retrieval_tool observation中提取的工具定义（更精确，token更少）
+                    tool_hint_prefix = f"[可用工具定义]\n{retrieval_tools_extracted}\n\n"
+                elif next_needs_retrieval_tool and tools:
+                    # retrieval_tool调用时使用完整的tools定义
+                    tool_text = self.format_tools.apply(content=tools)[0]
+                    tool_hint_prefix = f"[可用工具定义]\n{tool_text}\n\n"
                 
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:
                     # 如果存在之前的observation，说明这是multi-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tool_hint_prefix}用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
                 elif human_content:
                     # 如果没有之前的observation，说明这是single-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tool_hint_prefix}用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
                 else:
-                    enhanced_content = message['content']
+                    enhanced_content = f"{tool_hint_prefix}{message['content']}" if tool_hint_prefix else message['content']
                 
                 message = {**message, "content": enhanced_content}
 
@@ -474,6 +545,16 @@ class Llama2Template(Template):
             elif message["role"] == Role.ASSISTANT:
                 elements += self.format_assistant.apply(content=message["content"])
             elif message["role"] == Role.OBSERVATION:
+                # Llama2Template：完整tools方案，与主模板保持一致
+                # 提供完整的工具定义，确保模型能正确调用
+                tools_prefix = ""
+                if i + 1 < len(messages) and messages[i + 1]["role"] == Role.FUNCTION:
+                    next_function_content = messages[i + 1].get("content", "")
+                    if "retrieval_tool" in next_function_content and tools:
+                        # 提供完整的工具定义
+                        tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
+                        tools_prefix = f"[可用工具定义]\n{tool_text}\n\n" if tool_text else ""
+                
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
                 for j in range(i-1, -1, -1):
@@ -489,8 +570,18 @@ class Llama2Template(Template):
                         break
                 
                 # 查找最近的observation消息（用于multi-hop场景）
-                # 需要找到第一个非retrieval_tool的observation
+                # 如果下一条是business_tool，需要包含retrieval_tool的observation中的工具定义
+                # 如果下一条是retrieval_tool，则跳过retrieval_tool的observation（避免重复）
                 previous_observation_content = ""
+                retrieval_tools_extracted = ""  # 存储从retrieval_tool observation中提取的工具定义
+                
+                # 检查下一条是否是business_tool
+                next_is_business_tool = False
+                if i + 1 < len(messages) and messages[i + 1]["role"] == Role.FUNCTION:
+                    next_function_content = messages[i + 1].get("content", "")
+                    if "retrieval_tool" not in next_function_content:
+                        next_is_business_tool = True
+                
                 for j in range(i-1, -1, -1):
                     if messages[j]["role"] == Role.OBSERVATION:
                         # 检查这个observation对应的FUNCTION是不是retrieval_tool
@@ -500,23 +591,36 @@ class Llama2Template(Template):
                                 if "retrieval_tool" in messages[k]["content"]:
                                     is_retrieval = True
                                 break
-                        # 只使用非retrieval_tool的observation内容
+                        
                         if not is_retrieval:
+                            # 非retrieval_tool的observation，直接使用
                             previous_observation_content = messages[j]["content"]
                             break
-                        # 如果是retrieval_tool的observation，继续向前查找
+                        elif next_is_business_tool:
+                            # retrieval_tool的observation，但下一条是business_tool
+                            # 只提取工具定义部分，而不是整个observation（减少token使用）
+                            if not retrieval_tools_extracted:
+                                retrieval_tools_extracted = self._extract_tools_from_retrieval_observation(messages[j]["content"])
+                            # 继续向前查找非retrieval_tool的observation（如果有）
+                            continue
+                        # 如果是retrieval_tool的observation且下一条也是retrieval_tool，继续向前查找
+                
+                # 更新tools_prefix：如果有提取的工具定义，优先使用
+                if retrieval_tools_extracted:
+                    tools_prefix = f"[可用工具定义]\n{retrieval_tools_extracted}\n\n"
                 
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:
                     # 如果存在之前的observation，说明这是multi-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tools_prefix}用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
                     elements += self.format_observation.apply(content=enhanced_content)
                 elif human_content:
                     # 如果没有之前的observation，说明这是single-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tools_prefix}用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
                     elements += self.format_observation.apply(content=enhanced_content)
                 else:
-                    elements += self.format_observation.apply(content=message["content"])
+                    enhanced_content = f"{tools_prefix}{message['content']}" if tools_prefix else message["content"]
+                    elements += self.format_observation.apply(content=enhanced_content)
             elif message["role"] == Role.FUNCTION:
                 # 直接使用原始内容，不做拼接处理，避免JSON解析错误
                 elements += self.format_function.apply(content=message["content"])
