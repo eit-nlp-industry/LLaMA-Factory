@@ -223,6 +223,12 @@ class Template:
                 if system:
                     elements += self.format_system.apply(content=system)
                 
+                # 统计当前已处理的observation数量，用于判断是否需要填充上一个工具返回结果
+                observation_count = 0
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.OBSERVATION:
+                        observation_count += 1
+                
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
                 for j in range(i-1, -1, -1):
@@ -237,23 +243,26 @@ class Template:
                         previous_function = messages[j]
                         break
                 
-                # 查找最近的observation消息（用于multi-hop场景）
-                # 需要找到第一个非retrieval_tool的observation
+                # 只在observation数量>=2（即至少是第三个observation）时才查找上一个observation
+                # 这意味着至少已经有2轮完整的工具调用
                 previous_observation_content = ""
-                for j in range(i-1, -1, -1):
-                    if messages[j]["role"] == Role.OBSERVATION:
-                        # 检查这个observation对应的FUNCTION是不是retrieval_tool
-                        is_retrieval = False
-                        for k in range(j-1, -1, -1):
-                            if messages[k]["role"] == Role.FUNCTION:
-                                if "retrieval_tool" in messages[k]["content"]:
-                                    is_retrieval = True
+                if observation_count >= 3:
+                    # 查找最近的observation消息（用于multi-hop场景）
+                    # 需要找到第一个非retrieval_tool的observation
+                    for j in range(i-1, -1, -1):
+                        if messages[j]["role"] == Role.OBSERVATION:
+                            # 检查这个observation对应的FUNCTION是不是retrieval_tool
+                            is_retrieval = False
+                            for k in range(j-1, -1, -1):
+                                if messages[k]["role"] == Role.FUNCTION:
+                                    if "retrieval_tool" in messages[k]["content"]:
+                                        is_retrieval = True
+                                    break
+                            # 只使用非retrieval_tool的observation内容
+                            if not is_retrieval:
+                                previous_observation_content = messages[j]["content"]
                                 break
-                        # 只使用非retrieval_tool的observation内容
-                        if not is_retrieval:
-                            previous_observation_content = messages[j]["content"]
-                            break
-                        # 如果是retrieval_tool的observation，继续向前查找
+                            # 如果是retrieval_tool的observation，继续向前查找
                 
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:
@@ -474,6 +483,12 @@ class Llama2Template(Template):
             elif message["role"] == Role.ASSISTANT:
                 elements += self.format_assistant.apply(content=message["content"])
             elif message["role"] == Role.OBSERVATION:
+                # 统计当前已处理的observation数量
+                observation_count = 0
+                for j in range(i-1, -1, -1):
+                    if messages[j]["role"] == Role.OBSERVATION:
+                        observation_count += 1
+                
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
                 for j in range(i-1, -1, -1):
@@ -488,23 +503,22 @@ class Llama2Template(Template):
                         previous_function = messages[j]
                         break
                 
-                # 查找最近的observation消息（用于multi-hop场景）
-                # 需要找到第一个非retrieval_tool的observation
+                # 只在observation数量>=2时才查找上一个observation
                 previous_observation_content = ""
-                for j in range(i-1, -1, -1):
-                    if messages[j]["role"] == Role.OBSERVATION:
-                        # 检查这个observation对应的FUNCTION是不是retrieval_tool
-                        is_retrieval = False
-                        for k in range(j-1, -1, -1):
-                            if messages[k]["role"] == Role.FUNCTION:
-                                if "retrieval_tool" in messages[k]["content"]:
-                                    is_retrieval = True
+                if observation_count >= 3:
+                    for j in range(i-1, -1, -1):
+                        if messages[j]["role"] == Role.OBSERVATION:
+                            # 检查这个observation对应的FUNCTION是不是retrieval_tool
+                            is_retrieval = False
+                            for k in range(j-1, -1, -1):
+                                if messages[k]["role"] == Role.FUNCTION:
+                                    if "retrieval_tool" in messages[k]["content"]:
+                                        is_retrieval = True
+                                    break
+                            # 只使用非retrieval_tool的observation内容
+                            if not is_retrieval:
+                                previous_observation_content = messages[j]["content"]
                                 break
-                        # 只使用非retrieval_tool的observation内容
-                        if not is_retrieval:
-                            previous_observation_content = messages[j]["content"]
-                            break
-                        # 如果是retrieval_tool的observation，继续向前查找
                 
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:

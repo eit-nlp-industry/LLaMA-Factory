@@ -293,6 +293,13 @@ class QwenToolUtils(ToolUtils):
             try:
                 tool = json.loads(tool.strip())
             except json.JSONDecodeError:
+                # 如果JSON解析失败，可能是简化格式（retrieval_tool）
+                # 简化格式示例: "query": "内容", "source_filter": "toollist"
+                is_simplified = tool.strip().startswith('"') and not tool.strip().startswith('{"')
+                if is_simplified:
+                    # 对于简化格式，假设调用的是retrieval_tool
+                    results.append(FunctionCall("retrieval_tool", "{" + tool.strip() + "}"))
+                    continue
                 return content
 
             if "name" not in tool or "arguments" not in tool:

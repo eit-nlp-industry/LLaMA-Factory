@@ -104,6 +104,7 @@ class FunctionFormatter(StringFormatter):
 
         functions: list[FunctionCall] = []
         try:
+            # 尝试解析为完整 JSON 格式
             tool_calls = json.loads(content)
             if not isinstance(tool_calls, list):  # parallel function call
                 tool_calls = [tool_calls]
@@ -114,7 +115,21 @@ class FunctionFormatter(StringFormatter):
                 )
 
         except json.JSONDecodeError:
-            raise RuntimeError(f"Invalid JSON format in function message: {str([content])}.")  # flat string
+            # 如果不是完整 JSON，尝试检测是否为简化格式（用于 retrieval_tool）
+            # 简化格式示例: "query": "内容", "source_filter": "toollist"
+            # 检测条件：以引号开头且不是完整 JSON 对象
+            is_simplified_format = content.strip().startswith('"') and not content.strip().startswith('{"')
+            
+            if is_simplified_format:
+                # 对于简化格式（retrieval_tool），需要添加<tool_call>标签
+                # 这是为了与系统prompt中要求的格式保持一致
+                function_str = f"<tool_call>\n{content}\n</tool_call>"
+                if thought:
+                    function_str = thought.group(0) + function_str
+                
+                return super().apply(content=function_str)
+            else:
+                raise RuntimeError(f"Invalid JSON format in function message: {str([content])}.")  # flat string
 
         function_str = self.tool_utils.function_formatter(functions)
         if thought:
