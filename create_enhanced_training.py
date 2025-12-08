@@ -49,7 +49,7 @@ def modify_trainer_to_add_monitoring():
     """修改训练器以添加监控功能"""
     
     # 修改SFT训练器，添加监控回调
-    trainer_file = "/home/ziqiang/LLaMA-Factory/src/llamafactory/train/sft/trainer.py"
+    trainer_file = "/home/qiyang_shi/LLaMA-Factory/src/llamafactory/train/sft/trainer.py"
     
     # 读取现有文件
     with open(trainer_file, 'r', encoding='utf-8') as f:
@@ -110,10 +110,10 @@ def create_enhanced_training_script():
     
     # 创建输出目录
     timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M")
-    output_dir = f"/home/ziqiang/LLaMA-Factory/saves/Qwen3-8B/lora/train_{timestamp}"
+    output_dir = f"/home/qiyang_shi/LLaMA-Factory/saves/Qwen3-8B/lora/train_{timestamp}"
     
     # 创建日志目录
-    log_dir = "/home/ziqiang/LLaMA-Factory/enhanced_training_logs"
+    log_dir = "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs"
     os.makedirs(log_dir, exist_ok=True)
     
     # 创建日志文件
@@ -138,8 +138,9 @@ echo "📁 输出目录: {output_dir}"
 echo "📝 日志文件: {log_files['main']}"
 echo "=" * 60
 
-# 设置环境变量 - 先使用单GPU 6
-export CUDA_VISIBLE_DEVICES=2
+# 设置环境变量 - 双卡训练（根据实际情况调整）
+# 推荐使用两张显存较大的GPU
+export CUDA_VISIBLE_DEVICES=6,7
 
 # 创建输出目录
 mkdir -p "{output_dir}"
@@ -158,29 +159,30 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 🚀 增强训练开始" >> "{log_fi
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 📁 输出目录: {output_dir}" >> "{log_files['main']}"
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 📝 日志文件: {log_files['main']}" >> "{log_files['main']}"
 
-# 运行训练命令 - 多GPU分布式训练
-echo "🔄 执行多GPU分布式训练命令..."
+# 运行训练命令 - 多GPU分布式训练 + DeepSpeed ZeRO-2
+echo "🔄 执行多GPU分布式训练命令（使用DeepSpeed优化显存）..."
 llamafactory-cli train \\
     --stage sft \\
     --do_train True \\
     --model_name_or_path /data/models/Qwen3-8B \\
-    --preprocessing_num_workers 1 \\
+    --preprocessing_num_workers 4 \\
     --finetuning_type lora \\
     --template qwen3 \\
     --flash_attn auto \\
     --dataset_dir data \\
     --dataset data_demo \\
-    --cutoff_len 8192 \\
+    --cutoff_len 10240 \\
     --learning_rate 5.0e-5 \\
-    --num_train_epochs 5.0 \\
+    --deepspeed examples/deepspeed/ds_z3_offload_config.json \\
+    --num_train_epochs 6.0 \\
     --max_samples 100000 \\
     --per_device_train_batch_size 1 \\
-    --gradient_accumulation_steps 1 \\
+    --gradient_accumulation_steps 8 \\
     --lr_scheduler_type cosine \\
-    --max_grad_norm 0.5 \\
+    --max_grad_norm 1.0 \\
     --weight_decay 0.01 \\
-    --logging_steps 1 \\
-    --save_steps 200 \\
+    --logging_steps 5 \\
+    --save_steps 100 \\
     --warmup_ratio 0.1 \\
     --packing False \\
     --enable_thinking False \\
@@ -199,7 +201,7 @@ llamafactory-cli train \\
     --lora_target all \\
     --gradient_checkpointing True \\
     --dataloader_pin_memory False \\
-    --dataloader_num_workers 0 \\
+    --dataloader_num_workers 4 \\
     --remove_unused_columns False \\
     --dataloader_drop_last True
 

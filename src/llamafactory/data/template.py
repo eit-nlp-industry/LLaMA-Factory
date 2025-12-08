@@ -219,9 +219,17 @@ class Template:
                     tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
                     elements += self.format_system.apply(content=(system + tool_text))
             elif message["role"] == Role.OBSERVATION:
-                # 对于正常的observation消息，添加system信息（不包含tools）
+                # 对于正常的observation消息，添加system信息（保持原始行为）
                 if system:
                     elements += self.format_system.apply(content=system)
+                
+                # 检查下一条消息是否需要调用 retrieval_tool
+                # 如果是，我们会在 observation 内容中添加简洁的工具定义提示
+                next_needs_retrieval_tool = False
+                if i + 1 < len(messages) and messages[i + 1]["role"] == Role.FUNCTION:
+                    next_function_content = messages[i + 1].get("content", "")
+                    if "retrieval_tool" in next_function_content:
+                        next_needs_retrieval_tool = True
                 
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
@@ -255,15 +263,23 @@ class Template:
                             break
                         # 如果是retrieval_tool的observation，继续向前查找
                 
+                # 如果下一条需要 retrieval_tool，添加完整的工具定义
+                # 在cutoff_len=10240下，有足够空间提供完整的"开卷考试"信息
+                tool_hint_prefix = ""
+                if next_needs_retrieval_tool and tools:
+                    # 提供完整的工具定义，包含参数schema、类型、必需字段等
+                    tool_text = self.format_tools.apply(content=tools)[0]
+                    tool_hint_prefix = f"[可用工具定义]\n{tool_text}\n\n"
+                
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:
                     # 如果存在之前的observation，说明这是multi-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tool_hint_prefix}用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
                 elif human_content:
                     # 如果没有之前的observation，说明这是single-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tool_hint_prefix}用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
                 else:
-                    enhanced_content = message['content']
+                    enhanced_content = f"{tool_hint_prefix}{message['content']}" if tool_hint_prefix else message['content']
                 
                 message = {**message, "content": enhanced_content}
 
@@ -474,6 +490,16 @@ class Llama2Template(Template):
             elif message["role"] == Role.ASSISTANT:
                 elements += self.format_assistant.apply(content=message["content"])
             elif message["role"] == Role.OBSERVATION:
+                # Llama2Template：完整tools方案，与主模板保持一致
+                # 提供完整的工具定义，确保模型能正确调用
+                tools_prefix = ""
+                if i + 1 < len(messages) and messages[i + 1]["role"] == Role.FUNCTION:
+                    next_function_content = messages[i + 1].get("content", "")
+                    if "retrieval_tool" in next_function_content and tools:
+                        # 提供完整的工具定义
+                        tool_text = self.format_tools.apply(content=tools)[0] if tools else ""
+                        tools_prefix = f"[可用工具定义]\n{tool_text}\n\n" if tool_text else ""
+                
                 # 查找最近的human消息，将其内容添加到observation中
                 human_content = ""
                 for j in range(i-1, -1, -1):
@@ -509,14 +535,15 @@ class Llama2Template(Template):
                 # 根据是否有previous_observation_content来决定如何拼接
                 if previous_observation_content:
                     # 如果存在之前的observation，说明这是multi-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tools_prefix}用户查询: {human_content}\n\n上一个工具返回结果: {previous_observation_content}\n\n当前工具返回结果: {message['content']}"
                     elements += self.format_observation.apply(content=enhanced_content)
                 elif human_content:
                     # 如果没有之前的observation，说明这是single-hop场景
-                    enhanced_content = f"用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
+                    enhanced_content = f"{tools_prefix}用户查询: {human_content}\n\n当前工具返回结果: {message['content']}"
                     elements += self.format_observation.apply(content=enhanced_content)
                 else:
-                    elements += self.format_observation.apply(content=message["content"])
+                    enhanced_content = f"{tools_prefix}{message['content']}" if tools_prefix else message["content"]
+                    elements += self.format_observation.apply(content=enhanced_content)
             elif message["role"] == Role.FUNCTION:
                 # 直接使用原始内容，不做拼接处理，避免JSON解析错误
                 elements += self.format_function.apply(content=message["content"])
