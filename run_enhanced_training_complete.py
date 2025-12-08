@@ -2,6 +2,10 @@
 """
 完整的增强训练启动脚本
 整合所有优化功能，一键启动训练
+
+使用方法：
+1. 在脚本顶部修改超参数配置
+2. 直接运行：python run_enhanced_training_complete.py
 """
 
 import os
@@ -11,14 +15,71 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+# ============================================================================
+# 超参数配置区域 - 在这里直接修改训练参数
+# ============================================================================
+
+# 模型和数据集配置
+MODEL_PATH = "/data/models/Qwen3-8B"  # 模型路径
+DATASET_NAME = "tool_calling_12_08"  # 数据集名称（在dataset_info.json中定义）
+TEST_DATASET_NAME = "tool_calling_12_08_test"  # 测试数据集名称
+TRAIN_DATA_PATH = "data/dataset/12_08/train.json"  # 训练数据路径
+TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
+
+# 学习率和训练配置
+LEARNING_RATE = 2.0e-5  # 学习率
+NUM_TRAIN_EPOCHS = 8.0  # 训练轮数
+MAX_SAMPLES = 100000  # 最大样本数
+
+# 批次配置
+PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
+GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（有效batch size = 1 × 16 = 16）
+LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
+WARMUP_RATIO = 0.1  # Warmup比例（10%）
+
+# 正则化和稳定性
+MAX_GRAD_NORM = 0.3  # 梯度裁剪阈值
+WEIGHT_DECAY = 0.01  # 权重衰减
+
+# LoRA配置
+LORA_RANK = 64  # LoRA rank
+LORA_ALPHA = 128  # LoRA alpha（通常设为rank的2倍）
+LORA_DROPOUT = 0.1  # LoRA dropout
+LORA_TARGET = "all"  # LoRA目标层
+
+# 训练设置
+CUTOFF_LEN = 8192  # 序列最大长度
+LOGGING_STEPS = 10  # 日志记录步数
+SAVE_STEPS = 500  # 模型保存步数
+EVAL_STEPS = 500  # 评估步数
+SAVE_TOTAL_LIMIT = 3  # 保留的checkpoint数量
+
+# 其他配置
+TEMPLATE = "qwen3"  # 模板类型
+FINETUNING_TYPE = "lora"  # 微调类型
+PREPROCESSING_NUM_WORKERS = 16  # 数据预处理工作进程数
+DATALOADER_NUM_WORKERS = 4  # 数据加载工作进程数
+FLASH_ATTN = "auto"  # Flash attention设置
+GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
+BF16 = True  # 是否使用bf16精度
+
+# 自动执行选项
+AUTO_VALIDATE_DATA = True  # 自动验证数据
+AUTO_ENHANCE_DATA = True  # 自动增强数据（应用增强的系统提示）
+SKIP_IF_ENHANCED_EXISTS = True  # 如果增强数据已存在则跳过
+
+# ============================================================================
+# 以下为脚本逻辑，通常不需要修改
+# ============================================================================
+
 def check_environment():
     """检查环境配置"""
     print("🔍 检查环境配置...")
     
-    # 检查必要文件
+    # 检查必要文件（使用配置的路径）
     required_files = [
-        "data/dataset/12_08/train.json",
-        "data/dataset/12_08/test.json",
+        TRAIN_DATA_PATH,
+        TEST_DATA_PATH,
         "data/dataset_info.json"
     ]
     
@@ -38,16 +99,20 @@ def check_environment():
 
 def validate_data():
     """验证训练数据"""
+    if not AUTO_VALIDATE_DATA:
+        print("\\n⏭️  跳过数据验证（AUTO_VALIDATE_DATA=False）")
+        return True
+    
     print("\\n🔍 验证训练数据...")
     
     validator_path = "validate_tool_calling_data.py"
     if not Path(validator_path).exists():
-        print(f"⚠️  验证工具不存在，跳过验证")
+        print("⚠️  验证工具不存在，跳过验证")
         return True
     
     try:
         result = subprocess.run(
-            [sys.executable, validator_path, "data/dataset/12_08/train.json"],
+            [sys.executable, validator_path, TRAIN_DATA_PATH],
             capture_output=True,
             text=True
         )
@@ -61,24 +126,29 @@ def validate_data():
 
 def enhance_data_if_needed():
     """如果需要，增强数据"""
+    if not AUTO_ENHANCE_DATA:
+        print("\\n⏭️  跳过数据增强（AUTO_ENHANCE_DATA=False）")
+        return TRAIN_DATA_PATH
+    
     print("\\n🔧 检查数据增强...")
     
-    enhanced_path = "data/dataset/12_08/train_enhanced.json"
+    enhanced_path = str(Path(TRAIN_DATA_PATH).parent / "train_enhanced.json")
     
-    if Path(enhanced_path).exists():
+    if Path(enhanced_path).exists() and SKIP_IF_ENHANCED_EXISTS:
         print(f"✅ 增强数据已存在: {enhanced_path}")
+        update_dataset_info_for_enhanced(enhanced_path)
         return enhanced_path
     
     enhancer_path = "enhance_dataset_with_constraints.py"
     if not Path(enhancer_path).exists():
         print("⚠️  数据增强工具不存在，使用原始数据")
-        return "data/dataset/12_08/train.json"
+        return TRAIN_DATA_PATH
     
     print("📝 开始增强数据...")
     try:
         subprocess.run(
             [sys.executable, enhancer_path, 
-             "data/dataset/12_08/train.json", 
+             TRAIN_DATA_PATH, 
              enhanced_path],
             check=True
         )
@@ -89,7 +159,7 @@ def enhance_data_if_needed():
         return enhanced_path
     except Exception as e:
         print(f"⚠️  数据增强失败: {e}，使用原始数据")
-        return "data/dataset/12_08/train.json"
+        return TRAIN_DATA_PATH
 
 def update_dataset_info_for_enhanced(enhanced_path):
     """更新dataset_info.json以使用增强数据"""
@@ -107,98 +177,110 @@ def update_dataset_info_for_enhanced(enhanced_path):
     
     print(f"✅ 已更新 {dataset_info_path}")
 
-def create_training_command(output_dir, model_path=None):
-    """创建训练命令"""
+def create_training_command(output_dir=None, model_path=None):
+    """创建训练命令，使用脚本顶部的超参数配置"""
     
-    if model_path is None:
-        model_path = "/data/models/Qwen3-8B"  # 默认路径，需要根据实际情况修改
-    
+    # 使用全局配置或参数
+    model_path = model_path or MODEL_PATH
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    final_output_dir = f"saves/Qwen3-8B/lora/enhanced_tool_calling_{timestamp}"
+    final_output_dir = output_dir or f"saves/Qwen3-8B/lora/enhanced_tool_calling_{timestamp}"
     
-    if output_dir:
-        final_output_dir = output_dir
-    
-    # 优化的超参数配置
+    # 构建训练命令，使用脚本顶部的配置
     cmd = [
         "llamafactory-cli", "train",
         "--stage", "sft",
         "--do_train", "True",
         "--model_name_or_path", model_path,
-        "--preprocessing_num_workers", "16",
-        "--finetuning_type", "lora",
-        "--template", "qwen3",
-        "--flash_attn", "auto",
+        "--preprocessing_num_workers", str(PREPROCESSING_NUM_WORKERS),
+        "--finetuning_type", FINETUNING_TYPE,
+        "--template", TEMPLATE,
+        "--flash_attn", FLASH_ATTN,
         "--dataset_dir", "data",
-        "--dataset", "tool_calling_12_08",
-        "--cutoff_len", "8192",
+        "--dataset", DATASET_NAME,
+        "--cutoff_len", str(CUTOFF_LEN),
         
         # 学习率和训练轮数
-        "--learning_rate", "2.0e-5",
-        "--num_train_epochs", "8.0",
-        "--max_samples", "100000",
+        "--learning_rate", str(LEARNING_RATE),
+        "--num_train_epochs", str(NUM_TRAIN_EPOCHS),
+        "--max_samples", str(MAX_SAMPLES),
         
         # 批次配置
-        "--per_device_train_batch_size", "1",
-        "--gradient_accumulation_steps", "16",
-        "--lr_scheduler_type", "cosine",
-        "--warmup_ratio", "0.1",
+        "--per_device_train_batch_size", str(PER_DEVICE_TRAIN_BATCH_SIZE),
+        "--gradient_accumulation_steps", str(GRADIENT_ACCUMULATION_STEPS),
+        "--lr_scheduler_type", LR_SCHEDULER_TYPE,
+        "--warmup_ratio", str(WARMUP_RATIO),
         
         # 正则化和稳定性
-        "--max_grad_norm", "0.3",
-        "--weight_decay", "0.01",
-        "--lora_rank", "64",
-        "--lora_alpha", "128",
-        "--lora_dropout", "0.1",
+        "--max_grad_norm", str(MAX_GRAD_NORM),
+        "--weight_decay", str(WEIGHT_DECAY),
+        "--lora_rank", str(LORA_RANK),
+        "--lora_alpha", str(LORA_ALPHA),
+        "--lora_dropout", str(LORA_DROPOUT),
         
         # 训练设置
-        "--logging_steps", "10",
-        "--save_steps", "500",
+        "--logging_steps", str(LOGGING_STEPS),
+        "--save_steps", str(SAVE_STEPS),
         "--save_strategy", "steps",
         "--evaluation_strategy", "steps",
-        "--eval_steps", "500",
-        "--eval_dataset", "tool_calling_12_08_test",
+        "--eval_steps", str(EVAL_STEPS),
+        "--eval_dataset", TEST_DATASET_NAME,
         "--packing", "False",
         "--enable_thinking", "False",
         "--overwrite_cache", "True",
         
         # 输出
         "--output_dir", final_output_dir,
-        "--bf16", "True",
+        "--bf16", str(BF16),
         "--plot_loss", "True",
         "--trust_remote_code", "True",
         "--ddp_timeout", "180000000",
         "--include_num_input_tokens_seen", "True",
         "--optim", "adamw_torch",
-        "--lora_target", "all",
-        "--gradient_checkpointing", "True",
+        "--lora_target", LORA_TARGET,
+        "--gradient_checkpointing", str(GRADIENT_CHECKPOINTING),
         
         # 数据加载
         "--dataloader_pin_memory", "False",
-        "--dataloader_num_workers", "4",
+        "--dataloader_num_workers", str(DATALOADER_NUM_WORKERS),
         "--remove_unused_columns", "False",
         "--dataloader_drop_last", "False",
         
         # 其他
         "--seed", "42",
-        "--save_total_limit", "3",
+        "--save_total_limit", str(SAVE_TOTAL_LIMIT),
     ]
     
     return cmd, final_output_dir
 
 def main():
-    """主函数"""
+    """主函数 - 自动执行全部步骤"""
     import argparse
     
-    parser = argparse.ArgumentParser(description="增强的工具调用训练启动脚本")
+    parser = argparse.ArgumentParser(
+        description="增强的工具调用训练启动脚本",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+使用说明：
+1. 在脚本顶部修改超参数配置（MODEL_PATH, LEARNING_RATE等）
+2. 直接运行：python run_enhanced_training_complete.py
+3. 脚本会自动完成：环境检查 → 数据验证 → 数据增强 → 训练执行
+
+或者使用命令行参数覆盖配置：
+  --model_path: 覆盖MODEL_PATH
+  --output_dir: 指定输出目录
+  --skip_validation: 跳过数据验证
+  --skip_enhancement: 跳过数据增强
+  --dry_run: 只显示命令，不执行
+        """
+    )
     parser.add_argument("--model_path", type=str, default=None, 
-                       help="模型路径（默认: /data/models/Qwen3-8B）")
+                       help=f"模型路径（覆盖脚本中的MODEL_PATH，默认: {MODEL_PATH}）")
     parser.add_argument("--output_dir", type=str, default=None,
                        help="输出目录（默认: 自动生成）")
     parser.add_argument("--skip_validation", action="store_true",
-                       help="跳过数据验证")
+                       help="跳过数据验证（覆盖AUTO_VALIDATE_DATA）")
     parser.add_argument("--skip_enhancement", action="store_true",
-                       help="跳过数据增强")
+                       help="跳过数据增强（覆盖AUTO_ENHANCE_DATA）")
     parser.add_argument("--dry_run", action="store_true",
                        help="只显示命令，不执行")
     
@@ -206,35 +288,42 @@ def main():
     
     print("🚀 增强的工具调用训练启动脚本")
     print("=" * 60)
+    print("📝 提示: 在脚本顶部修改超参数配置（MODEL_PATH, LEARNING_RATE等）")
+    print("=" * 60)
     
     # 1. 检查环境
     if not check_environment():
         print("\\n❌ 环境检查失败，请修复后重试")
         sys.exit(1)
     
-    # 2. 验证数据
+    # 2. 验证数据（根据配置和参数）
     if not args.skip_validation:
         validate_data()
+    else:
+        print("\\n⏭️  跳过数据验证（--skip_validation）")
     
-    # 3. 增强数据
+    # 3. 增强数据（根据配置和参数）
     if not args.skip_enhancement:
         data_path = enhance_data_if_needed()
     else:
-        data_path = "data/dataset/12_08/train.json"
-        print(f"\\n📝 使用原始数据: {data_path}")
+        data_path = TRAIN_DATA_PATH
+        print(f"\\n⏭️  跳过数据增强（--skip_enhancement）")
+        print(f"📝 使用原始数据: {data_path}")
     
-    # 4. 创建训练命令
+    # 4. 创建训练命令（使用脚本顶部的配置）
     print("\\n⚙️  准备训练命令...")
     cmd, output_dir = create_training_command(args.output_dir, args.model_path)
     
-    print(f"\\n📊 训练配置:")
-    print(f"   模型路径: {args.model_path or '/data/models/Qwen3-8B'}")
+    print(f"\\n📊 训练配置（来自脚本顶部配置）:")
+    print(f"   模型路径: {args.model_path or MODEL_PATH}")
     print(f"   输出目录: {output_dir}")
-    print(f"   数据集: tool_calling_12_08")
-    print(f"   学习率: 2.0e-5")
-    print(f"   训练轮数: 8.0")
-    print(f"   LoRA rank: 64, alpha: 128")
-    print(f"   有效batch size: 16 (1 × 16)")
+    print(f"   数据集: {DATASET_NAME}")
+    print(f"   学习率: {LEARNING_RATE}")
+    print(f"   训练轮数: {NUM_TRAIN_EPOCHS}")
+    print(f"   LoRA rank: {LORA_RANK}, alpha: {LORA_ALPHA}")
+    print(f"   有效batch size: {PER_DEVICE_TRAIN_BATCH_SIZE} × {GRADIENT_ACCUMULATION_STEPS} = {PER_DEVICE_TRAIN_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS}")
+    print(f"   梯度裁剪: {MAX_GRAD_NORM}")
+    print(f"   权重衰减: {WEIGHT_DECAY}")
     
     if args.dry_run:
         print(f"\\n📜 训练命令（dry-run模式）:")
@@ -250,6 +339,7 @@ def main():
         print("\\n" + "=" * 60)
         print("✅ 训练完成！")
         print(f"📁 模型保存在: {output_dir}")
+        print("=" * 60)
     except KeyboardInterrupt:
         print("\\n⚠️  训练被用户中断")
         sys.exit(1)
