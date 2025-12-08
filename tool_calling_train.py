@@ -224,7 +224,7 @@ def create_training_command(output_dir=None, model_path=None):
         "--logging_steps", str(LOGGING_STEPS),
         "--save_steps", str(SAVE_STEPS),
         "--save_strategy", "steps",
-        "--evaluation_strategy", "steps",
+        "--eval_strategy", "steps",
         "--eval_steps", str(EVAL_STEPS),
         "--eval_dataset", TEST_DATASET_NAME,
         "--packing", "False",
