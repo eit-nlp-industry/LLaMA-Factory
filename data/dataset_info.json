@@ -868,5 +868,23 @@
       "time": "time",
       "user_id": "user_id"
     }
+  },
+  "tool_calling_12_08": {
+    "file_name": "dataset/12_08/train.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
+  },
+  "tool_calling_12_08_test": {
+    "file_name": "dataset/12_08/test.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system",
+      "tools": "tools"
+    }
   }
 }
