@@ -103,7 +103,7 @@ def monitor_training_logs(loggers, log_files):
 def main():
     '''主函数'''
     
-    log_files = {"training": "/home/ziqiang/LLaMA-Factory/enhanced_training_logs/training_monitor_20251027_182728.log", "predictions": "/home/ziqiang/LLaMA-Factory/enhanced_training_logs/prediction_monitor_20251027_182728.log", "labels": "/home/ziqiang/LLaMA-Factory/enhanced_training_logs/label_analysis_20251027_182728.log", "alignment": "/home/ziqiang/LLaMA-Factory/enhanced_training_logs/alignment_analysis_20251027_182728.log", "main": "/home/ziqiang/LLaMA-Factory/enhanced_training_logs/main_training_20251027_182728.log"}
+    log_files = {"training": "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs/training_monitor_20251124_154237.log", "predictions": "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs/prediction_monitor_20251124_154237.log", "labels": "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs/label_analysis_20251124_154237.log", "alignment": "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs/alignment_analysis_20251124_154237.log", "main": "/home/qiyang_shi/LLaMA-Factory/enhanced_training_logs/main_training_20251124_154237.log"}
     
     # 设置日志记录器
     loggers = setup_loggers(log_files)

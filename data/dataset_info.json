@@ -63,7 +63,7 @@
     ]
   },
   "test_data": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_14/merged_dataset_test_09_14.json",
+    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/9_14/merged_dataset_test_09_14.json",
     "formatting": "custom_context"
   },
   "ocr_text_orders_08_14_test": {
@@ -839,7 +839,7 @@
     }
   },
   "mixed_training_data_09_17": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/9_17/mixed_training_data_9_17.json",
+    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/9_17/mixed_training_data_9_17.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
@@ -848,7 +848,7 @@
     }
   },
   "data_demo": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/10_27/multi_hop.json",
+    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/11_11/multihop_retrieval_train.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
@@ -859,7 +859,7 @@
     }
   },
   "function_call_context_audit": {
-    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/10_22/10.22_train_data.json",
+    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/10_22/10.22_train_data.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",

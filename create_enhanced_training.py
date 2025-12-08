@@ -140,7 +140,11 @@ echo "=" * 60
 
 # 设置环境变量 - 双卡训练（根据实际情况调整）
 # 推荐使用两张显存较大的GPU
+<<<<<<< HEAD
 export CUDA_VISIBLE_DEVICES=6,7
+=======
+export CUDA_VISIBLE_DEVICES=4,5
+>>>>>>> 3813134fff97a56a7c5ff7b1a3964d708d40c9db
 
 # 创建输出目录
 mkdir -p "{output_dir}"
