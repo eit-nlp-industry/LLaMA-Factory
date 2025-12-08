@@ -1,65 +1,33 @@
-# 快速开始指南
+# 工具调用训练快速开始
 
-## 一键启动训练
-
-### 最简单的方式
+## 一键启动
 
 ```bash
-# 1. 生成所有必要文件
-python enhanced_tool_calling_training.py
+# 1. 首次使用：生成辅助工具（只需一次）
+python tool_calling_setup.py
 
-# 2. 启动训练（自动完成验证和增强）
-python run_enhanced_training_complete.py --model_path /data/models/Qwen3-8B
+# 2. 直接训练（自动完成验证和增强）
+python tool_calling_train.py
 ```
 
-### 详细步骤
+## 配置说明
 
-#### 步骤1: 生成配置文件
+在 `tool_calling_train.py` 顶部修改超参数：
+- `CUDA_VISIBLE_DEVICES`: GPU设备（如 "0" 或 "0,2"）
+- `MODEL_PATH`: 模型路径
+- `LEARNING_RATE`: 学习率（默认3.5e-5）
+- `LORA_RANK`: LoRA rank（默认32）
+- 其他参数见脚本注释
 
-```bash
-python enhanced_tool_calling_training.py
-```
-
-输出：
-- ✅ `enhanced_system_prompt.txt` - 增强的系统提示
-- ✅ `validate_tool_calling_data.py` - 数据验证工具
-- ✅ `run_enhanced_tool_calling_training_*.sh` - 训练脚本
-- ✅ 更新 `data/dataset_info.json`
-
-#### 步骤2: 验证数据（可选）
+## 其他工具
 
 ```bash
+# 单独增强数据
+python tool_calling_enhance_data.py data/dataset/12_08/train.json output.json
+
+# 单独验证数据
 python validate_tool_calling_data.py data/dataset/12_08/train.json
 ```
-
-#### 步骤3: 增强数据（推荐）
-
-```bash
-python enhance_dataset_with_constraints.py \
-    data/dataset/12_08/train.json \
-    data/dataset/12_08/train_enhanced.json
-```
-
-#### 步骤4: 开始训练
-
-```bash
-python run_enhanced_training_complete.py \
-    --model_path /data/models/Qwen3-8B \
-    --output_dir saves/Qwen3-8B/lora/enhanced_tool_calling
-```
-
-## 关键优化点
-
-### 1. 系统提示增强
-- 强化 `retrieval_tool` 调用约束
-- 明确工具选择规则
-- 规范参数提取要求
-
-### 2. 超参数优化
-- 学习率: 2.0e-5（稳定学习）
-- LoRA rank: 64（提高表达能力）
-- 梯度裁剪: 0.3（提高稳定性）
-- 训练轮数: 8.0（充分训练）
 
 ### 3. 约束机制
 - ✅ 强制检索阶段调用 `retrieval_tool`

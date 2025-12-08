@@ -27,24 +27,24 @@ TRAIN_DATA_PATH = "data/dataset/12_08/train.json"  # 训练数据路径
 TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
 
 # 学习率和训练配置
-LEARNING_RATE = 2.0e-5  # 学习率
-NUM_TRAIN_EPOCHS = 8.0  # 训练轮数
+LEARNING_RATE = 3.5e-5  # 学习率
+NUM_TRAIN_EPOCHS = 10.0  # 训练轮数
 MAX_SAMPLES = 100000  # 最大样本数
 
 # 批次配置
 PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
-GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（有效batch size = 1 × 16 = 16）
+GRADIENT_ACCUMULATION_STEPS = 8  # 梯度累积步数（有效batch size = 1 × 8 = 8）
 LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
-WARMUP_RATIO = 0.1  # Warmup比例（10%）
+WARMUP_RATIO = 0.05  # Warmup比例（5%）
 
 # 正则化和稳定性
-MAX_GRAD_NORM = 0.3  # 梯度裁剪阈值
+MAX_GRAD_NORM = 0.5  # 梯度裁剪阈值
 WEIGHT_DECAY = 0.01  # 权重衰减
 
 # LoRA配置
-LORA_RANK = 64  # LoRA rank
-LORA_ALPHA = 128  # LoRA alpha（通常设为rank的2倍）
-LORA_DROPOUT = 0.1  # LoRA dropout
+LORA_RANK = 32  # LoRA rank
+LORA_ALPHA = 64  # LoRA alpha（通常设为rank的2倍）
+LORA_DROPOUT = 0.05  # LoRA dropout
 LORA_TARGET = "all"  # LoRA目标层
 
 # 训练设置
@@ -62,6 +62,9 @@ DATALOADER_NUM_WORKERS = 4  # 数据加载工作进程数
 FLASH_ATTN = "auto"  # Flash attention设置
 GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
 BF16 = True  # 是否使用bf16精度
+
+# CUDA配置
+CUDA_VISIBLE_DEVICES = "0"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "0,2"
 
 # 自动执行选项
 AUTO_VALIDATE_DATA = True  # 自动验证数据
@@ -139,7 +142,7 @@ def enhance_data_if_needed():
         update_dataset_info_for_enhanced(enhanced_path)
         return enhanced_path
     
-    enhancer_path = "enhance_dataset_with_constraints.py"
+    enhancer_path = "tool_calling_enhance_data.py"
     if not Path(enhancer_path).exists():
         print("⚠️  数据增强工具不存在，使用原始数据")
         return TRAIN_DATA_PATH
@@ -262,7 +265,7 @@ def main():
         epilog="""
 使用说明：
 1. 在脚本顶部修改超参数配置（MODEL_PATH, LEARNING_RATE等）
-2. 直接运行：python run_enhanced_training_complete.py
+2. 直接运行：python tool_calling_train.py
 3. 脚本会自动完成：环境检查 → 数据验证 → 数据增强 → 训练执行
 
 或者使用命令行参数覆盖配置：
@@ -330,7 +333,12 @@ def main():
         print(" ".join(cmd))
         return
     
-    # 5. 执行训练
+    # 5. 设置CUDA设备
+    if CUDA_VISIBLE_DEVICES:
+        os.environ["CUDA_VISIBLE_DEVICES"] = CUDA_VISIBLE_DEVICES
+        print(f"\\n🎮 设置CUDA设备: {CUDA_VISIBLE_DEVICES}")
+    
+    # 6. 执行训练
     print(f"\\n🚀 开始训练...")
     print("=" * 60)
     
