@@ -43,13 +43,13 @@ from datetime import datetime
 from pathlib import Path
 
 # 添加LLaMA-Factory路径
-sys.path.append('/home/ziqiang/LLaMA-Factory')
+sys.path.append('/home/qiyang_shi/testing/LLaMA-Factory')
 
 def modify_trainer_to_add_monitoring():
     """修改训练器以添加监控功能"""
     
     # 修改SFT训练器，添加监控回调
-    trainer_file = "/home/ziqiang/LLaMA-Factory/src/llamafactory/train/sft/trainer.py"
+    trainer_file = "/home/qiyang_shi/testing/LLaMA-Factory/src/llamafactory/train/sft/trainer.py"
     
     # 读取现有文件
     with open(trainer_file, 'r', encoding='utf-8') as f:
@@ -110,10 +110,10 @@ def create_enhanced_training_script():
     
     # 创建输出目录
     timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M")
-    output_dir = f"/home/ziqiang/LLaMA-Factory/saves/Qwen3-8B/lora/train_{timestamp}"
+    output_dir = f"/home/qiyang_shi/testing/LLaMA-Factory/saves/Qwen3-8B/lora/train_{timestamp}"
     
     # 创建日志目录
-    log_dir = "/home/ziqiang/LLaMA-Factory/enhanced_training_logs"
+    log_dir = "/home/qiyang_shi/testing/LLaMA-Factory/enhanced_training_logs"
     os.makedirs(log_dir, exist_ok=True)
     
     # 创建日志文件
@@ -160,7 +160,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 📝 日志文件: {log_files['main'
 
 # 检查数据集一致性
 echo "🔍 检查数据集一致性..."
-python3 /home/ziqiang/LLaMA-Factory/check_dataset_consistency.py >> "{log_files['main']}" 2>&1
+python3 /home/qiyang_shi/testing/LLaMA-Factory/check_dataset_consistency.py >> "{log_files['main']}" 2>&1
 echo "✅ 数据集检查完成"
 
 # 运行训练命令 - 双卡DDP分布式训练
