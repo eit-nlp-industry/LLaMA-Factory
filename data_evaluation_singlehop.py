@@ -979,8 +979,8 @@ class SingleHopEvaluator:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="旧模板单跳模型评估脚本")
-    parser.add_argument("--input_file", "-i", type=str, default="data/dataset/12_05_a/train.json", help="输入数据文件")
-    parser.add_argument("--output_file", "-o", type=str, default="data/dataset/result/12_05_a_singlehop_train_eval_results.json", help="评估结果输出文件")
+    parser.add_argument("--input_file", "-i", type=str, default="data/dataset/12_08_a/test.json", help="输入数据文件")
+    parser.add_argument("--output_file", "-o", type=str, default="data/dataset/result/12_08singlehop_test_eval_results.json", help="评估结果输出文件")
     parser.add_argument("--log_file", "-l", type=str, default="data/dataset/log/singlehop_eval.log", help="日志输出文件")
     parser.add_argument("--diagnostic", "-d", action="store_true", help="启用诊断模式，显示详细的样本和预测信息")
     parser.add_argument("--eval_all_hops", action="store_true", default=True, help="评估所有跳（检索跳+业务跳），默认True")
