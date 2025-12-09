@@ -48,7 +48,7 @@ LORA_DROPOUT = 0.05  # LoRA dropout
 LORA_TARGET = "all"  # LoRA目标层
 
 # 训练设置
-CUTOFF_LEN = 8192  # 序列最大长度
+CUTOFF_LEN = 8192  # 序列最大长度（如果OOM，可尝试降低到4096或2048）
 LOGGING_STEPS = 10  # 日志记录步数
 SAVE_STEPS = 500  # 模型保存步数
 EVAL_STEPS = 500  # 评估步数
@@ -64,7 +64,7 @@ GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
 BF16 = True  # 是否使用bf16精度
 
 # CUDA配置
-CUDA_VISIBLE_DEVICES = "0"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "0,2"
+CUDA_VISIBLE_DEVICES = "4,5"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "4,5"（双卡训练可减少单卡内存压力）
 
 # 自动执行选项
 AUTO_VALIDATE_DATA = True  # 自动验证数据
