@@ -37,13 +37,17 @@ USAGE = (
 
 
 def _get_torchrun_command():
-    """Get torchrun command, fallback to python -m torch.distributed.run if torchrun is not found"""
-    torchrun_path = shutil.which("torchrun")
-    if torchrun_path:
-        return ["torchrun"]
-    else:
-        # Fallback to python -m torch.distributed.run
-        return [sys.executable, "-m", "torch.distributed.run"]
+    """
+    Get torchrun command, preferring python -m torch.distributed.run.
+    
+    PyTorch's torchrun is actually python -m torch.distributed.run, not a separate
+    package. Some users may have installed a wrong torchrun package via pip,
+    so we prefer the Python module approach which is always correct.
+    """
+    # Always prefer python -m torch.distributed.run (the official PyTorch way)
+    # This avoids issues with incorrect torchrun packages installed via pip
+    # The standalone torchrun command is just a wrapper around this
+    return [sys.executable, "-m", "torch.distributed.run"]
 
 
 def main():
