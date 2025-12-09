@@ -58,6 +58,8 @@ class SingleHopExample:
     target: str  # 期望的工具调用
     next_tool_name: str = ""  # 下一跳业务工具，用于recall
     tools: str = ""  # 工具定义（JSON字符串），用于评估时让模型看到工具列表
+    is_retrieval_hop: bool = False  # 是否为检索跳
+    related_retrieval_pair_id: int = 0  # 如果是业务跳，关联的检索跳pair_id
 
 
 @dataclass
@@ -212,7 +214,14 @@ class SingleHopDataProcessor:
                 
                 # 评估业务跳：observation -> function_call (业务工具，如 list_orders)
                 elif eval_all_hops and msg.get("from") == "observation" and nxt.get("from") == "function_call":
-                    # 构建包含历史对话的prompt
+                    # 找到关联的检索跳pair_id（上一个检索跳）
+                    related_retrieval_pair_id = 0
+                    for prev_ex in reversed(examples):
+                        if prev_ex.conversation_id == idx and prev_ex.is_retrieval_hop:
+                            related_retrieval_pair_id = prev_ex.pair_id
+                            break
+                    
+                    # 构建包含历史对话的prompt（注意：这里先使用训练数据中的observation，后面评估时会替换为实际检索结果）
                     user_prompt = self._build_user_prompt_with_context(conversation_context, msg, tools)
                     prompt = self._build_prompt(system_prompt, user_prompt, tools)
                     next_tool_name = self._find_next_tool_name(conv, i + 1)
@@ -224,6 +233,8 @@ class SingleHopDataProcessor:
                         target=nxt["value"],
                         next_tool_name=next_tool_name,
                         tools=tools,
+                        is_retrieval_hop=False,
+                        related_retrieval_pair_id=related_retrieval_pair_id,  # 关联的检索跳pair_id
                     )
                     examples.append(example)
                     
@@ -320,14 +331,12 @@ class SingleHopDataProcessor:
         """构建prompt，包含system、tools和user"""
         system_block = system_prompt or "You are a helpful assistant."
         
-        # **关键修复1**：确保使用增强的system prompt（与训练时一致）
         # 检测是否包含增强规则的关键词，如果没有则自动替换
         if "第一阶段：检索工具调用" not in system_block:
             try:
                 # 尝试从tool_calling_setup.py导入增强的system prompt
                 import sys
                 import os
-                # 修复路径：文件在项目根目录，直接添加当前目录到路径即可
                 current_dir = os.path.dirname(os.path.abspath(__file__))
                 if current_dir not in sys.path:
                     sys.path.insert(0, current_dir)
@@ -357,7 +366,7 @@ class SingleHopDataProcessor:
         
         user_block = user_query.strip()
         
-        # **关键修复2**：将tools格式化后追加到system prompt，与训练时保持一致
+        # 将tools格式化后追加到system prompt，与训练时保持一致
         # 这样评估时模型也能看到工具列表，而不是仅凭记忆预测
         try:
             tools_list = json.loads(tools) if isinstance(tools, str) else tools
@@ -366,7 +375,6 @@ class SingleHopDataProcessor:
                 # 动态导入避免循环依赖
                 import sys
                 import os
-                # 修复路径：确保能正确导入
                 current_dir = os.path.dirname(os.path.abspath(__file__))
                 if current_dir not in sys.path:
                     sys.path.insert(0, current_dir)
@@ -645,7 +653,7 @@ class LLMPredictor:
         self.max_retries = 4
 
     async def infer(self, session: aiohttp.ClientSession, example: SingleHopExample, diagnostic_mode: bool = False) -> str:
-        # **修复**：使用qwen3 template格式，与训练时保持一致
+        # 使用qwen3 template格式，与训练时保持一致
         # 训练时使用：<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n
         # 评估时也应该使用相同格式，确保一致性
         qwen3_prompt = f"<|im_start|>system\n{example.system_prompt}<|im_end|>\n<|im_start|>user\n{example.user_prompt}<|im_end|>\n<|im_start|>assistant\n"
@@ -718,31 +726,6 @@ class SingleHopEvaluator:
         if not examples:
             return []
 
-        # ⚠️ 重要说明：当前业务跳评估使用的observation来自训练数据，而非实际检索结果
-        # 这导致业务跳的Accuracy/Precision@1可能偏高，因为评估时使用的是"完美的"检索结果
-        # 实际运行时，如果Recall@5低，业务跳性能应该会更低
-        # TODO: 修复评估逻辑，让业务跳使用检索跳的实际检索结果
-        if eval_all_hops:
-            business_examples = [ex for ex in examples if ex.pair_id > 1]
-            if business_examples:
-                logger.warning("")
-                logger.warning("=" * 80)
-                logger.warning("⚠️  评估方式说明")
-                logger.warning("=" * 80)
-                logger.warning("当前业务跳评估使用的是训练数据中的observation（完美检索结果）")
-                logger.warning("这可能导致业务跳的Accuracy/Precision@1被高估")
-                logger.warning("")
-                logger.warning("实际运行时的情况：")
-                logger.warning("  - 如果Recall@5 = 0.083，意味着只有8.3%%的情况下能检索到目标工具")
-                logger.warning("  - 在Recall=0的情况下，模型无法看到目标工具，业务跳成功率应该接近0")
-                logger.warning("  - 因此实际业务跳性能应该 ≤ Recall@5（即 ≤ 0.083）")
-                logger.warning("")
-                logger.warning("当前评估结果解读：")
-                logger.warning("  - 业务跳Accuracy/Precision@1反映的是'假设检索完美时'的表现")
-                logger.warning("  - 要获得真实性能，需要修复评估逻辑，使用实际检索结果")
-                logger.warning("=" * 80)
-                logger.warning("")
-
         connector = aiohttp.TCPConnector(limit=MAX_CONCURRENT_EXAMPLES)
         timeout = aiohttp.ClientTimeout(total=120)
         results: List[SingleHopResult] = []
@@ -796,7 +779,7 @@ class SingleHopEvaluator:
                     ):
                         logger.info("Pair {} 满足Recall计算条件，开始计算Recall", example.pair_id)
                         try:
-                            # **重要修复**：同时使用真实query和预测query计算Recall
+                            # 同时使用真实query和预测query计算Recall
                             # 1. 从target（真实）中提取query，用于评估检索服务本身的召回率
                             target_call = details.get("target_call", {})
                             target_query = target_call.get("arguments", {}).get("query", "") if isinstance(target_call.get("arguments"), dict) else ""
@@ -805,7 +788,7 @@ class SingleHopEvaluator:
                             predict_call = details.get("predict_call", {})
                             predict_query = predict_call.get("arguments", {}).get("query", "") if isinstance(predict_call.get("arguments"), dict) else ""
                             
-                            # 3. **关键修复**：优先使用真实query计算Recall（评估检索服务本身的质量）
+                            # 3. 优先使用真实query计算Recall（评估检索服务本身的质量）
                             # 这样即使模型预测的query有差异，也能正确评估检索服务
                             recall = None
                             recall_details = None
@@ -868,9 +851,137 @@ class SingleHopEvaluator:
                         )
                     )
 
-            # 传递 diagnostic_mode 参数
-            diagnostic_mode_flag = diagnostic_mode
-            await asyncio.gather(*(run_example(ex, diagnostic_mode=diagnostic_mode_flag) for ex in examples))
+            # 分两阶段评估（检索跳先评估，业务跳使用实际检索结果）
+            # 阶段1：先评估所有检索跳，保存预测结果和实际检索响应
+            retrieval_examples_list = [ex for ex in examples if ex.is_retrieval_hop]
+            business_examples_list = [ex for ex in examples if not ex.is_retrieval_hop]
+            
+            if retrieval_examples_list:
+                logger.info("")
+                logger.info("=" * 80)
+                logger.info("阶段1: 评估检索跳（共 {} 个）", len(retrieval_examples_list))
+                logger.info("=" * 80)
+                retrieval_cache: Dict[tuple[int, int], tuple[str, Dict[str, Any], Optional[Dict[str, Any]]]] = {}
+                
+                async def run_retrieval_with_cache(ex: SingleHopExample):
+                    async with semaphore:
+                        logger.debug("评估检索跳 Pair {} (conversation_id: {})", ex.pair_id, ex.conversation_id)
+                        predict = await self.predictor.infer(session, ex, diagnostic_mode=diagnostic_mode)
+                        score, name_score, details = self.evaluator.evaluate(ex.target, predict)
+                        
+                        target_name = details.get("target_call", {}).get("name")
+                        actual_retrieval_response = None
+                        recall = None
+                        recall_details = None
+                        
+                        # 如果是retrieval_tool且预测成功，获取实际检索响应
+                        if (target_name == "retrieval_tool" and name_score == 1.0 and 
+                            self.retrieval_caller and ex.next_tool_name):
+                            try:
+                                predict_call = details.get("predict_call", {})
+                                predict_query = predict_call.get("arguments", {}).get("query", "") if isinstance(predict_call.get("arguments"), dict) else ""
+                                if predict_query:
+                                    status, retrieval_response = await self.retrieval_caller.call_retrieval_tool(session, predict_query)
+                                    if status == 200:
+                                        actual_retrieval_response = retrieval_response
+                                        
+                                # 计算Recall（使用真实query）
+                                target_call = details.get("target_call", {})
+                                target_query = target_call.get("arguments", {}).get("query", "") if isinstance(target_call.get("arguments"), dict) else ""
+                                if target_query:
+                                    recall, recall_details = await self.retrieval_caller.compute_recall(
+                                        session, ex.target, ex.next_tool_name
+                                    )
+                            except Exception as exc:
+                                logger.error("检索或Recall计算失败: {}", exc)
+                        
+                        # 保存结果
+                        results.append(SingleHopResult(
+                            conversation_id=ex.conversation_id, pair_id=ex.pair_id,
+                            predict=predict, target=ex.target, score=score,
+                            tool_name_score=name_score, details=details,
+                            recall=recall, recall_details=recall_details,
+                        ))
+                        
+                        # 返回这个检索跳的缓存条目（单个条目）
+                        return {(ex.conversation_id, ex.pair_id): (predict, actual_retrieval_response or {}, recall_details)}
+                
+                # 并发评估检索跳并合并缓存
+                cache_results_list = await asyncio.gather(*(run_retrieval_with_cache(ex) for ex in retrieval_examples_list))
+                final_retrieval_cache = {}
+                for cache in cache_results_list:
+                    if cache:
+                        final_retrieval_cache.update(cache)
+                logger.info("✅ 检索跳评估完成，已保存 {} 个检索结果", len(final_retrieval_cache))
+                
+                # 阶段2：评估业务跳，使用检索跳的实际检索结果
+                if business_examples_list:
+                    logger.info("")
+                    logger.info("=" * 80)
+                    logger.info("阶段2: 评估业务跳（共 {} 个，使用实际检索结果）", len(business_examples_list))
+                    logger.info("=" * 80)
+                    
+                    async def run_business_with_actual_retrieval(ex: SingleHopExample):
+                        async with semaphore:
+                            logger.debug("评估业务跳 Pair {} (conversation_id: {}, 关联检索跳: {})", 
+                                       ex.pair_id, ex.conversation_id, ex.related_retrieval_pair_id)
+                            
+                            # 获取关联检索跳的实际检索结果
+                            actual_observation = None
+                            used_actual_retrieval = False
+                            if ex.related_retrieval_pair_id > 0:
+                                cache_key = (ex.conversation_id, ex.related_retrieval_pair_id)
+                                if cache_key in final_retrieval_cache:
+                                    _, retrieval_response, _ = final_retrieval_cache[cache_key]
+                                    if retrieval_response and (retrieval_response.get("result") or not retrieval_response.get("error")):
+                                        if self.retrieval_caller:
+                                            actual_observation = self.retrieval_caller.build_observation_from_response(retrieval_response)
+                                            if actual_observation:
+                                                used_actual_retrieval = True
+                                                logger.info("业务跳 Pair {} 使用实际检索结果（来自检索跳 Pair {}）", 
+                                                          ex.pair_id, ex.related_retrieval_pair_id)
+                                    else:
+                                        logger.warning("业务跳 Pair {} 关联的检索跳 {} 检索响应为空或失败，使用训练数据中的observation", 
+                                                     ex.pair_id, ex.related_retrieval_pair_id)
+                                else:
+                                    logger.warning("业务跳 Pair {} 找不到关联的检索跳 {} 的缓存，使用训练数据中的observation", 
+                                                 ex.pair_id, ex.related_retrieval_pair_id)
+                            
+                            # 如果有实际检索结果，重新构建prompt
+                            if actual_observation and used_actual_retrieval:
+                                # 替换user_prompt中的observation
+                                # 查找最后一个"工具返回:"并替换其后的内容
+                                pattern = r"工具返回:.*$"
+                                # 限制observation长度，避免prompt过长
+                                obs_preview = actual_observation[:1000] + ("..." if len(actual_observation) > 1000 else "")
+                                new_user_prompt = re.sub(pattern, f"工具返回: {obs_preview}", ex.user_prompt, count=1, flags=re.MULTILINE | re.DOTALL)
+                                prompt = self.data_processor._build_prompt(ex.system_prompt, new_user_prompt, ex.tools)
+                                ex = SingleHopExample(
+                                    conversation_id=ex.conversation_id, pair_id=ex.pair_id,
+                                    system_prompt=prompt["system"], user_prompt=prompt["user"],
+                                    target=ex.target, next_tool_name=ex.next_tool_name, tools=ex.tools,
+                                    is_retrieval_hop=False, related_retrieval_pair_id=ex.related_retrieval_pair_id,
+                                )
+                            else:
+                                logger.info("业务跳 Pair {} 使用训练数据中的observation（无实际检索结果或检索失败）", ex.pair_id)
+                            
+                            # 评估业务跳
+                            predict = await self.predictor.infer(session, ex, diagnostic_mode=diagnostic_mode)
+                            score, name_score, details = self.evaluator.evaluate(ex.target, predict)
+                            
+                            results.append(SingleHopResult(
+                                conversation_id=ex.conversation_id, pair_id=ex.pair_id,
+                                predict=predict, target=ex.target, score=score,
+                                tool_name_score=name_score, details=details,
+                                recall=None, recall_details=None,
+                            ))
+                    
+                    # 并发评估业务跳
+                    await asyncio.gather(*(run_business_with_actual_retrieval(ex) for ex in business_examples_list))
+                    logger.info("✅ 业务跳评估完成")
+            else:
+                # 如果没有检索跳，按原逻辑处理
+                await asyncio.gather(*(run_example(ex, diagnostic_mode=diagnostic_mode) for ex in examples))
 
         return results
 
