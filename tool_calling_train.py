@@ -109,26 +109,29 @@ def validate_data():
     print("\\n🔍 验证训练数据...")
     
     validator_path = "validate_tool_calling_data.py"
+    setup_script = "tool_calling_setup.py"
     
-    # 如果验证脚本不存在，尝试从tool_calling_setup.py重新生成
-    if not Path(validator_path).exists():
-        print("⚠️  验证工具不存在，尝试重新生成...")
-        setup_script = "tool_calling_setup.py"
-        if Path(setup_script).exists():
-            try:
-                # 导入并调用create_data_validator函数
-                import importlib.util
-                spec = importlib.util.spec_from_file_location("tool_calling_setup", setup_script)
-                setup_module = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(setup_module)
-                setup_module.create_data_validator()
+    # 强制重新生成验证脚本，确保使用最新版本
+    if Path(setup_script).exists():
+        try:
+            # 导入并调用create_data_validator函数
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("tool_calling_setup", setup_script)
+            setup_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(setup_module)
+            setup_module.create_data_validator()
+            if Path(validator_path).exists():
+                print("✅ 验证工具已更新到最新版本")
+            else:
                 print("✅ 验证工具已重新生成")
-            except Exception as e:
-                print(f"⚠️  重新生成验证工具失败: {e}，跳过验证")
+        except Exception as e:
+            print(f"⚠️  重新生成验证工具失败: {e}")
+            if not Path(validator_path).exists():
+                print("⚠️  验证工具不存在，跳过验证")
                 return True
-        else:
-            print("⚠️  验证工具不存在且无法重新生成，跳过验证")
-            return True
+    elif not Path(validator_path).exists():
+        print("⚠️  验证工具不存在且无法重新生成，跳过验证")
+        return True
     
     try:
         result = subprocess.run(
