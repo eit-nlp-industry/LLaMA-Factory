@@ -157,7 +157,15 @@ class ToolCallEvaluator:
 class SingleHopDataProcessor:
     """从旧模板数据中抽取单跳评估样本"""
 
-    def parse(self, data: List[Dict[str, Any]], diagnostic_mode: bool = False) -> List[SingleHopExample]:
+    def parse(self, data: List[Dict[str, Any]], diagnostic_mode: bool = False, eval_all_hops: bool = True) -> List[SingleHopExample]:
+        """
+        解析数据，提取所有工具调用评估样本
+        
+        Args:
+            data: 对话数据列表
+            diagnostic_mode: 是否启用诊断模式
+            eval_all_hops: 是否评估所有跳（True: 评估检索跳+业务跳, False: 仅评估检索跳）
+        """
         examples: List[SingleHopExample] = []
         pair_id = 1
 
@@ -165,10 +173,15 @@ class SingleHopDataProcessor:
             system_prompt = conversation.get("system", "")
             tools = conversation.get("tools", "[]")  # 提取tools字段
             conv = conversation.get("conversations", [])
-
+            
+            # 用于累积对话上下文（用于业务工具调用评估）
+            conversation_context = []
+            
             for i in range(len(conv) - 1):
                 msg = conv[i]
                 nxt = conv[i + 1]
+                
+                # 评估检索跳：human -> function_call (通常是 retrieval_tool)
                 if msg.get("from") == "human" and nxt.get("from") == "function_call":
                     prompt = self._build_prompt(system_prompt, msg["value"], tools)
                     next_tool_name = self._find_next_tool_name(conv, i + 1)
@@ -187,10 +200,64 @@ class SingleHopDataProcessor:
                     if diagnostic_mode and pair_id <= 5:
                         self._log_example_details(example, pair_id)
                     
+                    # 累积上下文（用于后续业务工具调用）
+                    conversation_context.append(msg)  # human
+                    conversation_context.append(nxt)  # retrieval_tool call
+                    if i + 2 < len(conv):
+                        conversation_context.append(conv[i + 2])  # observation
+                    
                     pair_id += 1
-                    break  # 单跳：每个对话只取首个 pair
+                    if not eval_all_hops:
+                        break  # 旧行为：只评估检索跳
+                
+                # 评估业务跳：observation -> function_call (业务工具，如 list_orders)
+                elif eval_all_hops and msg.get("from") == "observation" and nxt.get("from") == "function_call":
+                    # 构建包含历史对话的prompt
+                    user_prompt = self._build_user_prompt_with_context(conversation_context, msg, tools)
+                    prompt = self._build_prompt(system_prompt, user_prompt, tools)
+                    next_tool_name = self._find_next_tool_name(conv, i + 1)
+                    example = SingleHopExample(
+                        conversation_id=idx,
+                        pair_id=pair_id,
+                        system_prompt=prompt["system"],
+                        user_prompt=prompt["user"],
+                        target=nxt["value"],
+                        next_tool_name=next_tool_name,
+                        tools=tools,
+                    )
+                    examples.append(example)
+                    
+                    # 诊断模式：显示前5个样本的详细信息
+                    if diagnostic_mode and pair_id <= 5:
+                        self._log_example_details(example, pair_id)
+                    
+                    # 继续累积上下文
+                    conversation_context.append(msg)  # observation
+                    conversation_context.append(nxt)  # business_tool call
+                    if i + 2 < len(conv):
+                        conversation_context.append(conv[i + 2])  # observation (结果)
+                    
+                    pair_id += 1
 
-        logger.info("共解析出 {} 个单跳样本", len(examples))
+        hop_type_summary = "所有跳" if eval_all_hops else "检索跳"
+        logger.info("共解析出 {} 个样本（评估{}）", len(examples), hop_type_summary)
+        
+        # 统计工具类型
+        retrieval_count = 0
+        business_count = 0
+        for ex in examples:
+            try:
+                target_obj = json.loads(ex.target) if isinstance(ex.target, str) else ex.target
+                tool_name = target_obj.get("name", "") if isinstance(target_obj, dict) else ""
+                if tool_name == "retrieval_tool":
+                    retrieval_count += 1
+                else:
+                    business_count += 1
+            except:
+                pass
+        logger.info("  - 检索工具调用: {} 个", retrieval_count)
+        logger.info("  - 业务工具调用: {} 个", business_count)
+        
         return examples
     
     @staticmethod
@@ -260,16 +327,33 @@ class SingleHopDataProcessor:
                 # 尝试从tool_calling_setup.py导入增强的system prompt
                 import sys
                 import os
-                project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-                if project_root not in sys.path:
-                    sys.path.insert(0, project_root)
+                # 修复路径：文件在项目根目录，直接添加当前目录到路径即可
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                if current_dir not in sys.path:
+                    sys.path.insert(0, current_dir)
                 
                 from tool_calling_setup import create_enhanced_system_prompt
                 enhanced_prompt = create_enhanced_system_prompt()
-                logger.info("检测到system prompt未包含增强规则，自动替换为增强版")
+                logger.info("✅ 检测到system prompt未包含增强规则，已自动替换为增强版（与训练时一致）")
                 system_block = enhanced_prompt
+            except ImportError as e:
+                logger.warning("⚠️ 无法导入增强的system prompt（ImportError），尝试从文件加载: {}", str(e))
+                # 备选方案：从文件加载
+                try:
+                    import os
+                    prompt_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "enhanced_system_prompt.txt")
+                    if os.path.exists(prompt_path):
+                        with open(prompt_path, 'r', encoding='utf-8') as f:
+                            system_block = f.read().strip()
+                        logger.info("✅ 从文件加载增强的system prompt: {}", prompt_path)
+                    else:
+                        logger.warning("⚠️ 增强模板文件不存在: {}，使用原始prompt", prompt_path)
+                except Exception as file_e:
+                    logger.warning("⚠️ 从文件加载失败: {}，使用原始prompt", str(file_e))
             except Exception as e:
-                logger.warning("无法加载增强的system prompt，使用原始prompt: {}", str(e))
+                logger.warning("⚠️ 无法加载增强的system prompt，使用原始prompt: {}", str(e))
+        else:
+            logger.debug("✅ 检测到system prompt已包含增强规则，直接使用")
         
         user_block = user_query.strip()
         
@@ -282,24 +366,74 @@ class SingleHopDataProcessor:
                 # 动态导入避免循环依赖
                 import sys
                 import os
-                # 添加项目根目录到路径
-                project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-                if project_root not in sys.path:
-                    sys.path.insert(0, project_root)
+                # 修复路径：确保能正确导入
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                if current_dir not in sys.path:
+                    sys.path.insert(0, current_dir)
                 
                 from src.llamafactory.data.tool_utils import QwenToolUtils
                 tool_formatter = QwenToolUtils()
                 tool_text = tool_formatter.tool_formatter(tools_list)
-                # 追加到system prompt后面（与template.py第220行的逻辑一致）
+                # 追加到system prompt后面（与template.py的逻辑一致）
                 system_block = system_block + tool_text
+                logger.debug("✅ 已添加工具列表到system prompt（工具数量: {}）", len(tools_list))
         except Exception as e:
-            logger.warning("解析tools字段失败，将不使用工具列表: {}", str(e))
+            logger.warning("⚠️ 解析tools字段失败，将不使用工具列表: {}", str(e))
             logger.debug("Tools字段内容: {}", tools[:200] if tools else "空")
         
         return {
             "system": system_block,
             "user": user_block,
         }
+
+    @staticmethod
+    def _build_user_prompt_with_context(context: List[Dict[str, Any]], observation: Dict[str, Any], tools: str = "[]") -> str:
+        """
+        为业务工具调用构建包含历史上下文的user prompt
+        
+        Args:
+            context: 累积的对话历史（human, tool_call, observation等）
+            observation: 当前的observation消息（retrieval_tool的返回结果）
+            tools: 工具列表
+        
+        Returns:
+            构建的user prompt字符串
+        """
+        # 构建完整的对话历史
+        prompt_parts = []
+        
+        # 添加初始用户查询（第一个human消息）
+        for msg in context:
+            if msg.get("from") == "human":
+                prompt_parts.append(f"用户: {msg.get('value', '')}")
+                break
+        
+        # 添加工具调用和返回结果
+        for i, msg in enumerate(context):
+            if msg.get("from") == "function_call":
+                try:
+                    call_obj = json.loads(msg.get("value", "{}"))
+                    tool_name = call_obj.get("name", "")
+                    prompt_parts.append(f"调用工具: {tool_name}")
+                except:
+                    prompt_parts.append("调用工具: [解析失败]")
+            elif msg.get("from") == "observation":
+                # 截断过长的observation
+                obs_value = msg.get("value", "")
+                if len(obs_value) > 500:
+                    obs_value = obs_value[:500] + "..."
+                prompt_parts.append(f"工具返回: {obs_value}")
+        
+        # 添加当前的observation（retrieval_tool的返回结果）
+        obs_value = observation.get("value", "")
+        if len(obs_value) > 500:
+            obs_value = obs_value[:500] + "..."
+        prompt_parts.append(f"工具返回: {obs_value}")
+        
+        # 组合成完整的prompt
+        user_prompt = "\n".join(prompt_parts)
+        
+        return user_prompt
 
     @staticmethod
     def _find_next_tool_name(conversations: List[Dict[str, Any]], start_idx: int) -> str:
@@ -544,11 +678,11 @@ class SingleHopEvaluator:
         self.evaluator = ToolCallEvaluator()
         self.retrieval_caller = None if DISABLE_RECALL else RetrievalToolCaller()
 
-    async def evaluate_file(self, input_file: str, diagnostic_mode: bool = False) -> List[SingleHopResult]:
+    async def evaluate_file(self, input_file: str, diagnostic_mode: bool = False, eval_all_hops: bool = True) -> List[SingleHopResult]:
         with open(input_file, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        examples = self.data_processor.parse(data, diagnostic_mode=diagnostic_mode)
+        examples = self.data_processor.parse(data, diagnostic_mode=diagnostic_mode, eval_all_hops=eval_all_hops)
         if not examples:
             return []
 
@@ -677,12 +811,40 @@ class SingleHopEvaluator:
             else:
                 failure_stats["perfect_matches"] += 1
         
+        # 分别统计检索跳和业务跳的性能
+        retrieval_results = []
+        business_results = []
+        for r in results:
+            try:
+                target_obj = json.loads(r.target) if isinstance(r.target, str) else r.target
+                tool_name = target_obj.get("name", "") if isinstance(target_obj, dict) else ""
+                if tool_name == "retrieval_tool":
+                    retrieval_results.append(r)
+                else:
+                    business_results.append(r)
+            except:
+                pass
+        
+        retrieval_stats = {
+            "count": len(retrieval_results),
+            "accuracy": sum(r.score for r in retrieval_results) / len(retrieval_results) if retrieval_results else 0.0,
+            "precision@1": sum(r.tool_name_score for r in retrieval_results) / len(retrieval_results) if retrieval_results else 0.0,
+        }
+        
+        business_stats = {
+            "count": len(business_results),
+            "accuracy": sum(r.score for r in business_results) / len(business_results) if business_results else 0.0,
+            "precision@1": sum(r.tool_name_score for r in business_results) / len(business_results) if business_results else 0.0,
+        }
+        
         return {
             "total": total, 
             "accuracy": acc, 
             "precision@1": p_at1, 
             "recall@5": recall_rate,
-            "failure_stats": failure_stats
+            "failure_stats": failure_stats,
+            "retrieval_stats": retrieval_stats,
+            "business_stats": business_stats,
         }
 
 
@@ -692,6 +854,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output_file", "-o", type=str, default="data/dataset/result/12_05_a_singlehop_train_eval_results.json", help="评估结果输出文件")
     parser.add_argument("--log_file", "-l", type=str, default="data/dataset/log/singlehop_eval.log", help="日志输出文件")
     parser.add_argument("--diagnostic", "-d", action="store_true", help="启用诊断模式，显示详细的样本和预测信息")
+    parser.add_argument("--eval_all_hops", action="store_true", default=True, help="评估所有跳（检索跳+业务跳），默认True")
+    parser.add_argument("--eval_retrieval_only", action="store_true", help="仅评估检索跳（与--eval_all_hops互斥）")
     return parser.parse_args()
 
 
@@ -939,18 +1103,44 @@ async def main():
     
     # 执行评估
     diagnostic_mode = args.diagnostic
+    eval_all_hops = args.eval_all_hops and not args.eval_retrieval_only
+    
     if diagnostic_mode:
         logger.info("")
         logger.info("🔍 诊断模式已启用，将显示详细的样本和预测信息")
         logger.info("")
     
-    results = await evaluator.evaluate_file(args.input_file, diagnostic_mode=diagnostic_mode)
+    logger.info("")
+    logger.info("📊 评估模式: {}", "所有跳（检索跳+业务跳）" if eval_all_hops else "仅检索跳")
+    logger.info("")
+    
+    results = await evaluator.evaluate_file(args.input_file, diagnostic_mode=diagnostic_mode, eval_all_hops=eval_all_hops)
     dump_report(results, args.output_file)
 
     summary = evaluator.summarize(results)
-    logger.info("评估完成，总样本: {}", summary["total"])
-    logger.info("Accuracy: {:.3f}", summary["accuracy"])
-    logger.info("Precision@1: {:.3f}", summary["precision@1"])
+    logger.info("=" * 60)
+    logger.info("📊 评估结果汇总")
+    logger.info("=" * 60)
+    logger.info("总样本数: {}", summary["total"])
+    logger.info("总体 Accuracy: {:.3f}", summary["accuracy"])
+    logger.info("总体 Precision@1: {:.3f}", summary["precision@1"])
+    
+    # 分别显示检索跳和业务跳的统计
+    if summary.get("retrieval_stats"):
+        ret_stats = summary["retrieval_stats"]
+        logger.info("")
+        logger.info("🔍 检索工具调用统计:")
+        logger.info("  样本数: {}", ret_stats["count"])
+        logger.info("  Accuracy: {:.3f}", ret_stats["accuracy"])
+        logger.info("  Precision@1: {:.3f}", ret_stats["precision@1"])
+    
+    if summary.get("business_stats"):
+        bus_stats = summary["business_stats"]
+        logger.info("")
+        logger.info("💼 业务工具调用统计:")
+        logger.info("  样本数: {}", bus_stats["count"])
+        logger.info("  Accuracy: {:.3f}", bus_stats["accuracy"])
+        logger.info("  Precision@1: {:.3f}", bus_stats["precision@1"])
     
     # 详细的Recall统计
     recall_samples = [r for r in results if r.recall is not None]

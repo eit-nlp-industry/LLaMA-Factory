@@ -34,6 +34,7 @@ MAX_SAMPLES = 100000  # 最大样本数
 # 批次配置
 PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
 GRADIENT_ACCUMULATION_STEPS = 8  # 梯度累积步数（有效batch size = 1 × 8 = 8）
+PER_DEVICE_EVAL_BATCH_SIZE = 1  # 评估批次大小（建议设为1以节省评估时的内存）
 LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
 WARMUP_RATIO = 0.05  # Warmup比例（5%）
 
@@ -229,6 +230,7 @@ def create_training_command(output_dir=None, model_path=None):
         
         # 批次配置
         "--per_device_train_batch_size", str(PER_DEVICE_TRAIN_BATCH_SIZE),
+        "--per_device_eval_batch_size", str(PER_DEVICE_EVAL_BATCH_SIZE),
         "--gradient_accumulation_steps", str(GRADIENT_ACCUMULATION_STEPS),
         "--lr_scheduler_type", LR_SCHEDULER_TYPE,
         "--warmup_ratio", str(WARMUP_RATIO),
