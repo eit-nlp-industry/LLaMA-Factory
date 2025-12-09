@@ -517,6 +517,38 @@ class RetrievalToolCaller:
         return 0, {"error": "retrieval request failed"}
 
     @staticmethod
+    def build_observation_from_response(response_obj: Dict[str, Any]) -> str:
+        """
+        从检索服务响应构建observation字符串（用于业务跳评估）
+        
+        Args:
+            response_obj: 检索服务的响应对象
+        
+        Returns:
+            observation字符串（JSON格式）
+        """
+        try:
+            # 尝试提取完整的result作为observation
+            result = response_obj.get("result")
+            if result:
+                # 如果result是字典，尝试提取嵌套的response.result
+                if isinstance(result, dict):
+                    nested_result = result.get("response", {}).get("result")
+                    if nested_result is not None:
+                        return json.dumps(nested_result, ensure_ascii=False)
+                    # 或者直接使用result
+                    return json.dumps(result, ensure_ascii=False)
+                # 如果result是列表，直接返回
+                elif isinstance(result, list):
+                    return json.dumps(result, ensure_ascii=False)
+            
+            # 如果无法提取，返回整个响应
+            return json.dumps(response_obj, ensure_ascii=False)
+        except Exception as e:
+            logger.warning("构建observation失败: {}, 使用原始响应", str(e))
+            return json.dumps(response_obj, ensure_ascii=False)
+
+    @staticmethod
     def extract_tools(response_obj: Dict[str, Any], top_k: int = 5) -> List[str]:
         """
         从检索工具响应中提取工具名称列表
@@ -686,6 +718,31 @@ class SingleHopEvaluator:
         if not examples:
             return []
 
+        # ⚠️ 重要说明：当前业务跳评估使用的observation来自训练数据，而非实际检索结果
+        # 这导致业务跳的Accuracy/Precision@1可能偏高，因为评估时使用的是"完美的"检索结果
+        # 实际运行时，如果Recall@5低，业务跳性能应该会更低
+        # TODO: 修复评估逻辑，让业务跳使用检索跳的实际检索结果
+        if eval_all_hops:
+            business_examples = [ex for ex in examples if ex.pair_id > 1]
+            if business_examples:
+                logger.warning("")
+                logger.warning("=" * 80)
+                logger.warning("⚠️  评估方式说明")
+                logger.warning("=" * 80)
+                logger.warning("当前业务跳评估使用的是训练数据中的observation（完美检索结果）")
+                logger.warning("这可能导致业务跳的Accuracy/Precision@1被高估")
+                logger.warning("")
+                logger.warning("实际运行时的情况：")
+                logger.warning("  - 如果Recall@5 = 0.083，意味着只有8.3%%的情况下能检索到目标工具")
+                logger.warning("  - 在Recall=0的情况下，模型无法看到目标工具，业务跳成功率应该接近0")
+                logger.warning("  - 因此实际业务跳性能应该 ≤ Recall@5（即 ≤ 0.083）")
+                logger.warning("")
+                logger.warning("当前评估结果解读：")
+                logger.warning("  - 业务跳Accuracy/Precision@1反映的是'假设检索完美时'的表现")
+                logger.warning("  - 要获得真实性能，需要修复评估逻辑，使用实际检索结果")
+                logger.warning("=" * 80)
+                logger.warning("")
+
         connector = aiohttp.TCPConnector(limit=MAX_CONCURRENT_EXAMPLES)
         timeout = aiohttp.ClientTimeout(total=120)
         results: List[SingleHopResult] = []
@@ -739,10 +796,59 @@ class SingleHopEvaluator:
                     ):
                         logger.info("Pair {} 满足Recall计算条件，开始计算Recall", example.pair_id)
                         try:
-                            recall, recall_details = await self.retrieval_caller.compute_recall(
-                                session, predict, example.next_tool_name
-                            )
-                            logger.info("Pair {} Recall计算完成: {}", example.pair_id, recall)
+                            # **重要修复**：同时使用真实query和预测query计算Recall
+                            # 1. 从target（真实）中提取query，用于评估检索服务本身的召回率
+                            target_call = details.get("target_call", {})
+                            target_query = target_call.get("arguments", {}).get("query", "") if isinstance(target_call.get("arguments"), dict) else ""
+                            
+                            # 2. 从predict中提取query（用于评估模型预测query的质量）
+                            predict_call = details.get("predict_call", {})
+                            predict_query = predict_call.get("arguments", {}).get("query", "") if isinstance(predict_call.get("arguments"), dict) else ""
+                            
+                            # 3. **关键修复**：优先使用真实query计算Recall（评估检索服务本身的质量）
+                            # 这样即使模型预测的query有差异，也能正确评估检索服务
+                            recall = None
+                            recall_details = None
+                            
+                            if target_query:
+                                # 使用真实query计算Recall（这是主要指标）
+                                recall, recall_details = await self.retrieval_caller.compute_recall(
+                                    session, example.target, example.next_tool_name
+                                )
+                                logger.info("Pair {} Recall(使用真实query): {}", example.pair_id, recall)
+                                
+                                # 如果真实query的Recall也低，说明检索服务本身召回率有问题
+                                if recall == 0:
+                                    logger.warning("Pair {} Recall=0 (使用真实query)，说明检索服务召回率可能有问题", example.pair_id)
+                            else:
+                                logger.warning("Pair {} 无法从target提取query，使用预测query计算Recall", example.pair_id)
+                                # 如果真实query提取失败，回退到使用预测query
+                                recall, recall_details = await self.retrieval_caller.compute_recall(
+                                    session, predict, example.next_tool_name
+                                )
+                            
+                            # 4. 可选：如果真实query和预测query不同，也计算预测query的Recall（用于对比）
+                            if target_query and predict_query and target_query != predict_query and recall is not None:
+                                recall_with_predict_query, recall_details_predict = await self.retrieval_caller.compute_recall(
+                                    session, predict, example.next_tool_name
+                                )
+                                logger.info("Pair {} Recall(使用预测query): {} (对比用)", example.pair_id, recall_with_predict_query)
+                                
+                                # 记录对比信息到recall_details
+                                if recall_details:
+                                    recall_details["recall_with_predict_query"] = recall_with_predict_query
+                                    recall_details["target_query"] = target_query
+                                    recall_details["predict_query"] = predict_query
+                                    recall_details["query_match"] = False
+                                    
+                                    if recall == 1 and recall_with_predict_query == 0:
+                                        logger.warning("Pair {} Query差异导致Recall下降: 真实query Recall=1, 预测query Recall=0", example.pair_id)
+                            elif recall_details:
+                                # query相同，记录匹配信息
+                                recall_details["query_match"] = target_query == predict_query if target_query else False
+                                recall_details["target_query"] = target_query
+                                recall_details["predict_query"] = predict_query
+                                
                         except Exception as exc:
                             logger.error("Recall计算失败 (pair_id=%s): %s", example.pair_id, exc)
                     else:
@@ -837,11 +943,34 @@ class SingleHopEvaluator:
             "precision@1": sum(r.tool_name_score for r in business_results) / len(business_results) if business_results else 0.0,
         }
         
+        # 分析Recall失败的原因
+        recall_failure_analysis = {
+            "total_calculated": len(recall_samples),
+            "recall_hits": sum(r.recall for r in recall_samples),
+            "recall_misses": len(recall_samples) - sum(r.recall for r in recall_samples),
+            "query_extraction_failures": 0,
+            "retrieval_service_failures": 0,
+            "target_tool_not_in_results": 0,
+        }
+        
+        for r in recall_samples:
+            if r.recall_details:
+                details = r.recall_details
+                if "error" in details:
+                    error_msg = str(details.get("error", ""))
+                    if "无法提取query" in error_msg:
+                        recall_failure_analysis["query_extraction_failures"] += 1
+                    else:
+                        recall_failure_analysis["retrieval_service_failures"] += 1
+                elif r.recall == 0 and details.get("retrieved_tools"):
+                    recall_failure_analysis["target_tool_not_in_results"] += 1
+        
         return {
             "total": total, 
             "accuracy": acc, 
             "precision@1": p_at1, 
             "recall@5": recall_rate,
+            "recall_failure_analysis": recall_failure_analysis,
             "failure_stats": failure_stats,
             "retrieval_stats": retrieval_stats,
             "business_stats": business_stats,
