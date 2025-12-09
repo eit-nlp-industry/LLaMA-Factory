@@ -335,12 +335,21 @@ def validate_retrieval_tool_call(conversations):
                     retrieval_index = i
                     # 验证参数
                     args = value.get("arguments", {})
-                    if "query" not in args or "source_filter" not in args or "user_id" not in args:
-                        print(f"⚠️  警告: retrieval_tool缺少必需参数 (索引 {i})")
+                    missing_params = []
+                    if "query" not in args:
+                        missing_params.append("query")
+                    if "source_filter" not in args:
+                        missing_params.append("source_filter")
+                    if "user_id" not in args:
+                        missing_params.append("user_id")
+                    
+                    if missing_params:
+                        print(f"⚠️  警告: retrieval_tool缺少必需参数 {missing_params} (消息索引 {i})")
+                    
                     if args.get("source_filter") != "toollist":
-                        print(f"⚠️  警告: retrieval_tool的source_filter应为'toollist' (索引 {i})")
+                        print(f"⚠️  警告: retrieval_tool的source_filter应为'toollist'，当前为'{args.get('source_filter')}' (消息索引 {i})")
                     break
-            except:
+            except Exception as e:
                 pass
     
     return has_retrieval, retrieval_index

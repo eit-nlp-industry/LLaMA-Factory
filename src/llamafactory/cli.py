@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import shutil
 import subprocess
 import sys
 from copy import deepcopy
@@ -33,6 +34,16 @@ USAGE = (
     + "|   llamafactory-cli version: show version info                      |\n"
     + "-" * 70
 )
+
+
+def _get_torchrun_command():
+    """Get torchrun command, fallback to python -m torch.distributed.run if torchrun is not found"""
+    torchrun_path = shutil.which("torchrun")
+    if torchrun_path:
+        return ["torchrun"]
+    else:
+        # Fallback to python -m torch.distributed.run
+        return [sys.executable, "-m", "torch.distributed.run"]
 
 
 def main():
@@ -97,6 +108,8 @@ def main():
             env["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
             env["TORCH_NCCL_AVOID_RECORD_STREAMS"] = "1"
 
+        torchrun_cmd = _get_torchrun_command()
+        
         if rdzv_id is not None:
             # launch elastic job with fault tolerant support when possible
             # see also https://docs.pytorch.org/docs/stable/elastic/train_script.html
@@ -105,43 +118,34 @@ def main():
             if min_nnodes is not None and max_nnodes is not None:
                 rdzv_nnodes = f"{min_nnodes}:{max_nnodes}"
 
+            cmd = torchrun_cmd + [
+                "--nnodes", str(rdzv_nnodes),
+                "--nproc-per-node", str(nproc_per_node),
+                "--rdzv-id", str(rdzv_id),
+                "--rdzv-backend", "c10d",
+                "--rdzv-endpoint", f"{master_addr}:{master_port}",
+                "--max-restarts", str(max_restarts),
+                launcher.__file__
+            ] + sys.argv[1:]
+            
             process = subprocess.run(
-                (
-                    "torchrun --nnodes {rdzv_nnodes} --nproc-per-node {nproc_per_node} "
-                    "--rdzv-id {rdzv_id} --rdzv-backend c10d --rdzv-endpoint {master_addr}:{master_port} "
-                    "--max-restarts {max_restarts} {file_name} {args}"
-                )
-                .format(
-                    rdzv_nnodes=rdzv_nnodes,
-                    nproc_per_node=nproc_per_node,
-                    rdzv_id=rdzv_id,
-                    master_addr=master_addr,
-                    master_port=master_port,
-                    max_restarts=max_restarts,
-                    file_name=launcher.__file__,
-                    args=" ".join(sys.argv[1:]),
-                )
-                .split(),
+                cmd,
                 env=env,
                 check=True,
             )
         else:
             # NOTE: DO NOT USE shell=True to avoid security risk
+            cmd = torchrun_cmd + [
+                "--nnodes", str(nnodes),
+                "--node-rank", str(node_rank),
+                "--nproc-per-node", str(nproc_per_node),
+                "--master-addr", str(master_addr),
+                "--master-port", str(master_port),
+                launcher.__file__
+            ] + sys.argv[1:]
+            
             process = subprocess.run(
-                (
-                    "torchrun --nnodes {nnodes} --node_rank {node_rank} --nproc_per_node {nproc_per_node} "
-                    "--master_addr {master_addr} --master_port {master_port} {file_name} {args}"
-                )
-                .format(
-                    nnodes=nnodes,
-                    node_rank=node_rank,
-                    nproc_per_node=nproc_per_node,
-                    master_addr=master_addr,
-                    master_port=master_port,
-                    file_name=launcher.__file__,
-                    args=" ".join(sys.argv[1:]),
-                )
-                .split(),
+                cmd,
                 env=env,
                 check=True,
             )
