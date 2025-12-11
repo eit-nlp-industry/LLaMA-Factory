@@ -308,6 +308,8 @@ def main():
                        help="跳过数据增强（覆盖AUTO_ENHANCE_DATA）")
     parser.add_argument("--dry_run", action="store_true",
                        help="只显示命令，不执行")
+    parser.add_argument("--resume_from_checkpoint", type=str, default=None,
+                       help="继续训练的checkpoint路径，透传给llamafactory-cli")
     
     args = parser.parse_args()
     
@@ -338,6 +340,8 @@ def main():
     # 4. 创建训练命令（使用脚本顶部的配置）
     print("\\n⚙️  准备训练命令...")
     cmd, output_dir = create_training_command(args.output_dir, args.model_path)
+    if args.resume_from_checkpoint:
+        cmd += ["--resume_from_checkpoint", args.resume_from_checkpoint]
     
     print(f"\\n📊 训练配置（来自脚本顶部配置）:")
     print(f"   模型路径: {args.model_path or MODEL_PATH}")
