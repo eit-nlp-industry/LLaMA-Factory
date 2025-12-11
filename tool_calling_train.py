@@ -33,7 +33,7 @@ MAX_SAMPLES = 100000  # 最大样本数
 
 # 批次配置
 PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
-GRADIENT_ACCUMULATION_STEPS = 8  # 梯度累积步数（有效batch size = 1 × 8 = 8）
+GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（小改动：换时间省显存，有效batch=1×16）
 PER_DEVICE_EVAL_BATCH_SIZE = 1  # 评估批次大小（建议设为1以节省评估时的内存）
 LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
 WARMUP_RATIO = 0.05  # Warmup比例（5%）
@@ -63,6 +63,7 @@ DATALOADER_NUM_WORKERS = 4  # 数据加载工作进程数
 FLASH_ATTN = "auto"  # Flash attention设置
 GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
 BF16 = True  # 是否使用bf16精度
+OPTIMIZER = "adamw_bnb_8bit"  # 小改动：8bit优化器，换时间省显存
 
 # CUDA配置
 CUDA_VISIBLE_DEVICES = "4,5"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "4,5"（双卡训练可减少单卡内存压力）
@@ -71,6 +72,12 @@ CUDA_VISIBLE_DEVICES = "4,5"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "4,5"
 AUTO_VALIDATE_DATA = True  # 自动验证数据
 AUTO_ENHANCE_DATA = True  # 自动增强数据（应用增强的系统提示）
 SKIP_IF_ENHANCED_EXISTS = True  # 如果增强数据已存在则跳过
+
+# 备份配置（便于有空闲显存时回退）
+BACKUP_BASE_CONFIG = {
+    "GRADIENT_ACCUMULATION_STEPS": 8,
+    "OPTIMIZER": "adamw_torch",
+}
 
 # ============================================================================
 # 以下为脚本逻辑，通常不需要修改
@@ -260,7 +267,7 @@ def create_training_command(output_dir=None, model_path=None):
         "--trust_remote_code", "True",
         "--ddp_timeout", "180000000",
         "--include_num_input_tokens_seen", "True",
-        "--optim", "adamw_torch",
+        "--optim", OPTIMIZER,
         "--lora_target", LORA_TARGET,
         "--gradient_checkpointing", str(GRADIENT_CHECKPOINTING),
         
