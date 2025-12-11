@@ -27,8 +27,8 @@ TRAIN_DATA_PATH = "data/dataset/12_08/train.json"  # 训练数据路径
 TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
 
 # 学习率和训练配置
-LEARNING_RATE = 3.5e-5  # 学习率
-NUM_TRAIN_EPOCHS = 10.0  # 训练轮数
+LEARNING_RATE = 2e-5  # 学习率（方案A：稍降学习率，再跑少量epoch）
+NUM_TRAIN_EPOCHS = 3.0  # 训练轮数（方案A：追加2-3轮微调，可视需要再调）
 MAX_SAMPLES = 100000  # 最大样本数
 
 # 批次配置
@@ -45,7 +45,7 @@ WEIGHT_DECAY = 0.01  # 权重衰减
 # LoRA配置
 LORA_RANK = 32  # LoRA rank
 LORA_ALPHA = 64  # LoRA alpha（通常设为rank的2倍）
-LORA_DROPOUT = 0.05  # LoRA dropout
+LORA_DROPOUT = 0.02  # LoRA dropout（方案A：降低以利过拟合）
 LORA_TARGET = "all"  # LoRA目标层
 
 # 训练设置
