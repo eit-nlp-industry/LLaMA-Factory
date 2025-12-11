@@ -28,7 +28,7 @@ TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
 
 # 学习率和训练配置
 LEARNING_RATE = 1e-5  # 学习率（为精确拟合再降一档）
-NUM_TRAIN_EPOCHS = 2.0  # 训练轮数（短程再训，可按需上调）
+NUM_TRAIN_EPOCHS = 12.0  # 训练轮数（充分训练，允许过拟合以达到训练集高准确率）
 MAX_SAMPLES = 100000  # 最大样本数
 
 # 批次配置
