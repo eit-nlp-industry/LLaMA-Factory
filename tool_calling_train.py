@@ -27,13 +27,13 @@ TRAIN_DATA_PATH = "data/dataset/12_08/train.json"  # 训练数据路径
 TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
 
 # 学习率和训练配置
-LEARNING_RATE = 2e-5  # 学习率（方案A：稍降学习率，再跑少量epoch）
-NUM_TRAIN_EPOCHS = 3.0  # 训练轮数（方案A：追加2-3轮微调，可视需要再调）
+LEARNING_RATE = 1e-5  # 学习率（为精确拟合再降一档）
+NUM_TRAIN_EPOCHS = 2.0  # 训练轮数（短程再训，可按需上调）
 MAX_SAMPLES = 100000  # 最大样本数
 
 # 批次配置
 PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
-GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（小改动：换时间省显存，有效batch=1×16）
+GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（换时间省显存，有效batch=1×16）
 PER_DEVICE_EVAL_BATCH_SIZE = 1  # 评估批次大小（建议设为1以节省评估时的内存）
 LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
 WARMUP_RATIO = 0.05  # Warmup比例（5%）
@@ -45,8 +45,9 @@ WEIGHT_DECAY = 0.01  # 权重衰减
 # LoRA配置
 LORA_RANK = 32  # LoRA rank
 LORA_ALPHA = 64  # LoRA alpha（通常设为rank的2倍）
-LORA_DROPOUT = 0.02  # LoRA dropout（方案A：降低以利过拟合）
-LORA_TARGET = "all"  # LoRA目标层
+LORA_DROPOUT = 0.0  # LoRA dropout（进一步利于过拟合）
+# 仅挂核心注意力/MLP，减少噪声、集中学习
+LORA_TARGET = "q_proj,v_proj,k_proj,o_proj,gate_proj,up_proj,down_proj"
 
 # 训练设置
 CUTOFF_LEN = 8192  # 序列最大长度（如果OOM，可尝试降低到4096或2048）
@@ -63,7 +64,7 @@ DATALOADER_NUM_WORKERS = 4  # 数据加载工作进程数
 FLASH_ATTN = "auto"  # Flash attention设置
 GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
 BF16 = True  # 是否使用bf16精度
-OPTIMIZER = "adamw_bnb_8bit"  # 小改动：8bit优化器，换时间省显存
+OPTIMIZER = "adamw_torch"  # 回退常规优化器，避免 bnb 依赖问题
 
 # CUDA配置
 CUDA_VISIBLE_DEVICES = "4,5"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "4,5"（双卡训练可减少单卡内存压力）
@@ -73,10 +74,14 @@ AUTO_VALIDATE_DATA = True  # 自动验证数据
 AUTO_ENHANCE_DATA = True  # 自动增强数据（应用增强的系统提示）
 SKIP_IF_ENHANCED_EXISTS = True  # 如果增强数据已存在则跳过
 
-# 备份配置（便于有空闲显存时回退）
+# 备份配置（便于回退/对比）
 BACKUP_BASE_CONFIG = {
-    "GRADIENT_ACCUMULATION_STEPS": 8,
-    "OPTIMIZER": "adamw_torch",
+    "GRADIENT_ACCUMULATION_STEPS": 16,
+    "OPTIMIZER": "adamw_bnb_8bit",
+    "LEARNING_RATE": 2e-5,
+    "LORA_DROPOUT": 0.02,
+    "LORA_TARGET": "all",
+    "NUM_TRAIN_EPOCHS": 3.0,
 }
 
 # ============================================================================
