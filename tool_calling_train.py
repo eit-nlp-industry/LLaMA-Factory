@@ -77,10 +77,18 @@ DATALOADER_NUM_WORKERS = 4  # 数据加载工作进程数
 FLASH_ATTN = "auto"  # Flash attention设置
 GRADIENT_CHECKPOINTING = True  # 是否启用梯度检查点
 BF16 = True  # 是否使用bf16精度
-OPTIMIZER = "adamw_torch"  # 回退常规优化器，避免 bnb 依赖问题
+OPTIMIZER = "adamw_torch"  # 优化器: "adamw_torch" 或 "adamw_bnb_8bit" (8-bit优化器可节省内存)
+
+# 内存优化配置
+# 方案1: 使用 DeepSpeed ZeRO-3 (推荐，内存节省最多，但需要安装 deepspeed)
+USE_DEEPSPEED = True  # 是否启用 DeepSpeed ZeRO-3
+DEEPSPEED_CONFIG = "examples/deepspeed/ds_z3_config.json"  # DeepSpeed 配置文件路径
+
+# 方案2: 使用 8-bit 优化器 (简单，但节省较少，需要安装 bitsandbytes)
+# 如果 USE_DEEPSPEED=False，可以设置 OPTIMIZER="adamw_bnb_8bit" 来启用 8-bit 优化器
 
 # CUDA配置
-CUDA_VISIBLE_DEVICES = "4,5"  # 使用的GPU设备，如 "0" 或 "0,1" 或 "4,5"（双卡训练可减少单卡内存压力）
+CUDA_VISIBLE_DEVICES = "6"  # 使用的GPU设备，单卡训练使用 "6"
 
 # 自动执行选项
 AUTO_VALIDATE_DATA = True  # 自动验证数据
@@ -226,6 +234,39 @@ def update_dataset_info_for_enhanced(enhanced_path):
     
     print(f"✅ 已更新 {dataset_info_path}")
 
+def create_deepspeed_config(config_path):
+    """创建 DeepSpeed ZeRO-3 配置文件"""
+    config_dir = Path(config_path).parent
+    config_dir.mkdir(parents=True, exist_ok=True)
+    
+    ds_config = {
+        "train_batch_size": "auto",
+        "train_micro_batch_size_per_gpu": "auto",
+        "gradient_accumulation_steps": "auto",
+        "gradient_clipping": "auto",
+        "zero_allow_untested_optimizer": True,
+        "bf16": {
+            "enabled": "auto"
+        },
+        "zero_optimization": {
+            "stage": 3,
+            "overlap_comm": False,
+            "contiguous_gradients": True,
+            "sub_group_size": 1e9,
+            "reduce_bucket_size": "auto",
+            "stage3_prefetch_bucket_size": "auto",
+            "stage3_param_persistence_threshold": "auto",
+            "stage3_max_live_parameters": 1e9,
+            "stage3_max_reuse_distance": 1e9,
+            "stage3_gather_16bit_weights_on_model_save": True
+        }
+    }
+    
+    with open(config_path, 'w', encoding='utf-8') as f:
+        json.dump(ds_config, f, indent=2, ensure_ascii=False)
+    
+    print(f"✅ 已创建 DeepSpeed ZeRO-3 配置文件: {config_path}")
+
 def create_training_command(output_dir=None, model_path=None):
     """创建训练命令，使用脚本顶部的超参数配置"""
     
@@ -304,6 +345,17 @@ def create_training_command(output_dir=None, model_path=None):
         "--seed", "42",
         "--save_total_limit", str(SAVE_TOTAL_LIMIT),
     ]
+    
+    # 添加 DeepSpeed 配置（如果启用）
+    if USE_DEEPSPEED:
+        # 检查配置文件是否存在
+        if not Path(DEEPSPEED_CONFIG).exists():
+            print(f"⚠️  DeepSpeed 配置文件不存在: {DEEPSPEED_CONFIG}")
+            print(f"   将使用默认的 DeepSpeed ZeRO-3 配置")
+            # 创建默认的 DeepSpeed ZeRO-3 配置
+            create_deepspeed_config(DEEPSPEED_CONFIG)
+        cmd.append("--deepspeed")
+        cmd.append(DEEPSPEED_CONFIG)
     
     return cmd, final_output_dir
 
@@ -389,6 +441,10 @@ def main():
     print(f"   评估频率: 每 {EVAL_STEPS} 步评估一次")
     print(f"   最佳模型保存: {LOAD_BEST_MODEL_AT_END} (基于 {METRIC_FOR_BEST_MODEL})")
     print(f"   保留checkpoint数: {SAVE_TOTAL_LIMIT}")
+    if USE_DEEPSPEED:
+        print(f"   DeepSpeed ZeRO-3: 已启用 (配置文件: {DEEPSPEED_CONFIG})")
+    if OPTIMIZER == "adamw_bnb_8bit":
+        print(f"   8-bit 优化器: 已启用")
     print(f"\\n   💡 预期效果:")
     print(f"      - 训练集指标: 0.95-0.99 (非常好看)")
     print(f"      - 验证集指标: 可能下降 (过拟合)")
@@ -403,6 +459,11 @@ def main():
     if CUDA_VISIBLE_DEVICES:
         os.environ["CUDA_VISIBLE_DEVICES"] = CUDA_VISIBLE_DEVICES
         print(f"\\n🎮 设置CUDA设备: {CUDA_VISIBLE_DEVICES}")
+    
+    # 5.5. 如果启用 DeepSpeed，设置 FORCE_TORCHRUN（DeepSpeed 需要 torchrun）
+    if USE_DEEPSPEED:
+        os.environ["FORCE_TORCHRUN"] = "1"
+        print(f"\\n⚙️  启用 DeepSpeed，已设置 FORCE_TORCHRUN=1")
     
     # 6. 执行训练
     print(f"\\n🚀 开始训练...")
