@@ -48,6 +48,11 @@ if not DISABLE_RECALL and SINGLEHOP_RETRIEVAL_ENDPOINT:
 # 并发配置（旧模板数据普遍较小，默认串行，可通过环境变量调整）
 MAX_CONCURRENT_EXAMPLES = int(os.getenv("SINGLEHOP_MAX_CONCURRENT", "5"))
 
+# 业务跳评估配置：是否使用训练数据中的observation（而非实际检索结果）
+# 设置为True时，业务跳评估使用训练数据中的observation，消除分布不匹配问题
+# 适合测试过拟合效果和模型对训练数据的记忆程度
+USE_TRAINING_DATA_OBSERVATION = os.getenv("SINGLEHOP_USE_TRAINING_OBSERVATION", "false").lower() in ("true", "1", "yes")
+
 
 @dataclass
 class SingleHopExample:
@@ -998,7 +1003,11 @@ class SingleHopEvaluator:
                             # 获取关联检索跳的实际检索结果
                             actual_observation = None
                             used_actual_retrieval = False
-                            if ex.related_retrieval_pair_id > 0:
+                            
+                            # 如果配置为使用训练数据observation，直接跳过实际检索
+                            if USE_TRAINING_DATA_OBSERVATION:
+                                logger.info("业务跳 Pair {} 使用训练数据中的observation（配置启用：USE_TRAINING_DATA_OBSERVATION=True）", ex.pair_id)
+                            elif ex.related_retrieval_pair_id > 0:
                                 cache_key = (ex.conversation_id, ex.related_retrieval_pair_id)
                                 if cache_key in final_retrieval_cache:
                                     _, retrieval_response, _ = final_retrieval_cache[cache_key]
@@ -1016,8 +1025,8 @@ class SingleHopEvaluator:
                                     logger.warning("业务跳 Pair {} 找不到关联的检索跳 {} 的缓存，使用训练数据中的observation", 
                                                  ex.pair_id, ex.related_retrieval_pair_id)
                             
-                            # 如果有实际检索结果，重新构建prompt
-                            if actual_observation and used_actual_retrieval:
+                            # 如果有实际检索结果且未配置使用训练数据，重新构建prompt
+                            if actual_observation and used_actual_retrieval and not USE_TRAINING_DATA_OBSERVATION:
                                 # 替换user_prompt中的observation
                                 # 查找最后一个"工具返回:"并替换其后的内容
                                 pattern = r"工具返回:.*$"
@@ -1353,6 +1362,10 @@ async def main():
     logger.info("严格模式: {}", "启用" if args.strict_mode else "禁用（使用原有逻辑）")
     if args.strict_mode:
         logger.info("  ⚠️ 严格模式：参数评估仅在工具名匹配时进行，参数必须完全匹配才得分")
+    logger.info("业务跳使用训练数据observation: {}", "是" if USE_TRAINING_DATA_OBSERVATION else "否（使用实际检索结果）")
+    if USE_TRAINING_DATA_OBSERVATION:
+        logger.info("  ⚠️  此模式用于测试过拟合效果，评估模型对训练数据的记忆程度")
+        logger.info("  ⚠️  不适合评估模型的真实应用能力和泛化能力")
     logger.info("=" * 60)
     
     # ========== 自检机制 ==========
