@@ -18,14 +18,6 @@ from pathlib import Path
 # ============================================================================
 # 超参数配置区域 - 在这里直接修改训练参数
 # ============================================================================
-#
-# ⚠️ 过拟合实验配置 ⚠️
-# 本配置专门用于学习过拟合现象和各参数的作用
-# 预期效果：训练集指标会非常好看（0.95-0.99），但验证集指标可能下降
-# 目的：通过实验理解过拟合的含义和影响
-#
-# 如需恢复正常配置，请从 backups/ 目录恢复备份文件
-# ============================================================================
 
 # 模型和数据集配置
 MODEL_PATH = "/data/models/Qwen3-8B"  # 模型路径
@@ -34,26 +26,26 @@ TEST_DATASET_NAME = "tool_calling_12_08_test"  # 测试数据集名称
 TRAIN_DATA_PATH = "data/dataset/12_08/train.json"  # 训练数据路径
 TEST_DATA_PATH = "data/dataset/12_08/test.json"  # 测试数据路径
 
-# 学习率和训练配置（过拟合优化）
-LEARNING_RATE = 5e-6  # 学习率（从1e-5降低到5e-6，更精细拟合，便于记忆训练数据）
-NUM_TRAIN_EPOCHS = 20.0  # 训练轮数（从12增加到20，充分过拟合训练集）
+# 学习率和训练配置
+LEARNING_RATE = 1e-5  # 学习率（为精确拟合再降一档）
+NUM_TRAIN_EPOCHS = 12.0  # 训练轮数（充分训练，允许过拟合以达到训练集高准确率）
 MAX_SAMPLES = 100000  # 最大样本数
 
-# 批次配置（过拟合优化）
+# 批次配置
 PER_DEVICE_TRAIN_BATCH_SIZE = 1  # 单设备批次大小
-GRADIENT_ACCUMULATION_STEPS = 32  # 梯度累积步数（从16增加到32，更频繁的梯度更新，有效batch=1×32）
+GRADIENT_ACCUMULATION_STEPS = 16  # 梯度累积步数（换时间省显存，有效batch=1×16）
 PER_DEVICE_EVAL_BATCH_SIZE = 1  # 评估批次大小（建议设为1以节省评估时的内存）
-LR_SCHEDULER_TYPE = "constant"  # 学习率调度器类型（从"cosine"改为"constant"，保持恒定学习率，不衰减）
-WARMUP_RATIO = 0.0  # Warmup比例（从0.05改为0.0，关闭warmup，立即开始学习）
+LR_SCHEDULER_TYPE = "cosine"  # 学习率调度器类型
+WARMUP_RATIO = 0.05  # Warmup比例（5%）
 
-# 正则化和稳定性（过拟合优化：关闭所有正则化）
-MAX_GRAD_NORM = 10.0  # 梯度裁剪阈值（从0.5增加到10.0，几乎不裁剪梯度，允许更大的参数更新）
-WEIGHT_DECAY = 0.0  # 权重衰减（从0.01改为0.0，关闭权重衰减，允许模型自由记忆）
+# 正则化和稳定性
+MAX_GRAD_NORM = 0.5  # 梯度裁剪阈值
+WEIGHT_DECAY = 0.01  # 权重衰减
 
-# LoRA配置（过拟合优化：提高模型容量）
-LORA_RANK = 128  # LoRA rank（从32增加到128，提高模型表达能力，便于记忆更多训练数据）
-LORA_ALPHA = 256  # LoRA alpha（从64增加到256，保持2倍关系，增强LoRA的影响）
-LORA_DROPOUT = 0.0  # LoRA dropout（从0.05改为0.0，完全关闭dropout，允许模型完全记忆）
+# LoRA配置
+LORA_RANK = 32  # LoRA rank
+LORA_ALPHA = 64  # LoRA alpha（通常设为rank的2倍）
+LORA_DROPOUT = 0.05  # LoRA dropout（增加正则化，防止过拟合，从0.0调整为0.05）
 # 仅挂核心注意力/MLP，减少噪声、集中学习
 LORA_TARGET = "q_proj,v_proj,k_proj,o_proj,gate_proj,up_proj,down_proj"
 
@@ -377,22 +369,16 @@ def main():
     print(f"   模型路径: {args.model_path or MODEL_PATH}")
     print(f"   输出目录: {output_dir}")
     print(f"   数据集: {DATASET_NAME}")
-    print(f"   学习率: {LEARNING_RATE} (降低，更精细拟合)")
-    print(f"   训练轮数: {NUM_TRAIN_EPOCHS} (增加，充分过拟合)")
-    print(f"   LoRA rank: {LORA_RANK}, alpha: {LORA_ALPHA}, dropout: {LORA_DROPOUT} (提高容量，关闭正则化)")
-    print(f"   有效batch size: {PER_DEVICE_TRAIN_BATCH_SIZE} × {GRADIENT_ACCUMULATION_STEPS} = {PER_DEVICE_TRAIN_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS} (增加，更频繁更新)")
-    print(f"   梯度裁剪: {MAX_GRAD_NORM} (放宽，几乎不裁剪)")
-    print(f"   权重衰减: {WEIGHT_DECAY} (关闭，允许自由记忆)")
-    print(f"   学习率调度: {LR_SCHEDULER_TYPE} (恒定，不衰减)")
-    print(f"   Warmup比例: {WARMUP_RATIO} (关闭)")
+    print(f"   学习率: {LEARNING_RATE}")
+    print(f"   训练轮数: {NUM_TRAIN_EPOCHS}")
+    print(f"   LoRA rank: {LORA_RANK}, alpha: {LORA_ALPHA}, dropout: {LORA_DROPOUT}")
+    print(f"   有效batch size: {PER_DEVICE_TRAIN_BATCH_SIZE} × {GRADIENT_ACCUMULATION_STEPS} = {PER_DEVICE_TRAIN_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS}")
+    print(f"   梯度裁剪: {MAX_GRAD_NORM}")
+    print(f"   权重衰减: {WEIGHT_DECAY}")
     print(f"   保存频率: 每 {SAVE_STEPS} 步保存一次")
     print(f"   评估频率: 每 {EVAL_STEPS} 步评估一次")
     print(f"   最佳模型保存: {LOAD_BEST_MODEL_AT_END} (基于 {METRIC_FOR_BEST_MODEL})")
     print(f"   保留checkpoint数: {SAVE_TOTAL_LIMIT}")
-    print(f"\\n   💡 预期效果:")
-    print(f"      - 训练集指标: 0.95-0.99 (非常好看)")
-    print(f"      - 验证集指标: 可能下降 (过拟合)")
-    print(f"      - 目的: 学习过拟合的含义和各参数的作用")
     
     if args.dry_run:
         print(f"\\n📜 训练命令（dry-run模式）:")
