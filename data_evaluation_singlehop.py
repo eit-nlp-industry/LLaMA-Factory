@@ -73,12 +73,24 @@ class SingleHopResult:
     details: Dict[str, Any]
     recall: Optional[int] = None
     recall_details: Optional[Dict[str, Any]] = None
+    arg_match: Optional[int] = None  # 严格模式下的参数匹配：1=完全匹配，0=不匹配，None=跳过评估
 
 
 class ToolCallEvaluator:
     """基础的工具调用评估（与多跳版保持一致简化版）"""
 
     IGNORED_FIELDS = {"user_id", "trace_id", "top_k"}
+
+    def __init__(self, strict_mode: bool = False):
+        """
+        初始化评估器
+        
+        Args:
+            strict_mode: 是否启用严格模式
+                - False (默认): 原有逻辑，工具名匹配0.5分 + 参数匹配0.5分（按比例）
+                - True: 严格模式，只有在工具名匹配时才计算参数，参数必须完全匹配才得分
+        """
+        self.strict_mode = strict_mode
 
     def extract_tool_call(self, text: str) -> Dict[str, Any]:
         text = text.strip()
@@ -94,7 +106,17 @@ class ToolCallEvaluator:
             pass
         return {}
 
-    def evaluate(self, target: str, predict: str) -> tuple[float, float, Dict[str, Any]]:
+    def evaluate(self, target: str, predict: str) -> tuple[float, float, Dict[str, Any], Optional[int]]:
+        """
+        评估工具调用
+        
+        Returns:
+            (score, tool_name_score, details, arg_match)
+            - score: 综合得分（原有逻辑）
+            - tool_name_score: 工具名匹配得分（1.0或0.0）
+            - details: 详细评估信息
+            - arg_match: 严格模式下的参数匹配（1=完全匹配，0=不匹配，None=跳过评估）
+        """
         target_call = self.extract_tool_call(target)
         predict_call = self.extract_tool_call(predict)
 
@@ -111,22 +133,25 @@ class ToolCallEvaluator:
         if not target_call:
             logger.warning("目标工具调用解析失败，target预览: {}", target[:200])
             logger.debug("完整target内容: {}", target)
-            return 0.0, 0.0, details
+            return 0.0, 0.0, details, None
 
         if not predict_call:
             logger.warning("预测工具调用解析失败，predict预览: {}", predict[:200])
             logger.debug("完整predict内容: {}", predict)
-            return 0.0, 0.0, details
+            return 0.0, 0.0, details, None
         
         # 记录解析成功的工具调用信息
         logger.debug("目标工具: {}, 预测工具: {}", target_call.get("name", "未知"), predict_call.get("name", "未知"))
 
         score = 0.0
         tool_name_score = 0.0
+        arg_match = None  # 严格模式下的参数匹配结果
 
         target_name = target_call.get("name", "")
         predict_name = predict_call.get("name", "")
-        if target_name and target_name == predict_name:
+        tool_name_matched = target_name and target_name == predict_name
+        
+        if tool_name_matched:
             details["tool_name_match"] = True
             tool_name_score = 1.0
             score += 0.5
@@ -135,25 +160,56 @@ class ToolCallEvaluator:
         predict_args = predict_call.get("arguments", {}) or {}
         filtered_target_args = {k: v for k, v in target_args.items() if k not in self.IGNORED_FIELDS}
 
-        if filtered_target_args:
-            matches = 0
-            for key, value in filtered_target_args.items():
-                predict_value = predict_args.get(key)
-                details["argument_details"][key] = {
-                    "target": value,
-                    "predict": predict_value,
-                    "match": predict_value == value,
-                }
-                if predict_value == value:
-                    matches += 1
-            score += 0.5 * (matches / len(filtered_target_args))
-            details["arguments_match"] = matches == len(filtered_target_args)
-        elif target_args:
-            # 仅剩忽略字段
-            score += 0.5
-            details["arguments_match"] = True
+        # 严格模式：只有在工具名匹配时才计算参数匹配
+        if self.strict_mode:
+            if tool_name_matched and filtered_target_args:
+                # 工具名匹配且有参数，计算参数匹配
+                all_match = True
+                for key, value in filtered_target_args.items():
+                    predict_value = predict_args.get(key)
+                    is_match = (predict_value == value)
+                    details["argument_details"][key] = {
+                        "target": value,
+                        "predict": predict_value,
+                        "match": is_match,
+                    }
+                    if not is_match:
+                        all_match = False
+                arg_match = 1 if all_match else 0
+                details["arguments_match"] = all_match
+                # 严格模式下，参数必须完全匹配才得分
+                if all_match:
+                    score += 0.5
+            elif tool_name_matched and target_args and not filtered_target_args:
+                # 工具名匹配但仅剩忽略字段
+                arg_match = 1
+                details["arguments_match"] = True
+                score += 0.5
+            else:
+                # 工具名不匹配，跳过参数评估
+                arg_match = None
+                details["arguments_match"] = False
+        else:
+            # 原有逻辑：即使工具名不匹配也计算参数（虽然总分已经是0了）
+            if filtered_target_args:
+                matches = 0
+                for key, value in filtered_target_args.items():
+                    predict_value = predict_args.get(key)
+                    details["argument_details"][key] = {
+                        "target": value,
+                        "predict": predict_value,
+                        "match": predict_value == value,
+                    }
+                    if predict_value == value:
+                        matches += 1
+                score += 0.5 * (matches / len(filtered_target_args))
+                details["arguments_match"] = matches == len(filtered_target_args)
+            elif target_args:
+                # 仅剩忽略字段
+                score += 0.5
+                details["arguments_match"] = True
 
-        return score, tool_name_score, details
+        return score, tool_name_score, details, arg_match
 
 
 class SingleHopDataProcessor:
@@ -712,11 +768,18 @@ class LLMPredictor:
 
 
 class SingleHopEvaluator:
-    def __init__(self):
+    def __init__(self, strict_mode: bool = False):
+        """
+        初始化评估器
+        
+        Args:
+            strict_mode: 是否启用严格模式（参数评估仅在工具名匹配时进行）
+        """
         self.data_processor = SingleHopDataProcessor()
         self.predictor = LLMPredictor()
-        self.evaluator = ToolCallEvaluator()
+        self.evaluator = ToolCallEvaluator(strict_mode=strict_mode)
         self.retrieval_caller = None if DISABLE_RECALL else RetrievalToolCaller()
+        self.strict_mode = strict_mode
 
     async def evaluate_file(self, input_file: str, diagnostic_mode: bool = False, eval_all_hops: bool = True) -> List[SingleHopResult]:
         with open(input_file, "r", encoding="utf-8") as f:
@@ -750,13 +813,17 @@ class SingleHopEvaluator:
                         logger.info("=" * 80)
                         logger.info("")
                     
-                    score, name_score, details = self.evaluator.evaluate(example.target, predict)
+                    score, name_score, details, arg_match = self.evaluator.evaluate(example.target, predict)
                     
                     # 记录评估结果
                     target_name = details.get("target_call", {}).get("name", "未知")
                     predict_name = details.get("predict_call", {}).get("name", "未知")
                     logger.info("Pair {} 评估结果: score={:.3f}, name_score={:.3f}, 目标工具={}, 预测工具={}", 
                                example.pair_id, score, name_score, target_name, predict_name)
+                    if self.strict_mode and arg_match is not None:
+                        logger.debug("Pair {} 参数匹配 (严格模式): {}", example.pair_id, "✅ 完全匹配" if arg_match == 1 else "❌ 不匹配")
+                    elif self.strict_mode:
+                        logger.debug("Pair {} 参数评估跳过 (严格模式): 工具名不匹配", example.pair_id)
                     
                     recall = None
                     recall_details = None
@@ -848,6 +915,7 @@ class SingleHopEvaluator:
                             details=details,
                             recall=recall,
                             recall_details=recall_details,
+                            arg_match=arg_match,
                         )
                     )
 
@@ -867,7 +935,7 @@ class SingleHopEvaluator:
                     async with semaphore:
                         logger.debug("评估检索跳 Pair {} (conversation_id: {})", ex.pair_id, ex.conversation_id)
                         predict = await self.predictor.infer(session, ex, diagnostic_mode=diagnostic_mode)
-                        score, name_score, details = self.evaluator.evaluate(ex.target, predict)
+                        score, name_score, details, arg_match = self.evaluator.evaluate(ex.target, predict)
                         
                         target_name = details.get("target_call", {}).get("name")
                         actual_retrieval_response = None
@@ -901,6 +969,7 @@ class SingleHopEvaluator:
                             predict=predict, target=ex.target, score=score,
                             tool_name_score=name_score, details=details,
                             recall=recall, recall_details=recall_details,
+                            arg_match=arg_match,
                         ))
                         
                         # 返回这个检索跳的缓存条目（单个条目）
@@ -967,13 +1036,14 @@ class SingleHopEvaluator:
                             
                             # 评估业务跳
                             predict = await self.predictor.infer(session, ex, diagnostic_mode=diagnostic_mode)
-                            score, name_score, details = self.evaluator.evaluate(ex.target, predict)
+                            score, name_score, details, arg_match = self.evaluator.evaluate(ex.target, predict)
                             
                             results.append(SingleHopResult(
                                 conversation_id=ex.conversation_id, pair_id=ex.pair_id,
                                 predict=predict, target=ex.target, score=score,
                                 tool_name_score=name_score, details=details,
                                 recall=None, recall_details=None,
+                                arg_match=arg_match,
                             ))
                     
                     # 并发评估业务跳
@@ -988,7 +1058,7 @@ class SingleHopEvaluator:
     @staticmethod
     def summarize(results: List[SingleHopResult]) -> Dict[str, Any]:
         if not results:
-            return {"total": 0, "accuracy": 0.0, "precision@1": 0.0, "recall@5": None}
+            return {"total": 0, "accuracy": 0.0, "precision@1": 0.0, "recall@5": None, "arg_accuracy": None, "arg_denominator": 0}
 
         total = len(results)
         acc = sum(r.score for r in results) / total
@@ -997,6 +1067,11 @@ class SingleHopEvaluator:
         recall_rate = (
             sum(r.recall for r in recall_samples) / len(recall_samples) if recall_samples else None
         )
+        
+        # 计算参数准确率（严格模式）：仅在 arg_match 不为 None 时统计
+        arg_eligible = [r for r in results if r.arg_match is not None]
+        arg_hits = sum(1 for r in arg_eligible if r.arg_match == 1)
+        arg_accuracy = (arg_hits / len(arg_eligible)) if arg_eligible else None
         
         # 添加详细的失败原因统计
         failure_stats = {
@@ -1081,6 +1156,8 @@ class SingleHopEvaluator:
             "accuracy": acc, 
             "precision@1": p_at1, 
             "recall@5": recall_rate,
+            "arg_accuracy": arg_accuracy,
+            "arg_denominator": len(arg_eligible),
             "recall_failure_analysis": recall_failure_analysis,
             "failure_stats": failure_stats,
             "retrieval_stats": retrieval_stats,
@@ -1096,6 +1173,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--diagnostic", "-d", action="store_true", help="启用诊断模式，显示详细的样本和预测信息")
     parser.add_argument("--eval_all_hops", action="store_true", default=True, help="评估所有跳（检索跳+业务跳），默认True")
     parser.add_argument("--eval_retrieval_only", action="store_true", help="仅评估检索跳（与--eval_all_hops互斥）")
+    parser.add_argument("--strict_mode", action="store_true", help="启用严格模式：参数评估仅在工具名匹配时进行，参数必须完全匹配才得分（类似eval_via_prod_sse.py）")
     return parser.parse_args()
 
 
@@ -1113,6 +1191,7 @@ def dump_report(results: List[SingleHopResult], output_file: str):
                 "details": r.details,
                 "recall": r.recall,
                 "recall_details": r.recall_details,
+                "arg_match": r.arg_match,
             }
             for r in results
         ],
@@ -1271,6 +1350,9 @@ async def main():
     logger.info("推理服务: {}", SINGLEHOP_API_URL)
     logger.info("调用服务端口: {}", SERVICE_PORTS)
     logger.info("Recall评估: {}", "启用" if not DISABLE_RECALL else "禁用")
+    logger.info("严格模式: {}", "启用" if args.strict_mode else "禁用（使用原有逻辑）")
+    if args.strict_mode:
+        logger.info("  ⚠️ 严格模式：参数评估仅在工具名匹配时进行，参数必须完全匹配才得分")
     logger.info("=" * 60)
     
     # ========== 自检机制 ==========
@@ -1312,7 +1394,7 @@ async def main():
     
     # 3. 检查Prompt格式（采样检查）
     logger.info("3️⃣ 检查Prompt格式（采样前3个样本）...")
-    evaluator = SingleHopEvaluator()
+    evaluator = SingleHopEvaluator(strict_mode=args.strict_mode)
     examples = evaluator.data_processor.parse(data[:3])  # 只检查前3个
     for ex in examples:
         prompt_check = validator.check_prompt_format(ex)
@@ -1364,6 +1446,13 @@ async def main():
     logger.info("总样本数: {}", summary["total"])
     logger.info("总体 Accuracy: {:.3f}", summary["accuracy"])
     logger.info("总体 Precision@1: {:.3f}", summary["precision@1"])
+    
+    # 显示参数准确率（严格模式）
+    if summary.get("arg_accuracy") is not None:
+        logger.info("参数准确率 (严格模式): {:.3f} (可评估样本: {})", 
+                   summary["arg_accuracy"], summary.get("arg_denominator", 0))
+    elif args.strict_mode:
+        logger.info("参数准确率 (严格模式): 暂无数据（无工具名匹配的样本）")
     
     # 分别显示检索跳和业务跳的统计
     if summary.get("retrieval_stats"):

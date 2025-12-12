@@ -45,16 +45,21 @@ WEIGHT_DECAY = 0.01  # 权重衰减
 # LoRA配置
 LORA_RANK = 32  # LoRA rank
 LORA_ALPHA = 64  # LoRA alpha（通常设为rank的2倍）
-LORA_DROPOUT = 0.0  # LoRA dropout（进一步利于过拟合）
+LORA_DROPOUT = 0.05  # LoRA dropout（增加正则化，防止过拟合，从0.0调整为0.05）
 # 仅挂核心注意力/MLP，减少噪声、集中学习
 LORA_TARGET = "q_proj,v_proj,k_proj,o_proj,gate_proj,up_proj,down_proj"
 
 # 训练设置
 CUTOFF_LEN = 8192  # 序列最大长度（如果OOM，可尝试降低到4096或2048）
 LOGGING_STEPS = 10  # 日志记录步数
-SAVE_STEPS = 500  # 模型保存步数
-EVAL_STEPS = 500  # 评估步数
-SAVE_TOTAL_LIMIT = 3  # 保留的checkpoint数量
+SAVE_STEPS = 20  # 模型保存步数（从500改为20，确保能捕获最佳模型）
+EVAL_STEPS = 20  # 评估步数（从500改为20，更频繁评估以监控过拟合）
+SAVE_TOTAL_LIMIT = 10  # 保留的checkpoint数量（从3增加到10，保存更多历史checkpoint）
+
+# 最佳模型保存配置
+LOAD_BEST_MODEL_AT_END = True  # 训练结束时加载最佳模型
+METRIC_FOR_BEST_MODEL = "eval_loss"  # 用于选择最佳模型的指标（eval_loss越小越好）
+GREATER_IS_BETTER = False  # eval_loss越小越好，所以设为False
 
 # 其他配置
 TEMPLATE = "qwen3"  # 模板类型
@@ -265,6 +270,11 @@ def create_training_command(output_dir=None, model_path=None):
         "--enable_thinking", "False",
         "--overwrite_cache", "True",
         
+        # 最佳模型保存配置
+        "--load_best_model_at_end", str(LOAD_BEST_MODEL_AT_END),
+        "--metric_for_best_model", METRIC_FOR_BEST_MODEL,
+        "--greater_is_better", str(GREATER_IS_BETTER),
+        
         # 输出
         "--output_dir", final_output_dir,
         "--bf16", str(BF16),
@@ -361,10 +371,14 @@ def main():
     print(f"   数据集: {DATASET_NAME}")
     print(f"   学习率: {LEARNING_RATE}")
     print(f"   训练轮数: {NUM_TRAIN_EPOCHS}")
-    print(f"   LoRA rank: {LORA_RANK}, alpha: {LORA_ALPHA}")
+    print(f"   LoRA rank: {LORA_RANK}, alpha: {LORA_ALPHA}, dropout: {LORA_DROPOUT}")
     print(f"   有效batch size: {PER_DEVICE_TRAIN_BATCH_SIZE} × {GRADIENT_ACCUMULATION_STEPS} = {PER_DEVICE_TRAIN_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS}")
     print(f"   梯度裁剪: {MAX_GRAD_NORM}")
     print(f"   权重衰减: {WEIGHT_DECAY}")
+    print(f"   保存频率: 每 {SAVE_STEPS} 步保存一次")
+    print(f"   评估频率: 每 {EVAL_STEPS} 步评估一次")
+    print(f"   最佳模型保存: {LOAD_BEST_MODEL_AT_END} (基于 {METRIC_FOR_BEST_MODEL})")
+    print(f"   保留checkpoint数: {SAVE_TOTAL_LIMIT}")
     
     if args.dry_run:
         print(f"\\n📜 训练命令（dry-run模式）:")
