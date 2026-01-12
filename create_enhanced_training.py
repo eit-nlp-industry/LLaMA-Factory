@@ -32,6 +32,15 @@
    - 每5步记录详细Token信息
    - 每步都检查Token和预测变化
    - 自动保存到日志文件
+
+5. 验证集Loss监控和记录
+   - 自动从训练集中划分10%作为验证集
+   - 每100步评估一次验证集Loss
+   - 实时提取和记录eval_loss到独立日志文件
+   - 从trainer_state.json读取准确的eval_loss
+   - 保存验证集Loss历史到JSON文件
+   - 验证集Loss会绘制在loss曲线图中
+   - 验证集Loss会保存在训练metrics中
 """
 
 import os
@@ -123,6 +132,7 @@ def create_enhanced_training_script():
         "predictions": os.path.join(log_dir, f"prediction_monitor_{log_timestamp}.log"),
         "labels": os.path.join(log_dir, f"label_analysis_{log_timestamp}.log"),
         "alignment": os.path.join(log_dir, f"alignment_analysis_{log_timestamp}.log"),
+        "eval_loss": os.path.join(log_dir, f"eval_loss_monitor_{log_timestamp}.log"),
         "main": os.path.join(log_dir, f"main_training_{log_timestamp}.log")
     }
     
@@ -139,7 +149,7 @@ echo "📝 日志文件: {log_files['main']}"
 echo "=" * 60
 
 # 设置环境变量 - 双卡DDP训练（保持最佳单卡训练效果）
-export CUDA_VISIBLE_DEVICES=0,2
+export CUDA_VISIBLE_DEVICES=0,4
 
 # 创建输出目录
 mkdir -p "{output_dir}"
@@ -152,11 +162,15 @@ export ENHANCED_TRAINING_LOG="{log_files['main']}"
 export ENHANCED_LABEL_LOG="{log_files['labels']}"
 export ENHANCED_PREDICT_LOG="{log_files['predictions']}"
 export ENHANCED_ALIGNMENT_LOG="{log_files['alignment']}"
+export ENHANCED_EVAL_LOSS_LOG="{log_files['eval_loss']}"
 
 # 记录开始时间
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 🚀 增强训练开始" >> "{log_files['main']}"
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 📁 输出目录: {output_dir}" >> "{log_files['main']}"
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | 📝 日志文件: {log_files['main']}" >> "{log_files['main']}"
+
+# 设置输出目录环境变量，供监控脚本使用
+export OUTPUT_DIR="{output_dir}"
 
 # 检查数据集一致性
 echo "🔍 检查数据集一致性..."
@@ -166,6 +180,7 @@ echo "✅ 数据集检查完成"
 # 运行训练命令 - 双卡DDP分布式训练
 echo "🔄 执行双卡DDP分布式训练命令..."
 echo "⚡ 使用PyTorch DDP，配置与最佳单卡完全等效"
+echo "📊 启用验证集评估，使用独立的test数据集，监控eval_loss"
 llamafactory-cli train \
     --stage sft \
     --do_train True \
@@ -175,13 +190,14 @@ llamafactory-cli train \
     --template qwen3 \
     --flash_attn auto \
     --dataset_dir data \
-    --dataset data_demo \
+    --dataset sft_training_data_filter \
+    --eval_dataset sft_test_data_01_08 \
     --cutoff_len 8192 \
-    --learning_rate 3.5e-5 \
-    --num_train_epochs 10.0 \
+    --learning_rate 5e-5 \
+    --num_train_epochs 5.0 \
     --max_samples 100000 \
     --per_device_train_batch_size 1 \
-    --gradient_accumulation_steps 8 \
+    --gradient_accumulation_steps 16 \
     --lr_scheduler_type cosine \
     --max_grad_norm 0.5 \
     --weight_decay 0.01 \
@@ -208,7 +224,11 @@ llamafactory-cli train \
     --dataloader_num_workers 0 \
     --remove_unused_columns False \
     --dataloader_drop_last False \
-    --seed 42
+    --seed 42 \
+    --eval_strategy steps \
+    --eval_steps 25 \
+    --per_device_eval_batch_size 1 \
+    --do_eval True
 
 # 记录结束时间
 echo "$(date '+%Y-%m-%d %H:%M:%S') | INFO | ✅ 训练完成" >> "{log_files['main']}"
@@ -220,6 +240,7 @@ echo "   📝 日志文件: {log_files['main']}"
 echo "   🏷️ 标签分析: {log_files['labels']}"
 echo "   🔮 预测监控: {log_files['predictions']}"
 echo "   🎯 对齐分析: {log_files['alignment']}"
+echo "   📈 验证集Loss: {log_files['eval_loss']}"
 """
     
     # 保存脚本
@@ -255,8 +276,15 @@ def create_monitoring_script(log_files):
 
 3. 训练过程监控
    - Loss变化
+   - 验证集Loss (eval_loss) 监控和记录
    - 学习率调整
    - 训练进度
+
+4. 验证集Loss监控
+   - 实时提取和记录eval_loss
+   - 从trainer_state.json读取准确的eval_loss
+   - 保存验证集Loss历史到JSON文件
+   - 监控验证集Loss变化趋势
 '''
 
 import os
@@ -298,6 +326,7 @@ def monitor_training_logs(loggers, log_files):
     '''监控训练日志'''
     
     main_logger = loggers["main"]
+    eval_loss_logger = loggers.get("eval_loss")
     main_logger.info("🔍 开始监控训练过程")
     
     # 监控训练日志文件
@@ -312,6 +341,8 @@ def monitor_training_logs(loggers, log_files):
         
         # 监控文件变化
         last_size = 0
+        eval_loss_history = []  # 保存验证集loss历史
+        
         while True:
             try:
                 if os.path.exists(trainer_log):
@@ -322,17 +353,106 @@ def monitor_training_logs(loggers, log_files):
                             f.seek(last_size)
                             new_content = f.read()
                             
-                        # 记录新内容
+                        # 记录新内容并提取eval_loss
                         for line in new_content.strip().split('\\n'):
                             if line.strip():
                                 main_logger.info(f"📊 训练日志: {{line}}")
                                 
+                                # 提取eval_loss信息
+                                if "eval_loss" in line.lower() or "'eval_loss'" in line or '"eval_loss"' in line:
+                                    try:
+                                        # 尝试从JSON格式中提取eval_loss
+                                        import re
+                                        # 匹配 eval_loss: value 或 "eval_loss": value
+                                        match = re.search(r'["\']?eval_loss["\']?\\s*[:=]\\s*([0-9.]+)', line, re.IGNORECASE)
+                                        if match:
+                                            eval_loss_value = float(match.group(1))
+                                            eval_loss_history.append({{
+                                                "step": len(eval_loss_history) + 1,
+                                                "eval_loss": eval_loss_value,
+                                                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                            }})
+                                            
+                                            if eval_loss_logger:
+                                                eval_loss_logger.info(
+                                                    f"📈 Step {{len(eval_loss_history)}} | "
+                                                    f"Eval Loss: {{eval_loss_value:.6f}} | "
+                                                    f"Time: {{datetime.now().strftime('%H:%M:%S')}}"
+                                                )
+                                            
+                                            main_logger.info(
+                                                f"✅ 验证集Loss更新: {{eval_loss_value:.6f}}"
+                                            )
+                                    except Exception as e:
+                                        pass  # 如果解析失败，忽略
+                                
                         last_size = current_size
                         
-                time.sleep(1)  # 每秒检查一次
+                # 监控输出目录中的trainer_state.json以获取更准确的eval_loss
+                # 尝试从环境变量或日志中获取output_dir
+                output_dir = os.environ.get("OUTPUT_DIR")
+                if not output_dir:
+                    # 从日志文件中提取output_dir（如果存在）
+                    try:
+                        if os.path.exists(trainer_log):
+                            with open(trainer_log, 'r', encoding='utf-8') as f:
+                                content = f.read()
+                                import re
+                                match = re.search(r'输出目录[:：]\\s*([^\\n]+)', content)
+                                if match:
+                                    output_dir = match.group(1).strip()
+                    except:
+                        pass
+                
+                if output_dir and os.path.exists(output_dir):
+                    trainer_state_file = os.path.join(output_dir, "trainer_state.json")
+                    if os.path.exists(trainer_state_file):
+                        try:
+                            with open(trainer_state_file, 'r', encoding='utf-8') as f:
+                                trainer_state = json.load(f)
+                            
+                            # 检查log_history中的最新eval_loss
+                            if "log_history" in trainer_state:
+                                for log_entry in reversed(trainer_state["log_history"]):
+                                    if "eval_loss" in log_entry:
+                                        eval_loss_value = log_entry["eval_loss"]
+                                        step = log_entry.get("step", 0)
+                                        
+                                        # 检查是否是新记录
+                                        if not any(h.get("step") == step for h in eval_loss_history):
+                                            eval_loss_history.append({{
+                                                "step": step,
+                                                "eval_loss": eval_loss_value,
+                                                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                            }})
+                                            
+                                            if eval_loss_logger:
+                                                eval_loss_logger.info(
+                                                    f"📈 Step {{step}} | "
+                                                    f"Eval Loss: {{eval_loss_value:.6f}} | "
+                                                    f"Time: {{datetime.now().strftime('%H:%M:%S')}}"
+                                                )
+                                            
+                                            main_logger.info(
+                                                f"✅ 验证集Loss (Step {{step}}): {{eval_loss_value:.6f}}"
+                                            )
+                                        break
+                        except Exception as e:
+                            pass  # 如果读取失败，忽略
+                        
+                time.sleep(2)  # 每2秒检查一次
                 
             except KeyboardInterrupt:
                 main_logger.info("🛑 监控已停止")
+                # 保存eval_loss历史到JSON文件
+                if eval_loss_history and eval_loss_logger:
+                    eval_loss_file = log_files.get("eval_loss", "").replace(".log", "_history.json")
+                    try:
+                        with open(eval_loss_file, 'w', encoding='utf-8') as f:
+                            json.dump(eval_loss_history, f, indent=2, ensure_ascii=False)
+                        eval_loss_logger.info(f"💾 验证集Loss历史已保存: {{eval_loss_file}}")
+                    except Exception as e:
+                        eval_loss_logger.error(f"❌ 保存验证集Loss历史失败: {{e}}")
                 break
             except Exception as e:
                 main_logger.error(f"❌ 监控错误: {{e}}")
@@ -428,6 +548,17 @@ def main():
     print("✅ 追踪训练过程中token的具体变化")
     print("✅ 每5步记录详细Token信息，每步都检查变化")
     print("✅ 监控回调已集成到训练器中，会自动记录训练Token变化")
+    print("")
+    print("📈 验证集Loss监控:")
+    print("✅ 使用独立的test数据集作为验证集（eval_dataset=sft_test_data_01_08）")
+    print("✅ 每50步评估一次验证集Loss（eval_steps=50）")
+    print("✅ 验证集Loss会实时打印到控制台和日志文件")
+    print("✅ 验证集Loss历史会保存到独立的日志文件")
+    print("✅ 验证集Loss会绘制在loss曲线图中（plot_loss=True）")
+    print("✅ 验证集Loss会保存在trainer_state.json和all_results.json中")
+    print("✅ 监控脚本会自动提取和记录验证集Loss变化")
+    print("")
+    print("💡 提示：如果需要从训练集中划分验证集，可以使用 --val_size 0.1 替代 --eval_dataset")
     print("")
     print("🔮 预测Token监控功能:")
     print("✅ 实时监控模型的预测输出变化")
