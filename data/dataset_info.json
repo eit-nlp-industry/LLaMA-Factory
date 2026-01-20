@@ -848,7 +848,7 @@
     }
   },
   "data_demo": {
-    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/11_11/multihop_retrieval_train.json",
+    "file_name": "/home/qiyang_shi/LLaMA-Factory/data/dataset/12_12/train.json",
     "formatting": "sharegpt",
     "columns": {
       "messages": "conversations",
