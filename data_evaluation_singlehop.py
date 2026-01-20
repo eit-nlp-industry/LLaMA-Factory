@@ -31,7 +31,7 @@ SINGLEHOP_MODEL_NAME = os.getenv("SINGLEHOP_MODEL_NAME", "my_lora")
 SINGLEHOP_API_URL = f"{SINGLEHOP_VLLM_BASE_URL.rstrip('/')}/v1/chat/completions"
 
 # 检索工具服务（用于Recall评估）
-SINGLEHOP_RETRIEVAL_ENDPOINT = os.getenv("SINGLEHOP_RETRIEVAL_ENDPOINT", "http://127.0.0.1:8084/v1/databoard/tools/call")
+SINGLEHOP_RETRIEVAL_ENDPOINT = os.getenv("SINGLEHOP_RETRIEVAL_ENDPOINT", "http://127.0.0.1:9527/v1/databoard/tools/call")
 SINGLEHOP_RETRIEVAL_HEADERS = {
     "accept": "application/json",
     "Content-Type": "application/json",
@@ -1176,8 +1176,8 @@ class SingleHopEvaluator:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="旧模板单跳模型评估脚本")
-    parser.add_argument("--input_file", "-i", type=str, default="data/dataset/12_08_a/test.json", help="输入数据文件")
-    parser.add_argument("--output_file", "-o", type=str, default="data/dataset/result/12_08singlehop_test_eval_results.json", help="评估结果输出文件")
+    parser.add_argument("--input_file", "-i", type=str, default="data/dataset/12_08/train.json", help="输入数据文件")
+    parser.add_argument("--output_file", "-o", type=str, default="data/dataset/result/12_15_singlehop_train_eval_results.json", help="评估结果输出文件")
     parser.add_argument("--log_file", "-l", type=str, default="data/dataset/log/singlehop_eval.log", help="日志输出文件")
     parser.add_argument("--diagnostic", "-d", action="store_true", help="启用诊断模式，显示详细的样本和预测信息")
     parser.add_argument("--eval_all_hops", action="store_true", default=True, help="评估所有跳（检索跳+业务跳），默认True")

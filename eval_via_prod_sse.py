@@ -10,8 +10,8 @@
 
 使用示例：
 python eval_via_prod_sse.py \
-  --input_file /home/ziqiang/LLaMA-Factory/data/dataset/10_27/10.22_evaluate_data.json \
-  --output_file /home/ziqiang/LLaMA-Factory/data/dataset/10_27/data_evaluation_prod.json \
+  --input_file /home/qiyang_shi/testing/LLaMA-Factory/data/dataset/12_08/train_enhanced.json \
+  --output_file /home/qiyang_shi/testing/LLaMA-Factory/data/dataset/result/data_evaluation_prod.json \
   --start_idx 0 --end_idx 50
 """
 

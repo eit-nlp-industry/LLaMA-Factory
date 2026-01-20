@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 50,
+    "total_failed": 1,
+    "total_cases": 50,
+    "failure_rate": 0.02
+  },
+  "cases": [
+    {
+      "index": 29,
+      "user_query": "帮我看看所有关于\"大慈岩\"的产品有哪些？",
+      "target_tool_name": "list_products",
+      "target_arguments": {
+        "keyword": "大慈岩"
+      },
+      "recall@5": 0,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "大慈岩",
+          "source_filter": "jiande",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 16,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": \"retrieval_tool\\n知识检索工具\\n根据用户的问题，在知识库中搜索相关信息。可以指定知识来源(如工具库、对话历史或具体的'建德'、'新昌'文档库)，并返回最匹配的结果。\", \"relevance_score\": 0.3528, \"source\": \"IndependentVector\", \"relevance_level\": \"一般相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 2, \"tool_name\": \"retrieval_tool\", \"chinese_name\": \"知识检索工具\", \"full_json\": \"{\\n  \\\"name\\\": \\\"retrieval_tool\\\",\\n  \\\"chinese_name\\\": \\\"知识检索工具\\\",\\n  \\\"description\\\": \\\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源(如工具库、对话历史或具体的'建德'、'新昌'文档库)，并返回最匹配的结果。\\\",\\n  \\\"category\\\": \\\"nlp\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"query\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"description\\\": \\\"用户的查询内容或问题\\\",\\n        \\\"label\\\": \\\"用户的查询内容或问题\\\"\\n      },\\n      \\\"top_k\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"description\\\": \\\"最相关结果的数量，需要返回的最相关结果的数量\\\",\\n        \\\"default\\\": 3,\\n        \\\"label\\\": \\\"最相关结果的数量，需要返回的最相关结果的数量\\\"\\n      },\\n      \\\"source_filter\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"description\\\": \\\"检索的知识库，指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\\\",\\n        \\\"enum\\\": [\\n          {\\n            \\\"key\\\": \\\"toollist\\\",\\n            \\\"label\\\": \\\"工具库\\\"\\n          },\\n          {\\n            \\\"key\\\": \\\"jiande\\\",\\n            \\\"label\\\": \\\"建德导游手册\\\"\\n          },\\n          {\\n            \\\"key\\\": \\\"xinchang\\\",\\n            \\\"label\\\": \\\"新昌导游手册\\\"\\n          }\\n        ],\\n        \\\"examples\\\": [\\n          \\\"toollist\\\",\\n          \\\"jiande\\\"\\n        ],\\n        \\\"label\\\": \\\"检索的知识库，指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\\\"\\n      },\\n      \\\"user_id\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"description\\\": \\\"用户的ID，用于确认身份\\\",\\n        \\\"label\\\": \\\"用户的ID，用于确认身份\\\"\\n      }\\n    },\\n    \\\"required\\\": [\\n      \\\"query\\\",\\"
+    }
+  ]
+}

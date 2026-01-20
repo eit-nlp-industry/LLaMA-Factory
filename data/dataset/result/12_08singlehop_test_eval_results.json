@@ -1,0 +1,4299 @@
+{
+  "summary": {
+    "total": 72,
+    "accuracy": 0.8833333333333333,
+    "precision@1": 0.9305555555555556,
+    "recall@5": 1.0,
+    "recall_failure_analysis": {
+      "total_calculated": 36,
+      "recall_hits": 36,
+      "recall_misses": 0,
+      "query_extraction_failures": 0,
+      "retrieval_service_failures": 0,
+      "target_tool_not_in_results": 0
+    },
+    "failure_stats": {
+      "parse_failures": {
+        "target_parse_failed": 0,
+        "predict_parse_failed": 1,
+        "both_parse_failed": 0
+      },
+      "tool_name_mismatches": 4,
+      "argument_mismatches": 20,
+      "perfect_matches": 47
+    },
+    "retrieval_stats": {
+      "count": 36,
+      "accuracy": 1.0,
+      "precision@1": 1.0
+    },
+    "business_stats": {
+      "count": 36,
+      "accuracy": 0.7666666666666667,
+      "precision@1": 0.8611111111111112
+    }
+  },
+  "cases": [
+    {
+      "conversation_id": 1,
+      "pair_id": 2,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-10-28\", \"status\": \"已完成\", \"limit\": 5}}",
+      "predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-10-28\", \"status\": \"已完成\", \"limit\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_orders",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-10-28",
+            "status": "已完成",
+            "limit": 5
+          }
+        },
+        "predict_call": {
+          "name": "list_orders",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-10-28",
+            "status": "已完成",
+            "limit": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-10-28",
+            "predict": "2025-10-28",
+            "match": true
+          },
+          "status": {
+            "target": "已完成",
+            "predict": "已完成",
+            "match": true
+          },
+          "limit": {
+            "target": 5,
+            "predict": 5,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-10-28\", \"status\": \"已完成\", \"limit\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-10-28\", \"status\": \"已完成\", \"limit\": 5}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 2,
+      "pair_id": 4,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"group_by\": [\"is_legal\"], \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"id_card\": \"count\"}, \"time_field\": \"create_time\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"group_by\": \"month\", \"aggregations\": [\"legal\", \"illegal\"]}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "group_by": [
+              "is_legal"
+            ],
+            "time_bucket": {
+              "period": "month",
+              "aggregations": {
+                "id_card": "count"
+              },
+              "time_field": "create_time"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "group_by": "month",
+            "aggregations": [
+              "legal",
+              "illegal"
+            ]
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-12-31",
+            "predict": "2025-12-31",
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "is_legal"
+            ],
+            "predict": "month",
+            "match": false
+          },
+          "time_bucket": {
+            "target": {
+              "period": "month",
+              "aggregations": {
+                "id_card": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"group_by\": \"month\", \"aggregations\": [\"legal\", \"illegal\"]}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"group_by\": [\"is_legal\"], \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"id_card\": \"count\"}, \"time_field\": \"create_time\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 3,
+      "pair_id": 6,
+      "score": 0.0,
+      "tool_name_score": 0.0,
+      "target": "{\"name\": \"list_visitors\", \"arguments\": {\"gender\": \"女\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\"}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": \"gender\", \"filter\": {\"gender\": \"female\"}}}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "gender": "女",
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30"
+          }
+        },
+        "predict_call": {},
+        "tool_name_match": false,
+        "arguments_match": false,
+        "argument_details": {},
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": \"gender\", \"filter\": {\"gender\": \"female\"}}}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_visitors\", \"arguments\": {\"gender\": \"女\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 3,
+      "pair_id": 5,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度，有哪些女性游客的记录？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度，有哪些女性游客的记录？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度，有哪些女性游客的记录？",
+            "predict": "2025年第三季度，有哪些女性游客的记录？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年第三季度，有哪些女性游客的记录？",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "analyze_visitors",
+          "list_visitors",
+          "analyze_resorts",
+          "analyze_customers",
+          "analyze_agreement_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "2025年第三季度，有哪些女性游客的记录？",
+        "predict_query": "2025年第三季度，有哪些女性游客的记录？"
+      }
+    },
+    {
+      "conversation_id": 4,
+      "pair_id": 8,
+      "score": 0.8,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"status\": 1, \"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"group_by\": [\"agreement_type\"], \"aggregations\": {\"agreement_no\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"status\": 1, \"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"group_by\": \"agreement_type\", \"aggregation\": \"count\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "status": 1,
+            "sign_date_start": "2025-06-01",
+            "sign_date_end": "2025-08-31",
+            "group_by": [
+              "agreement_type"
+            ],
+            "aggregations": {
+              "agreement_no": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "status": 1,
+            "sign_date_start": "2025-06-01",
+            "sign_date_end": "2025-08-31",
+            "group_by": "agreement_type",
+            "aggregation": "count"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "status": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          },
+          "sign_date_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "sign_date_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "agreement_type"
+            ],
+            "predict": "agreement_type",
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "agreement_no": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"status\": 1, \"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"group_by\": \"agreement_type\", \"aggregation\": \"count\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"status\": 1, \"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"group_by\": [\"agreement_type\"], \"aggregations\": {\"agreement_no\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 5,
+      "pair_id": 10,
+      "score": 0.16666666666666666,
+      "tool_name_score": 0.0,
+      "target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"order_id\": 22222, \"group_by\": [\"gender\"], \"aggregations\": {\"id_card\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 22222}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "order_id": 22222,
+            "group_by": [
+              "gender"
+            ],
+            "aggregations": {
+              "id_card": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "order_id": 22222
+          }
+        },
+        "tool_name_match": false,
+        "arguments_match": false,
+        "argument_details": {
+          "order_id": {
+            "target": 22222,
+            "predict": 22222,
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "gender"
+            ],
+            "predict": null,
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "id_card": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 22222}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"order_id\": 22222, \"group_by\": [\"gender\"], \"aggregations\": {\"id_card\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 2,
+      "pair_id": 3,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "predict": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "analyze_visitors",
+          "list_visitors",
+          "analyze_customers",
+          "analyze_agreement_customers",
+          "analyze_resorts"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+        "predict_query": "统计一下2025年下半年每月合法游客和非合法游客的总数。"
+      }
+    },
+    {
+      "conversation_id": 1,
+      "pair_id": 1,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "predict": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "analyze_orders",
+          "list_products",
+          "analyze_products",
+          "list_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+        "predict_query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。"
+      }
+    },
+    {
+      "conversation_id": 4,
+      "pair_id": 7,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "predict": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "analyze_agreement_customers",
+          "list_agreement_customers",
+          "analyze_customers",
+          "list_customers",
+          "analyze_products"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+        "predict_query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。"
+      }
+    },
+    {
+      "conversation_id": 7,
+      "pair_id": 14,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_visitors\", \"arguments\": {\"name\": \"李四\", \"gender\": \"男\", \"time_start\": \"2025-08-01\", \"time_end\": \"2025-09-30\"}}",
+      "predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"name\": \"李四\", \"gender\": \"男\", \"time_start\": \"2025-08-01\", \"time_end\": \"2025-09-30\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "name": "李四",
+            "gender": "男",
+            "time_start": "2025-08-01",
+            "time_end": "2025-09-30"
+          }
+        },
+        "predict_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "name": "李四",
+            "gender": "男",
+            "time_start": "2025-08-01",
+            "time_end": "2025-09-30"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "name": {
+            "target": "李四",
+            "predict": "李四",
+            "match": true
+          },
+          "gender": {
+            "target": "男",
+            "predict": "男",
+            "match": true
+          },
+          "time_start": {
+            "target": "2025-08-01",
+            "predict": "2025-08-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"name\": \"李四\", \"gender\": \"男\", \"time_start\": \"2025-08-01\", \"time_end\": \"2025-09-30\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_visitors\", \"arguments\": {\"name\": \"李四\", \"gender\": \"男\", \"time_start\": \"2025-08-01\", \"time_end\": \"2025-09-30\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 6,
+      "pair_id": 12,
+      "score": 0.1,
+      "tool_name_score": 0.0,
+      "target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"valid_from_date_start\": \"2025-07-01\", \"valid_to_date_end\": \"2025-12-31\", \"agreement_type\": \"新协议\", \"group_by\": [\"status\"], \"aggregations\": {\"agreement_no\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"list_agreement_customers\", \"arguments\": {\"valid_from_date_start\": \"2025-07-01\", \"valid_from_date_end\": \"2025-12-31\", \"agreement_type\": \"服务协议\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "valid_from_date_start": "2025-07-01",
+            "valid_to_date_end": "2025-12-31",
+            "agreement_type": "新协议",
+            "group_by": [
+              "status"
+            ],
+            "aggregations": {
+              "agreement_no": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "list_agreement_customers",
+          "arguments": {
+            "valid_from_date_start": "2025-07-01",
+            "valid_from_date_end": "2025-12-31",
+            "agreement_type": "服务协议"
+          }
+        },
+        "tool_name_match": false,
+        "arguments_match": false,
+        "argument_details": {
+          "valid_from_date_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "valid_to_date_end": {
+            "target": "2025-12-31",
+            "predict": null,
+            "match": false
+          },
+          "agreement_type": {
+            "target": "新协议",
+            "predict": "服务协议",
+            "match": false
+          },
+          "group_by": {
+            "target": [
+              "status"
+            ],
+            "predict": null,
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "agreement_no": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_agreement_customers\", \"arguments\": {\"valid_from_date_start\": \"2025-07-01\", \"valid_from_date_end\": \"2025-12-31\", \"agreement_type\": \"服务协议\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"valid_from_date_start\": \"2025-07-01\", \"valid_to_date_end\": \"2025-12-31\", \"agreement_type\": \"新协议\", \"group_by\": [\"status\"], \"aggregations\": {\"agreement_no\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 8,
+      "pair_id": 16,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_products\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"sort\": {\"field\": \"create_time\", \"descending\": false}, \"limit\": 20}}",
+      "predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"sort\": {\"time\": \"asc\"}, \"limit\": 20}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_products",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "sort": {
+              "field": "create_time",
+              "descending": false
+            },
+            "limit": 20
+          }
+        },
+        "predict_call": {
+          "name": "list_products",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "sort": {
+              "time": "asc"
+            },
+            "limit": 20
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          },
+          "sort": {
+            "target": {
+              "field": "create_time",
+              "descending": false
+            },
+            "predict": {
+              "time": "asc"
+            },
+            "match": false
+          },
+          "limit": {
+            "target": 20,
+            "predict": 20,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"sort\": {\"time\": \"asc\"}, \"limit\": 20}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_products\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"sort\": {\"field\": \"create_time\", \"descending\": false}, \"limit\": 20}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 5,
+      "pair_id": 9,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "订单ID是22222的游客中，男女比例是怎样的？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "订单ID是22222的游客中，男女比例是怎样的？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "订单ID是22222的游客中，男女比例是怎样的？",
+            "predict": "订单ID是22222的游客中，男女比例是怎样的？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "订单ID是22222的游客中，男女比例是怎样的？",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "list_visitors",
+          "analyze_visitors",
+          "analyze_orders",
+          "list_orders",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "订单ID是22222的游客中，男女比例是怎样的？",
+        "predict_query": "订单ID是22222的游客中，男女比例是怎样的？"
+      }
+    },
+    {
+      "conversation_id": 6,
+      "pair_id": 11,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "predict": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "list_agreement_customers",
+          "analyze_agreement_customers",
+          "list_customers",
+          "analyze_customers",
+          "list_products"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+        "predict_query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。"
+      }
+    },
+    {
+      "conversation_id": 9,
+      "pair_id": 18,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"灵栖洞\", \"status\": 0}}",
+      "predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"灵栖洞\", \"status\": 0}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_products",
+          "arguments": {
+            "keyword": "灵栖洞",
+            "status": 0
+          }
+        },
+        "predict_call": {
+          "name": "list_products",
+          "arguments": {
+            "keyword": "灵栖洞",
+            "status": 0
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "keyword": {
+            "target": "灵栖洞",
+            "predict": "灵栖洞",
+            "match": true
+          },
+          "status": {
+            "target": 0,
+            "predict": 0,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"灵栖洞\", \"status\": 0}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"灵栖洞\", \"status\": 0}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 10,
+      "pair_id": 20,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_products\", \"arguments\": {\"keyword\": \"旅游套餐\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"aggregations\": {\"product_id\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_products\", \"arguments\": {\"keyword\": \"旅游套餐\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"aggregations\": {\"product_id\": \"count\"}}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_products",
+          "arguments": {
+            "keyword": "旅游套餐",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "aggregations": {
+              "product_id": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_products",
+          "arguments": {
+            "keyword": "旅游套餐",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "aggregations": {
+              "product_id": "count"
+            }
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "keyword": {
+            "target": "旅游套餐",
+            "predict": "旅游套餐",
+            "match": true
+          },
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-12-31",
+            "predict": "2025-12-31",
+            "match": true
+          },
+          "aggregations": {
+            "target": {
+              "product_id": "count"
+            },
+            "predict": {
+              "product_id": "count"
+            },
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_products\", \"arguments\": {\"keyword\": \"旅游套餐\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"aggregations\": {\"product_id\": \"count\"}}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_products\", \"arguments\": {\"keyword\": \"旅游套餐\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"aggregations\": {\"product_id\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 7,
+      "pair_id": 13,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "predict": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "list_visitors",
+          "analyze_visitors",
+          "maps_text_search",
+          "list_customers",
+          "list_agreement_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+        "predict_query": "我想找2025年8月到9月期间，叫李四的男性游客信息。"
+      }
+    },
+    {
+      "conversation_id": 8,
+      "pair_id": 15,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "predict": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "list_products",
+          "analyze_products",
+          "list_orders",
+          "list_resources",
+          "analyze_orders"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+        "predict_query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。"
+      }
+    },
+    {
+      "conversation_id": 11,
+      "pair_id": 22,
+      "score": 0.8333333333333333,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"sort\": {\"field\": \"create_time\", \"descending\": true}}}",
+      "predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"sort_by\": \"create_time\", \"sort_order\": \"desc\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "sort": {
+              "field": "create_time",
+              "descending": true
+            }
+          }
+        },
+        "predict_call": {
+          "name": "list_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "sort_by": "create_time",
+            "sort_order": "desc"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          },
+          "sort": {
+            "target": {
+              "field": "create_time",
+              "descending": true
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"sort_by\": \"create_time\", \"sort_order\": \"desc\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"sort\": {\"field\": \"create_time\", \"descending\": true}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 12,
+      "pair_id": 24,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"area\", \"status\"], \"aggregations\": {\"id\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"area\", \"status\"]}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "group_by": [
+              "area",
+              "status"
+            ],
+            "aggregations": {
+              "id": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "group_by": [
+              "area",
+              "status"
+            ]
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "area",
+              "status"
+            ],
+            "predict": [
+              "area",
+              "status"
+            ],
+            "match": true
+          },
+          "aggregations": {
+            "target": {
+              "id": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"area\", \"status\"]}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"area\", \"status\"], \"aggregations\": {\"id\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 10,
+      "pair_id": 19,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "predict": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+        "target_tool": "analyze_products",
+        "retrieved_tools": [
+          "analyze_products",
+          "list_products",
+          "analyze_resorts",
+          "analyze_visitors",
+          "list_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+        "predict_query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？"
+      }
+    },
+    {
+      "conversation_id": 9,
+      "pair_id": 17,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有没有状态是0的\"灵栖洞\"产品？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有没有状态是0的\"灵栖洞\"产品？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "有没有状态是0的\"灵栖洞\"产品？",
+            "predict": "有没有状态是0的\"灵栖洞\"产品？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "有没有状态是0的\"灵栖洞\"产品？",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "list_products",
+          "analyze_products",
+          "list_resources",
+          "list_orders",
+          "list_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "有没有状态是0的\"灵栖洞\"产品？",
+        "predict_query": "有没有状态是0的\"灵栖洞\"产品？"
+      }
+    },
+    {
+      "conversation_id": 13,
+      "pair_id": 26,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-07-31\", \"is_legal\": 1}}",
+      "predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-07-31\", \"is_legal\": 1}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-07-31",
+            "is_legal": 1
+          }
+        },
+        "predict_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-07-31",
+            "is_legal": 1
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-07-31",
+            "predict": "2025-07-31",
+            "match": true
+          },
+          "is_legal": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-07-31\", \"is_legal\": 1}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-07-31\", \"is_legal\": 1}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 14,
+      "pair_id": 28,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"resource_type\": \"住宿\", \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"id\": \"count\"}, \"time_field\": \"create_time\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"resource_type\": \"虚拟机\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"month\"]}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "resource_type": "住宿",
+            "time_bucket": {
+              "period": "month",
+              "aggregations": {
+                "id": "count"
+              },
+              "time_field": "create_time"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "resource_type": "虚拟机",
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "group_by": [
+              "month"
+            ]
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          },
+          "resource_type": {
+            "target": "住宿",
+            "predict": "虚拟机",
+            "match": false
+          },
+          "time_bucket": {
+            "target": {
+              "period": "month",
+              "aggregations": {
+                "id": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"resource_type\": \"虚拟机\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"month\"]}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"resource_type\": \"住宿\", \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"id\": \"count\"}, \"time_field\": \"create_time\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 12,
+      "pair_id": 23,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "predict": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "analyze_resources",
+          "list_resources",
+          "analyze_products",
+          "analyze_visitors",
+          "analyze_resorts"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+        "predict_query": "统计一下2025年第三季度，各个区域不同状态的资源数量。"
+      }
+    },
+    {
+      "conversation_id": 11,
+      "pair_id": 21,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "predict": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "list_customers",
+          "list_agreement_customers",
+          "list_orders",
+          "list_visitors",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+        "predict_query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。"
+      }
+    },
+    {
+      "conversation_id": 15,
+      "pair_id": 30,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}",
+      "predict": "<tool_call>\n{\"name\": \"list_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_resources",
+          "arguments": {
+            "resource_type": "酒店",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31"
+          }
+        },
+        "predict_call": {
+          "name": "list_resources",
+          "arguments": {
+            "resource_type": "酒店",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "resource_type": {
+            "target": "酒店",
+            "predict": "酒店",
+            "match": true
+          },
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-12-31",
+            "predict": "2025-12-31",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 16,
+      "pair_id": 32,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"sort\": {\"field\": \"create_time\", \"descending\": false}}}",
+      "predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"sort_by\": \"create_time\", \"sort_order\": \"asc\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "sort": {
+              "field": "create_time",
+              "descending": false
+            }
+          }
+        },
+        "predict_call": {
+          "name": "list_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "sort_by": "create_time",
+            "sort_order": "asc"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "sort": {
+            "target": {
+              "field": "create_time",
+              "descending": false
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"sort_by\": \"create_time\", \"sort_order\": \"asc\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"sort\": {\"field\": \"create_time\", \"descending\": false}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 14,
+      "pair_id": 27,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "predict": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "analyze_resources",
+          "list_resources",
+          "analyze_visitors",
+          "analyze_resorts",
+          "analyze_orders"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+        "predict_query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。"
+      }
+    },
+    {
+      "conversation_id": 13,
+      "pair_id": 25,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "predict": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "list_visitors",
+          "analyze_visitors",
+          "analyze_resorts",
+          "list_customers",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+        "predict_query": "查询一下2025年6月到7月期间所有合法的游客记录。"
+      }
+    },
+    {
+      "conversation_id": 17,
+      "pair_id": 34,
+      "score": 0.3333333333333333,
+      "tool_name_score": 0.0,
+      "target": "{\"name\": \"list_customers\", \"arguments\": {\"customer_type\": \"旅行社\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_customers",
+          "arguments": {
+            "customer_type": "旅行社",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31"
+          }
+        },
+        "predict_call": {
+          "name": "analyze_customers",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31"
+          }
+        },
+        "tool_name_match": false,
+        "arguments_match": false,
+        "argument_details": {
+          "customer_type": {
+            "target": "旅行社",
+            "predict": null,
+            "match": false
+          },
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-12-31",
+            "predict": "2025-12-31",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_customers\", \"arguments\": {\"customer_type\": \"旅行社\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 18,
+      "pair_id": 36,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 67890, \"limit\": 20}}",
+      "predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 67890, \"limit\": 20}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "order_id": 67890,
+            "limit": 20
+          }
+        },
+        "predict_call": {
+          "name": "list_visitors",
+          "arguments": {
+            "order_id": 67890,
+            "limit": 20
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "order_id": {
+            "target": 67890,
+            "predict": 67890,
+            "match": true
+          },
+          "limit": {
+            "target": 20,
+            "predict": 20,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 67890, \"limit\": 20}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_visitors\", \"arguments\": {\"order_id\": 67890, \"limit\": 20}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 16,
+      "pair_id": 31,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "predict": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "list_customers",
+          "list_agreement_customers",
+          "list_orders",
+          "list_visitors",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+        "predict_query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。"
+      }
+    },
+    {
+      "conversation_id": 15,
+      "pair_id": 29,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "predict": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+        "target_tool": "list_resources",
+        "retrieved_tools": [
+          "list_resources",
+          "analyze_resources",
+          "analyze_resorts",
+          "retrieval_tool",
+          "list_products"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+        "predict_query": "我想看2025年下半年，所有\"酒店\"类型的资源。"
+      }
+    },
+    {
+      "conversation_id": 17,
+      "pair_id": 33,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有哪些旅行社客户？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有哪些旅行社客户？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年下半年有哪些旅行社客户？",
+            "predict": "2025年下半年有哪些旅行社客户？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年下半年有哪些旅行社客户？",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "list_customers",
+          "analyze_customers",
+          "list_visitors",
+          "list_agreement_customers",
+          "analyze_agreement_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "2025年下半年有哪些旅行社客户？",
+        "predict_query": "2025年下半年有哪些旅行社客户？"
+      }
+    },
+    {
+      "conversation_id": 20,
+      "pair_id": 40,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2026-01-01\", \"status\": \"已作废\", \"limit\": 10}}",
+      "predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"status\": \"已作废\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"limit\": 10}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2026-01-01",
+            "status": "已作废",
+            "limit": 10
+          }
+        },
+        "predict_call": {
+          "name": "list_orders",
+          "arguments": {
+            "status": "已作废",
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "limit": 10
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2026-01-01",
+            "predict": "2025-12-31",
+            "match": false
+          },
+          "status": {
+            "target": "已作废",
+            "predict": "已作废",
+            "match": true
+          },
+          "limit": {
+            "target": 10,
+            "predict": 10,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"status\": \"已作废\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"limit\": 10}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2026-01-01\", \"status\": \"已作废\", \"limit\": 10}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 19,
+      "pair_id": 38,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-09-01\", \"time_end\": \"2025-10-31\", \"group_by\": [\"gender\"], \"aggregations\": {\"id_card\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-09-01\", \"time_end\": \"2025-10-31\", \"group_by\": \"gender\", \"aggregations\": {\"total_visitors\": \"sum\"}}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-09-01",
+            "time_end": "2025-10-31",
+            "group_by": [
+              "gender"
+            ],
+            "aggregations": {
+              "id_card": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-09-01",
+            "time_end": "2025-10-31",
+            "group_by": "gender",
+            "aggregations": {
+              "total_visitors": "sum"
+            }
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-09-01",
+            "predict": "2025-09-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-10-31",
+            "predict": "2025-10-31",
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "gender"
+            ],
+            "predict": "gender",
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "id_card": "count"
+            },
+            "predict": {
+              "total_visitors": "sum"
+            },
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-09-01\", \"time_end\": \"2025-10-31\", \"group_by\": \"gender\", \"aggregations\": {\"total_visitors\": \"sum\"}}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-09-01\", \"time_end\": \"2025-10-31\", \"group_by\": [\"gender\"], \"aggregations\": {\"id_card\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 21,
+      "pair_id": 42,
+      "score": 0.6666666666666666,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-10-27\", \"aggregations\": {\"agreement_no\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-10-28\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "sign_date_start": "2025-06-01",
+            "sign_date_end": "2025-10-27",
+            "aggregations": {
+              "agreement_no": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "sign_date_start": "2025-06-01",
+            "sign_date_end": "2025-10-28"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "sign_date_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "sign_date_end": {
+            "target": "2025-10-27",
+            "predict": "2025-10-28",
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "agreement_no": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-10-28\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-10-27\", \"aggregations\": {\"agreement_no\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 18,
+      "pair_id": 35,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下订单ID是67890的游客，只要前20条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下订单ID是67890的游客，只要前20条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下订单ID是67890的游客，只要前20条。",
+            "predict": "查一下订单ID是67890的游客，只要前20条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查一下订单ID是67890的游客，只要前20条。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "list_visitors",
+          "list_orders",
+          "analyze_visitors",
+          "analyze_orders",
+          "list_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查一下订单ID是67890的游客，只要前20条。",
+        "predict_query": "查一下订单ID是67890的游客，只要前20条。"
+      }
+    },
+    {
+      "conversation_id": 19,
+      "pair_id": 37,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年9月到10月，按性别统计游客总数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年9月到10月，按性别统计游客总数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年9月到10月，按性别统计游客总数。",
+            "predict": "从2025年9月到10月，按性别统计游客总数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "从2025年9月到10月，按性别统计游客总数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "analyze_visitors",
+          "list_visitors",
+          "analyze_resorts",
+          "analyze_customers",
+          "analyze_resources"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "从2025年9月到10月，按性别统计游客总数。",
+        "predict_query": "从2025年9月到10月，按性别统计游客总数。"
+      }
+    },
+    {
+      "conversation_id": 22,
+      "pair_id": 44,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-07-31\", \"resource_type\": \"酒店\", \"aggregations\": {\"id\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-07-31\", \"group_by\": [\"resource_type\"], \"aggregations\": {\"count\": \"resource_id\"}}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-07-31",
+            "resource_type": "酒店",
+            "aggregations": {
+              "id": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_resources",
+          "arguments": {
+            "resource_type": "酒店",
+            "time_start": "2025-07-01",
+            "time_end": "2025-07-31",
+            "group_by": [
+              "resource_type"
+            ],
+            "aggregations": {
+              "count": "resource_id"
+            }
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-07-31",
+            "predict": "2025-07-31",
+            "match": true
+          },
+          "resource_type": {
+            "target": "酒店",
+            "predict": "酒店",
+            "match": true
+          },
+          "aggregations": {
+            "target": {
+              "id": "count"
+            },
+            "predict": {
+              "count": "resource_id"
+            },
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_resources\", \"arguments\": {\"resource_type\": \"酒店\", \"time_start\": \"2025-07-01\", \"time_end\": \"2025-07-31\", \"group_by\": [\"resource_type\"], \"aggregations\": {\"count\": \"resource_id\"}}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_resources\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-07-31\", \"resource_type\": \"酒店\", \"aggregations\": {\"id\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 23,
+      "pair_id": 46,
+      "score": 0.7,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"status\"], \"aggregations\": {\"code\": \"count\"}, \"chart_config\": {\"output_format\": \"bar_chart\", \"x_field\": \"status\", \"y_field\": \"count_code\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": \"status\", \"aggregation\": \"count\", \"chart_type\": \"bar\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "group_by": [
+              "status"
+            ],
+            "aggregations": {
+              "code": "count"
+            },
+            "chart_config": {
+              "output_format": "bar_chart",
+              "x_field": "status",
+              "y_field": "count_code"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-09-30",
+            "group_by": "status",
+            "aggregation": "count",
+            "chart_type": "bar"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          },
+          "group_by": {
+            "target": [
+              "status"
+            ],
+            "predict": "status",
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "code": "count"
+            },
+            "predict": null,
+            "match": false
+          },
+          "chart_config": {
+            "target": {
+              "output_format": "bar_chart",
+              "x_field": "status",
+              "y_field": "count_code"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": \"status\", \"aggregation\": \"count\", \"chart_type\": \"bar\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-09-30\", \"group_by\": [\"status\"], \"aggregations\": {\"code\": \"count\"}, \"chart_config\": {\"output_format\": \"bar_chart\", \"x_field\": \"status\", \"y_field\": \"count_code\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 20,
+      "pair_id": 39,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "predict": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "analyze_orders",
+          "list_products",
+          "list_agreement_customers",
+          "list_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+        "predict_query": "2025年下半年有没有“已作废”的订单？给我前10条。"
+      }
+    },
+    {
+      "conversation_id": 21,
+      "pair_id": 41,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月到今天，总共有多少份协议？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月到今天，总共有多少份协议？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年6月到今天，总共有多少份协议？",
+            "predict": "从2025年6月到今天，总共有多少份协议？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "从2025年6月到今天，总共有多少份协议？",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "analyze_agreement_customers",
+          "list_agreement_customers",
+          "analyze_customers",
+          "list_customers",
+          "analyze_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "从2025年6月到今天，总共有多少份协议？",
+        "predict_query": "从2025年6月到今天，总共有多少份协议？"
+      }
+    },
+    {
+      "conversation_id": 24,
+      "pair_id": 48,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_resources\", \"arguments\": {\"parent_id\": 242, \"resource_type\": \"票务\"}}",
+      "predict": "<tool_call>\n{\"name\": \"list_resources\", \"arguments\": {\"parent_id\": 242, \"resource_type\": \"票务\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_resources",
+          "arguments": {
+            "parent_id": 242,
+            "resource_type": "票务"
+          }
+        },
+        "predict_call": {
+          "name": "list_resources",
+          "arguments": {
+            "parent_id": 242,
+            "resource_type": "票务"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "parent_id": {
+            "target": 242,
+            "predict": 242,
+            "match": true
+          },
+          "resource_type": {
+            "target": "票务",
+            "predict": "票务",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_resources\", \"arguments\": {\"parent_id\": 242, \"resource_type\": \"票务\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_resources\", \"arguments\": {\"parent_id\": 242, \"resource_type\": \"票务\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 25,
+      "pair_id": 50,
+      "score": 0.8333333333333333,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"day\", \"aggregations\": {\"id_card\": \"count\"}, \"time_field\": \"create_time\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": \"day\", \"group_by\": \"day\", \"aggregations\": [\"count\"]}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "time_bucket": {
+              "period": "day",
+              "aggregations": {
+                "id_card": "count"
+              },
+              "time_field": "create_time"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "time_bucket": "day",
+            "group_by": "day",
+            "aggregations": [
+              "count"
+            ]
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          },
+          "time_bucket": {
+            "target": {
+              "period": "day",
+              "aggregations": {
+                "id_card": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": "day",
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": \"day\", \"group_by\": \"day\", \"aggregations\": [\"count\"]}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"day\", \"aggregations\": {\"id_card\": \"count\"}, \"time_field\": \"create_time\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 23,
+      "pair_id": 45,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "predict": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "analyze_orders",
+          "analyze_products",
+          "list_orders",
+          "analyze_customers",
+          "analyze_resources"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+        "predict_query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。"
+      }
+    },
+    {
+      "conversation_id": 22,
+      "pair_id": 43,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计2025年7月所有\"酒店\"资源的数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计2025年7月所有\"酒店\"资源的数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计2025年7月所有\"酒店\"资源的数量。",
+            "predict": "统计2025年7月所有\"酒店\"资源的数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "统计2025年7月所有\"酒店\"资源的数量。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "analyze_resources",
+          "list_resources",
+          "analyze_visitors",
+          "analyze_resorts",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "统计2025年7月所有\"酒店\"资源的数量。",
+        "predict_query": "统计2025年7月所有\"酒店\"资源的数量。"
+      }
+    },
+    {
+      "conversation_id": 26,
+      "pair_id": 52,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"游船\", \"status\": 1, \"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\"}}",
+      "predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"游船\", \"status\": 1, \"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_products",
+          "arguments": {
+            "keyword": "游船",
+            "status": 1,
+            "time_start": "2025-08-01",
+            "time_end": "2025-08-31"
+          }
+        },
+        "predict_call": {
+          "name": "list_products",
+          "arguments": {
+            "keyword": "游船",
+            "status": 1,
+            "time_start": "2025-08-01",
+            "time_end": "2025-08-31"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "keyword": {
+            "target": "游船",
+            "predict": "游船",
+            "match": true
+          },
+          "status": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          },
+          "time_start": {
+            "target": "2025-08-01",
+            "predict": "2025-08-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"游船\", \"status\": 1, \"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_products\", \"arguments\": {\"keyword\": \"游船\", \"status\": 1, \"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\"}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 27,
+      "pair_id": 54,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"day\", \"aggregations\": {\"code\": \"count\"}, \"time_field\": \"create_time\"}, \"chart_config\": {\"output_format\": \"line_chart\", \"x_field\": \"time_period\", \"y_field\": \"count_code\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": \"day\", \"group_by\": \"day\", \"aggregation\": \"count\", \"chart_type\": \"line\", \"time_format\": \"YYYY-MM-DD\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-08-01",
+            "time_end": "2025-08-31",
+            "time_bucket": {
+              "period": "day",
+              "aggregations": {
+                "code": "count"
+              },
+              "time_field": "create_time"
+            },
+            "chart_config": {
+              "output_format": "line_chart",
+              "x_field": "time_period",
+              "y_field": "count_code"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-08-01",
+            "time_end": "2025-08-31",
+            "time_bucket": "day",
+            "group_by": "day",
+            "aggregation": "count",
+            "chart_type": "line",
+            "time_format": "YYYY-MM-DD"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-08-01",
+            "predict": "2025-08-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          },
+          "time_bucket": {
+            "target": {
+              "period": "day",
+              "aggregations": {
+                "code": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": "day",
+            "match": false
+          },
+          "chart_config": {
+            "target": {
+              "output_format": "line_chart",
+              "x_field": "time_period",
+              "y_field": "count_code"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": \"day\", \"group_by\": \"day\", \"aggregation\": \"count\", \"chart_type\": \"line\", \"time_format\": \"YYYY-MM-DD\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-08-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"day\", \"aggregations\": {\"code\": \"count\"}, \"time_field\": \"create_time\"}, \"chart_config\": {\"output_format\": \"line_chart\", \"x_field\": \"time_period\", \"y_field\": \"count_code\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 25,
+      "pair_id": 49,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "predict": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "analyze_visitors",
+          "analyze_resorts",
+          "list_visitors",
+          "analyze_resources",
+          "analyze_orders"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+        "predict_query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。"
+      }
+    },
+    {
+      "conversation_id": 24,
+      "pair_id": 47,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "predict": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+        "target_tool": "list_resources",
+        "retrieved_tools": [
+          "list_resources",
+          "analyze_resources",
+          "list_visitors",
+          "analyze_resorts",
+          "retrieval_tool"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+        "predict_query": "查一下父级ID是242的，类型是\"票务\"的资源。"
+      }
+    },
+    {
+      "conversation_id": 28,
+      "pair_id": 56,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-06-30\", \"is_verify\": 1, \"aggregations\": {\"id_card\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-06-30\", \"group_by\": \"is_verify\", \"is_verify\": 1}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-06-30",
+            "is_verify": 1,
+            "aggregations": {
+              "id_card": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_visitors",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-06-30",
+            "group_by": "is_verify",
+            "is_verify": 1
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-06-30",
+            "predict": "2025-06-30",
+            "match": true
+          },
+          "is_verify": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          },
+          "aggregations": {
+            "target": {
+              "id_card": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-06-30\", \"group_by\": \"is_verify\", \"is_verify\": 1}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_visitors\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-06-30\", \"is_verify\": 1, \"aggregations\": {\"id_card\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 29,
+      "pair_id": 58,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-10-31\", \"trend\": {\"metric_field\": \"price\", \"trend_type\": \"growth_rate\", \"time_field\": \"create_time\"}, \"chart_config\": {\"output_format\": \"line_chart\", \"x_field\": \"time_period\", \"y_field\": \"growth_rate_price\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-10-31\", \"aggregation\": \"总金额\", \"time_bucket\": \"月\", \"chart_type\": \"折线图\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-10-31",
+            "trend": {
+              "metric_field": "price",
+              "trend_type": "growth_rate",
+              "time_field": "create_time"
+            },
+            "chart_config": {
+              "output_format": "line_chart",
+              "x_field": "time_period",
+              "y_field": "growth_rate_price"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-10-31",
+            "aggregation": "总金额",
+            "time_bucket": "月",
+            "chart_type": "折线图"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-10-31",
+            "predict": "2025-10-31",
+            "match": true
+          },
+          "trend": {
+            "target": {
+              "metric_field": "price",
+              "trend_type": "growth_rate",
+              "time_field": "create_time"
+            },
+            "predict": null,
+            "match": false
+          },
+          "chart_config": {
+            "target": {
+              "output_format": "line_chart",
+              "x_field": "time_period",
+              "y_field": "growth_rate_price"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-10-31\", \"aggregation\": \"总金额\", \"time_bucket\": \"月\", \"chart_type\": \"折线图\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-10-31\", \"trend\": {\"metric_field\": \"price\", \"trend_type\": \"growth_rate\", \"time_field\": \"create_time\"}, \"chart_config\": {\"output_format\": \"line_chart\", \"x_field\": \"time_period\", \"y_field\": \"growth_rate_price\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 27,
+      "pair_id": 53,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年8月份每日新增订单的趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年8月份每日新增订单的趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看看2025年8月份每日新增订单的趋势图。",
+            "predict": "我想看看2025年8月份每日新增订单的趋势图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想看看2025年8月份每日新增订单的趋势图。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "analyze_orders",
+          "analyze_products",
+          "list_orders",
+          "analyze_customers",
+          "analyze_agreement_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想看看2025年8月份每日新增订单的趋势图。",
+        "predict_query": "我想看看2025年8月份每日新增订单的趋势图。"
+      }
+    },
+    {
+      "conversation_id": 26,
+      "pair_id": 51,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "predict": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "list_products",
+          "analyze_products",
+          "list_visitors",
+          "list_orders",
+          "list_resources"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+        "predict_query": "帮我找找2025年8月那些状态是1的\"游船\"产品。"
+      }
+    },
+    {
+      "conversation_id": 30,
+      "pair_id": 60,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_customers\", \"arguments\": {\"status\": 0, \"limit\": 10}}",
+      "predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"status\": 0, \"limit\": 10}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_customers",
+          "arguments": {
+            "status": 0,
+            "limit": 10
+          }
+        },
+        "predict_call": {
+          "name": "list_customers",
+          "arguments": {
+            "status": 0,
+            "limit": 10
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "status": {
+            "target": 0,
+            "predict": 0,
+            "match": true
+          },
+          "limit": {
+            "target": 10,
+            "predict": 10,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_customers\", \"arguments\": {\"status\": 0, \"limit\": 10}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_customers\", \"arguments\": {\"status\": 0, \"limit\": 10}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 31,
+      "pair_id": 62,
+      "score": 0.0,
+      "tool_name_score": 0.0,
+      "target": "{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"group_by\": [\"is_agreement\"], \"aggregations\": {\"customer_id\": \"count\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"agreement_type\": \"协议客户\", \"status\": 1}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "group_by": [
+              "is_agreement"
+            ],
+            "aggregations": {
+              "customer_id": "count"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_agreement_customers",
+          "arguments": {
+            "sign_date_start": "2025-06-01",
+            "sign_date_end": "2025-08-31",
+            "agreement_type": "协议客户",
+            "status": 1
+          }
+        },
+        "tool_name_match": false,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": null,
+            "match": false
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": null,
+            "match": false
+          },
+          "group_by": {
+            "target": [
+              "is_agreement"
+            ],
+            "predict": null,
+            "match": false
+          },
+          "aggregations": {
+            "target": {
+              "customer_id": "count"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_agreement_customers\", \"arguments\": {\"sign_date_start\": \"2025-06-01\", \"sign_date_end\": \"2025-08-31\", \"agreement_type\": \"协议客户\", \"status\": 1}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"group_by\": [\"is_agreement\"], \"aggregations\": {\"customer_id\": \"count\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 29,
+      "pair_id": 57,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "predict": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "analyze_orders",
+          "analyze_products",
+          "list_orders",
+          "analyze_resorts",
+          "analyze_resources"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+        "predict_query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。"
+      }
+    },
+    {
+      "conversation_id": 28,
+      "pair_id": 55,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "predict": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "analyze_visitors",
+          "list_visitors",
+          "analyze_customers",
+          "analyze_agreement_customers",
+          "analyze_resorts"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+        "predict_query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。"
+      }
+    },
+    {
+      "conversation_id": 32,
+      "pair_id": 64,
+      "score": 0.8333333333333333,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-09-30\", \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"customer_id\": \"count\"}, \"time_field\": \"create_time\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-09-30\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-09-30",
+            "time_bucket": {
+              "period": "month",
+              "aggregations": {
+                "customer_id": "count"
+              },
+              "time_field": "create_time"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_customers",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-09-30"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-09-30",
+            "predict": "2025-09-30",
+            "match": true
+          },
+          "time_bucket": {
+            "target": {
+              "period": "month",
+              "aggregations": {
+                "customer_id": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-09-30\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_customers\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-09-30\", \"time_bucket\": {\"period\": \"month\", \"aggregations\": {\"customer_id\": \"count\"}, \"time_field\": \"create_time\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 33,
+      "pair_id": 66,
+      "score": 0.875,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_products\", \"arguments\": {\"status\": 1, \"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"week\", \"aggregations\": {\"product_id\": \"count\"}, \"time_field\": \"create_time\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_products\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"status\": 1, \"group_by\": [\"create_time\"], \"aggregations\": {\"product_id\": \"count\"}}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_products",
+          "arguments": {
+            "status": 1,
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "time_bucket": {
+              "period": "week",
+              "aggregations": {
+                "product_id": "count"
+              },
+              "time_field": "create_time"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_products",
+          "arguments": {
+            "time_start": "2025-06-01",
+            "time_end": "2025-08-31",
+            "status": 1,
+            "group_by": [
+              "create_time"
+            ],
+            "aggregations": {
+              "product_id": "count"
+            }
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "status": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          },
+          "time_start": {
+            "target": "2025-06-01",
+            "predict": "2025-06-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-08-31",
+            "predict": "2025-08-31",
+            "match": true
+          },
+          "time_bucket": {
+            "target": {
+              "period": "week",
+              "aggregations": {
+                "product_id": "count"
+              },
+              "time_field": "create_time"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_products\", \"arguments\": {\"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"status\": 1, \"group_by\": [\"create_time\"], \"aggregations\": {\"product_id\": \"count\"}}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_products\", \"arguments\": {\"status\": 1, \"time_start\": \"2025-06-01\", \"time_end\": \"2025-08-31\", \"time_bucket\": {\"period\": \"week\", \"aggregations\": {\"product_id\": \"count\"}, \"time_field\": \"create_time\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 31,
+      "pair_id": 61,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "predict": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+        "target_tool": "analyze_customers",
+        "retrieved_tools": [
+          "analyze_agreement_customers",
+          "analyze_customers",
+          "list_agreement_customers",
+          "list_customers",
+          "analyze_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+        "predict_query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。"
+      }
+    },
+    {
+      "conversation_id": 30,
+      "pair_id": 59,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "显示一下不活跃的客户，只要前10个就行。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "显示一下不活跃的客户，只要前10个就行。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "显示一下不活跃的客户，只要前10个就行。",
+            "predict": "显示一下不活跃的客户，只要前10个就行。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "显示一下不活跃的客户，只要前10个就行。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "list_customers",
+          "analyze_customers",
+          "list_agreement_customers",
+          "analyze_agreement_customers",
+          "list_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "显示一下不活跃的客户，只要前10个就行。",
+        "predict_query": "显示一下不活跃的客户，只要前10个就行。"
+      }
+    },
+    {
+      "conversation_id": 32,
+      "pair_id": 63,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "predict": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+        "target_tool": "analyze_customers",
+        "retrieved_tools": [
+          "analyze_customers",
+          "analyze_agreement_customers",
+          "analyze_visitors",
+          "analyze_resources",
+          "list_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+        "predict_query": "看看2025年6月到9月，客户新增数量的月度趋势。"
+      }
+    },
+    {
+      "conversation_id": 34,
+      "pair_id": 68,
+      "score": 0.75,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_orders\", \"arguments\": {\"status\": \"待确认\", \"relations\": [\"resources_order\"]}}",
+      "predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"status\": \"待确认\", \"include_resource_orders\": true}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_orders",
+          "arguments": {
+            "status": "待确认",
+            "relations": [
+              "resources_order"
+            ]
+          }
+        },
+        "predict_call": {
+          "name": "list_orders",
+          "arguments": {
+            "status": "待确认",
+            "include_resource_orders": true
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "status": {
+            "target": "待确认",
+            "predict": "待确认",
+            "match": true
+          },
+          "relations": {
+            "target": [
+              "resources_order"
+            ],
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_orders\", \"arguments\": {\"status\": \"待确认\", \"include_resource_orders\": true}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_orders\", \"arguments\": {\"status\": \"待确认\", \"relations\": [\"resources_order\"]}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 35,
+      "pair_id": 70,
+      "score": 0.8333333333333333,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"chart_config\": {\"output_format\": \"distribution_chart\", \"distribution_field\": \"price\", \"chart_type\": \"histogram\"}}}",
+      "predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"time_bucket\": \"month\", \"group_by\": \"month\", \"aggregations\": [{\"field\": \"amount\", \"aggregation\": \"sum\"}], \"chart_type\": \"histogram\"}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "chart_config": {
+              "output_format": "distribution_chart",
+              "distribution_field": "price",
+              "chart_type": "histogram"
+            }
+          }
+        },
+        "predict_call": {
+          "name": "analyze_orders",
+          "arguments": {
+            "time_start": "2025-07-01",
+            "time_end": "2025-12-31",
+            "time_bucket": "month",
+            "group_by": "month",
+            "aggregations": [
+              {
+                "field": "amount",
+                "aggregation": "sum"
+              }
+            ],
+            "chart_type": "histogram"
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": false,
+        "argument_details": {
+          "time_start": {
+            "target": "2025-07-01",
+            "predict": "2025-07-01",
+            "match": true
+          },
+          "time_end": {
+            "target": "2025-12-31",
+            "predict": "2025-12-31",
+            "match": true
+          },
+          "chart_config": {
+            "target": {
+              "output_format": "distribution_chart",
+              "distribution_field": "price",
+              "chart_type": "histogram"
+            },
+            "predict": null,
+            "match": false
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"time_bucket\": \"month\", \"group_by\": \"month\", \"aggregations\": [{\"field\": \"amount\", \"aggregation\": \"sum\"}], \"chart_type\": \"histogram\"}}\n</tool_call>",
+        "raw_target": "{\"name\": \"analyze_orders\", \"arguments\": {\"time_start\": \"2025-07-01\", \"time_end\": \"2025-12-31\", \"chart_config\": {\"output_format\": \"distribution_chart\", \"distribution_field\": \"price\", \"chart_type\": \"histogram\"}}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 36,
+      "pair_id": 72,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"list_products\", \"arguments\": {\"status\": 1}}",
+      "predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"status\": 1}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "list_products",
+          "arguments": {
+            "status": 1
+          }
+        },
+        "predict_call": {
+          "name": "list_products",
+          "arguments": {
+            "status": 1
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "status": {
+            "target": 1,
+            "predict": 1,
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"list_products\", \"arguments\": {\"status\": 1}}\n</tool_call>",
+        "raw_target": "{\"name\": \"list_products\", \"arguments\": {\"status\": 1}}"
+      },
+      "recall": null,
+      "recall_details": null
+    },
+    {
+      "conversation_id": 33,
+      "pair_id": 65,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "predict": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+        "target_tool": "analyze_products",
+        "retrieved_tools": [
+          "analyze_products",
+          "list_products",
+          "analyze_orders",
+          "analyze_resources",
+          "analyze_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+        "predict_query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。"
+      }
+    },
+    {
+      "conversation_id": 34,
+      "pair_id": 67,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "predict": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "list_resources",
+          "list_products",
+          "analyze_orders",
+          "list_visitors"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+        "predict_query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。"
+      }
+    },
+    {
+      "conversation_id": 35,
+      "pair_id": 69,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "predict": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "analyze_orders",
+          "analyze_products",
+          "analyze_resources",
+          "analyze_customers",
+          "analyze_agreement_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+        "predict_query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。"
+      }
+    },
+    {
+      "conversation_id": 36,
+      "pair_id": 71,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想查一下那些状态是1的产品列表。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想查一下那些状态是1的产品列表。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想查一下那些状态是1的产品列表。",
+            "predict": "我想查一下那些状态是1的产品列表。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "我想查一下那些状态是1的产品列表。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "list_products",
+          "analyze_products",
+          "list_orders",
+          "list_resources",
+          "list_customers"
+        ],
+        "recall": 1,
+        "response_status": 200,
+        "query_match": true,
+        "target_query": "我想查一下那些状态是1的产品列表。",
+        "predict_query": "我想查一下那些状态是1的产品列表。"
+      }
+    }
+  ],
+  "service_ports": {
+    "vllm_inference": "http://localhost:5526",
+    "retrieval_tool": "http://127.0.0.1:9527/v1/databoard/tools/call"
+  },
+  "model": "my_lora"
+}

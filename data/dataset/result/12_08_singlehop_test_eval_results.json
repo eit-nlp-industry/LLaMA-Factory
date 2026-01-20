@@ -1,0 +1,2077 @@
+{
+  "summary": {
+    "total": 36,
+    "accuracy": 1.0,
+    "precision@1": 1.0,
+    "recall@5": 0.08333333333333333,
+    "failure_stats": {
+      "parse_failures": {
+        "target_parse_failed": 0,
+        "predict_parse_failed": 0,
+        "both_parse_failed": 0
+      },
+      "tool_name_mismatches": 0,
+      "argument_mismatches": 0,
+      "perfect_matches": 36
+    }
+  },
+  "cases": [
+    {
+      "conversation_id": 3,
+      "pair_id": 3,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度，有哪些女性游客的记录？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度，有哪些女性游客的记录？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度，有哪些女性游客的记录？",
+            "predict": "2025年第三季度，有哪些女性游客的记录？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度，有哪些女性游客的记录？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "2025年第三季度，有哪些女性游客的记录？",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "count_basic_statistics",
+          "query_monthly_data",
+          "query_resort_visitors",
+          "find_extreme_values"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 5,
+      "pair_id": 5,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "订单ID是22222的游客中，男女比例是怎样的？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "订单ID是22222的游客中，男女比例是怎样的？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "订单ID是22222的游客中，男女比例是怎样的？",
+            "predict": "订单ID是22222的游客中，男女比例是怎样的？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"订单ID是22222的游客中，男女比例是怎样的？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "订单ID是22222的游客中，男女比例是怎样的？",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "perform_comparative_analysis",
+          "query_resort_visitors",
+          "list_order_resource_status_distribution",
+          "analyze_proportions",
+          "analyze_payment_methods"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 2,
+      "pair_id": 2,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "predict": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年下半年每月合法游客和非合法游客的总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "get_ticket_sales_statistics",
+          "query_realtime_today",
+          "count_basic_statistics",
+          "query_resort_visitors"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 1,
+      "pair_id": 1,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "predict": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下2025年6月到现在已完成的订单，只要最新的5条就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "manage_order_status",
+          "filter_by_status",
+          "list_order_resource_status_distribution",
+          "manage_products"
+        ],
+        "recall": 1,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 4,
+      "pair_id": 4,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "predict": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "analyze_complex_conditions",
+          "manage_agreement_customers",
+          "get_order_details",
+          "filter_by_status",
+          "manage_order_status"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 6,
+      "pair_id": 6,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "predict": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "manage_agreement_customers",
+          "analyze_complex_conditions",
+          "get_order_details",
+          "manage_order_status",
+          "filter_by_status"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 9,
+      "pair_id": 9,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有没有状态是0的\"灵栖洞\"产品？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "有没有状态是0的\"灵栖洞\"产品？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "有没有状态是0的\"灵栖洞\"产品？",
+            "predict": "有没有状态是0的\"灵栖洞\"产品？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"有没有状态是0的\\\"灵栖洞\\\"产品？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "有没有状态是0的\"灵栖洞\"产品？",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "analyze_complex_conditions",
+          "manage_products",
+          "manage_order_status",
+          "filter_by_status",
+          "list_order_resource_status_distribution"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 10,
+      "pair_id": 10,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "predict": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "想知道2025年下半年，关于“旅游套餐”这个关键词的产品，总共有多少个？",
+        "target_tool": "analyze_products",
+        "retrieved_tools": [
+          "manage_resort_resources",
+          "analyze_travel_agencies",
+          "count_basic_statistics",
+          "query_resort_visitors",
+          "query_basic_resources"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 7,
+      "pair_id": 7,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "predict": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想找2025年8月到9月期间，叫李四的男性游客信息。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "manage_agreement_customers",
+          "query_resort_visitors",
+          "query_monthly_data",
+          "maps_text_search"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 8,
+      "pair_id": 8,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "predict": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列一下2025年第三季度上架的产品，按时间正序，最多20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "给我列一下2025年第三季度上架的产品，按时间正序，最多20条。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "intelligent_route_analysis",
+          "create_sorted_lists",
+          "manage_products",
+          "search_travel_images",
+          "image_ai_generate_tool"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 12,
+      "pair_id": 12,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "predict": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计一下2025年第三季度，各个区域不同状态的资源数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "manage_resort_resources",
+          "count_basic_statistics",
+          "query_basic_resources",
+          "query_resort_visitors",
+          "list_order_resource_status_distribution"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 11,
+      "pair_id": 11,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "predict": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "query_annual_data",
+          "create_sorted_lists",
+          "manage_agreement_customers",
+          "list_orders",
+          "manage_customer_basic"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 13,
+      "pair_id": 13,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "predict": "查询一下2025年6月到7月期间所有合法的游客记录。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月到7月期间所有合法的游客记录。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "query_resort_visitors",
+          "query_monthly_data",
+          "query_realtime_today",
+          "count_basic_statistics"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 15,
+      "pair_id": 15,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "predict": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看2025年下半年，所有\\\"酒店\\\"类型的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+        "target_tool": "list_resources",
+        "retrieved_tools": [
+          "query_basic_resources",
+          "baidu_ai_search",
+          "count_basic_statistics",
+          "manage_resort_resources",
+          "get_order_details"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 14,
+      "pair_id": 14,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "predict": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度期间，\\\"虚拟机\\\"资源的数量趋势如何？按月分析。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "calculate_business_metrics",
+          "analyze_time_trends",
+          "query_resort_visitors",
+          "query_basic_resources",
+          "count_basic_statistics"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 17,
+      "pair_id": 17,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有哪些旅行社客户？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有哪些旅行社客户？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年下半年有哪些旅行社客户？",
+            "predict": "2025年下半年有哪些旅行社客户？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有哪些旅行社客户？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "2025年下半年有哪些旅行社客户？",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "query_annual_data",
+          "query_monthly_data",
+          "analyze_travel_agencies",
+          "manage_agreement_customers",
+          "analyze_customer_segments"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 16,
+      "pair_id": 16,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "predict": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "从2025年6月开始，所有客户都给我列出来，按创建时间正序排列。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "query_annual_data",
+          "get_ranked_by_time_resort",
+          "create_sorted_lists",
+          "list_orders",
+          "rank_orders"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 18,
+      "pair_id": 18,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下订单ID是67890的游客，只要前20条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下订单ID是67890的游客，只要前20条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下订单ID是67890的游客，只要前20条。",
+            "predict": "查一下订单ID是67890的游客，只要前20条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下订单ID是67890的游客，只要前20条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "查一下订单ID是67890的游客，只要前20条。",
+        "target_tool": "list_visitors",
+        "retrieved_tools": [
+          "query_realtime_today",
+          "query_monthly_data",
+          "list_order_resource_status_distribution",
+          "rank_orders",
+          "query_orders_by_time"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 19,
+      "pair_id": 19,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年9月到10月，按性别统计游客总数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年9月到10月，按性别统计游客总数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年9月到10月，按性别统计游客总数。",
+            "predict": "从2025年9月到10月，按性别统计游客总数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年9月到10月，按性别统计游客总数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "从2025年9月到10月，按性别统计游客总数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "query_realtime_today",
+          "count_basic_statistics",
+          "analyze_proportions",
+          "query_resort_visitors"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 20,
+      "pair_id": 20,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "predict": "2025年下半年有没有“已作废”的订单？给我前10条。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年下半年有没有“已作废”的订单？给我前10条。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "manage_order_status",
+          "filter_by_status",
+          "list_order_resource_status_distribution",
+          "get_approval_list"
+        ],
+        "recall": 1,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 21,
+      "pair_id": 21,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月到今天，总共有多少份协议？",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "从2025年6月到今天，总共有多少份协议？",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "从2025年6月到今天，总共有多少份协议？",
+            "predict": "从2025年6月到今天，总共有多少份协议？",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"从2025年6月到今天，总共有多少份协议？\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "从2025年6月到今天，总共有多少份协议？",
+        "target_tool": "analyze_agreement_customers",
+        "retrieved_tools": [
+          "manage_agreement_customers",
+          "get_order_details",
+          "query_realtime_today",
+          "query_resort_visitors",
+          "count_basic_statistics"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 22,
+      "pair_id": 22,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计2025年7月所有\"酒店\"资源的数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "统计2025年7月所有\"酒店\"资源的数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "统计2025年7月所有\"酒店\"资源的数量。",
+            "predict": "统计2025年7月所有\"酒店\"资源的数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"统计2025年7月所有\\\"酒店\\\"资源的数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "统计2025年7月所有\"酒店\"资源的数量。",
+        "target_tool": "analyze_resources",
+        "retrieved_tools": [
+          "query_basic_resources",
+          "query_by_time_resort",
+          "count_basic_statistics",
+          "manage_resort_resources",
+          "query_resort_visitors"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 23,
+      "pair_id": 23,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "predict": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "calculate_order_distribution",
+          "analyze_and_generate_chart",
+          "group_by_dimensions",
+          "monitor_business_operations",
+          "list_order_resource_status_distribution"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 24,
+      "pair_id": 24,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "predict": "查一下父级ID是242的，类型是\"票务\"的资源。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查一下父级ID是242的，类型是\\\"票务\\\"的资源。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "查一下父级ID是242的，类型是\"票务\"的资源。",
+        "target_tool": "list_resources",
+        "retrieved_tools": [
+          "intelligent_route_analysis",
+          "manage_resort_resources",
+          "query_basic_resources",
+          "list_order_resource_status_distribution",
+          "get_order_details"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 25,
+      "pair_id": 25,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "predict": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "analyze_order_trends",
+          "get_scenic_spot_revenue",
+          "compare_by_time_resort",
+          "analyze_and_generate_chart",
+          "analyze_time_ranges"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 26,
+      "pair_id": 26,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "predict": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我找找2025年8月那些状态是1的\\\"游船\\\"产品。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "帮我找找2025年8月那些状态是1的\"游船\"产品。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "analyze_complex_conditions",
+          "manage_products",
+          "get_approval_list",
+          "filter_by_status",
+          "manage_order_status"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 27,
+      "pair_id": 27,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年8月份每日新增订单的趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年8月份每日新增订单的趋势图。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看看2025年8月份每日新增订单的趋势图。",
+            "predict": "我想看看2025年8月份每日新增订单的趋势图。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年8月份每日新增订单的趋势图。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想看看2025年8月份每日新增订单的趋势图。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "query_orders_by_time",
+          "analyze_order_trends",
+          "analyze_and_generate_chart",
+          "analyze_time_trends",
+          "monitor_business_operations"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 28,
+      "pair_id": 28,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "predict": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+        "target_tool": "analyze_visitors",
+        "retrieved_tools": [
+          "query_by_time_resort",
+          "query_realtime_today",
+          "count_basic_statistics",
+          "query_resort_visitors",
+          "get_approval_list"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 29,
+      "pair_id": 29,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "predict": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我分析一下从2025年7月到10月订单总金额的增长率趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "analyze_time_trends",
+          "compare_by_time_resort",
+          "analyze_order_trends",
+          "analyze_and_generate_chart",
+          "query_historical_periods"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 30,
+      "pair_id": 30,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "显示一下不活跃的客户，只要前10个就行。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "显示一下不活跃的客户，只要前10个就行。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "显示一下不活跃的客户，只要前10个就行。",
+            "predict": "显示一下不活跃的客户，只要前10个就行。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"显示一下不活跃的客户，只要前10个就行。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "显示一下不活跃的客户，只要前10个就行。",
+        "target_tool": "list_customers",
+        "retrieved_tools": [
+          "list_orders",
+          "manage_agreement_customers",
+          "find_extreme_values",
+          "query_monthly_data",
+          "manage_products"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 32,
+      "pair_id": 32,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "predict": "看看2025年6月到9月，客户新增数量的月度趋势。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"看看2025年6月到9月，客户新增数量的月度趋势。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+        "target_tool": "analyze_customers",
+        "retrieved_tools": [
+          "analyze_order_trends",
+          "analyze_time_trends",
+          "query_historical_periods",
+          "perform_comparative_analysis",
+          "calculate_business_metrics"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 31,
+      "pair_id": 31,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "predict": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+        "target_tool": "analyze_customers",
+        "retrieved_tools": [
+          "perform_comparative_analysis",
+          "analyze_proportions",
+          "analyze_customer_segments",
+          "analyze_payment_methods",
+          "analyze_revenue_by_type"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 33,
+      "pair_id": 33,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "predict": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+        "target_tool": "analyze_products",
+        "retrieved_tools": [
+          "calculate_order_distribution",
+          "manage_products",
+          "analyze_proportions",
+          "create_sorted_lists",
+          "monitor_business_operations"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 34,
+      "pair_id": 34,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "predict": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"给我列出所有“待确认”的订单，并且把资源订单信息也带上。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 1,
+      "recall_details": {
+        "query": "给我列出所有“待确认”的订单，并且把资源订单信息也带上。",
+        "target_tool": "list_orders",
+        "retrieved_tools": [
+          "list_orders",
+          "get_order_details",
+          "filter_by_status",
+          "list_order_resource_status_distribution",
+          "manage_order_status"
+        ],
+        "recall": 1,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 35,
+      "pair_id": 35,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "predict": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"分析一下2025年下半年订单金额的分布情况，用直方图展示。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+        "target_tool": "analyze_orders",
+        "retrieved_tools": [
+          "calculate_order_distribution",
+          "filter_by_amount",
+          "generate_histogram_chart",
+          "generate_violin_chart",
+          "list_order_resource_status_distribution"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    },
+    {
+      "conversation_id": 36,
+      "pair_id": 36,
+      "score": 1.0,
+      "tool_name_score": 1.0,
+      "target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}",
+      "predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+      "details": {
+        "target_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想查一下那些状态是1的产品列表。",
+            "source_filter": "toollist",
+            "top_k": 5,
+            "user_id": 13
+          }
+        },
+        "predict_call": {
+          "name": "retrieval_tool",
+          "arguments": {
+            "query": "我想查一下那些状态是1的产品列表。",
+            "source_filter": "toollist",
+            "top_k": 5
+          }
+        },
+        "tool_name_match": true,
+        "arguments_match": true,
+        "argument_details": {
+          "query": {
+            "target": "我想查一下那些状态是1的产品列表。",
+            "predict": "我想查一下那些状态是1的产品列表。",
+            "match": true
+          },
+          "source_filter": {
+            "target": "toollist",
+            "predict": "toollist",
+            "match": true
+          }
+        },
+        "raw_predict": "<tool_call>\n{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5}}\n</tool_call>",
+        "raw_target": "{\"name\": \"retrieval_tool\", \"arguments\": {\"query\": \"我想查一下那些状态是1的产品列表。\", \"source_filter\": \"toollist\", \"top_k\": 5, \"user_id\": 13}}"
+      },
+      "recall": 0,
+      "recall_details": {
+        "query": "我想查一下那些状态是1的产品列表。",
+        "target_tool": "list_products",
+        "retrieved_tools": [
+          "manage_products",
+          "analyze_complex_conditions",
+          "get_approval_list",
+          "manage_order_status",
+          "filter_by_status"
+        ],
+        "recall": 0,
+        "response_status": 200
+      }
+    }
+  ],
+  "service_ports": {
+    "vllm_inference": "http://localhost:5526",
+    "retrieval_tool": "http://127.0.0.1:8084/v1/databoard/tools/call"
+  },
+  "model": "my_lora"
+}
