@@ -29,7 +29,9 @@ from ...extras import logging
 from ...extras.constants import IGNORE_INDEX
 from ...extras.packages import is_transformers_version_greater_than
 from ..callbacks import SaveProcessorCallback
+from ..token_loss_callback import TokenLossFinalizeCallback
 from ..trainer_utils import create_custom_optimizer, create_custom_scheduler
+from ..token_loss_tracker import TokenLossTracker
 
 
 if TYPE_CHECKING:
@@ -98,6 +100,23 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             from ..trainer_utils import dft_loss_func
 
             self.compute_loss_func = dft_loss_func
+        
+        # 初始化Token-level Loss Tracker
+        self.token_loss_tracker = TokenLossTracker(
+            output_dir=self.args.output_dir,
+            save_interval=100,  # Save every 100 records
+            max_samples_per_step=1,  # Track 1 sample per step to save memory
+            context_window_size=10,  # Context window size (left and right)
+        )
+        
+        # Set tokenizer for tracker
+        if hasattr(self, 'tokenizer') and self.tokenizer is not None:
+            self.token_loss_tracker.set_tokenizer(self.tokenizer)
+        elif hasattr(self, 'processing_class') and self.processing_class is not None:
+            self.token_loss_tracker.set_tokenizer(self.processing_class)
+        
+        # Add callback to finalize token loss tracking at the end of training
+        self.add_callback(TokenLossFinalizeCallback())
 
     @override
     def create_optimizer(self) -> "torch.optim.Optimizer":
@@ -120,27 +139,73 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         return super()._get_train_sampler(*args, **kwargs)
 
     @override
-    def compute_loss(self, model, inputs, *args, **kwargs):
-        # 调用监控回调分析token（每次训练步骤都调用）
-        for callback in self.callback_handler.callbacks:
-            if hasattr(callback, 'analyze_training_tokens'):
-                try:
-                    labels = inputs.get('labels')
-                    if labels is not None:
-                        callback.analyze_training_tokens(model, inputs, labels)
-                except Exception as e:
-                    logger.warning(f"⚠️ Token分析失败: {e}")
-            
-            # 调用预测分析（每次训练步骤都调用）
-            if hasattr(callback, 'analyze_model_predictions'):
-                try:
-                    labels = inputs.get('labels')
-                    if labels is not None:
-                        callback.analyze_model_predictions(model, inputs, labels)
-                except Exception as e:
-                    logger.warning(f"⚠️ 预测分析失败: {e}")
+    def compute_loss(self, model, inputs, return_outputs=False, *args, **kwargs):
+        # 检查是否在训练模式（评估时不应记录token-level loss）
+        is_training = model.training
         
-        return super().compute_loss(model, inputs, *args, **kwargs)
+        # 调用监控回调分析token（仅在训练时调用）
+        if is_training:
+            for callback in self.callback_handler.callbacks:
+                if hasattr(callback, 'analyze_training_tokens'):
+                    try:
+                        labels = inputs.get('labels')
+                        if labels is not None:
+                            callback.analyze_training_tokens(model, inputs, labels)
+                    except Exception as e:
+                        logger.warning(f"⚠️ Token分析失败: {e}")
+                
+                # 调用预测分析（仅在训练时调用）
+                if hasattr(callback, 'analyze_model_predictions'):
+                    try:
+                        labels = inputs.get('labels')
+                        if labels is not None:
+                            callback.analyze_model_predictions(model, inputs, labels)
+                    except Exception as e:
+                        logger.warning(f"⚠️ 预测分析失败: {e}")
+        
+        # 获取模型输出（用于计算loss和记录token-level loss）
+        labels = inputs.get('labels')
+        outputs = None  # Initialize outputs to None
+        
+        if labels is not None:
+            # Forward pass
+            outputs = model(**inputs)
+            logits = outputs.logits
+            
+            # 记录token-level loss（仅在训练时记录，使用detach避免影响梯度）
+            if is_training:
+                try:
+                    self.token_loss_tracker.record_token_losses(
+                        logits=logits.detach(),  # Detach to avoid affecting gradients
+                        labels=labels,
+                        input_ids=inputs.get('input_ids'),
+                        step=self.state.global_step if hasattr(self, 'state') else None,
+                    )
+                except Exception as e:
+                    logger.warning(f"⚠️ Token-level loss记录失败: {e}")
+            
+            # 计算标准loss（用于训练和评估）
+            if hasattr(self, 'compute_loss_func') and self.compute_loss_func is not None:
+                loss = self.compute_loss_func(model, inputs, outputs, return_outputs=False)
+            else:
+                # Use default loss computation
+                loss_fct = torch.nn.CrossEntropyLoss(ignore_index=IGNORE_INDEX)
+                shift_logits = logits[..., :-1, :].contiguous()
+                shift_labels = labels[..., 1:].contiguous()
+                loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
+        else:
+            # Fallback to default behavior
+            result = super().compute_loss(model, inputs, return_outputs=return_outputs, *args, **kwargs)
+            if return_outputs:
+                loss, outputs = result
+            else:
+                loss = result
+        
+        # 根据return_outputs参数决定返回值
+        if return_outputs:
+            return loss, outputs
+        else:
+            return loss
 
     @override
     def prediction_step(
@@ -203,3 +268,12 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         with open(output_prediction_file, "w", encoding="utf-8") as f:
             for text, pred, label in zip(decoded_inputs, decoded_preds, decoded_labels):
                 f.write(json.dumps({"prompt": text, "predict": pred, "label": label}, ensure_ascii=False) + "\n")
+    
+    def _finalize_token_loss_tracking(self):
+        """Finalize token loss tracking and save remaining data."""
+        if hasattr(self, 'token_loss_tracker'):
+            try:
+                self.token_loss_tracker.finalize()
+                logger.info_rank0("Token loss tracking finalized.")
+            except Exception as e:
+                logger.warning(f"Failed to finalize token loss tracking: {e}")

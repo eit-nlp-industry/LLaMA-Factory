@@ -51,10 +51,6 @@
     "file_name": "ocr_text_orders_fine_grained_test_08_07_updated_v2_with_context_object.json",
     "formatting": "custom_context"
   },
-  "test_data_for_eval": {
-    "file_name": "8_30_all_evaldata.json",
-    "formatting": "custom_context"
-  },
   "test_data_for_eval_v2": {
     "file_name": "text_idcards_8_18_eval.json",
     "formatting": "custom_context",
@@ -868,5 +864,17 @@
       "time": "time",
       "user_id": "user_id"
     }
+  },
+  "price_service": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/11_25/price_service.json",
+    "formatting": "custom_context"
+  },
+  "sft_training_data_filter": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/01_17/train_sft.json",
+    "formatting": "custom_context"
+  },
+  "sft_test_data_01_08": {
+    "file_name": "/home/ziqiang/LLaMA-Factory/data/dataset/01_17/test_sft.json",
+    "formatting": "custom_context"
   }
 }

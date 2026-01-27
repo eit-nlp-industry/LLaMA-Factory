@@ -41,6 +41,20 @@
    - 保存验证集Loss历史到JSON文件
    - 验证集Loss会绘制在loss曲线图中
    - 验证集Loss会保存在训练metrics中
+
+6. Token-level Loss跟踪与分析（含上下文窗口）
+   - 自动记录每个token的loss值（使用reduction="none"）
+   - 记录token信息、位置、类型、top-k预测结果
+   - 上下文窗口记录（左右各10个token的上下文及对应loss）
+   - 将"token loss高"升级为"token在特定上下文中loss高"
+   - 训练完成后可进行深度分析：
+     * 高频高loss token统计
+     * Token类型聚类分析（structural/keyword/numeric/path/natural_language）
+     * 位置敏感分析（识别序列位置loss分布，发现尾部崩溃等问题）
+     * Top-k预测对比分析（分析模型预测置信度和正确性）
+     * 上下文模式分析（识别token在特定上下文中的loss模式）
+   - 数据自动保存到 {output_dir}/token_loss_data/
+   - 提供完整的分析脚本和可视化报告
 """
 
 import os
@@ -65,9 +79,14 @@ def modify_trainer_to_add_monitoring():
         content = f.read()
     
     # 检查是否已经添加了监控功能
-    if "LabelPredictionMonitorCallback" in content:
-        print("✅ 训练器已经包含监控功能")
+    # TokenLossTracker已经在trainer.py中直接集成，不需要通过此函数添加
+    if "LabelPredictionMonitorCallback" in content and "TokenLossTracker" in content:
+        print("✅ 训练器已经包含监控功能和Token-level Loss跟踪")
+        print("   - LabelPredictionMonitorCallback: 已集成")
+        print("   - TokenLossTracker: 已集成（自动记录token-level loss）")
         return True
+    elif "TokenLossTracker" in content:
+        print("✅ TokenLossTracker已集成，正在添加LabelPredictionMonitorCallback...")
     
     # 在__init__方法中添加监控回调
     init_modification = '''
@@ -133,6 +152,7 @@ def create_enhanced_training_script():
         "labels": os.path.join(log_dir, f"label_analysis_{log_timestamp}.log"),
         "alignment": os.path.join(log_dir, f"alignment_analysis_{log_timestamp}.log"),
         "eval_loss": os.path.join(log_dir, f"eval_loss_monitor_{log_timestamp}.log"),
+        "token_loss": os.path.join(log_dir, f"token_loss_analysis_{log_timestamp}.log"),
         "main": os.path.join(log_dir, f"main_training_{log_timestamp}.log")
     }
     
@@ -181,6 +201,7 @@ echo "✅ 数据集检查完成"
 echo "🔄 执行双卡DDP分布式训练命令..."
 echo "⚡ 使用PyTorch DDP，配置与最佳单卡完全等效"
 echo "📊 启用验证集评估，使用独立的test数据集，监控eval_loss"
+echo "⚠️ 注意: eval_steps=100 (每100步评估一次，避免在epoch边界评估导致错误)"
 llamafactory-cli train \
     --stage sft \
     --do_train True \
@@ -193,7 +214,7 @@ llamafactory-cli train \
     --dataset sft_training_data_filter \
     --eval_dataset sft_test_data_01_08 \
     --cutoff_len 8192 \
-    --learning_rate 5e-5 \
+    --learning_rate 5.0e-5 \
     --num_train_epochs 5.0 \
     --max_samples 100000 \
     --per_device_train_batch_size 1 \
@@ -202,7 +223,7 @@ llamafactory-cli train \
     --max_grad_norm 0.5 \
     --weight_decay 0.01 \
     --logging_steps 1 \
-    --save_steps 100 \
+    --save_steps 25 \
     --warmup_ratio 0.05 \
     --packing False \
     --enable_thinking False \
@@ -226,7 +247,7 @@ llamafactory-cli train \
     --dataloader_drop_last False \
     --seed 42 \
     --eval_strategy steps \
-    --eval_steps 25 \
+    --eval_steps 10 \
     --per_device_eval_batch_size 1 \
     --do_eval True
 
@@ -241,6 +262,28 @@ echo "   🏷️ 标签分析: {log_files['labels']}"
 echo "   🔮 预测监控: {log_files['predictions']}"
 echo "   🎯 对齐分析: {log_files['alignment']}"
 echo "   📈 验证集Loss: {log_files['eval_loss']}"
+echo "   🔍 Token Loss数据: {output_dir}/token_loss_data/"
+
+# 训练完成后，提示可以分析token-level loss
+echo ""
+echo "📊 Token-level Loss分析（含上下文窗口）:"
+echo "   【训练时已自动记录】"
+echo "   ✅ 训练过程中已自动记录token-level loss数据（含上下文窗口）"
+echo "   ✅ 数据保存在: {output_dir}/token_loss_data/"
+echo "   ✅ 每个token记录包含左右各10个token的上下文及对应loss"
+echo ""
+echo "   【训练后分析】（使用以下脚本读取已记录的数据）"
+echo "   脚本1: 基础分析 - 读取 {output_dir}/token_loss_data/ 进行基础统计"
+echo "   python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss.py \\"
+echo "       --token_loss_dir {output_dir}/token_loss_data \\"
+echo "       --output_dir {output_dir}/token_loss_analysis"
+echo ""
+echo "   脚本2: 上下文专项分析 - 读取 {output_dir}/token_loss_data/ 进行上下文模式识别"
+echo "   python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss_with_context.py \\"
+echo "       --token_loss_dir {output_dir}/token_loss_data \\"
+echo "       --output_dir {output_dir}/token_loss_context_analysis \\"
+echo "       --target_token 'token'"
+echo ""
 """
     
     # 保存脚本
@@ -252,6 +295,93 @@ echo "   📈 验证集Loss: {log_files['eval_loss']}"
     os.chmod(script_path, 0o755)
     
     return script_path, output_dir, log_files
+
+def create_token_loss_analysis_script(output_dir):
+    """创建Token Loss分析脚本（含上下文窗口分析）"""
+    
+    analysis_script = f"""#!/bin/bash
+# Token-level Loss分析脚本（含上下文窗口分析）
+# 自动生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+TOKEN_LOSS_DIR="{output_dir}/token_loss_data"
+ANALYSIS_OUTPUT_DIR="{output_dir}/token_loss_analysis"
+CONTEXT_ANALYSIS_OUTPUT_DIR="{output_dir}/token_loss_context_analysis"
+
+echo "🔍 开始分析Token-level Loss数据（含上下文窗口）..."
+echo "   数据目录: $TOKEN_LOSS_DIR"
+echo "   基础分析输出: $ANALYSIS_OUTPUT_DIR"
+echo "   上下文分析输出: $CONTEXT_ANALYSIS_OUTPUT_DIR"
+echo ""
+
+# 检查token_loss_data目录是否存在
+if [ ! -d "$TOKEN_LOSS_DIR" ]; then
+    echo "❌ Token loss data directory not found: $TOKEN_LOSS_DIR"
+    echo "   请确保训练已经完成并生成了token_loss_data目录"
+    exit 1
+fi
+
+# 创建分析输出目录
+mkdir -p "$ANALYSIS_OUTPUT_DIR"
+mkdir -p "$CONTEXT_ANALYSIS_OUTPUT_DIR"
+
+# 运行基础分析脚本
+echo "📊 运行基础分析..."
+python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss.py \\
+    --token_loss_dir "$TOKEN_LOSS_DIR" \\
+    --output_dir "$ANALYSIS_OUTPUT_DIR"
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ 基础分析完成！"
+    echo "📁 基础分析结果文件："
+    echo "   - $ANALYSIS_OUTPUT_DIR/token_loss_analysis_report.md (综合分析报告)"
+    echo "   - $ANALYSIS_OUTPUT_DIR/high_loss_tokens.csv (高频高loss token)"
+    echo "   - $ANALYSIS_OUTPUT_DIR/token_type_analysis.csv (token类型分析)"
+    echo "   - $ANALYSIS_OUTPUT_DIR/position_analysis.csv (位置分析)"
+    echo "   - $ANALYSIS_OUTPUT_DIR/topk_prediction_analysis.csv (Top-k预测分析)"
+    echo "   - $ANALYSIS_OUTPUT_DIR/position_loss_analysis.png (位置loss可视化)"
+else
+    echo "⚠️ 基础分析失败，继续上下文分析..."
+fi
+
+# 运行上下文专项分析
+echo ""
+echo "📊 运行上下文模式分析..."
+python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss_with_context.py \\
+    --token_loss_dir "$TOKEN_LOSS_DIR" \\
+    --output_dir "$CONTEXT_ANALYSIS_OUTPUT_DIR" \\
+    --target_token "token"
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ 上下文分析完成！"
+    echo "📁 上下文分析结果文件："
+    echo "   - $CONTEXT_ANALYSIS_OUTPUT_DIR/context_pattern_analysis.csv (上下文模式分析)"
+    echo "   - $CONTEXT_ANALYSIS_OUTPUT_DIR/context_distribution_token.csv (特定token上下文分布)"
+    echo "   - $CONTEXT_ANALYSIS_OUTPUT_DIR/context_loss_analysis.png (上下文loss可视化)"
+    echo ""
+    echo "💡 上下文分析帮助识别："
+    echo "   - token在什么上下文中loss高（如'anchor结构闭合位置'）"
+    echo "   - 上下文loss分布模式"
+    echo "   - 结构边界问题"
+else
+    echo "⚠️ 上下文分析失败"
+fi
+
+echo ""
+echo "📖 查看报告:"
+echo "   cat $ANALYSIS_OUTPUT_DIR/token_loss_analysis_report.md"
+"""
+    
+    # 保存脚本
+    script_path = os.path.join(os.path.dirname(output_dir), f"analyze_token_loss_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sh")
+    with open(script_path, "w", encoding="utf-8") as f:
+        f.write(analysis_script)
+    
+    # 设置执行权限
+    os.chmod(script_path, 0o755)
+    
+    return script_path
 
 def create_monitoring_script(log_files):
     """创建监控脚本"""
@@ -502,8 +632,12 @@ def main():
     # 创建监控脚本
     monitor_script = create_monitoring_script(log_files)
     
+    # 创建Token Loss分析脚本
+    token_loss_analysis_script = create_token_loss_analysis_script(output_dir)
+    
     print(f"📜 训练脚本: {script_path}")
     print(f"🔍 监控脚本: {monitor_script}")
+    print(f"📊 Token Loss分析脚本: {token_loss_analysis_script}")
     print(f"📁 输出目录: {output_dir}")
     print(f"📝 日志文件:")
     for log_type, log_file in log_files.items():
@@ -518,7 +652,10 @@ def main():
     print(f"2. 在另一个终端监控训练:")
     print(f"   python3 {monitor_script}")
     print(f"")
-    print(f"3. 查看日志文件:")
+    print(f"3. 训练完成后分析Token Loss:")
+    print(f"   bash {token_loss_analysis_script}")
+    print(f"")
+    print(f"4. 查看日志文件:")
     for log_type, log_file in log_files.items():
         print(f"   tail -f {log_file}")
     
@@ -551,7 +688,7 @@ def main():
     print("")
     print("📈 验证集Loss监控:")
     print("✅ 使用独立的test数据集作为验证集（eval_dataset=sft_test_data_01_08）")
-    print("✅ 每50步评估一次验证集Loss（eval_steps=50）")
+    print("✅ 每100步评估一次验证集Loss（eval_steps=100，避免在epoch边界评估导致错误）")
     print("✅ 验证集Loss会实时打印到控制台和日志文件")
     print("✅ 验证集Loss历史会保存到独立的日志文件")
     print("✅ 验证集Loss会绘制在loss曲线图中（plot_loss=True）")
@@ -579,6 +716,37 @@ def main():
     print("✅ 对话分段详情")
     print("✅ 训练部分vs忽略部分的比例")
     print("✅ 多轮对话模式检测")
+    print("")
+    print("🔍 Token-level Loss跟踪与分析功能（含上下文窗口）:")
+    print("")
+    print("【训练时自动记录】（无需手动操作）:")
+    print("✅ 自动记录每个token的loss值（使用reduction='none'）")
+    print("✅ 记录token信息、位置、类型、top-k预测结果")
+    print("✅ 上下文窗口记录（左右各10个token的上下文及对应loss）")
+    print("✅ 将'token loss高'升级为'token在特定上下文中loss高'")
+    print("✅ 数据自动保存到 {output_dir}/token_loss_data/")
+    print("")
+    print("【训练后分析】（使用以下脚本读取已记录的loss数据）:")
+    print("✅ 可进行以下深度分析:")
+    print("   - 高频高loss token统计（识别问题token）")
+    print("   - Token类型聚类分析（structural/keyword/numeric/path/natural_language）")
+    print("   - 位置敏感分析（识别序列位置loss分布，发现尾部崩溃等问题）")
+    print("   - Top-k预测对比分析（分析模型预测置信度和正确性）")
+    print("   - 上下文模式分析（识别token在特定上下文中的loss模式）")
+    print("")
+    print("📊 分析脚本使用方法:")
+    print(f"   # 脚本1: 基础分析（读取 {output_dir}/token_loss_data/ 中的数据）")
+    print(f"   # 功能: 高频高loss统计、类型聚类、位置分析、Top-k预测对比")
+    print(f"   python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss.py \\")
+    print(f"       --token_loss_dir {output_dir}/token_loss_data \\")
+    print(f"       --output_dir {output_dir}/token_loss_analysis")
+    print(f"")
+    print(f"   # 脚本2: 上下文专项分析（读取 {output_dir}/token_loss_data/ 中的数据）")
+    print(f"   # 功能: 上下文模式识别、上下文loss分布、结构边界问题分析")
+    print(f"   python3 /home/ziqiang/LLaMA-Factory/scripts/analyze_token_loss_with_context.py \\")
+    print(f"       --token_loss_dir {output_dir}/token_loss_data \\")
+    print(f"       --output_dir {output_dir}/token_loss_context_analysis \\")
+    print(f"       --target_token 'token'")
     
     # 询问是否立即运行
     response = input("\n是否立即开始训练? (y/n): ").lower().strip()
