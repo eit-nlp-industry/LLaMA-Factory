@@ -164,35 +164,23 @@ jobs:
           echo "Verifying remote configuration..."
           git remote -v
           
-          # Test remote access first
-          echo "Testing remote access with ls-remote..."
-          LS_REMOTE_OUTPUT=$(git ls-remote encrypted-origin HEAD 2>&1) || {
-            echo "Error: ls-remote failed"
-            echo "Output: $LS_REMOTE_OUTPUT"
-            echo "Trying to push anyway..."
-          }
+          # Direct push attempt - simpler and more reliable
+          echo "Attempting to push to encrypted repository..."
+          echo "Target: ${{ env.ENCRYPTED_REPO }}"
+          echo "Branch: ${{ env.ENCRYPTED_BRANCH }}"
           
-          # Check if branch exists in remote
-          echo "Checking remote branch..."
-          BRANCH_CHECK=$(git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} 2>&1) || {
-            echo "Warning: Branch check failed, output: $BRANCH_CHECK"
-            echo "Attempting to push to new branch..."
-            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }} || {
-              echo "Push failed, trying without refs/heads..."
-              git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
+          # Try push with verbose output
+          GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} 2>&1 || {
+            echo "First push attempt failed, trying with --force..."
+            GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force 2>&1 || {
+              echo "Push failed. Checking if repository exists..."
+              curl -s -H "Authorization: token ${ENCRYPTED_REPO_TOKEN}" \
+                "https://api.github.com/repos/${{ env.ENCRYPTED_REPO }}" | jq -r '.name, .message' || true
+              exit 1
             }
-            exit 0
           }
           
-          if echo "$BRANCH_CHECK" | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
-            echo "Branch exists, pushing..."
-            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
-            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
-          else
-            echo "Branch does not exist, creating new branch..."
-            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }} || \
-            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
-          fi
+          echo "✓ Push successful!"
           
       - name: Cleanup
         if: always()
