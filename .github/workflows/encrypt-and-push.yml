@@ -157,16 +157,26 @@ jobs:
         run: |
           set -e
           
+          # First, commit any changes from previous step (removing excluded dirs)
+          echo "Checking for uncommitted changes..."
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Committing changes from previous step..."
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -m "Remove excluded directories for encrypted repo" || echo "No changes to commit"
+          fi
+          
           echo "Unlocking git-crypt..."
           # Unlock is needed to apply filters when staging files
+          # Working directory must be clean for unlock
           git-crypt unlock 2>&1 || {
             echo "ERROR: git-crypt unlock failed!"
-            echo "This means files will NOT be encrypted. Checking status..."
+            echo "Checking git status..."
+            git status --short | head -20 || true
+            echo "Checking git-crypt status..."
             git-crypt status | head -10 || true
             echo "Listing GPG keys..."
             gpg --list-secret-keys --keyid-format LONG || true
-            echo "Listing git-crypt users..."
-            git-crypt ls-gpg-users 2>&1 || true
             exit 1
           }
           
