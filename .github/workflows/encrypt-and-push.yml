@@ -119,8 +119,15 @@ jobs:
         run: |
           set -e
           
-          # First, create a commit that removes .github and other excluded directories
-          echo "Preparing encrypted repository (removing excluded directories)..."
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # First, commit any existing changes to have a clean state
+          echo "Committing any existing changes..."
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Prepare for encryption: commit all changes" || echo "No changes to commit"
+          fi
           
           # Remove .github directory from git tracking
           if git ls-files | grep -q "^\.github/"; then
@@ -137,10 +144,8 @@ jobs:
           done
           
           # Create commit to remove excluded directories (if any were removed)
-          if [ -n "$(git status --porcelain | grep '^D')" ]; then
+          if [ -n "$(git status --porcelain)" ]; then
             echo "Creating commit to remove excluded directories..."
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
             git commit -m "Remove .github and other excluded directories for encrypted repo" || echo "No changes to commit"
           fi
           
@@ -151,19 +156,31 @@ jobs:
             exit 1
           fi
           
-          echo "✓ Repository prepared (excluded directories removed)"
+          # Ensure working directory is completely clean
+          echo "Ensuring working directory is clean..."
+          git reset --hard HEAD
+          git clean -fd
+          
+          echo "✓ Repository prepared (excluded directories removed, working directory clean)"
           
       - name: Encrypt repository
         run: |
           set -e
           
-          # First, commit any changes from previous step (removing excluded dirs)
-          echo "Checking for uncommitted changes..."
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Ensure working directory is completely clean before unlock
+          echo "Ensuring working directory is clean for git-crypt unlock..."
+          git reset --hard HEAD
+          git clean -fd
+          
+          # Verify working directory is clean
           if [ -n "$(git status --porcelain)" ]; then
-            echo "Committing changes from previous step..."
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git commit -m "Remove excluded directories for encrypted repo" || echo "No changes to commit"
+            echo "WARNING: Working directory still has uncommitted changes!"
+            git status --short | head -20
+            echo "Stashing changes..."
+            git stash push -m "Stash before git-crypt unlock" || true
           fi
           
           echo "Unlocking git-crypt..."
