@@ -128,13 +128,21 @@ jobs:
           git remote remove encrypted-origin 2>/dev/null || true
           
           echo "Adding remote repository: ${{ env.ENCRYPTED_REPO }}"
-          git remote add encrypted-origin https://x-access-token:$ENCRYPTED_REPO_TOKEN@github.com/${{ env.ENCRYPTED_REPO }}.git
+          
+          # URL encode the token to handle special characters
+          ENCODED_TOKEN=$(echo -n "$ENCRYPTED_REPO_TOKEN" | jq -sRr @uri)
+          echo "Debug: Encoded token length: ${#ENCODED_TOKEN}"
+          
+          git remote add encrypted-origin "https://x-access-token:${ENCRYPTED_REPO_TOKEN}@github.com/${{ env.ENCRYPTED_REPO }}.git"
           
           git remote -v
           
-          # Test remote access
+          # Test remote access with verbose output
           echo "Testing remote access..."
-          git ls-remote encrypted-origin HEAD || echo "Warning: ls-remote failed"
+          GIT_CURL_VERBOSE=1 GIT_TRACE=1 git ls-remote encrypted-origin HEAD 2>&1 | head -20 || {
+            echo "Warning: ls-remote failed, trying direct push test..."
+            git push encrypted-origin HEAD:main --dry-run 2>&1 | head -10 || true
+          }
           
       - name: Push to encrypted repository
         run: |
