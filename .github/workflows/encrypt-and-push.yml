@@ -145,12 +145,21 @@ jobs:
           }
           
       - name: Push to encrypted repository
+        env:
+          ENCRYPTED_REPO_TOKEN: ${{ secrets.ENCRYPTED_REPO_TOKEN }}
         run: |
           set -e
           
+          # Re-add remote with token to ensure it's fresh
+          git remote remove encrypted-origin 2>/dev/null || true
+          git remote add encrypted-origin "https://x-access-token:${ENCRYPTED_REPO_TOKEN}@github.com/${{ env.ENCRYPTED_REPO }}.git"
+          
+          echo "Verifying remote configuration..."
+          git remote -v
+          
           # Check if branch exists in remote
           echo "Checking remote branch..."
-          if git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
+          if git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} 2>&1 | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
             echo "Branch exists, pushing..."
             git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
             git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
