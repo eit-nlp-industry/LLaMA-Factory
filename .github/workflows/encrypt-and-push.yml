@@ -98,6 +98,11 @@ jobs:
           git-crypt unlock 2>&1 || echo "Warning: git-crypt may already be unlocked"
           echo "Checking encryption status..."
           git-crypt status | head -20 || true
+          
+          # Remove .github directory from staging (should not be in encrypted repo)
+          echo "Removing .github directory from encrypted repository..."
+          git rm -r --cached .github 2>/dev/null || echo "No .github directory to remove"
+          
           git add -A
           git status --short | head -20 || true
           
