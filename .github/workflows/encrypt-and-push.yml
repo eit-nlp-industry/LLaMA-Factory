@@ -199,39 +199,121 @@ jobs:
           
           echo "✓ git-crypt unlocked successfully"
           
-          echo "Checking encryption status..."
-          git-crypt status | head -20 || true
+          echo "Checking encryption status (before re-encryption)..."
+          git-crypt status 2>&1 | head -20 || true
           
-          # Force re-apply filters to all files
-          echo "Re-applying git-crypt filters..."
+          # CRITICAL: Force re-apply filters to all files
+          # The issue is that even after unlock, files in HEAD are unencrypted.
+          # We need to force git to re-process ALL files through the clean filter.
+          echo "Re-applying git-crypt filters to force encryption..."
+          
+          # Remove all files from index
           git rm --cached -r . 2>/dev/null || true
           
-          # Stage all changes (this will trigger git-crypt filters)
+          # Use --renormalize to force git to re-process all files through filters
+          # This ensures the clean filter runs even if file content appears unchanged
+          echo "Adding all files with --renormalize to force filter application..."
+          git add --renormalize .
+          
+          # Also add any new/untracked files
           git add -A
           
-          # Verify files are encrypted
-          echo "Verifying encryption..."
-          ENCRYPTED_COUNT=$(git-crypt status | grep -c "encrypted:" || echo "0")
+          # Verify files are now encrypted in the index
+          echo "Verifying encryption in index..."
+          ENCRYPTED_COUNT=$(git-crypt status 2>&1 | grep -c "encrypted:" || echo "0")
+          WARNING_COUNT=$(git-crypt status 2>&1 | grep -c "NOT ENCRYPTED" || echo "0")
           echo "Encrypted files count: $ENCRYPTED_COUNT"
+          echo "Files with encryption warnings: $WARNING_COUNT"
+          
+          if [ "$WARNING_COUNT" -gt "0" ]; then
+            echo "WARNING: Some files still show 'NOT ENCRYPTED' warnings!"
+            echo "This may indicate the clean filter is not running properly."
+            git-crypt status 2>&1 | grep "NOT ENCRYPTED" | head -10
+            echo "Attempting alternative method: removing and re-adding files individually..."
+            # Alternative: try removing and re-adding to force filter
+            git rm --cached -r src/ data/ saves/ output/ Qwen3-*/ 2>/dev/null || true
+            find . -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.md" -o -name "*.json" | \
+              grep -v "^\./\.git/" | \
+              grep -v "^\./\.github/" | \
+              grep -v "^\./docker/" | \
+              grep -v "^\./examples/" | \
+              grep -v "^\./tests/" | \
+              while read f; do
+                git add --renormalize "$f" 2>/dev/null || true
+              done
+            git add -A
+            WARNING_COUNT_AFTER=$(git-crypt status 2>&1 | grep -c "NOT ENCRYPTED" || echo "0")
+            echo "Files with encryption warnings after retry: $WARNING_COUNT_AFTER"
+          fi
           
           if [ "$ENCRYPTED_COUNT" -eq "0" ]; then
-            echo "WARNING: No files are encrypted! This may indicate a problem."
-            git-crypt status | head -30
+            echo "ERROR: No files are encrypted! This indicates a serious problem."
+            git-crypt status 2>&1 | head -30
+            exit 1
           fi
           
           git status --short | head -20 || true
           
           # Commit the encrypted blobs (index has encrypted content from clean filter)
           # Without this commit, we would push the previous commit which has unencrypted blobs
+          echo "Creating commit with encrypted file contents..."
           if [ -n "$(git status --porcelain)" ]; then
-            echo "Creating commit with encrypted file contents..."
-            git commit -m "Encrypted repository content (git-crypt)"
+            git commit -m "Encrypted repository content (git-crypt)" || {
+              echo "ERROR: Failed to create commit!"
+              git status --short | head -20
+              exit 1
+            }
+            echo "✓ Commit created successfully"
           else
-            echo "No changes to commit after re-add; creating empty commit to ensure encrypted tree..."
+            echo "WARNING: No changes to commit after re-add!"
+            echo "This should not happen - there should be changes after renormalization."
+            git status
             git commit --allow-empty -m "Encrypted repository content (git-crypt)"
           fi
           
           echo "✓ Repository encrypted and committed, ready for push"
+          
+      - name: Verify commit contains encrypted blobs (diagnostic)
+        run: |
+          set -e
+          echo "=== DIAGNOSTIC: Checking what is actually stored in HEAD ==="
+          echo "Current HEAD commit: $(git rev-parse HEAD)"
+          echo ""
+          
+          # Check if src/train.py exists and what it looks like
+          if git show HEAD:src/train.py >/dev/null 2>&1; then
+            echo "=== src/train.py in HEAD ==="
+            echo "File size: $(git show HEAD:src/train.py | wc -c) bytes"
+            echo ""
+            echo "First 200 bytes (hex dump):"
+            git show HEAD:src/train.py | head -c 200 | xxd | head -15
+            echo ""
+            echo "First 5 lines as text (encrypted = binary/gibberish, unencrypted = readable Python):"
+            git show HEAD:src/train.py | head -5
+            echo ""
+            
+            # Check if it looks encrypted (encrypted files start with specific patterns)
+            FIRST_BYTES=$(git show HEAD:src/train.py | head -c 50 | xxd -p | tr -d '\n')
+            if echo "$FIRST_BYTES" | grep -q "^4749544352595054"; then
+              echo "✓ File appears to be ENCRYPTED (starts with 'GITCRYPT' magic bytes)"
+            else
+              echo "⚠ File appears to be UNENCRYPTED (does not start with git-crypt magic bytes)"
+              echo "   First 50 bytes (hex): $FIRST_BYTES"
+            fi
+          else
+            echo "src/train.py not found in HEAD"
+          fi
+          
+          echo ""
+          echo "=== git-crypt status for HEAD ==="
+          git-crypt status 2>&1 | head -30
+          
+          echo ""
+          echo "=== Summary ==="
+          ENCRYPTED=$(git-crypt status 2>&1 | grep -c "encrypted:" || echo "0")
+          WARNINGS=$(git-crypt status 2>&1 | grep -c "NOT ENCRYPTED" || echo "0")
+          echo "Files marked as encrypted: $ENCRYPTED"
+          echo "Files with 'NOT ENCRYPTED' warnings: $WARNINGS"
           
       - name: Setup target repository
         env:
