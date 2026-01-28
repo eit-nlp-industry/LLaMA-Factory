@@ -99,12 +99,30 @@ jobs:
           echo "Checking encryption status..."
           git-crypt status | head -20 || true
           
-          # Remove .github directory from staging (should not be in encrypted repo)
+          # Remove .github directory completely (should not be in encrypted repo)
           echo "Removing .github directory from encrypted repository..."
-          git rm -r --cached .github 2>/dev/null || echo "No .github directory to remove"
+          if [ -d .github ]; then
+            git rm -rf --cached .github 2>/dev/null || true
+            rm -rf .github
+            echo "✓ .github directory removed"
+          fi
+          
+          # Also remove other non-encrypted directories that shouldn't be in encrypted repo
+          for dir in docker examples tests; do
+            if [ -d "$dir" ]; then
+              git rm -rf --cached "$dir" 2>/dev/null || true
+              echo "Removed $dir directory"
+            fi
+          done
           
           git add -A
           git status --short | head -20 || true
+          
+          # Verify .github is not in staging
+          if git diff --cached --name-only | grep -q "^\.github/"; then
+            echo "Warning: .github files still in staging, removing..."
+            git reset HEAD .github 2>/dev/null || true
+          fi
           
       - name: Setup target repository
         env:
