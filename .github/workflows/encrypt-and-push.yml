@@ -99,30 +99,42 @@ jobs:
           echo "Checking encryption status..."
           git-crypt status | head -20 || true
           
-          # Remove .github directory completely (should not be in encrypted repo)
-          echo "Removing .github directory from encrypted repository..."
-          if [ -d .github ]; then
+          # Create a commit that removes .github and other excluded directories
+          echo "Preparing encrypted repository (removing excluded directories)..."
+          
+          # Remove .github directory from git tracking
+          if git ls-files | grep -q "^\.github/"; then
+            echo "Removing .github directory from git..."
             git rm -rf --cached .github 2>/dev/null || true
-            rm -rf .github
-            echo "✓ .github directory removed"
           fi
           
-          # Also remove other non-encrypted directories that shouldn't be in encrypted repo
+          # Remove other excluded directories
           for dir in docker examples tests; do
-            if [ -d "$dir" ]; then
+            if git ls-files | grep -q "^${dir}/"; then
+              echo "Removing $dir directory from git..."
               git rm -rf --cached "$dir" 2>/dev/null || true
-              echo "Removed $dir directory"
             fi
           done
           
+          # Stage all remaining changes (encrypted files)
           git add -A
+          
+          # Create commit to remove excluded directories (if any were removed)
+          if [ -n "$(git status --porcelain | grep '^D')" ]; then
+            echo "Creating commit to remove excluded directories..."
+            git commit -m "Remove .github and other excluded directories for encrypted repo" || echo "No changes to commit"
+          fi
+          
           git status --short | head -20 || true
           
-          # Verify .github is not in staging
-          if git diff --cached --name-only | grep -q "^\.github/"; then
-            echo "Warning: .github files still in staging, removing..."
-            git reset HEAD .github 2>/dev/null || true
+          # Final verification: ensure .github is not in the tree
+          if git ls-tree -r HEAD --name-only | grep -q "^\.github/"; then
+            echo "ERROR: .github files still in repository!"
+            git ls-tree -r HEAD --name-only | grep "^\.github/" | head -10
+            exit 1
           fi
+          
+          echo "✓ Repository prepared for encryption"
           
       - name: Setup target repository
         env:
