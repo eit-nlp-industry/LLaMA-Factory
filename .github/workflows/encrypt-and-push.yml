@@ -91,15 +91,11 @@ jobs:
             git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || echo "Warning: User may already be added"
           fi
           
-      - name: Encrypt repository
+      - name: Prepare repository for encryption
         run: |
           set -e
-          echo "Unlocking git-crypt..."
-          git-crypt unlock 2>&1 || echo "Warning: git-crypt may already be unlocked"
-          echo "Checking encryption status..."
-          git-crypt status | head -20 || true
           
-          # Create a commit that removes .github and other excluded directories
+          # First, create a commit that removes .github and other excluded directories
           echo "Preparing encrypted repository (removing excluded directories)..."
           
           # Remove .github directory from git tracking
@@ -116,25 +112,40 @@ jobs:
             fi
           done
           
-          # Stage all remaining changes (encrypted files)
-          git add -A
-          
           # Create commit to remove excluded directories (if any were removed)
           if [ -n "$(git status --porcelain | grep '^D')" ]; then
             echo "Creating commit to remove excluded directories..."
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
             git commit -m "Remove .github and other excluded directories for encrypted repo" || echo "No changes to commit"
           fi
           
-          git status --short | head -20 || true
-          
-          # Final verification: ensure .github is not in the tree
+          # Verify .github is removed from current HEAD
           if git ls-tree -r HEAD --name-only | grep -q "^\.github/"; then
-            echo "ERROR: .github files still in repository!"
+            echo "ERROR: .github files still in HEAD!"
             git ls-tree -r HEAD --name-only | grep "^\.github/" | head -10
             exit 1
           fi
           
-          echo "✓ Repository prepared for encryption"
+          echo "✓ Repository prepared (excluded directories removed)"
+          
+      - name: Encrypt repository
+        run: |
+          set -e
+          echo "Unlocking git-crypt..."
+          git-crypt unlock 2>&1 || {
+            echo "Warning: git-crypt unlock failed, checking if already unlocked..."
+            git-crypt status | head -5 || true
+          }
+          
+          echo "Checking encryption status..."
+          git-crypt status | head -20 || true
+          
+          # Stage all changes (encrypted files)
+          git add -A
+          git status --short | head -20 || true
+          
+          echo "✓ Repository encrypted"
           
       - name: Setup target repository
         env:
