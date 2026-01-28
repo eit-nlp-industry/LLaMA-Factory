@@ -138,20 +138,45 @@ jobs:
       - name: Encrypt repository
         run: |
           set -e
+          
           echo "Unlocking git-crypt..."
+          # Unlock is needed to apply filters when staging files
           git-crypt unlock 2>&1 || {
-            echo "Warning: git-crypt unlock failed, checking if already unlocked..."
-            git-crypt status | head -5 || true
+            echo "ERROR: git-crypt unlock failed!"
+            echo "This means files will NOT be encrypted. Checking status..."
+            git-crypt status | head -10 || true
+            echo "Listing GPG keys..."
+            gpg --list-secret-keys --keyid-format LONG || true
+            echo "Listing git-crypt users..."
+            git-crypt ls-gpg-users 2>&1 || true
+            exit 1
           }
+          
+          echo "✓ git-crypt unlocked successfully"
           
           echo "Checking encryption status..."
           git-crypt status | head -20 || true
           
-          # Stage all changes (encrypted files)
+          # Force re-apply filters to all files
+          echo "Re-applying git-crypt filters..."
+          git rm --cached -r . 2>/dev/null || true
+          
+          # Stage all changes (this will trigger git-crypt filters)
           git add -A
+          
+          # Verify files are encrypted
+          echo "Verifying encryption..."
+          ENCRYPTED_COUNT=$(git-crypt status | grep -c "encrypted:" || echo "0")
+          echo "Encrypted files count: $ENCRYPTED_COUNT"
+          
+          if [ "$ENCRYPTED_COUNT" -eq "0" ]; then
+            echo "WARNING: No files are encrypted! This may indicate a problem."
+            git-crypt status | head -30
+          fi
+          
           git status --short | head -20 || true
           
-          echo "✓ Repository encrypted"
+          echo "✓ Repository encrypted and ready for push"
           
       - name: Setup target repository
         env:
