@@ -157,25 +157,35 @@ jobs:
         run: |
           set -e
           
-          # Re-add remote with token to ensure it's fresh
+          echo "Verifying token permissions..."
+          TOKEN_PERMS=$(curl -s -H "Authorization: token ${ENCRYPTED_REPO_TOKEN}" \
+            "https://api.github.com/repos/${{ env.ENCRYPTED_REPO }}" | jq -r '.permissions')
+          echo "Token permissions: $TOKEN_PERMS"
+          
+          # Use git credential helper to store token
+          git config --global credential.helper store
+          echo "https://x-access-token:${ENCRYPTED_REPO_TOKEN}@github.com" > ~/.git-credentials
+          chmod 600 ~/.git-credentials
+          
+          # Re-add remote without token in URL (will use credential helper)
           git remote remove encrypted-origin 2>/dev/null || true
-          git remote add encrypted-origin "https://x-access-token:${ENCRYPTED_REPO_TOKEN}@github.com/${{ env.ENCRYPTED_REPO }}.git"
+          git remote add encrypted-origin "https://github.com/${{ env.ENCRYPTED_REPO }}.git"
           
           echo "Verifying remote configuration..."
           git remote -v
           
-          # Direct push attempt - simpler and more reliable
+          # Direct push attempt
           echo "Attempting to push to encrypted repository..."
           echo "Target: ${{ env.ENCRYPTED_REPO }}"
           echo "Branch: ${{ env.ENCRYPTED_BRANCH }}"
           
-          # Try push with verbose output
-          GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} 2>&1 || {
+          # Try push
+          git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} 2>&1 || {
             echo "First push attempt failed, trying with --force..."
-            GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force 2>&1 || {
-              echo "Push failed. Checking if repository exists..."
+            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force 2>&1 || {
+              echo "Push failed. Final verification..."
               curl -s -H "Authorization: token ${ENCRYPTED_REPO_TOKEN}" \
-                "https://api.github.com/repos/${{ env.ENCRYPTED_REPO }}" | jq -r '.name, .message' || true
+                "https://api.github.com/repos/${{ env.ENCRYPTED_REPO }}" | jq -r '.name, .message, .permissions' || true
               exit 1
             }
           }
