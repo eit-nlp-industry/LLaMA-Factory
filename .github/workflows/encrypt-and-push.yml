@@ -77,25 +77,43 @@ jobs:
           # Set ultimate trust for the key
           echo "$GPG_FINGERPRINT:6:" | gpg --import-ownertrust
           
+          # Check if git-crypt is initialized and if current GPG key can unlock it
           if [ ! -d .git-crypt ]; then
             echo "Initializing git-crypt..."
             git-crypt init
           else
             echo "git-crypt already initialized"
-            # If already initialized, unlock first to add new GPG user
-            git-crypt unlock 2>/dev/null || echo "Note: Could not unlock (may need GPG key)"
+            # Try to unlock to check if current GPG key works
+            if git-crypt unlock 2>/dev/null; then
+              echo "✓ Can unlock with current GPG key"
+            else
+              echo "⚠ Cannot unlock - repository may have different GPG keys"
+              echo "Re-initializing git-crypt to use current GPG key..."
+              # Remove old git-crypt directory
+              rm -rf .git-crypt
+              git-crypt init
+            fi
           fi
           
           echo "Adding GPG user to git-crypt..."
           if [ -n "$GPG_PASSPHRASE" ] && [ "$GPG_PASSPHRASE" != "" ]; then
-            echo "$GPG_PASSPHRASE" | git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || echo "Warning: User may already be added"
+            echo "$GPG_PASSPHRASE" | git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || {
+              echo "Warning: Failed to add GPG user, may already be added"
+            }
           else
-            git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || echo "Warning: User may already be added"
+            git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || {
+              echo "Warning: Failed to add GPG user, may already be added"
+            }
           fi
           
-          # Verify GPG key is added
-          echo "Verifying GPG user in git-crypt..."
-          git-crypt ls-gpg-users 2>&1 | grep -q "$GPG_KEY_ID" && echo "✓ GPG user verified" || echo "⚠ GPG user not found in git-crypt"
+          # Verify we can unlock now
+          echo "Verifying git-crypt setup..."
+          if git-crypt unlock 2>&1; then
+            echo "✓ git-crypt unlock successful - GPG key is properly configured"
+          else
+            echo "ERROR: Still cannot unlock after adding GPG user!"
+            exit 1
+          fi
           
       - name: Prepare repository for encryption
         run: |
