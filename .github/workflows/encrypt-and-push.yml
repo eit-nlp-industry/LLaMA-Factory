@@ -112,6 +112,16 @@ jobs:
             exit 1
           fi
           
+          echo "Debug: Token length: ${#ENCRYPTED_REPO_TOKEN}"
+          echo "Debug: Token prefix: ${ENCRYPTED_REPO_TOKEN:0:7}..."
+          echo "Debug: Target repo: ${{ env.ENCRYPTED_REPO }}"
+          
+          # Test token access
+          echo "Testing token access to repository..."
+          curl -s -H "Authorization: token $ENCRYPTED_REPO_TOKEN" \
+            "https://api.github.com/repos/${{ env.ENCRYPTED_REPO }}" | \
+            jq -r '.name, .private, .permissions' || echo "API test failed"
+          
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
@@ -121,6 +131,10 @@ jobs:
           git remote add encrypted-origin https://x-access-token:$ENCRYPTED_REPO_TOKEN@github.com/${{ env.ENCRYPTED_REPO }}.git
           
           git remote -v
+          
+          # Test remote access
+          echo "Testing remote access..."
+          git ls-remote encrypted-origin HEAD || echo "Warning: ls-remote failed"
           
       - name: Push to encrypted repository
         run: |
