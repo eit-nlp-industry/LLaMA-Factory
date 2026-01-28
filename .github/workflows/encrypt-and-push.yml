@@ -146,8 +146,18 @@ jobs:
           
       - name: Push to encrypted repository
         run: |
-          git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
-          git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
+          set -e
+          
+          # Check if branch exists in remote
+          echo "Checking remote branch..."
+          if git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
+            echo "Branch exists, pushing..."
+            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
+            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
+          else
+            echo "Branch does not exist, creating new branch..."
+            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }}
+          fi
           
       - name: Cleanup
         if: always()
