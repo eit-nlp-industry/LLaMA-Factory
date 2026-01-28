@@ -1,0 +1,483 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 63,
+    "total_failed": 10,
+    "total_cases": 63,
+    "precision_eligible": 63,
+    "failure_rate": 0.15873015873015872
+  },
+  "cases": [
+    {
+      "index": 6,
+      "user_query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-17"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_travel_agencies",
+        "rank_orders",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "analyze_travel_agencies",
+        "arguments": {
+          "analysis_type": "top_orders",
+          "time_period": "monthly",
+          "year": 2025,
+          "month": 8,
+          "top_n": 5,
+          "metric": "order_count"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 84
+    },
+    {
+      "index": 7,
+      "user_query": "我想了解一下，2025年7月收入排名前三的客户是谁。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 3,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_top_rankings",
+        "get_ranked_by_time_resort",
+        "rank_orders",
+        "analyze_visitor_sources"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "revenue",
+          "include_ranking": true,
+          "top_n": 3,
+          "month_filter": 7
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我想了解一下，2025年7月收入排名前三的客户是谁。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 29
+    },
+    {
+      "index": 8,
+      "user_query": "今年哪个产品为我们创造了最高的收入？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 1,
+        "entity_type": "product",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "query_annual_data",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "product",
+          "metric": "revenue",
+          "time_filter": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-10-31"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "今年哪个产品为我们创造了最高的收入？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 30
+    },
+    {
+      "index": 23,
+      "user_query": "2025年8月1日到10月22日客户订单数量最少的前5个客户有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "create_sorted_lists",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "minimum",
+          "target_entity": "customer",
+          "metric": "order_count",
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "bottom_n": 5,
+          "include_zero": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年8月1日到10月22日客户订单数量最少的前5个客户有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 78
+    },
+    {
+      "index": 30,
+      "user_query": "2025年6月到8月期间，产品收入最高的前5名是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "find_extreme_values",
+        "query_top_rankings",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "query_top_rankings",
+        "arguments": {
+          "ranking_type": "resource_revenue",
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "top_n": 5,
+          "trace_id": "eval_20251121_140511"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月期间，产品收入最高的前5名是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 86
+    },
+    {
+      "index": 31,
+      "user_query": "2025年第三季度，产品销售额最低的前10名有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "find_extreme_values",
+        "manage_products",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "minimum",
+          "target_entity": "product",
+          "metric": "revenue",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "bottom_n": 10
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第三季度，产品销售额最低的前10名有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 48,
+      "user_query": "检查一下汉庭酒店的运营状态是否超过阈值，设为33",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "汉庭酒店",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 33,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "find_extreme_values",
+        "calculate_business_metrics",
+        "manage_order_status",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "resort",
+          "metric": "operational_status",
+          "threshold": 33,
+          "analysis_reason": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "检查一下汉庭酒店的运营状态是否超过阈值，设为33",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35
+    },
+    {
+      "index": 59,
+      "user_query": "2025年全年在大慈岩景区哪些客户的订单收入是最高的？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "customer",
+        "resort_filter": "大慈岩",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        },
+        "top_n": 10,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_resort_revenue",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "customers",
+          "resort_filter": "大慈岩",
+          "include_ranking": true,
+          "top_n": 5
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年全年在大慈岩景区哪些客户的订单收入是最高的？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 97
+    },
+    {
+      "index": 60,
+      "user_query": "帮我看看2025年7月在大慈岩，哪些产品的收入最高。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "product",
+        "resort_filter": "大慈岩",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "top_n": 5,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "analyze_team_scales",
+        "find_extreme_values",
+        "query_top_rankings"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resort_revenue",
+        "arguments": {
+          "analysis_type": "highest_product",
+          "time_period": "monthly",
+          "year": 2025,
+          "specific_date": "2025-07-01 到 2025-07-31",
+          "resort_list": [
+            "大慈岩"
+          ]
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我看看2025年7月在大慈岩，哪些产品的收入最高。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 61,
+      "user_query": "2025年全年哪些产品的收入最高？我需要详细信息",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "product",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        },
+        "top_n": 10,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "analyze_resort_revenue",
+        "rank_orders",
+        "calculate_revenue_statistics",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resort_revenue",
+        "arguments": {
+          "analysis_type": "highest_product",
+          "time_period": "annual",
+          "year": 2025,
+          "include_visitor_count": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年全年哪些产品的收入最高？我需要详细信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 54
+    }
+  ]
+}

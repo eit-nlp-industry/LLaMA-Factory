@@ -1,0 +1,418 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "user_query": "我想问问，2025年8月订单数量最少的客户是哪家？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 1,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 1,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我想问问，2025年8月订单数量最少的客户是哪家？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 37
+    },
+    {
+      "index": 1,
+      "user_query": "请帮我查一下2025年7月1日到15日这段时间里，哪些产品的订单金额最低，排在前五名的有哪些。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-15"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_orders_by_conditions",
+        "create_sorted_lists",
+        "filter_by_amount",
+        "find_extreme_values"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请帮我查一下2025年7月1日到15日这段时间里，哪些产品的订单金额最低，排在前五名的有哪些。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 63
+    },
+    {
+      "index": 2,
+      "user_query": "请查一下2025年8月订单数量最多的客户，并展示他们的详细信息。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer",
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "manage_customer_basic",
+        "rank_orders",
+        "analyze_order_statistics",
+        "analyze_travel_agencies",
+        "find_extreme_values"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请查一下2025年8月订单数量最多的客户，并展示他们的详细信息。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 7
+    },
+    {
+      "index": 3,
+      "user_query": "在严州古城，今年7月到8月期间，哪些商品的订单金额最低？请列出前五名。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "严州古城",
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": null,
+          "match": false
+        },
+        "resort_filter": {
+          "target": "严州古城",
+          "predict": "严州古城",
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "filter_orders_by_conditions",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "resort_filter": "严州古城",
+          "date_range": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "在严州古城，今年7月到8月期间，哪些商品的订单金额最低？请列出前五名。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 4,
+      "user_query": "今年上半年订单数量最多的前10位客户是哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "query_monthly_data",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "今年上半年订单数量最多的前10位客户是哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 38
+    },
+    {
+      "index": 5,
+      "user_query": "帮我看看2025年7月在大慈岩，哪个产品的订单数量最少。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 1,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "resort_filter": "大慈岩",
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_travel_agencies",
+        "get_ranked_by_time_resort",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "resort",
+          "metric": "traffic",
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "include_zero": false,
+          "analysis_reason": false,
+          "trace_id": "eval_20251121_161411"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我看看2025年7月在大慈岩，哪个产品的订单数量最少。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 34
+    },
+    {
+      "index": 6,
+      "user_query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-17"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_travel_agencies",
+        "rank_orders",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "customer",
+          "metric": "order_count",
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-17"
+          },
+          "top_k": 5
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 97
+    }
+  ],
+  "processed_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "meta": {
+    "input_file": "/home/ziqiang/LLaMA-Factory/data/dataset/11_19/eval_rank_orders.json",
+    "output_file": "/home/ziqiang/LLaMA-Factory/data/dataset/11_19/eval_rank_orders_mask/data_train_prod_test.json",
+    "user_id": "1",
+    "range": [
+      0,
+      63
+    ]
+  }
+}

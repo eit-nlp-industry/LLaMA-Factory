@@ -157,15 +157,34 @@ jobs:
           echo "Verifying remote configuration..."
           git remote -v
           
+          # Test remote access first
+          echo "Testing remote access with ls-remote..."
+          LS_REMOTE_OUTPUT=$(git ls-remote encrypted-origin HEAD 2>&1) || {
+            echo "Error: ls-remote failed"
+            echo "Output: $LS_REMOTE_OUTPUT"
+            echo "Trying to push anyway..."
+          }
+          
           # Check if branch exists in remote
           echo "Checking remote branch..."
-          if git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} 2>&1 | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
+          BRANCH_CHECK=$(git ls-remote --heads encrypted-origin ${{ env.ENCRYPTED_BRANCH }} 2>&1) || {
+            echo "Warning: Branch check failed, output: $BRANCH_CHECK"
+            echo "Attempting to push to new branch..."
+            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }} || {
+              echo "Push failed, trying without refs/heads..."
+              git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
+            }
+            exit 0
+          }
+          
+          if echo "$BRANCH_CHECK" | grep -q "refs/heads/${{ env.ENCRYPTED_BRANCH }}"; then
             echo "Branch exists, pushing..."
             git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
             git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
           else
             echo "Branch does not exist, creating new branch..."
-            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }}
+            git push encrypted-origin HEAD:refs/heads/${{ env.ENCRYPTED_BRANCH }} || \
+            git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
           fi
           
       - name: Cleanup

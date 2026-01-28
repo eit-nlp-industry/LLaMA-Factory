@@ -1,0 +1,180 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 36,
+    "total_failed": 4,
+    "total_cases": 36,
+    "precision_eligible": 35,
+    "failure_rate": 0.11428571428571428
+  },
+  "cases": [
+    {
+      "index": 17,
+      "user_query": "查一下订单ID是67890的游客，只要前20条。",
+      "target_tool_name": "list_visitors",
+      "target_arguments": {
+        "order_id": 67890,
+        "limit": 20
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "list_visitors",
+        "list_orders",
+        "analyze_visitors",
+        "analyze_orders",
+        "list_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单ID是67890的游客",
+          "top_k": 20
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"description\": \"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.6501, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 11, \"tool_name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_visitors\\\",\\n  \\\"chinese_name\\\": \\\"游客列表查询\\\",\\n  \\\"description\\\": \\\"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"name\\\"\\n      },\\n      \\\"id_card\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"id_card\\\"\\n      },\\n      \\\"phone\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"phone\\\"\\n     "
+    },
+    {
+      "index": 22,
+      "user_query": "2025年第三季度各状态订单的数量分别是多少？给我一个柱状图。",
+      "target_tool_name": "analyze_orders",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-09-30",
+        "group_by": [
+          "status"
+        ],
+        "aggregations": {
+          "code": "count"
+        },
+        "chart_config": {
+          "output_format": "bar_chart",
+          "x_field": "status",
+          "y_field": "count_code"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_orders",
+        "analyze_products",
+        "list_orders",
+        "analyze_customers",
+        "analyze_agreement_customers"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第三季度各状态订单的数量分别是多少？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_orders\", \"chinese_name\": \"订单分析与可视化\", \"description\": \"对订单数据进行分组、聚合、时间分桶、趋势与可视化分析，图表类型由参数显式指定。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\", \"5\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"default\": [], \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_name\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚"
+    },
+    {
+      "index": 26,
+      "user_query": "我想看看2025年8月份每日新增订单的趋势图。",
+      "target_tool_name": "analyze_orders",
+      "target_arguments": {
+        "time_start": "2025-08-01",
+        "time_end": "2025-08-31",
+        "time_bucket": {
+          "period": "day",
+          "aggregations": {
+            "code": "count"
+          },
+          "time_field": "create_time"
+        },
+        "chart_config": {
+          "output_format": "line_chart",
+          "x_field": "time_period",
+          "y_field": "count_code"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_orders",
+        "list_orders",
+        "list_products",
+        "analyze_products",
+        "list_visitors"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_orders\", \"chinese_name\": \"订单分析与可视化\", \"description\": \"对订单数据进行分组、聚合、时间分桶、趋势与可视化分析，图表类型由参数显式指定。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\", \"5\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"default\": [], \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_name\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚"
+    },
+    {
+      "index": 28,
+      "user_query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+      "target_tool_name": "analyze_orders",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-10-31",
+        "trend": {
+          "metric_field": "price",
+          "trend_type": "growth_rate",
+          "time_field": "create_time"
+        },
+        "chart_config": {
+          "output_format": "line_chart",
+          "x_field": "time_period",
+          "y_field": "growth_rate_price"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_orders",
+        "list_orders",
+        "list_products",
+        "analyze_products",
+        "list_visitors"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_orders\", \"chinese_name\": \"订单分析与可视化\", \"description\": \"对订单数据进行分组、聚合、时间分桶、趋势与可视化分析，图表类型由参数显式指定。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\", \"5\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"default\": [], \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_name\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚"
+    }
+  ]
+}

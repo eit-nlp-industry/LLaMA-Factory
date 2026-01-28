@@ -1,0 +1,1764 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 36,
+    "total_failed": 23,
+    "total_eligible": 30,
+    "eligible_failure_rate": 0.7666666666666667
+  },
+  "cases": [
+    {
+      "index": 0,
+      "user_query": "查一下2025年6月到现在已完成的订单，只要最新的5条就行。",
+      "target_tool_name": "list_orders",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-10-28",
+        "status": "已完成",
+        "limit": 5
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": "2025-06-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-10-28",
+          "predict": "2025-12-15",
+          "match": false
+        },
+        "status": {
+          "target": "已完成",
+          "predict": "已完成",
+          "match": true
+        },
+        "limit": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "list_orders",
+        "analyze_orders",
+        "list_products",
+        "analyze_products",
+        "list_visitors"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "time_start": "2025-06-01",
+          "time_end": "2025-12-15",
+          "status": "已完成",
+          "limit": 5,
+          "sort": {
+            "field": "create_time",
+            "descending": true
+          },
+          "trace_id": "eval_20251215_104226"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询2025年6月至今的订单",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 301,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_orders\", \"chinese_name\": \"订单列表查询\", \"description\": \"按客户、订单号、状态、时间等条件筛选订单列表，支持关联加载、排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称进行模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称进行模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），且为包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），且为包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T23:59:59Z），且为不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T23:59:59Z），且为不包含边界\"}, \"relations\": {\"type\": \"array\", \"description\": \"关联数据，可选，配置需要额外加载的关联对象\", \"items\": {\"type\": \"string\", \"enum\": [{\"key\": \"product_order\", \"label\": \"产品订单\"}, {\"key\": \"resources_order\", \"label\": \"资源订单\"}, {\"key\": \"contacts_order\", \"label\": \"联系人\"}]}, \"default\": [], \"label\": \"关联数据，可选，配置需要额外加载的关联对象\"}, \"sort\": {\"type\""
+    },
+    {
+      "index": 1,
+      "user_query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+      "target_tool_name": "analyze_visitors",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-12-31",
+        "group_by": [
+          "is_legal"
+        ],
+        "time_bucket": {
+          "period": "month",
+          "aggregations": {
+            "id_card": "count"
+          },
+          "time_field": "create_time"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-12-31",
+          "predict": "2025-12-31",
+          "match": true
+        },
+        "group_by": {
+          "target": [
+            "is_legal"
+          ],
+          "predict": [
+            "is_legal"
+          ],
+          "match": true
+        },
+        "time_bucket": {
+          "target": {
+            "period": "month",
+            "aggregations": {
+              "id_card": "count"
+            },
+            "time_field": "create_time"
+          },
+          "predict": {
+            "period": "month",
+            "time_field": "time_end",
+            "aggregations": {
+              "order_id": "count"
+            }
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_visitors",
+        "list_visitors",
+        "analyze_customers",
+        "analyze_agreement_customers",
+        "analyze_resorts"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitors",
+        "arguments": {
+          "group_by": [
+            "is_legal"
+          ],
+          "aggregations": {
+            "order_id": "count"
+          },
+          "time_bucket": {
+            "period": "month",
+            "time_field": "time_end",
+            "aggregations": {
+              "order_id": "count"
+            }
+          },
+          "time_start": "2025-07-01",
+          "time_end": "2025-12-31",
+          "trend": {
+            "metric_field": "order_id",
+            "trend_type": "monthly",
+            "time_field": "time_end"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "统计一下2025年下半年每月合法游客和非合法游客的总数。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_visitors\", \"chinese_name\": \"游客统计分析\", \"description\": \"对游客数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按性别、验证状态、合法性状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \""
+    },
+    {
+      "index": 2,
+      "user_query": "2025年第三季度，有哪些女性游客的记录？",
+      "target_tool_name": "list_visitors",
+      "target_arguments": {
+        "gender": "女",
+        "time_start": "2025-07-01",
+        "time_end": "2025-09-30"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "gender": {
+          "target": "女",
+          "predict": "female",
+          "match": false
+        },
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-09-30",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_visitors",
+        "list_visitors",
+        "analyze_resorts",
+        "analyze_ticket_sales",
+        "analyze_revenue"
+      ],
+      "predicted_tool": {
+        "name": "list_visitors",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30",
+          "gender": "female"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年第三季度的游客记录",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 14,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_visitors\", \"chinese_name\": \"游客统计分析\", \"description\": \"对游客数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按性别、验证状态、合法性状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \""
+    },
+    {
+      "index": 3,
+      "user_query": "有哪些协议是状态为“1”的？请列出它们在2025年6月到8月期间，按协议类型分的数量。",
+      "target_tool_name": "analyze_agreement_customers",
+      "target_arguments": {
+        "status": 1,
+        "sign_date_start": "2025-06-01",
+        "sign_date_end": "2025-08-31",
+        "group_by": [
+          "agreement_type"
+        ],
+        "aggregations": {
+          "agreement_no": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "status": {
+          "target": 1,
+          "predict": null,
+          "match": false
+        },
+        "sign_date_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "sign_date_end": {
+          "target": "2025-08-31",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": [
+            "agreement_type"
+          ],
+          "predict": [
+            "agreement_type"
+          ],
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "agreement_no": "count"
+          },
+          "predict": {
+            "id": "count"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_agreement_customers",
+        "analyze_agreement_customers",
+        "list_customers",
+        "list_products",
+        "list_resources"
+      ],
+      "predicted_tool": {
+        "name": "analyze_agreement_customers",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31",
+          "group_by": [
+            "agreement_type"
+          ],
+          "aggregations": {
+            "id": "count"
+          },
+          "trace_id": "eval_20251215_104310"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取状态为'1'的协议列表",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_agreement_customers\", \"chinese_name\": \"协议客户列表查询\", \"description\": \"按协议编号、协议名称、客户名称、协议类型、状态和时间范围筛选协议客户列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"agreement_no\": {\"type\": \"string\", \"label\": \"agreement_no\"}, \"agreement_name\": {\"type\": \"string\", \"label\": \"agreement_name\"}, \"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"agreement_type\": {\"type\": \"string\", \"label\": \"agreement_type\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"sign_date_start\": {\"type\": \"string\", \"label\": \"sign_date_start\"}, \"sign_date_end\": {\"type\": \"string\", \"label\": \"sign_date_end\"}, \"valid_from_date_start\": {\"type\": \"string\", \"label\": \"valid_from_date_start\"}, \"valid_from_date_end\": {\"type\": \"string\", \"label\": \"valid_from_date_end\"}, \"valid_to_date_start\": {\"type\": \"string\", \"label\": \"valid_to_date_start\"}, \"valid_to_date_end\": {\"type\": \"string\", \"label\": \"valid_to_date_end\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7081, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 5, \"tool_name\": \"list_agreement_customers\", \"chinese_name\": \"协议客户列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_agreement_customers\\\",\\n  \\\"chinese_name\\\": \\\"协议客户列表查询\\\",\\n  \\\"description\\\": \\\"按协议编号、协议名称、客户名称、协议类型、状态和时间范围筛选协议客户列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\""
+    },
+    {
+      "index": 5,
+      "user_query": "查询一下2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计。",
+      "target_tool_name": "analyze_agreement_customers",
+      "target_arguments": {
+        "valid_from_date_start": "2025-07-01",
+        "valid_to_date_end": "2025-12-31",
+        "agreement_type": "新协议",
+        "group_by": [
+          "status"
+        ],
+        "aggregations": {
+          "agreement_no": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "valid_from_date_start": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "valid_to_date_end": {
+          "target": "2025-12-31",
+          "predict": null,
+          "match": false
+        },
+        "agreement_type": {
+          "target": "新协议",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": [
+            "status"
+          ],
+          "predict": [
+            "status"
+          ],
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "agreement_no": "count"
+          },
+          "predict": {
+            "agreement_no": "count"
+          },
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "list_agreement_customers",
+        "analyze_agreement_customers",
+        "list_customers",
+        "analyze_customers",
+        "list_products"
+      ],
+      "predicted_tool": {
+        "name": "analyze_agreement_customers",
+        "arguments": {
+          "valid_from_date_start": "2025-07-01",
+          "valid_from_date_end": "2025-12-31",
+          "group_by": [
+            "status"
+          ],
+          "aggregations": {
+            "agreement_no": "count"
+          },
+          "trace_id": "eval_20251215_104341"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询2025年下半年生效的“服务协议”有哪些，并按它们的状态进行统计",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 14,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_agreement_customers\", \"chinese_name\": \"协议客户列表查询\", \"description\": \"按协议编号、协议名称、客户名称、协议类型、状态和时间范围筛选协议客户列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"agreement_no\": {\"type\": \"string\", \"label\": \"agreement_no\"}, \"agreement_name\": {\"type\": \"string\", \"label\": \"agreement_name\"}, \"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"agreement_type\": {\"type\": \"string\", \"label\": \"agreement_type\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"sign_date_start\": {\"type\": \"string\", \"label\": \"sign_date_start\"}, \"sign_date_end\": {\"type\": \"string\", \"label\": \"sign_date_end\"}, \"valid_from_date_start\": {\"type\": \"string\", \"label\": \"valid_from_date_start\"}, \"valid_from_date_end\": {\"type\": \"string\", \"label\": \"valid_from_date_end\"}, \"valid_to_date_start\": {\"type\": \"string\", \"label\": \"valid_to_date_start\"}, \"valid_to_date_end\": {\"type\": \"string\", \"label\": \"valid_to_date_end\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.6001, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 5, \"tool_name\": \"list_agreement_customers\", \"chinese_name\": \"协议客户列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_agreement_customers\\\",\\n  \\\"chinese_name\\\": \\\"协议客户列表查询\\\",\\n  \\\"description\\\": \\\"按协议编号、协议名称、客户名称、协议类型、状态和时间范围筛选协议客户列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\""
+    },
+    {
+      "index": 6,
+      "user_query": "我想找2025年8月到9月期间，叫李四的男性游客信息。",
+      "target_tool_name": "list_visitors",
+      "target_arguments": {
+        "name": "李四",
+        "gender": "男",
+        "time_start": "2025-08-01",
+        "time_end": "2025-09-30"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "name": {
+          "target": "李四",
+          "predict": "李四",
+          "match": true
+        },
+        "gender": {
+          "target": "男",
+          "predict": "男",
+          "match": true
+        },
+        "time_start": {
+          "target": "2025-08-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-09-30",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_visitors",
+        "analyze_visitors",
+        "maps_text_search",
+        "list_customers",
+        "list_agreement_customers"
+      ],
+      "predicted_tool": {
+        "name": "list_visitors",
+        "arguments": {
+          "name": "李四",
+          "gender": "男",
+          "start_date": "2025-08-01",
+          "end_date": "2025-09-30"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查找2025年8月到9月期间，叫李四的男性游客信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 21,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"description\": \"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.6512, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 11, \"tool_name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_visitors\\\",\\n  \\\"chinese_name\\\": \\\"游客列表查询\\\",\\n  \\\"description\\\": \\\"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"name\\\"\\n      },\\n      \\\"id_card\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"id_card\\\"\\n      },\\n      \\\"phone\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"phone\\\"\\n     "
+    },
+    {
+      "index": 10,
+      "user_query": "我想看下2025年6月到8月期间的客户列表，按创建时间倒序排。",
+      "target_tool_name": "list_customers",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-08-31",
+        "sort": {
+          "field": "create_time",
+          "descending": true
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-08-31",
+          "predict": null,
+          "match": false
+        },
+        "sort": {
+          "target": {
+            "field": "create_time",
+            "descending": true
+          },
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_customers",
+        "list_agreement_customers",
+        "list_orders",
+        "analyze_customers",
+        "list_visitors"
+      ],
+      "predicted_tool": {
+        "name": "list_customers",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31",
+          "sort_field": "create_time",
+          "sort_direction": "desc"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月期间的客户列表，按创建时间倒序排",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 448,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"description\": \"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"customer_type\": {\"type\": \"string\", \"label\": \"customer_type\"}, \"is_agreement\": {\"type\": \"integer\", \"label\": \"is_agreement\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"description\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"time_end\": {\"type\": \"string\", \"description\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7008, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 3, \"tool_name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_customers\\\",\\n  \\\"chinese_name\\\": \\\"客户列表查询\\\",\\n  \\\"description\\\": \\\"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"customer_name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_name\\\"\\n      },\\n      \\\"customer_type\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_type\\\"\\n      },\\n      \\\"is_agreeme"
+    },
+    {
+      "index": 11,
+      "user_query": "统计一下2025年第三季度，各个区域不同状态的资源数量。",
+      "target_tool_name": "analyze_resources",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-09-30",
+        "group_by": [
+          "area",
+          "status"
+        ],
+        "aggregations": {
+          "id": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-09-30",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": [
+            "area",
+            "status"
+          ],
+          "predict": [
+            "area",
+            "status"
+          ],
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "id": "count"
+          },
+          "predict": {
+            "id": "count"
+          },
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "analyze_resources",
+        "list_resources",
+        "analyze_products",
+        "analyze_ticket_sales",
+        "analyze_customers"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resources",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30",
+          "group_by": [
+            "area",
+            "status"
+          ],
+          "aggregations": {
+            "id": "count"
+          },
+          "trace_id": "eval_20251215_104446"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年第三季度的资源状态统计",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 11,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_resources\", \"chinese_name\": \"资源统计分析\", \"description\": \"对资源数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按资源类型、层级、区域等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"keyword\": {\"type\": \"string\", \"label\": \"keyword\"}, \"resource_type\": {\"type\": \"string\", \"label\": \"resource_type\"}, \"area\": {\"type\": \"string\", \"label\": \"area\"}, \"parent_id\": {\"type\": \"integer\", \"label\": \"parent_id\"}, \"level\": {\"type\": \"integer\", \"label\": \"level\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \"trend\": {\"type\": \"object\", \"properties\": {\"me"
+    },
+    {
+      "index": 12,
+      "user_query": "查询一下2025年6月到7月期间所有合法的游客记录。",
+      "target_tool_name": "list_visitors",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-07-31",
+        "is_legal": 1
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-07-31",
+          "predict": null,
+          "match": false
+        },
+        "is_legal": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "list_visitors",
+        "analyze_visitors",
+        "analyze_ticket_sales",
+        "analyze_resorts",
+        "list_customers"
+      ],
+      "predicted_tool": {
+        "name": "list_visitors",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-07-31",
+          "is_legal": 1
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询2025年6月到7月期间所有合法的游客记录",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 11,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"description\": \"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7778, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 11, \"tool_name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_visitors\\\",\\n  \\\"chinese_name\\\": \\\"游客列表查询\\\",\\n  \\\"description\\\": \\\"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"name\\\"\\n      },\\n      \\\"id_card\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"id_card\\\"\\n      },\\n      \\\"phone\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"phone\\\"\\n     "
+    },
+    {
+      "index": 13,
+      "user_query": "2025年第三季度期间，\"虚拟机\"资源的数量趋势如何？按月分析。",
+      "target_tool_name": "analyze_resources",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-09-30",
+        "resource_type": "住宿",
+        "time_bucket": {
+          "period": "month",
+          "aggregations": {
+            "id": "count"
+          },
+          "time_field": "create_time"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-09-30",
+          "predict": "2025-09-30",
+          "match": true
+        },
+        "resource_type": {
+          "target": "住宿",
+          "predict": null,
+          "match": false
+        },
+        "time_bucket": {
+          "target": {
+            "period": "month",
+            "aggregations": {
+              "id": "count"
+            },
+            "time_field": "create_time"
+          },
+          "predict": {
+            "period": "month",
+            "aggregations": {
+              "id": "count"
+            }
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_resources",
+        "list_resources",
+        "analyze_visitors",
+        "analyze_ticket_sales",
+        "analyze_resorts"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resources",
+        "arguments": {
+          "keyword": "虚拟机",
+          "time_start": "2025-07-01",
+          "time_end": "2025-09-30",
+          "time_bucket": {
+            "period": "month",
+            "aggregations": {
+              "id": "count"
+            }
+          },
+          "trend": {
+            "metric_field": "id",
+            "time_field": "time_period"
+          },
+          "trace_id": "eval_20251215_104508"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第三季度期间，'虚拟机'资源的数量趋势如何？按月分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 49,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_resources\", \"chinese_name\": \"资源统计分析\", \"description\": \"对资源数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按资源类型、层级、区域等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"keyword\": {\"type\": \"string\", \"label\": \"keyword\"}, \"resource_type\": {\"type\": \"string\", \"label\": \"resource_type\"}, \"area\": {\"type\": \"string\", \"label\": \"area\"}, \"parent_id\": {\"type\": \"integer\", \"label\": \"parent_id\"}, \"level\": {\"type\": \"integer\", \"label\": \"level\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \"trend\": {\"type\": \"object\", \"properties\": {\"me"
+    },
+    {
+      "index": 14,
+      "user_query": "我想看2025年下半年，所有\"酒店\"类型的资源。",
+      "target_tool_name": "list_resources",
+      "target_arguments": {
+        "resource_type": "酒店",
+        "time_start": "2025-07-01",
+        "time_end": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "resource_type": {
+          "target": "酒店",
+          "predict": "酒店",
+          "match": true
+        },
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-12-31",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_resources",
+        "analyze_resources",
+        "analyze_resorts",
+        "analyze_ticket_sales",
+        "list_products"
+      ],
+      "predicted_tool": {
+        "name": "list_resources",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-12-31",
+          "resource_type": "酒店",
+          "trace_id": "eval_20251215_104523"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年下半年所有'酒店'类型的资源",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_resources\", \"chinese_name\": \"资源列表查询\", \"description\": \"按关键词、资源类型、区域、父级ID、层级、状态和时间范围筛选资源列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"keyword\": {\"type\": \"string\", \"label\": \"keyword\"}, \"resource_type\": {\"type\": \"string\", \"label\": \"resource_type\"}, \"area\": {\"type\": \"string\", \"label\": \"area\"}, \"parent_id\": {\"type\": \"integer\", \"label\": \"parent_id\"}, \"level\": {\"type\": \"integer\", \"label\": \"level\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.607, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 7, \"tool_name\": \"list_resources\", \"chinese_name\": \"资源列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_resources\\\",\\n  \\\"chinese_name\\\": \\\"资源列表查询\\\",\\n  \\\"description\\\": \\\"按关键词、资源类型、区域、父级ID、层级、状态和时间范围筛选资源列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"keyword\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"keyword\\\"\\n      },\\n      \\\"resource_type\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"resource_type\\\"\\n      },\\n      \\\"area\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"area\\\"\\n      },\\n      \\\"parent_id\\\": {\\n        \\\"typ"
+    },
+    {
+      "index": 16,
+      "user_query": "2025年下半年有哪些旅行社客户？",
+      "target_tool_name": "list_customers",
+      "target_arguments": {
+        "customer_type": "旅行社",
+        "time_start": "2025-07-01",
+        "time_end": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "customer_type": {
+          "target": "旅行社",
+          "predict": null,
+          "match": false
+        },
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-12-31",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_customers",
+        "list_visitors",
+        "list_agreement_customers",
+        "analyze_customers",
+        "list_orders"
+      ],
+      "predicted_tool": {
+        "name": "list_customers",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-12-31"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年下半年的旅行社客户列表",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 417,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"description\": \"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"customer_type\": {\"type\": \"string\", \"label\": \"customer_type\"}, \"is_agreement\": {\"type\": \"integer\", \"label\": \"is_agreement\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"description\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"time_end\": {\"type\": \"string\", \"description\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.6581, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 3, \"tool_name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_customers\\\",\\n  \\\"chinese_name\\\": \\\"客户列表查询\\\",\\n  \\\"description\\\": \\\"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"customer_name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_name\\\"\\n      },\\n      \\\"customer_type\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_type\\\"\\n      },\\n      \\\"is_agreeme"
+    },
+    {
+      "index": 18,
+      "user_query": "从2025年9月到10月，按性别统计游客总数。",
+      "target_tool_name": "analyze_visitors",
+      "target_arguments": {
+        "time_start": "2025-09-01",
+        "time_end": "2025-10-31",
+        "group_by": [
+          "gender"
+        ],
+        "aggregations": {
+          "id_card": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-09-01",
+          "predict": "2025-09-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-10-31",
+          "predict": "2025-10-31",
+          "match": true
+        },
+        "group_by": {
+          "target": [
+            "gender"
+          ],
+          "predict": [
+            "gender"
+          ],
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "id_card": "count"
+          },
+          "predict": {
+            "order_id": "count"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_visitors",
+        "list_visitors",
+        "analyze_resorts",
+        "analyze_customers",
+        "analyze_revenue"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitors",
+        "arguments": {
+          "group_by": [
+            "gender"
+          ],
+          "aggregations": {
+            "order_id": "count"
+          },
+          "time_start": "2025-09-01",
+          "time_end": "2025-10-31",
+          "time_field": "time_end"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "从2025年9月到10月，按性别统计游客总数。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_visitors\", \"chinese_name\": \"游客统计分析\", \"description\": \"对游客数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按性别、验证状态、合法性状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \""
+    },
+    {
+      "index": 19,
+      "user_query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+      "target_tool_name": "list_orders",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2026-01-01",
+        "status": "已作废",
+        "limit": 10
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2026-01-01",
+          "predict": null,
+          "match": false
+        },
+        "status": {
+          "target": "已作废",
+          "predict": "已作废",
+          "match": true
+        },
+        "limit": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "list_orders",
+        "analyze_orders",
+        "list_products",
+        "list_agreement_customers",
+        "list_customers"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-12-31",
+          "status": "已作废",
+          "limit": 10,
+          "trace_id": "eval_20251215_104624"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年下半年有没有“已作废”的订单？给我前10条。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 77,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_orders\", \"chinese_name\": \"订单列表查询\", \"description\": \"按客户、订单号、状态、时间等条件筛选订单列表，支持关联加载、排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称进行模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称进行模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），且为包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），且为包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T23:59:59Z），且为不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T23:59:59Z），且为不包含边界\"}, \"relations\": {\"type\": \"array\", \"description\": \"关联数据，可选，配置需要额外加载的关联对象\", \"items\": {\"type\": \"string\", \"enum\": [{\"key\": \"product_order\", \"label\": \"产品订单\"}, {\"key\": \"resources_order\", \"label\": \"资源订单\"}, {\"key\": \"contacts_order\", \"label\": \"联系人\"}]}, \"default\": [], \"label\": \"关联数据，可选，配置需要额外加载的关联对象\"}, \"sort\": {\"type\""
+    },
+    {
+      "index": 20,
+      "user_query": "从2025年6月到今天，总共有多少份协议？",
+      "target_tool_name": "analyze_agreement_customers",
+      "target_arguments": {
+        "sign_date_start": "2025-06-01",
+        "sign_date_end": "2025-10-27",
+        "aggregations": {
+          "agreement_no": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "sign_date_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "sign_date_end": {
+          "target": "2025-10-27",
+          "predict": null,
+          "match": false
+        },
+        "aggregations": {
+          "target": {
+            "agreement_no": "count"
+          },
+          "predict": {
+            "agreement_no": "count"
+          },
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "analyze_agreement_customers",
+        "list_agreement_customers",
+        "analyze_customers",
+        "analyze_products",
+        "analyze_resources"
+      ],
+      "predicted_tool": {
+        "name": "analyze_agreement_customers",
+        "arguments": {
+          "time_start": "2025-06-01",
+          "time_end": "2025-12-15",
+          "aggregations": {
+            "agreement_no": "count"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "统计从2025年6月到2025年12月15日的协议数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_agreement_customers\", \"chinese_name\": \"协议客户统计分析\", \"description\": \"对协议客户数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按协议类型、状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"agreement_no\": {\"type\": \"string\", \"label\": \"agreement_no\"}, \"agreement_name\": {\"type\": \"string\", \"label\": \"agreement_name\"}, \"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"agreement_type\": {\"type\": \"string\", \"label\": \"agreement_type\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"sign_date_start\": {\"type\": \"string\", \"label\": \"sign_date_start\"}, \"sign_date_end\": {\"type\": \"string\", \"label\": \"sign_date_end\"}, \"valid_from_date_start\": {\"type\": \"string\", \"label\": \"valid_from_date_start\"}, \"valid_from_date_end\": {\"type\": \"string\", \"label\": \"valid_from_date_end\"}, \"valid_to_date_start\": {\"type\": \"string\", \"label\": \"valid_to_date_start\"}, \"valid_to_date_end\": {\"type\": \"string\", \"label\": \"valid_to_date_end\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \""
+    },
+    {
+      "index": 21,
+      "user_query": "统计2025年7月所有\"酒店\"资源的数量。",
+      "target_tool_name": "analyze_resources",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-07-31",
+        "resource_type": "酒店",
+        "aggregations": {
+          "id": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-07-31",
+          "predict": null,
+          "match": false
+        },
+        "resource_type": {
+          "target": "酒店",
+          "predict": "酒店",
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "id": "count"
+          },
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_resources",
+        "list_resources",
+        "analyze_ticket_sales",
+        "analyze_visitors",
+        "analyze_resorts"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resources",
+        "arguments": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31",
+          "resource_type": "酒店",
+          "trace_id": "eval_20251215_104645"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "统计2025年7月所有'酒店'资源的数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 21,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_resources\", \"chinese_name\": \"资源统计分析\", \"description\": \"对资源数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按资源类型、层级、区域等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"keyword\": {\"type\": \"string\", \"label\": \"keyword\"}, \"resource_type\": {\"type\": \"string\", \"label\": \"resource_type\"}, \"area\": {\"type\": \"string\", \"label\": \"area\"}, \"parent_id\": {\"type\": \"integer\", \"label\": \"parent_id\"}, \"level\": {\"type\": \"integer\", \"label\": \"level\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \"trend\": {\"type\": \"object\", \"properties\": {\"me"
+    },
+    {
+      "index": 24,
+      "user_query": "帮我分析一下从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图。",
+      "target_tool_name": "analyze_visitors",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-08-31",
+        "time_bucket": {
+          "period": "day",
+          "aggregations": {
+            "id_card": "count"
+          },
+          "time_field": "create_time"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": "2025-06-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-08-31",
+          "predict": "2025-08-31",
+          "match": true
+        },
+        "time_bucket": {
+          "target": {
+            "period": "day",
+            "aggregations": {
+              "id_card": "count"
+            },
+            "time_field": "create_time"
+          },
+          "predict": {
+            "period": "day",
+            "aggregations": {
+              "visitor_count": "count"
+            }
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_visitors",
+        "analyze_resorts",
+        "list_visitors",
+        "analyze_revenue",
+        "analyze_ticket_sales"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitors",
+        "arguments": {
+          "time_start": "2025-06-01",
+          "time_end": "2025-08-31",
+          "time_bucket": {
+            "period": "day",
+            "aggregations": {
+              "visitor_count": "count"
+            }
+          },
+          "trend": {
+            "metric_field": "visitor_count",
+            "time_field": "time_period"
+          },
+          "chart_config": {
+            "output_format": "line_chart"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析从2025年6月1日到2025年8月31日这段时间，游客总数的每日变化趋势图",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 8,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_visitors\", \"chinese_name\": \"游客统计分析\", \"description\": \"对游客数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按性别、验证状态、合法性状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time\", \"sign_date\", \"valid_from_date\"]}}, \"label\": \"time_bucket\"}, \""
+    },
+    {
+      "index": 27,
+      "user_query": "查询一下2025年6月有哪些游客是已验证状态的，并统计他们的人数。",
+      "target_tool_name": "analyze_visitors",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-06-30",
+        "is_verify": 1,
+        "aggregations": {
+          "id_card": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": "2025-06-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-06-30",
+          "predict": "2025-06-30",
+          "match": true
+        },
+        "is_verify": {
+          "target": 1,
+          "predict": 2,
+          "match": false
+        },
+        "aggregations": {
+          "target": {
+            "id_card": "count"
+          },
+          "predict": {
+            "id": "count"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_visitors",
+        "analyze_visitors",
+        "analyze_ticket_sales",
+        "analyze_resorts",
+        "analyze_customers"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitors",
+        "arguments": {
+          "is_verify": 2,
+          "time_start": "2025-06-01",
+          "time_end": "2025-06-30",
+          "group_by": [
+            "is_verify"
+          ],
+          "aggregations": {
+            "id": "count"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询2025年6月已验证状态的游客",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 8,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"description\": \"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\", \"label\": \"name\"}, \"id_card\": {\"type\": \"string\", \"label\": \"id_card\"}, \"phone\": {\"type\": \"string\", \"label\": \"phone\"}, \"gender\": {\"type\": \"string\", \"label\": \"gender\"}, \"order_id\": {\"type\": \"integer\", \"label\": \"order_id\"}, \"is_verify\": {\"type\": \"integer\", \"label\": \"is_verify\"}, \"is_legal\": {\"type\": \"integer\", \"label\": \"is_legal\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7829, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 11, \"tool_name\": \"list_visitors\", \"chinese_name\": \"游客列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_visitors\\\",\\n  \\\"chinese_name\\\": \\\"游客列表查询\\\",\\n  \\\"description\\\": \\\"按姓名、身份证号、手机号、性别、订单ID、验证状态、合法性状态和时间范围筛选游客列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"name\\\"\\n      },\\n      \\\"id_card\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"id_card\\\"\\n      },\\n      \\\"phone\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"phone\\\"\\n     "
+    },
+    {
+      "index": 28,
+      "user_query": "给我分析一下从2025年7月到10月订单总金额的增长率趋势。",
+      "target_tool_name": "analyze_orders",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-10-31",
+        "trend": {
+          "metric_field": "price",
+          "trend_type": "growth_rate",
+          "time_field": "create_time"
+        },
+        "chart_config": {
+          "output_format": "line_chart",
+          "x_field": "time_period",
+          "y_field": "growth_rate_price"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-10-31",
+          "predict": "2025-10-31",
+          "match": true
+        },
+        "trend": {
+          "target": {
+            "metric_field": "price",
+            "trend_type": "growth_rate",
+            "time_field": "create_time"
+          },
+          "predict": {
+            "metric_field": "amount",
+            "trend_type": "growth_rate",
+            "time_field": "time_period"
+          },
+          "match": false
+        },
+        "chart_config": {
+          "target": {
+            "output_format": "line_chart",
+            "x_field": "time_period",
+            "y_field": "growth_rate_price"
+          },
+          "predict": {
+            "output_format": "line_chart",
+            "x_field": "time_period",
+            "y_field": "amount",
+            "series_field": "time_period"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_orders",
+        "list_orders",
+        "list_products",
+        "analyze_products",
+        "analyze_revenue"
+      ],
+      "predicted_tool": {
+        "name": "analyze_orders",
+        "arguments": {
+          "time_start": "2025-07-01",
+          "time_end": "2025-10-31",
+          "time_bucket": {
+            "period": "month",
+            "aggregations": {
+              "amount": "sum"
+            }
+          },
+          "trend": {
+            "metric_field": "amount",
+            "trend_type": "growth_rate",
+            "time_field": "time_period"
+          },
+          "chart_config": {
+            "output_format": "line_chart",
+            "x_field": "time_period",
+            "y_field": "amount",
+            "series_field": "time_period"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_orders\", \"chinese_name\": \"订单分析与可视化\", \"description\": \"对订单数据进行分组、聚合、时间分桶、趋势与可视化分析，图表类型由参数显式指定。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\", \"5\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"default\": [], \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_name\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚"
+    },
+    {
+      "index": 30,
+      "user_query": "帮我看看从2025年6月到8月，协议客户和非协议客户的数量分布情况。",
+      "target_tool_name": "analyze_customers",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-08-31",
+        "group_by": [
+          "is_agreement"
+        ],
+        "aggregations": {
+          "customer_id": "count"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-08-31",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": [
+            "is_agreement"
+          ],
+          "predict": [
+            "is_agreement"
+          ],
+          "match": true
+        },
+        "aggregations": {
+          "target": {
+            "customer_id": "count"
+          },
+          "predict": {
+            "count": "count"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_customers",
+        "list_agreement_customers",
+        "analyze_customers",
+        "list_orders",
+        "analyze_agreement_customers"
+      ],
+      "predicted_tool": {
+        "name": "analyze_customers",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31",
+          "group_by": [
+            "is_agreement"
+          ],
+          "aggregations": {
+            "count": "count"
+          },
+          "trace_id": "eval_20251215_104841"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年6月到8月的客户列表",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 10,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"description\": \"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"customer_type\": {\"type\": \"string\", \"label\": \"customer_type\"}, \"is_agreement\": {\"type\": \"integer\", \"label\": \"is_agreement\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"description\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"time_end\": {\"type\": \"string\", \"description\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7565, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 3, \"tool_name\": \"list_customers\", \"chinese_name\": \"客户列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_customers\\\",\\n  \\\"chinese_name\\\": \\\"客户列表查询\\\",\\n  \\\"description\\\": \\\"按客户名称、类型、是否协议客户、状态和时间范围筛选客户列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"customer_name\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_name\\\"\\n      },\\n      \\\"customer_type\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"customer_type\\\"\\n      },\\n      \\\"is_agreeme"
+    },
+    {
+      "index": 31,
+      "user_query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+      "target_tool_name": "analyze_customers",
+      "target_arguments": {
+        "time_start": "2025-06-01",
+        "time_end": "2025-09-30",
+        "time_bucket": {
+          "period": "month",
+          "aggregations": {
+            "customer_id": "count"
+          },
+          "time_field": "create_time"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-09-30",
+          "predict": null,
+          "match": false
+        },
+        "time_bucket": {
+          "target": {
+            "period": "month",
+            "aggregations": {
+              "customer_id": "count"
+            },
+            "time_field": "create_time"
+          },
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_customers",
+        "analyze_agreement_customers",
+        "analyze_visitors",
+        "analyze_resources",
+        "list_customers"
+      ],
+      "predicted_tool": {
+        "name": "analyze_customers",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-09-30",
+          "group_by": [
+            "month"
+          ],
+          "aggregations": {
+            "new_customers": "count"
+          },
+          "trace_id": "eval_20251215_104853"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "看看2025年6月到9月，客户新增数量的月度趋势。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 10,
+      "error": "Chunk too big",
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_customers\", \"chinese_name\": \"客户统计分析\", \"description\": \"对客户数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按客户类型、是否协议客户、状态等维度统计。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"label\": \"customer_name\"}, \"customer_type\": {\"type\": \"string\", \"label\": \"customer_type\"}, \"is_agreement\": {\"type\": \"integer\", \"label\": \"is_agreement\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"description\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"起始时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"time_end\": {\"type\": \"string\", \"description\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\", \"label\": \"结束时间，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_type\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"customer_id\": \"count\"}, {\"customer_id\": \"count\", \"amount\": \"sum\"}], \"label\": \"聚合定义，可选，配置字段与聚合方式映射。格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，其中字段名为数据库实际字段名，聚合类型为 sum/count/avg/max/min 之一。示例：{\\\"customer_id\\\": \\\"count\\\", \\\"amount\\\": \\\"sum\\\"}\"}, \"time_bucket\": {\"type\": \"object\", \"properties\": {\"period\": {\"type\": \"string\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"时间分桶内的聚合定义，格式：{\\\"字段名\\\": \\\"聚合类型\\\"}，详见主 aggregations 字段说明\", \"additionalProperties\": {\"type\": \"string\"}, \"examples\": [{\"agreement_no\": \"count\"}, {\"amount\": \"sum\"}]}, \"time_field\": {\"type\": \"string\", \"description\": \"时间字段，可选，用于时间分桶的基准列。字段名需使用数据库实际字段名，详见字段示例文档\", \"default\": \"create_time\", \"examples\": [\"create_time"
+    },
+    {
+      "index": 32,
+      "user_query": "我想看看2025年6月到8月，状态为“已发布”的产品都有哪些，并按创建时间分桶，统计每周的产品数量。",
+      "target_tool_name": "analyze_products",
+      "target_arguments": {
+        "status": 1,
+        "time_start": "2025-06-01",
+        "time_end": "2025-08-31",
+        "time_bucket": {
+          "period": "week",
+          "aggregations": {
+            "product_id": "count"
+          },
+          "time_field": "create_time"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "status": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        },
+        "time_start": {
+          "target": "2025-06-01",
+          "predict": null,
+          "match": false
+        },
+        "time_end": {
+          "target": "2025-08-31",
+          "predict": null,
+          "match": false
+        },
+        "time_bucket": {
+          "target": {
+            "period": "week",
+            "aggregations": {
+              "product_id": "count"
+            },
+            "time_field": "create_time"
+          },
+          "predict": {
+            "period": "week",
+            "aggregations": {
+              "product_id": "count"
+            }
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "list_products",
+        "analyze_products",
+        "list_orders",
+        "list_resources",
+        "list_customers"
+      ],
+      "predicted_tool": {
+        "name": "analyze_products",
+        "arguments": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31",
+          "status": 1,
+          "time_bucket": {
+            "period": "week",
+            "aggregations": {
+              "product_id": "count"
+            }
+          },
+          "trace_id": "eval_20251215_104903"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取2025年6月1日到2025年8月31日，状态为'已发布'的产品列表",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 14,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"list_products\", \"chinese_name\": \"产品列表查询\", \"description\": \"按关键词、状态和时间范围筛选产品列表，支持排序与分页，输出固定表格。\", \"category\": \"listing\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"keyword\": {\"type\": \"string\", \"label\": \"keyword\"}, \"status\": {\"type\": \"integer\", \"label\": \"status\"}, \"time_start\": {\"type\": \"string\", \"label\": \"time_start\"}, \"time_end\": {\"type\": \"string\", \"label\": \"time_end\"}, \"sort\": {\"type\": \"object\", \"properties\": {\"field\": {\"type\": \"string\", \"default\": \"create_time\"}, \"descending\": {\"type\": \"boolean\", \"default\": true}}, \"label\": \"sort\"}, \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"default\": 50, \"label\": \"limit\"}, \"offset\": {\"type\": \"integer\", \"minimum\": 0, \"default\": 0, \"label\": \"offset\"}}}}, \"relevance_score\": 0.7388, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 9, \"tool_name\": \"list_products\", \"chinese_name\": \"产品列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_products\\\",\\n  \\\"chinese_name\\\": \\\"产品列表查询\\\",\\n  \\\"description\\\": \\\"按关键词、状态和时间范围筛选产品列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"keyword\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"keyword\\\"\\n      },\\n      \\\"status\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"label\\\": \\\"status\\\"\\n      },\\n      \\\"time_start\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"time_start\\\"\\n      },\\n      \\\"time_end\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"time_end\\\"\\n      },\\n      \\\"sort\\\": {\\n        \\\"type\\\": \\\"object\\\",\\n        \\\"properties\\\": {\\n          \\\"field\\\": {\\n            \\\"type\\\": \\\"string\\\",\\n            \\\"default\\\": \\\"create_time\\\"\\n         "
+    },
+    {
+      "index": 34,
+      "user_query": "分析一下2025年下半年订单金额的分布情况，用直方图展示。",
+      "target_tool_name": "analyze_orders",
+      "target_arguments": {
+        "time_start": "2025-07-01",
+        "time_end": "2025-12-31",
+        "chart_config": {
+          "output_format": "distribution_chart",
+          "distribution_field": "price",
+          "chart_type": "histogram"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "time_start": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "time_end": {
+          "target": "2025-12-31",
+          "predict": "2025-12-31",
+          "match": true
+        },
+        "chart_config": {
+          "target": {
+            "output_format": "distribution_chart",
+            "distribution_field": "price",
+            "chart_type": "histogram"
+          },
+          "predict": {
+            "output_format": "distribution_chart",
+            "distribution_field": "amount",
+            "chart_type": "histogram"
+          },
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_orders",
+        "analyze_revenue",
+        "analyze_products",
+        "analyze_resources",
+        "analyze_ticket_sales"
+      ],
+      "predicted_tool": {
+        "name": "analyze_orders",
+        "arguments": {
+          "time_start": "2025-07-01",
+          "time_end": "2025-12-31",
+          "time_bucket": {
+            "period": "month",
+            "aggregations": {
+              "amount": "sum"
+            }
+          },
+          "chart_config": {
+            "output_format": "distribution_chart",
+            "distribution_field": "amount",
+            "chart_type": "histogram"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析2025年下半年订单金额的分布情况，用直方图展示",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": {\"name\": \"analyze_orders\", \"chinese_name\": \"订单分析与可视化\", \"description\": \"对订单数据进行分组、聚合、时间分桶、趋势与可视化分析，图表类型由参数显式指定。\", \"category\": \"analysis\", \"enabled\": true, \"source\": \"internal_service\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"customer_name\": {\"type\": \"string\", \"description\": \"客户名称，可选，用于按照客户名称模糊匹配\", \"label\": \"客户名称，可选，用于按照客户名称模糊匹配\"}, \"order_code\": {\"type\": \"string\", \"description\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\", \"examples\": [\"20250609LSFACTC0260753\", \"20250604LSFACTC0013447\"], \"label\": \"订单编号（对应数据库字段 code），可选，用于精确匹配订单编号\"}, \"status\": {\"type\": \"string\", \"description\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\", \"enum\": [{\"key\": \"待提交\", \"label\": \"待提交\"}, {\"key\": \"待发送\", \"label\": \"待发送\"}, {\"key\": \"待确认\", \"label\": \"待确认\"}, {\"key\": \"已确认\", \"label\": \"已确认\"}, {\"key\": \"执行中\", \"label\": \"执行中\"}, {\"key\": \"已完成\", \"label\": \"已完成\"}, {\"key\": \"已作废\", \"label\": \"已作废\"}], \"examples\": [\"已完成\", \"5\"], \"label\": \"订单状态，可选，支持中文状态名称或状态编码（整数/整数字符串）。支持的状态：待提交(1)、待发送(6)、待确认(2)、已确认(3)、执行中(4)、已完成(5)、已作废(-1)\"}, \"time_start\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\", \"examples\": [\"2025-06-01\", \"2025-06-01T00:00:00Z\"], \"label\": \"开始时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-01T00:00:00Z），并包含边界\"}, \"time_end\": {\"type\": \"string\", \"format\": \"date-time\", \"description\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\", \"examples\": [\"2025-06-30\", \"2025-06-30T23:59:59Z\"], \"label\": \"结束时间，可选，推荐格式 YYYY-MM-DD，也兼容完整 RFC3339 时间字符串（如 2025-06-30T23:59:59Z），并不包含边界\"}, \"group_by\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"default\": [], \"description\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\", \"examples\": [[\"status\"], [\"customer_name\", \"status\"]], \"label\": \"分组字段，可选，指定需要分组的列。字段名需使用数据库实际字段名，详见字段示例文档\"}, \"aggregations\": {\"type\": \"object\", \"description\": \"聚合定义，可选，配置字段与聚"
+    }
+  ]
+}

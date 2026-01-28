@@ -1,0 +1,2080 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 283,
+    "total_failed": 57,
+    "total_cases": 283,
+    "precision_eligible": 199,
+    "failure_rate": 0.2864321608040201
+  },
+  "cases": [
+    {
+      "index": 15,
+      "user_query": "今年上半年的收入结构分析，主要看门票、交通、餐饮这些业态的占比",
+      "target_tool_name": "analyze_revenue_by_type",
+      "target_arguments": {
+        "start_date": "2025-01-01",
+        "end_date": "2025-06-30"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_revenue_by_type",
+        "get_scenic_spot_revenue",
+        "get_ticket_sales_statistics",
+        "calculate_revenue_statistics",
+        "analyze_resort_revenue"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析今年上半年门票、交通、餐饮等业态的收入占比和金额分布情况，基于财务报表数据进行收入类型构成分析，并以饼图格式展示业态表现评估结果。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 68
+    },
+    {
+      "index": 19,
+      "user_query": "能不能给我看下25年第二季度建德市光大国际旅行社有限公司的收款方式分析",
+      "target_tool_name": "analyze_payment_methods",
+      "target_arguments": {
+        "start_date": "2025-04-01",
+        "end_date": "2025-06-30",
+        "travel_agency_filter": "建德市光大国际旅行社有限公司"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_payment_methods",
+        "get_sales_channel_analysis",
+        "analyze_revenue_by_type",
+        "get_scenic_spot_revenue",
+        "analyze_order_trends"
+      ],
+      "predicted_tool": {
+        "name": "获取资源详情数据",
+        "arguments": {
+          "target": "resourceDetail"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析建德市光大国际旅行社有限公司2025年第二季度的支付方式构成，基于财务报表数据，分析二维码支付、现金支付、记账支付三种支付方式的金额占比和分布情况，并以饼图格式展示，用于支付渠道优化和收款方式分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 731,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 22,
+      "user_query": "分析下今年第二季度景区收入走势情况",
+      "target_tool_name": "get_scenic_spot_revenue",
+      "target_arguments": {
+        "start_date": "2025-04-01",
+        "end_date": "2025-06-30"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_quarterly_data",
+        "get_scenic_spot_revenue",
+        "analyze_resort_revenue",
+        "compare_by_time_resort",
+        "calculate_revenue_statistics"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析2025年第二季度景区收入的季度增长和对比情况，基于财务报表数据，并支持趋势分析功能。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 23
+    },
+    {
+      "index": 34,
+      "user_query": "帮我分析下千岛湖好运岛今年7月的订单完成率",
+      "target_tool_name": "calculate_order_distribution",
+      "target_arguments": {
+        "start_date": "2025-07-01",
+        "end_date": "2025-07-31",
+        "scenic_spot_filter": "千岛湖好运岛"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "analyze_order_trends",
+        "get_scenic_spot_revenue",
+        "list_order_resource_status_distribution",
+        "compare_resort_performance"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单状态分布分析，基于订单系统数据统计千岛湖好运岛景区7月已完成、执行中、待提交、待确认、已确认、已作废等状态的订单数量分布，以饼图格式展示，用于订单流程监控和业务健康度评估。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 94
+    },
+    {
+      "index": 36,
+      "user_query": "想上传一个新的派团单，需要在哪里操作？",
+      "target_tool_name": "intelligent_route_analysis",
+      "target_arguments": {
+        "access": "2"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "intelligent_route_analysis",
+        "batch_permission_operation",
+        "generate_path_map",
+        "casbin_policy_list",
+        "maps_regeo"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "智能页面路由，通过输入1-10的数字快速跳转到对应的业务功能页面",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 14
+    },
+    {
+      "index": 37,
+      "user_query": "需要在系统里添加几个新的酒店资源，去哪里操作？",
+      "target_tool_name": "intelligent_route_analysis",
+      "target_arguments": {
+        "access": "2"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "intelligent_route_analysis",
+        "batch_permission_operation",
+        "generate_path_map",
+        "casbin_policy_list",
+        "maps_regeo"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "智能页面路由，通过输入1-10的数字快速跳转到对应的业务功能页面",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 19
+    },
+    {
+      "index": 46,
+      "user_query": "想看下25年7月，按月汇总的客户类型销售表现。",
+      "target_tool_name": "get_sales_channel_analysis",
+      "target_arguments": {
+        "start_date": "2025-07-01",
+        "end_date": "2025-07-31",
+        "statistic_dimension": "monthly"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "perform_comparative_analysis",
+        "get_sales_channel_analysis",
+        "analyze_customer_segments",
+        "analyze_time_dimensions",
+        "group_by_dimensions"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间维度分析客户类型销售表现，进行多维度数据对比分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 19
+    },
+    {
+      "index": 52,
+      "user_query": "查查今年第三季度导游服务的总收入和平均服务费。",
+      "target_tool_name": "get_guide_service_statistics",
+      "target_arguments": {
+        "start_date": "2025-07-01",
+        "end_date": "2025-09-30",
+        "statistic_dimension": "quarterly"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_guide_service_statistics",
+        "analyze_resort_revenue",
+        "analyze_revenue_by_type",
+        "get_scenic_spot_revenue",
+        "calculate_revenue_statistics"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "统计2025年第三季度导游服务的总收入和服务费，并进行收入分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 53,
+      "user_query": "今年下半年导游服务的人次统计，按月来。",
+      "target_tool_name": "get_guide_service_statistics",
+      "target_arguments": {
+        "start_date": "2025-07-01",
+        "end_date": "2025-12-31",
+        "statistic_dimension": "monthly"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_guide_service_statistics",
+        "count_basic_statistics",
+        "get_scenic_spot_revenue",
+        "query_monthly_data",
+        "query_quarterly_data"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "导游服务人次按时间维度统计，支持月度分布统计。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 56,
+      "user_query": "给集团高管和财务部门高管开通AI功能权限，可以吗？",
+      "target_tool_name": "batch_permission_operation",
+      "target_arguments": {
+        "operation": "enable",
+        "role_ids": [
+          "3",
+          "11"
+        ],
+        "permission_groups": [
+          "ai"
+        ]
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "batch_permission_operation",
+        "casbin_policy_list",
+        "casbin_policy_create",
+        "casbin_policy_check",
+        "casbin_policy_delete"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "执行批量权限管理操作，支持为多个角色、部门或用户批量分配、删除权限。基于Casbin权限模型，支持通配符级联和自定义权限策略",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 34
+    },
+    {
+      "index": 58,
+      "user_query": "想让所有资源方的部门成员都能使用资源管理和协议管理的功能。",
+      "target_tool_name": "batch_permission_operation",
+      "target_arguments": {
+        "operation": "enable",
+        "department_ids": [
+          "3"
+        ],
+        "permission_groups": [
+          "resource",
+          "agreement"
+        ]
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "batch_permission_operation",
+        "casbin_policy_list",
+        "casbin_policy_create",
+        "casbin_policy_check",
+        "casbin_policy_delete"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "执行批量权限管理操作，支持为多个角色、部门或用户批量分配、删除权限。基于Casbin权限模型，支持通配符级联和自定义权限策略",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 44
+    },
+    {
+      "index": 69,
+      "user_query": "对比新安江和三都渔村在今年上半年的收入情况，按周看。",
+      "target_tool_name": "compare_by_time_resort",
+      "target_arguments": {
+        "comparison_type": "revenue",
+        "first_target": {
+          "resort_name": "新安江",
+          "time_range": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          }
+        },
+        "second_target": {
+          "resort_name": "三都渔村",
+          "time_range": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          }
+        },
+        "dimension": "weekly"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_scenic_spot_revenue",
+        "compare_by_time_resort",
+        "query_quarterly_data",
+        "analyze_resort_revenue",
+        "calculate_revenue_statistics"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对比新安江和三都渔村在今年上半年的收入情况，按周看 （工具说明：景区收入趋势分析工具，基于财务报表数据按日统计各景区收入变化趋势，返回折线图格式的时间序列数据，支持多景区对比分析，适用于景区经营状况监控和收入趋势预测）",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 70
+    },
+    {
+      "index": 70,
+      "user_query": "统计一下今年7月各个景区的订单总数。",
+      "target_tool_name": "generate_statistics",
+      "target_arguments": {
+        "entity_type": "order",
+        "group_by_field": "resort_name",
+        "statistic_type": "count",
+        "target_field": "order_id",
+        "filters": {
+          "order_date": {
+            "start": "2025-07-01",
+            "end": "2025-07-31"
+          }
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_order_statistics",
+        "generate_statistics",
+        "filter_by_amount",
+        "calculate_revenue_statistics",
+        "calculate_order_distribution"
+      ],
+      "predicted_tool": {
+        "name": "analyze_order_statistics",
+        "arguments": {
+          "statistic_dimension": "resort",
+          "statistic_type": "count",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单统计分析，订单数量、金额统计分析，支持按客户、产品、景区、代理商等维度进行统计，提供计数、求和、平均值等统计类型",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 120
+    },
+    {
+      "index": 71,
+      "user_query": "想了解下今年第三季度，不同城市的客户平均年龄是多少？",
+      "target_tool_name": "generate_statistics",
+      "target_arguments": {
+        "entity_type": "customer",
+        "group_by_field": "city",
+        "statistic_type": "average",
+        "target_field": "age",
+        "filters": {
+          "registration_date": {
+            "start": "2025-07-01",
+            "end": "2025-09-30"
+          }
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_order_statistics",
+        "generate_statistics",
+        "analyze_proportions",
+        "analyze_customer_segments",
+        "count_basic_statistics"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对不同城市的客户年龄进行统计分析，计算平均值。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 77,
+      "user_query": "订单号是“ORD20250701001”的订单详情",
+      "target_tool_name": "list_orders",
+      "target_arguments": {
+        "order_id": "ORD20250701001"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "list_orders",
+        "get_order_details",
+        "filter_orders_by_conditions",
+        "analyze_order_associations",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单号是“ORD20250701001”的订单详情",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 88
+    },
+    {
+      "index": 86,
+      "user_query": "帮我查查所有已经完成的订单状态。",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "target_status": "已完成"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "manage_order_status",
+        "list_orders",
+        "filter_by_amount",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单状态分布分析，已按状态维度筛选已执行完成的订单。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 15
+    },
+    {
+      "index": 88,
+      "user_query": "查查所有待处理且支付状态是待支付的订单。",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "target_status": "待处理",
+        "payment_status": "pending"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_complex_conditions",
+        "calculate_order_distribution",
+        "manage_order_status",
+        "analyze_order_associations",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "analyze_complex_conditions",
+        "arguments": {
+          "condition_type": "status_and_payment",
+          "status_filter": "已确认",
+          "payment_status": "pending"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对订单进行复合条件分析，支持状态+支付状态的组合分析，以全面评估订单状况。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 91,
+      "user_query": "想了解下过去15天的订单总数和趋势。",
+      "target_tool_name": "query_orders_by_time",
+      "target_arguments": {
+        "time_range_type": "recent_days",
+        "days_back": 15,
+        "include_trends": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_historical_periods",
+        "query_orders_by_time",
+        "analyze_order_trends",
+        "get_sales_channel_analysis",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "query_historical_periods",
+        "arguments": {
+          "period_type": "recent_days",
+          "days_back": 15,
+          "data_type": "orders",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "历史时期查询，支持过去15天的订单总数和趋势分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35
+    },
+    {
+      "index": 95,
+      "user_query": "查询过去7天大慈岩景区的订单详情。",
+      "target_tool_name": "query_orders_by_time",
+      "target_arguments": {
+        "time_range_type": "recent_days",
+        "days_back": 7,
+        "resort_filter": "大慈岩"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_historical_periods",
+        "query_annual_data",
+        "query_monthly_data",
+        "query_realtime_today",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "query_historical_periods",
+        "arguments": {
+          "period_type": "recent_days",
+          "days_back": 7,
+          "data_type": "orders",
+          "resort_filter": "大慈岩"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "历史时期查询，支持去年、过去几个月、上月、近几天、上周、半年、同期对比等历史时期的订单、游客、团队、收入、增长数据查询",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 19
+    },
+    {
+      "index": 97,
+      "user_query": "帮我统计一下今年第三季度，每个产品的销售总额是多少？",
+      "target_tool_name": "analyze_order_statistics",
+      "target_arguments": {
+        "statistic_dimension": "product",
+        "statistic_type": "sum",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "calculate_revenue_statistics",
+        "query_top_rankings",
+        "analyze_order_statistics",
+        "get_sales_channel_analysis",
+        "analyze_customer_segments"
+      ],
+      "predicted_tool": {
+        "name": "calculate_revenue_statistics",
+        "arguments": {
+          "revenue_type": "product_sales",
+          "calculation_method": "sum",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请统计今年第三季度，产品销售的金额和销售额Top排名分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 62
+    },
+    {
+      "index": 102,
+      "user_query": "想了解下2025年第二季度哪些客户的订单数量最少，前五名就行。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "find_extreme_values",
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "极值查询，查找客户订单数量的最小值，以识别订单量最少的客户。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 27
+    },
+    {
+      "index": 107,
+      "user_query": "想看下订单和市场在2025年第二季度的关联分析，不需要统计结果。",
+      "target_tool_name": "analyze_order_associations",
+      "target_arguments": {
+        "association_type": "order_market",
+        "include_statistics": false,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_associations",
+        "analyze_order_associations",
+        "get_sales_channel_analysis",
+        "analyze_customer_segments",
+        "analyze_order_statistics"
+      ],
+      "predicted_tool": {
+        "name": "analyze_associations",
+        "arguments": {
+          "association_type": "order_market",
+          "analysis_method": "correlation",
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "进行订单市场关联分析，包含相关性计算和可视化功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 126
+    },
+    {
+      "index": 109,
+      "user_query": "给我分析下产品和资源的关联，从25年8月1日到17日这段时间，只要原始数据。",
+      "target_tool_name": "analyze_order_associations",
+      "target_arguments": {
+        "association_type": "product_resource",
+        "include_statistics": false,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-17"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_associations",
+        "analyze_order_associations",
+        "group_by_dimensions",
+        "analyze_customer_segments",
+        "analyze_product_sales"
+      ],
+      "predicted_tool": {
+        "name": "analyze_associations",
+        "arguments": {
+          "association_type": "product_resource",
+          "analysis_method": "count",
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-17"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "进行产品资源关联分析，包括相关性计算和可视化功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 1274,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 112,
+      "user_query": "帮我查查2025年上半年团队数量的统计情况。",
+      "target_tool_name": "count_basic_statistics",
+      "target_arguments": {
+        "count_type": "teams",
+        "time_period": "specific_date",
+        "year": 2025,
+        "end_time": "2025-06-30"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "calculate_business_metrics",
+        "count_basic_statistics",
+        "analyze_order_statistics",
+        "group_by_dimensions"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "teams",
+          "period": "half_year"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年上半年团队数量的统计情况",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 38
+    },
+    {
+      "index": 117,
+      "user_query": "25年第三季度，按客户市场统计一下客户的平均年龄。",
+      "target_tool_name": "group_by_dimensions",
+      "target_arguments": {
+        "entity_type": "customer",
+        "group_by_field": "customer_market",
+        "target_metric": "average",
+        "aggregate_field": "age",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_customer_segments",
+        "get_sales_channel_analysis",
+        "group_by_dimensions",
+        "analyze_proportions",
+        "analyze_visitor_sources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对客户进行分类分析，按客户市场维度进行客户细分。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 43
+    },
+    {
+      "index": 121,
+      "user_query": "今年上半年，景区收入的总和是多少？具体到每个景区哦。",
+      "target_tool_name": "calculate_revenue_statistics",
+      "target_arguments": {
+        "revenue_type": "resort_revenue",
+        "calculation_method": "sum",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-06-30"
+        },
+        "include_breakdown": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "calculate_revenue_statistics",
+        "get_scenic_spot_revenue",
+        "query_quarterly_data",
+        "analyze_resort_revenue",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "景区收入的求和统计，支持多维度求和，包括今年上半年的景区收入总和，并提供求和结果。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 122,
+      "user_query": "想看下25年7月，'大慈岩'和'灵栖洞'这两个景区的收入对比。",
+      "target_tool_name": "calculate_revenue_statistics",
+      "target_arguments": {
+        "revenue_type": "resort_revenue",
+        "calculation_method": "comparison",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "comparison_targets": [
+          "大慈岩",
+          "灵栖洞"
+        ]
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_scenic_spot_revenue",
+        "query_quarterly_data",
+        "analyze_resort_revenue",
+        "calculate_revenue_statistics",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "执行多景区收入对比分析，查看大慈岩和灵栖洞在2025年7月的收入表现。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 41
+    },
+    {
+      "index": 127,
+      "user_query": "分析下我们各个客户市场的占比情况。",
+      "target_tool_name": "analyze_proportions",
+      "target_arguments": {
+        "proportion_type": "customer_market"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_sales_channel_analysis",
+        "analyze_proportions",
+        "analyze_customer_segments",
+        "filter_by_amount",
+        "analyze_order_statistics"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "进行客户市场分布分析，以了解不同客户市场的订单数量和金额占比，分析市场表现和客户结构。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 133,
+      "user_query": "想查查今天的消息情况。",
+      "target_tool_name": "query_realtime_today",
+      "target_arguments": {
+        "query_type": "messages"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_realtime_today",
+        "query_annual_data",
+        "query_monthly_data",
+        "query_orders_by_time",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询今天的消息数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 134,
+      "user_query": "到下午两点半为止，消息量怎么样了？",
+      "target_tool_name": "query_realtime_today",
+      "target_arguments": {
+        "query_type": "messages",
+        "end_time": "14:30"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_realtime_today",
+        "get_ticket_sales_statistics",
+        "analyze_time_ranges",
+        "query_orders_by_time",
+        "query_historical_periods"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时当日消息统计，截止到下午2点半的消息量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 55
+    },
+    {
+      "index": 138,
+      "user_query": "想看下今年全年的游客数据。",
+      "target_tool_name": "query_annual_data",
+      "target_arguments": {
+        "year": 2025,
+        "data_type": "visitors",
+        "period": "full_year"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_historical_periods",
+        "query_quarterly_data",
+        "query_monthly_data",
+        "query_resort_visitors"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "年度数据查询，查询今年全年的游客数据。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 40
+    },
+    {
+      "index": 140,
+      "user_query": "查询一下今年7月的客户数量，按市场分类筛选一下。",
+      "target_tool_name": "query_annual_data",
+      "target_arguments": {
+        "year": 2025,
+        "data_type": "customers",
+        "month_filter": 7,
+        "period": "specific_month"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_monthly_data",
+        "query_historical_periods",
+        "query_quarterly_data",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "年度数据查询，支持今年7月的客户数量查询。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 23
+    },
+    {
+      "index": 141,
+      "user_query": "帮我查查今年8月大慈岩的订单数据。",
+      "target_tool_name": "query_annual_data",
+      "target_arguments": {
+        "year": 2025,
+        "data_type": "orders",
+        "resort_filter": "大慈岩",
+        "month_filter": 8,
+        "period": "specific_month"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_historical_periods",
+        "query_quarterly_data",
+        "get_ticket_sales_statistics",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询今年8月大慈岩的订单数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 20
+    },
+    {
+      "index": 144,
+      "user_query": "上个月的订单情况给我看看。",
+      "target_tool_name": "query_monthly_data",
+      "target_arguments": {
+        "month_type": "previous",
+        "data_type": "orders"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_historical_periods",
+        "query_annual_data",
+        "query_monthly_data",
+        "query_realtime_today",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "query_historical_periods",
+        "arguments": {
+          "period_type": "last_month",
+          "data_type": "orders"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "历史时期查询，支持去年、过去几个月、上月、近几天、上周、半年、同期对比等历史时期的订单、游客、团队、收入、增长数据查询",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 1395,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 146,
+      "user_query": "今年7月的收入统计一下，可以吗？",
+      "target_tool_name": "query_monthly_data",
+      "target_arguments": {
+        "month_type": "specific",
+        "year": 2025,
+        "month": 7,
+        "data_type": "revenue"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "calculate_revenue_statistics",
+        "query_quarterly_data",
+        "query_monthly_data",
+        "analyze_revenue_by_type"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请统计今年7月的收入，并进行月度同比对比。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 42
+    },
+    {
+      "index": 149,
+      "user_query": "今年第二季度有多少客户啊？",
+      "target_tool_name": "query_quarterly_data",
+      "target_arguments": {
+        "year": 2025,
+        "quarter": "2",
+        "data_type": "customers"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_historical_periods",
+        "query_monthly_data",
+        "query_quarterly_data",
+        "analyze_order_trends"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "customers",
+          "period": "half_year"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "年度数据查询，支持订单、游客、团队、收入、客户、资源等年度数据查询，提供月份筛选和同期对比",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 932,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 154,
+      "user_query": "统计一下产品B，金额超过10000元的订单数量，就统计个数就行。",
+      "target_tool_name": "analyze_complex_conditions",
+      "target_arguments": {
+        "condition_type": "product_and_amount",
+        "product_filter": "产品B",
+        "amount_threshold": 10000,
+        "calculation_type": "count"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_order_statistics",
+        "analyze_complex_conditions",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "get_sales_channel_analysis"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对产品B进行复合条件分析，统计金额超过10000元的订单数量。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 20
+    },
+    {
+      "index": 161,
+      "user_query": "今年下半年，订单处理时长的趋势是怎样的？",
+      "target_tool_name": "analyze_time_dimensions",
+      "target_arguments": {
+        "time_dimension": "processing_duration",
+        "analysis_type": "trend",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-12-31"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_time_trends",
+        "analyze_time_dimensions",
+        "query_orders_by_time",
+        "get_sales_channel_analysis",
+        "analyze_order_associations"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单处理时间分析，支持今年下半年的超时检测和时间趋势分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 23
+    },
+    {
+      "index": 167,
+      "user_query": "2025年6月到9月，来千岛湖好运岛的游客，他们主要来自哪些城市？",
+      "target_tool_name": "analyze_regional_data",
+      "target_arguments": {
+        "region_type": "city",
+        "analysis_target": "visitor_source",
+        "resort_filter": "千岛湖好运岛",
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-09-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_proportions",
+        "analyze_visitor_sources",
+        "analyze_regional_data",
+        "analyze_customer_segments",
+        "analyze_resort_revenue"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitor_sources",
+        "arguments": {
+          "source_type": "visitor_origin",
+          "analysis_scope": "main_sources",
+          "target_date": "2025-06-01 到 2025-09-30",
+          "resort_filter": "千岛湖好运岛",
+          "visitor_category": "all",
+          "time_period": "daily",
+          "top_n": 10,
+          "geographic_level": "city"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "占比分布分析，占比、分布、比例、份额分析，支持客户市场占比、游客来源分布、年龄组分布、客户类型占比、省份分布、产品销售占比等分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 29
+    },
+    {
+      "index": 168,
+      "user_query": "想了解下按客户类型划分，平均消费金额是多少？",
+      "target_tool_name": "analyze_customer_segments",
+      "target_arguments": {
+        "segment_type": "customer_type",
+        "analysis_metric": "average_amount"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "filter_by_amount",
+        "analyze_customer_segments",
+        "filter_orders_by_conditions",
+        "calculate_revenue_statistics",
+        "get_sales_channel_analysis"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按客户类型划分，平均消费金额是多少",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 20
+    },
+    {
+      "index": 169,
+      "user_query": "2025年6月，按市场距离来看，各类客户的占比情况怎么样？",
+      "target_tool_name": "analyze_customer_segments",
+      "target_arguments": {
+        "segment_type": "market_distance",
+        "analysis_metric": "proportion",
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-06-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_customer_segments",
+        "analyze_proportions",
+        "get_sales_channel_analysis",
+        "perform_comparative_analysis",
+        "group_by_dimensions"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "客户分类分析，按市场距离维度进行客户细分，分析各类客户的占比情况。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 28
+    },
+    {
+      "index": 172,
+      "user_query": "能给我详细分析下今年7月不同客户类型的预订习惯吗？",
+      "target_tool_name": "analyze_customer_segments",
+      "target_arguments": {
+        "segment_type": "customer_type",
+        "analysis_metric": "booking_habits",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "include_breakdown": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_customer_segments",
+        "get_sales_channel_analysis",
+        "analyze_proportions",
+        "perform_comparative_analysis",
+        "analyze_time_trends"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "进行今年7月不同客户类型的客户分类分析，以分析其预订习惯。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 21
+    },
+    {
+      "index": 173,
+      "user_query": "帮我查查大慈岩今年7月的订单情况。",
+      "target_tool_name": "query_resort_visitors",
+      "target_arguments": {
+        "query_type": "orders",
+        "resort_list": [
+          "大慈岩"
+        ],
+        "time_period": "specific_month",
+        "month": 7,
+        "year": 2025
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "search_travel_images",
+        "manage_resort_resources",
+        "query_resort_visitors",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询大慈岩景区今年7月的订单总金额和订单数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 174,
+      "user_query": "新安江和严州古城这个月的游客数量是多少？",
+      "target_tool_name": "query_resort_visitors",
+      "target_arguments": {
+        "query_type": "visitor_count",
+        "resort_list": [
+          "新安江",
+          "严州古城"
+        ],
+        "time_period": "current_month"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_by_time_resort",
+        "query_monthly_data",
+        "query_resort_visitors",
+        "query_annual_data",
+        "query_quarterly_data"
+      ],
+      "predicted_tool": {
+        "name": "query_by_time_resort",
+        "arguments": {
+          "start_date": "2025-10-01",
+          "end_date": "2025-10-31",
+          "target_object": "游客",
+          "query_type": "数量",
+          "resort": "新安江"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询新安江和严州古城景区的月度游客数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 175,
+      "user_query": "灵栖洞今年的团队游客有多少啊？",
+      "target_tool_name": "query_resort_visitors",
+      "target_arguments": {
+        "query_type": "team_count",
+        "resort_list": [
+          "灵栖洞"
+        ],
+        "time_period": "annual",
+        "year": 2025
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "get_ticket_sales_statistics",
+        "query_by_time_resort",
+        "query_annual_data",
+        "query_resort_visitors",
+        "compare_by_time_resort"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "灵栖洞今年的团队游客数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 20
+    },
+    {
+      "index": 178,
+      "user_query": "2025年全年，收入排名前三的景区是哪些？",
+      "target_tool_name": "analyze_resort_revenue",
+      "target_arguments": {
+        "analysis_type": "top_ranking",
+        "time_period": "annual",
+        "year": 2025,
+        "top_n": 3
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "query_top_rankings",
+        "get_scenic_spot_revenue",
+        "calculate_revenue_statistics",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年全年，景区收入Top排名分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 179,
+      "user_query": "帮我查下25年第三季度，按产品收入排名前三的景区是哪些？",
+      "target_tool_name": "analyze_resort_revenue",
+      "target_arguments": {
+        "analysis_type": "top_ranking",
+        "time_period": "quarter",
+        "year": 2025,
+        "quarter": 3,
+        "top_n": 3,
+        "revenue_breakdown": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_top_rankings",
+        "analyze_travel_agencies",
+        "analyze_visitor_sources",
+        "analyze_regional_data",
+        "analyze_resort_revenue"
+      ],
+      "predicted_tool": {
+        "name": "query_top_rankings",
+        "arguments": {
+          "ranking_type": "resource_revenue",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "top_n": 3,
+          "include_metrics": true,
+          "revenue_breakdown": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "TOP排名查询，支持游客来源、客户市场、资源收入、订单金额等多维度的Top排名分析和地理分布统计",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 73
+    },
+    {
+      "index": 183,
+      "user_query": "帮我看下现在景区资源的定价策略。",
+      "target_tool_name": "manage_resort_resources",
+      "target_arguments": {
+        "resource_query_type": "pricing_policy"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "manage_resort_resources",
+        "query_resort_visitors",
+        "query_by_time_resort",
+        "compare_by_time_resort",
+        "compare_resort_performance"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "景区资源管理，查看景区资源的资源管理功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 188,
+      "user_query": "帮我看下新安江和严州古城在今年7月的订单量对比情况。",
+      "target_tool_name": "compare_resort_performance",
+      "target_arguments": {
+        "comparison_type": "order_volume",
+        "target_entities": [
+          "新安江",
+          "严州古城"
+        ],
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_by_time_resort",
+        "analyze_order_trends",
+        "compare_by_time_resort",
+        "compare_resort_performance",
+        "query_quarterly_data"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对新安江和严州古城在今年7月的订单量进行跨景区对比分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 30
+    },
+    {
+      "index": 206,
+      "user_query": "帮我查查，25年7月到8月，所有订单金额超过1000元的订单。",
+      "target_tool_name": "filter_by_amount",
+      "target_arguments": {
+        "filter_type": "order_amount",
+        "amount_threshold": 1000,
+        "comparison_operator": "gt",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-08-31"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "create_sorted_lists",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "rank_orders",
+        "filter_orders_by_conditions"
+      ],
+      "predicted_tool": {
+        "name": "filter_orders_by_conditions",
+        "arguments": {
+          "date_range": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          },
+          "amount_min": 1000,
+          "comparison_operator": "gt"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对订单金额进行多字段排序，支持高价值订单的金额序分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17
+    },
+    {
+      "index": 216,
+      "user_query": "客户按类型分布的情况是怎样的？",
+      "target_tool_name": "manage_customer_basic",
+      "target_arguments": {
+        "query_type": "count_distribution",
+        "group_by": "type"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_proportions",
+        "analyze_visitor_sources",
+        "manage_customer_basic",
+        "analyze_customer_segments",
+        "group_by_dimensions"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "客户按类型分布的构成分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 27
+    },
+    {
+      "index": 226,
+      "user_query": "今年第二季度新增客户的数据，需要包含详细信息。",
+      "target_tool_name": "manage_agreement_customers",
+      "target_arguments": {
+        "query_type": "new_customers",
+        "time_period": "specific_quarter",
+        "year": 2025,
+        "quarter": 2,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_quarterly_data",
+        "manage_agreement_customers",
+        "perform_comparative_analysis",
+        "get_sales_channel_analysis",
+        "analyze_customer_segments"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析2025年第二季度新增客户的季度数据，并提供多维度的新增客户分析。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 104
+    },
+    {
+      "index": 231,
+      "user_query": "查查今年第二季度总收入最高的几个地区，按收入百分比排序。",
+      "target_tool_name": "query_top_rankings",
+      "target_arguments": {
+        "start_date": "2025-06-01",
+        "end_date": "2025-08-31",
+        "statistic_dimension": "monthly"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "query_top_rankings",
+        "get_scenic_spot_revenue",
+        "calculate_revenue_statistics",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析2025年第二季度各景区的收入Top排名，找出收入最高的几个地区。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 243,
+      "user_query": "想对比一下协议客户和普通客户在今年上半年的消费情况。",
+      "target_tool_name": "perform_comparative_analysis",
+      "target_arguments": {
+        "comparison_type": "customer_type",
+        "customer_segments": [
+          "agreement",
+          "regular"
+        ],
+        "comparison_metric": "consumption",
+        "first_period": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-06-30"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_customer_segments",
+        "perform_comparative_analysis",
+        "calculate_revenue_statistics",
+        "analyze_order_statistics",
+        "get_sales_channel_analysis"
+      ],
+      "predicted_tool": {
+        "name": "analyze_customer_segments",
+        "arguments": {
+          "segment_type": "customer_type",
+          "analysis_metric": "consumption_difference",
+          "customer_comparison": [
+            "协议客户",
+            "普通客户"
+          ],
+          "time_filter": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对协议客户和普通客户进行客户分类分析，对比其在今年上半年的平均金额、单价、消费习惯和价格差异。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 42
+    },
+    {
+      "index": 252,
+      "user_query": "本地团队的最高单价是啥样的？",
+      "target_tool_name": "analyze_team_scales",
+      "target_arguments": {
+        "analysis_focus": "highest_unit_price",
+        "market_distance": "local"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_team_scales",
+        "analyze_customer_segments",
+        "analyze_visitor_sources",
+        "get_sales_channel_analysis",
+        "analyze_regional_data"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析本地团队的最高单价和消费模式，支持市场距离细分和价格计算方式配置",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 18
+    },
+    {
+      "index": 259,
+      "user_query": "分析下所有资源的等级统计情况。",
+      "target_tool_name": "query_basic_resources",
+      "target_arguments": {
+        "query_type": "level_statistics"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_basic_resources",
+        "generate_statistics",
+        "analyze_order_statistics",
+        "group_by_dimensions",
+        "filter_by_amount"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析所有资源的等级统计情况",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17
+    },
+    {
+      "index": 280,
+      "user_query": "广州今天天气如何？",
+      "target_tool_name": "maps_weather",
+      "target_arguments": {
+        "city": "广州"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "maps_weather",
+        "maps_geocode",
+        "maps_text_search",
+        "query_quarterly_data",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "获取广州的天气信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17
+    }
+  ]
+}

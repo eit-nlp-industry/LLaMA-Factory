@@ -1,0 +1,303 @@
+[
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "三亚适合什么季节去旅游"
+      },
+      {
+        "from": "gpt",
+        "value": "\n三亚最佳旅游季节是11月至次年4月，此时气候温和舒适，温度在20-28℃，阳光充足，雨水较少。5-10月是淡季，虽然气温较高且多雨，但价格更实惠。推荐景点：亚龙湾、蜈支洲岛、天涯海角、南山寺、大小洞天。建议安排5-7天行程，体验潜水、帆船等水上运动。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 15:20"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "西安有哪些历史文化景点推荐"
+      },
+      {
+        "from": "gpt",
+        "value": "\n西安作为十三朝古都，历史文化景点丰富。必游景点包括：兵马俑（世界第八大奇迹）、华清宫、大雁塔、小雁塔、古城墙、钟鼓楼、回民街、陕西历史博物馆、大唐芙蓉园。推荐美食：肉夹馍、羊肉泡馍、凉皮、biangbiang面。建议游玩时间4-5天，春秋季节气候最宜人。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 14:35"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "成都三日游怎么安排比较好"
+      },
+      {
+        "from": "gpt",
+        "value": "\n成都三日游建议行程：\nDay1：武侯祠-锦里古街-宽窄巷子-春熙路\nDay2：大熊猫繁育研究基地-文殊院-人民公园（喝茶看变脸）\nDay3：都江堰或青城山一日游\n\n必吃美食：火锅、串串香、担担面、龙抄手、夫妻肺片、兔头。推荐住宿区域：春熙路、太古里附近交通便利。建议办理天府通卡，方便乘坐地铁公交。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 16:40"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "杭州西湖周边有什么好玩的"
+      },
+      {
+        "from": "gpt",
+        "value": "\n杭州西湖周边景点丰富：西湖十景（断桥残雪、雷峰夕照、三潭印月、苏堤春晓等）、灵隐寺、飞来峰、岳王庙、宋城、河坊街、南宋御街。推荐游湖方式：环湖骑行或乘坐游船。特色美食：西湖醋鱼、东坡肉、龙井虾仁、叫花鸡、片儿川。建议春季赏花或秋季赏桂花时节游览，2-3天可游玩主要景点。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 13:25"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "张家界旅游要注意什么"
+      },
+      {
+        "from": "gpt",
+        "value": "\n张家界旅游注意事项：\n1. 穿着：建议穿运动鞋或登山鞋，山路较多需爬山\n2. 天气：山区天气多变，带好雨具和外套\n3. 行程：主要景点包括天门山（玻璃栈道）、张家界国家森林公园（阿凡达取景地）、大峡谷玻璃桥、黄龙洞\n4. 时间：建议安排3-4天，旺季需提前订票\n5. 交通：景区内有环保车和索道，合理规划路线可节省体力\n6. 美食：推荐三下锅、土家腊肉、葛根粉。避开节假日高峰期游览体验更佳。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 11:50"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "云南大理丽江路线怎么走"
+      },
+      {
+        "from": "gpt",
+        "value": "\n云南大理-丽江经典路线（7-8天）：\nDay1-2：昆明-大理（大理古城、洱海、崇圣寺三塔、喜洲古镇）\nDay3：大理-丽江（途经双廊）\nDay4-5：丽江（丽江古城、束河古镇、拉市海、玉龙雪山）\nDay6-7：香格里拉（普达措国家公园、松赞林寺、独克宗古城）\n\n交通：大理至丽江约2小时动车，丽江至香格里拉可包车或大巴。特色体验：洱海骑行、古城民谣酒吧、纳西族传统文化。推荐3-5月或9-11月出行。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 10:15"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "桂林山水适合自驾游吗"
+      },
+      {
+        "from": "gpt",
+        "value": "\n桂林非常适合自驾游。推荐自驾路线：\n1. 桂林市区-阳朔（漓江风光、十里画廊、遇龙河、西街）\n2. 龙脊梯田（春耕、秋收季节最美）\n3. 兴坪古镇（20元人民币背景图）\n\n注意事项：市区停车位紧张，建议住宿选带停车场的酒店；漓江景区需坐游船，车可停在码头；山路弯道多注意安全。建议自驾4-5天深度游，体验竹筏漂流、攀岩、田园骑行。美食推荐：啤酒鱼、桂林米粉、荔浦芋扣肉。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 09:30"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "北京故宫游览需要多长时间"
+      },
+      {
+        "from": "gpt",
+        "value": "\n故宫游览建议预留4-6小时。故宫占地72万平方米，建筑众多，快速浏览中轴线主要宫殿需3-4小时，深度游览包括东西六宫、珍宝馆、钟表馆需要一整天。建议提前在官网预约门票（每日限流8万人），周一闭馆。游览路线：午门-太和殿-中和殿-保和殿-乾清宫-坤宁宫-御花园-神武门。旺季建议早上8:30开门就入场，避开人流高峰。可租借电子讲解器或请导游深入了解历史文化。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 17:05"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "重庆有哪些网红打卡地"
+      },
+      {
+        "from": "gpt",
+        "value": "\n重庆热门网红打卡地推荐：\n1. 洪崖洞（夜景最美，像千与千寻场景）\n2. 李子坝轻轨穿楼（2号线）\n3. 长江索道（山城空中巴士体验）\n4. 磁器口古镇（传统老街）\n5. 解放碑-朝天门（CBD商圈）\n6. 鹅岭二厂文创园（文艺地标）\n7. 南山一棵树观景台（俯瞰重庆夜景）\n8. 武隆天生三桥（变形金刚4取景地）\n\n必吃美食：火锅、小面、酸辣粉、江湖菜。建议安排3-4天，体验8D魔幻山城。注意：重庆多山路，穿舒适的鞋子。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 12:45"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "青岛旅游有什么特色体验"
+      },
+      {
+        "from": "gpt",
+        "value": "\n青岛特色体验推荐：\n1. 海滨风光：栈桥、八大关、金沙滩、石老人海水浴场\n2. 德式建筑：青岛啤酒博物馆、天主教堂、基督教堂、德国总督府\n3. 崂山：海上第一名山，道教圣地\n4. 海鲜大餐：蛤蜊、海螺、鲅鱼水饺、辣炒蛤蜊\n5. 啤酒文化：青岛啤酒节（每年8月）、啤酒街、袋装啤酒\n6. 特色街区：台东商业街、中山路、劈柴院（美食老街）\n\n最佳游览季节：6-9月海滨度假，建议3-4天行程。特别推荐：海边骑行、赶海挖蛤蜊、品尝原浆啤酒配烧烤。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 08:55"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍北京"
+      },
+      {
+        "from": "gpt",
+        "value": "\n北京是中国的首都，拥有3000多年建城史和800多年建都史，是世界著名的历史文化名城。\n\n**主要景点**：故宫、天安门广场、长城（八达岭/慕田峪）、颐和园、天坛、圆明园、北海公园、什刹海、雍和宫、恭王府、鸟巢水立方。\n\n**特色美食**：北京烤鸭、炸酱面、涮羊肉、卤煮火烧、豆汁儿、驴打滚、糖葫芦。\n\n**文化特色**：京剧、相声、胡同文化、四合院建筑。\n\n**最佳旅游季节**：春季（3-5月）赏花、秋季（9-11月）天高气爽。建议游玩5-7天，深度体验帝都文化底蕴。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 18:30"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍上海"
+      },
+      {
+        "from": "gpt",
+        "value": "\n上海是中国最大的经济中心城市，被誉为\"东方巴黎\"，是现代化与历史文化交融的国际大都市。\n\n**主要景点**：外滩、东方明珠、南京路步行街、豫园、城隍庙、田子坊、新天地、朱家角古镇、上海迪士尼乐园、上海中心大厦（632米）。\n\n**特色美食**：生煎包、小笼包、红烧肉、糖醋小排、葱油拌面、蟹粉小笼、本帮菜。\n\n**文化特色**：海派文化、万国建筑博览、石库门建筑、老洋房。\n\n**最佳旅游季节**：春秋两季（3-5月、9-11月）气候宜人。建议游玩3-5天，体验摩登与怀旧的双重魅力。交通便利，地铁网络发达。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 19:15"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍南京"
+      },
+      {
+        "from": "gpt",
+        "value": "\n南京是六朝古都、十朝都会，拥有深厚的历史文化底蕴，被誉为\"博爱之都\"、\"天下文枢\"。\n\n**主要景点**：中山陵、明孝陵、夫子庙秦淮河、总统府、玄武湖、鸡鸣寺、栖霞山、牛首山、南京博物院、侵华日军南京大屠杀遇难同胞纪念馆。\n\n**特色美食**：鸭血粉丝汤、盐水鸭、小笼包、牛肉锅贴、鸡汁汤包、桂花糖芋苗、梅花糕。\n\n**文化特色**：六朝文化、明文化、民国文化、民间艺术（云锦、雨花石）。\n\n**最佳旅游季节**：春季（3-5月）赏樱花梅花、秋季（9-11月）观栖霞红叶。建议游玩3-4天，感受古都沧桑与现代活力。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 20:05"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍苏州"
+      },
+      {
+        "from": "gpt",
+        "value": "\n苏州是江南水乡代表城市，素有\"人间天堂\"的美誉，以古典园林、小桥流水、丝绸文化闻名于世。\n\n**主要景点**：拙政园、留园、虎丘、狮子林、寒山寺、周庄古镇、同里古镇、平江路、山塘街、苏州博物馆（贝聿铭设计）、金鸡湖。\n\n**特色美食**：苏式面点（奥灶面、枫镇大面）、松鼠桂鱼、阳澄湖大闸蟹、糖粥、酒酿饼、鸡头米、碧螺春茶。\n\n**文化特色**：古典园林艺术、昆曲、评弹、苏绣、丝绸。\n\n**最佳旅游季节**：春季（3-5月）和秋季（9-11月）。建议游玩3-4天，漫步古城小巷，品味江南韵味。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 14:20"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍广州"
+      },
+      {
+        "from": "gpt",
+        "value": "\n广州是岭南文化中心，两千多年历史的商贸名城，被誉为\"食在广州\"的美食天堂，也是中国改革开放前沿城市。\n\n**主要景点**：广州塔（小蛮腰）、长隆旅游度假区、陈家祠、沙面、上下九步行街、北京路、越秀公园五羊石像、白云山、珠江夜游、黄埔军校旧址。\n\n**特色美食**：早茶点心（虾饺、烧卖、叉烧包、肠粉）、白切鸡、烧鹅、煲仔饭、云吞面、双皮奶、姜撞奶、糖水。\n\n**文化特色**：粤剧、岭南建筑、骑楼、花市文化、广府话。\n\n**最佳旅游季节**：秋冬季（10月-次年2月）气候舒适。建议游玩3-4天，深度体验岭南风情与现代都市魅力。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 15:40"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍深圳"
+      },
+      {
+        "from": "gpt",
+        "value": "\n深圳是中国第一个经济特区，从小渔村发展为现代化国际都市，被誉为\"设计之都\"、\"创新之城\"、\"中国硅谷\"。\n\n**主要景点**：世界之窗、欢乐谷、东部华侨城、大小梅沙、莲花山公园、深圳湾公园、OCT创意文化园、大芬油画村、红树林、仙湖植物园、南澳。\n\n**特色美食**：广式早茶、潮汕牛肉火锅、客家菜、港式茶餐厅、海鲜大排档、椰子鸡。\n\n**城市特色**：现代化建筑群、科技创新产业、多元文化融合、年轻活力。\n\n**最佳旅游季节**：11月-次年4月气候舒适。建议游玩2-3天，体验现代都市风情与海滨风光。交通便利，毗邻香港。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 16:25"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍武汉"
+      },
+      {
+        "from": "gpt",
+        "value": "\n武汉是湖北省省会，\"九省通衢\"的中部重镇，长江与汉江交汇处，历史文化悠久，素有\"江城\"之称。\n\n**主要景点**：黄鹤楼、武汉大学（樱花季）、东湖风景区、户部巷、汉口江滩、古琴台、归元寺、湖北省博物馆、光谷步行街、武汉长江大桥。\n\n**特色美食**：热干面、豆皮、面窝、鸭脖、汤包、排骨藕汤、武昌鱼、糊汤粉、烧卖、糯米包油条。\n\n**文化特色**：楚文化、码头文化、近代革命史迹。\n\n**最佳旅游季节**：春季（3-4月）赏樱花、秋季（9-11月）。建议游玩2-3天，体验码头文化与荆楚风情。美食街众多，夜生活丰富。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 11:30"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍天津"
+      },
+      {
+        "from": "gpt",
+        "value": "\n天津是中国四大直辖市之一，近代中国的重要港口城市，拥有独特的近代历史文化和地方风情，被誉为\"万国建筑博物馆\"。\n\n**主要景点**：五大道、意式风情街、古文化街、天津之眼摩天轮、海河、津门故里、瓷房子、西开教堂、盘山风景区、滨海图书馆。\n\n**特色美食**：狗不理包子、十八街麻花、耳朵眼炸糕、煎饼果子、嘎巴菜、锅巴菜、天津麻酱烧饼、熟梨糕。\n\n**文化特色**：相声文化、租界建筑、天津话、民间工艺（杨柳青年画、泥人张）。\n\n**最佳旅游季节**：春秋两季（4-5月、9-10月）。建议游玩2-3天，漫步五大道感受百年沧桑，品尝地道津味小吃。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 10:50"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍拉萨"
+      },
+      {
+        "from": "gpt",
+        "value": "\n拉萨是西藏自治区首府，\"日光城\"之称，世界海拔最高的城市之一（3650米），藏传佛教圣地，拥有独特的雪域高原文化。\n\n**主要景点**：布达拉宫、大昭寺、小昭寺、八廓街、色拉寺、哲蚌寺、罗布林卡、纳木错、羊卓雍错、扎什伦布寺。\n\n**特色美食**：酥油茶、青稞酒、糌粑、藏面、牦牛肉、藏香猪、酸奶、甜茶。\n\n**文化特色**：藏传佛教文化、唐卡艺术、藏族歌舞、转经文化。\n\n**最佳旅游季节**：6-9月气候温暖。注意事项：提前适应高原环境，预防高原反应；尊重当地宗教文化习俗；布达拉宫需提前预约。建议游玩5-7天深度体验。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 09:45"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为我介绍哈尔滨"
+      },
+      {
+        "from": "gpt",
+        "value": "\n哈尔滨是黑龙江省省会，\"东方莫斯科\"、\"冰城\"之称，中国著名的冰雪旅游城市，拥有独特的俄罗斯风情和冰雪文化。\n\n**主要景点**：中央大街、圣索菲亚大教堂、哈尔滨冰雪大世界、太阳岛雪博会、冰灯游园会、松花江、伏尔加庄园、老道外、亚布力滑雪场。\n\n**特色美食**：红肠、大列巴（俄式面包）、马迭尔冰棍、锅包肉、得莫利炖鱼、杀猪菜、俄式西餐。\n\n**文化特色**：俄罗斯风情建筑、冰雪艺术、东北民俗文化。\n\n**最佳旅游季节**：冬季（12月-次年2月）看冰雕雪雕，夏季（6-8月）避暑胜地。建议冬季游玩4-5天，充分体验冰雪奇观。注意保暖防寒。\n"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n\n\n**retrieval_tool调用格式说明**：\n如果调用 retrieval_tool，只需输出查询参数，其他参数由系统自动补全：\n<tool_call>\n\"query\": \"查询内容\", \"source_filter\": \"指定检索的知识库\"\n</tool_call>\n\nretrieval_tool 示例：\n<tool_call>\n\"query\": \"按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能\", \"source_filter\": \"toollist\"\n</tool_call>\n\n**注意**：其他工具（非 retrieval_tool）必须使用完整 JSON 格式。\n\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 08:20"
+  }
+]
+

@@ -1,0 +1,67 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# ============================================
+# git-crypt 加密规则
+# ============================================
+# 规则按顺序匹配，后面的规则会覆盖前面的规则
+
+# 核心代码目录 - 加密
+src/** filter=git-crypt diff=git-crypt
+
+# 敏感配置文件 - 加密
+*.yaml filter=git-crypt diff=git-crypt
+*.yml filter=git-crypt diff=git-crypt
+
+# 但排除 .github 目录（CI/CD 配置不能加密）
+.github/** -filter -diff
+
+# 排除 docker 和 examples 目录
+docker/** -filter -diff
+examples/** -filter -diff
+
+# 排除测试目录
+tests/** -filter -diff
+
+# 根目录的 Python 脚本 - 加密
+*.py filter=git-crypt diff=git-crypt
+
+# 但排除特定脚本
+scripts/setup_git_crypt.sh -filter -diff
+scripts/decrypt_repository.sh -filter -diff
+setup.py -filter -diff
+setup_token_logger.py -filter -diff
+
+# 敏感数据目录 - 加密
+data/** filter=git-crypt diff=git-crypt
+saves/** filter=git-crypt diff=git-crypt
+output/** filter=git-crypt diff=git-crypt
+Qwen3-*/** filter=git-crypt diff=git-crypt
+
+# 敏感文档 - 加密
+*.md filter=git-crypt diff=git-crypt
+
+# 但排除公开文档
+README.md -filter -diff
+README_zh.md -filter -diff
+QUICK_START_ENCRYPTION.md -filter -diff
+GIT_CRYPT_SETUP.md -filter -diff
+CREATE_ENCRYPTED_REPO.md -filter -diff
+TROUBLESHOOTING.md -filter -diff
+.github/**/*.md -filter -diff
+
+# 敏感 JSON 文件 - 加密
+*.json filter=git-crypt diff=git-crypt
+
+# 再次明确排除 .github 目录的所有文件（放在最后以覆盖之前的规则）
+.github/**/*.yml -filter -diff
+.github/**/*.yaml -filter -diff
+.github/**/*.md -filter -diff
+.github/**/*.json -filter -diff
+
+# 不加密的特定文件
+.gitignore -filter -diff
+.gitattributes -filter -diff
+LICENSE -filter -diff
+.pre-commit-config.yaml -filter -diff
+.git-crypt-keys/** -filter -diff

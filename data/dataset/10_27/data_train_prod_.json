@@ -1,0 +1,579 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 10,
+    "metrics": {
+      "total": 10,
+      "recall@5": 0.6,
+      "precision@1": 0.5,
+      "arg_accuracy": 0.5
+    }
+  },
+  "cases": [
+    {
+      "index": 0,
+      "user_query": "新叶古村和建德市光大国际旅行社有限公司在2025年7月1日到8月17日的合作订单状态如何",
+      "target_tool_name": "calculate_order_distribution",
+      "target_arguments": {
+        "start_date": "2025-07-01",
+        "end_date": "2025-08-17",
+        "scenic_spot_filter": "新叶古村",
+        "travel_agency_filter": "建德市光大国际旅行社有限公司"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "start_date": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "end_date": {
+          "target": "2025-08-17",
+          "predict": "2025-08-17",
+          "match": true
+        },
+        "scenic_spot_filter": {
+          "target": "新叶古村",
+          "predict": null,
+          "match": false
+        },
+        "travel_agency_filter": {
+          "target": "建德市光大国际旅行社有限公司",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "manage_order_status",
+        "list_orders",
+        "list_order_resource_status_distribution",
+        "rank_orders"
+      ],
+      "predicted_tool": {
+        "name": "manage_order_status",
+        "arguments": {
+          "resort_filter": "新叶古村",
+          "start_date": "2025-07-01",
+          "end_date": "2025-08-17"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单状态查询和分析，支持状态筛选和分布分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 34
+    },
+    {
+      "index": 1,
+      "user_query": "宿江公司相关的订单在2025年7月5日到8月3日的状态分布",
+      "target_tool_name": "calculate_order_distribution",
+      "target_arguments": {
+        "start_date": "2025-07-05",
+        "end_date": "2025-08-03",
+        "scenic_spot_filter": "宿江公司"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "start_date": {
+          "target": "2025-07-05",
+          "predict": "2025-07-05",
+          "match": true
+        },
+        "end_date": {
+          "target": "2025-08-03",
+          "predict": "2025-08-03",
+          "match": true
+        },
+        "scenic_spot_filter": {
+          "target": "宿江公司",
+          "predict": "宿江公司",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "get_sales_channel_analysis",
+        "list_order_resource_status_distribution",
+        "analyze_order_statistics",
+        "manage_order_status"
+      ],
+      "predicted_tool": {
+        "name": "calculate_order_distribution",
+        "arguments": {
+          "start_date": "2025-07-05",
+          "end_date": "2025-08-03",
+          "scenic_spot_filter": "宿江公司"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析宿江公司相关的订单状态分布，基于订单系统数据统计待提交、待确认、已确认、执行中、已完成、已作废等状态的订单数量分布，并以饼图格式展示，适用于订单流程监控和业务健康度评估。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 2,
+      "user_query": "给模板1添加姜钰炎作为抄送人",
+      "target_tool_name": "update_approval_template",
+      "target_arguments": {
+        "approval_template_id": 1,
+        "operate_entity": "",
+        "entity_type": "cc",
+        "operate_type": "create",
+        "target_values": [
+          "姜钰炎"
+        ]
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "approval_template_id": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        },
+        "operate_entity": {
+          "target": "",
+          "predict": "",
+          "match": true
+        },
+        "entity_type": {
+          "target": "cc",
+          "predict": "cc",
+          "match": true
+        },
+        "operate_type": {
+          "target": "create",
+          "predict": "create",
+          "match": true
+        },
+        "target_values": {
+          "target": [
+            "姜钰炎"
+          ],
+          "predict": [
+            "姜钰炎"
+          ],
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "update_approval_template",
+        "intelligent_route_analysis",
+        "get_approval_list",
+        "batch_permission_operation",
+        "casbin_policy_create"
+      ],
+      "predicted_tool": {
+        "name": "update_approval_template",
+        "arguments": {
+          "approval_template_id": 1,
+          "operate_entity": "",
+          "entity_type": "cc",
+          "operate_type": "create",
+          "target_values": [
+            "姜钰炎"
+          ]
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对审批流模板中的审批人和抄送人进行新增、更新、删除等操作",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 3,
+      "user_query": "灵栖洞里面的景色怎么样，给我看看照片",
+      "target_tool_name": "search_travel_images",
+      "target_arguments": {
+        "query": "里面的景色怎么样，给我看看照片",
+        "location_filter": "灵栖洞"
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "query": {
+          "target": "里面的景色怎么样，给我看看照片",
+          "predict": null,
+          "match": false
+        },
+        "location_filter": {
+          "target": "灵栖洞",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "在文旅图片库中，语义搜索灵栖洞的景色图片",
+          "source_filter": "xinchang",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 6,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"result\": [{\"content\": \"近期可建成的实景印证诗境节点\"}, {\"content\": \"风景 、 名人故居观光\"}, {\"content\": \"图 5- 14  三十六渡溪 ·湿地风景画廊示意\"}, {\"content\": \"图 5- 13  石磁溪 ·户外风景画廊示意\"}, {\"content\": \"序号\\t景区\\t品牌\\t资源特点\\t旅游产品\"}], \"error\": null, \"has_content\": true, \"trace_id\": \"\"}"
+    },
+    {
+      "index": 4,
+      "user_query": "列出宁波欢朋国际旅行社有限公司的所有订单，并显示资源信息。",
+      "target_tool_name": "list_orders",
+      "target_arguments": {
+        "customer_name": "宁波欢朋国际旅行社有限公司",
+        "include_resources": true
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "customer_name": {
+          "target": "宁波欢朋国际旅行社有限公司",
+          "predict": "宁波欢朋国际旅行社有限公司",
+          "match": true
+        },
+        "include_resources": {
+          "target": true,
+          "predict": true,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "list_orders",
+        "get_order_details",
+        "analyze_order_trends",
+        "filter_orders_by_conditions",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "customer_name": "宁波欢朋国际旅行社有限公司",
+          "include_resources": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单列表查询，显示和列出基础订单信息，支持多条件筛选包括客户名称、联系人、订单号、状态等，列出宁波欢朋国际旅行社有限公司的所有订单，并显示资源信息。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 5,
+      "user_query": "有哪些订单处理时长超过3天了？",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "processing_duration": 3
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "processing_duration": {
+          "target": 3,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "query_orders_by_time",
+        "list_orders",
+        "rank_orders",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "limit": 100,
+          "time_filter": {
+            "status": "pending"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单状态查询和分析，筛选订单处理时长超过3天的订单。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 6,
+      "user_query": "帮我看下长城景区的已支付订单。",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "resort_filter": "长城景区",
+        "payment_status": "paid"
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "resort_filter": {
+          "target": "长城景区",
+          "predict": "长城",
+          "match": false
+        },
+        "payment_status": {
+          "target": "paid",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "manage_resort_resources",
+        "query_resort_visitors",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue"
+      ],
+      "predicted_tool": {
+        "name": "manage_resort_resources",
+        "arguments": {
+          "resource_query_type": "related_orders",
+          "resort_filter": "长城",
+          "resource_level": "all"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询长城景区的已支付订单状态，并进行支付状态管理。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 7,
+      "user_query": "排除掉已发货的订单，再给我看看那些未支付的。",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "exclude_status": [
+          "已发货"
+        ],
+        "payment_status": "unpaid"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "exclude_status": {
+          "target": [
+            "已发货"
+          ],
+          "predict": [
+            "已发货"
+          ],
+          "match": true
+        },
+        "payment_status": {
+          "target": "unpaid",
+          "predict": "unpaid",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "manage_order_status",
+        "list_orders",
+        "rank_orders",
+        "list_order_resource_status_distribution",
+        "get_order_details"
+      ],
+      "predicted_tool": {
+        "name": "manage_order_status",
+        "arguments": {
+          "exclude_status": [
+            "已发货"
+          ],
+          "payment_status": "unpaid"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对订单状态进行查询和分析，支持状态筛选、备注检索、支付状态管理等。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 8,
+      "user_query": "帮我看下2025年7月1日到2025年7月31日'乌镇'景区的订单情况，按周统计。",
+      "target_tool_name": "query_orders_by_time",
+      "target_arguments": {
+        "time_range_type": "date_range",
+        "start_date": "2025-07-01",
+        "end_date": "2025-07-31",
+        "resort_filter": "乌镇",
+        "group_by": "week"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "time_range_type": {
+          "target": "date_range",
+          "predict": "date_range",
+          "match": true
+        },
+        "start_date": {
+          "target": "2025-07-01",
+          "predict": "2025-07-01",
+          "match": true
+        },
+        "end_date": {
+          "target": "2025-07-31",
+          "predict": "2025-07-31",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "乌镇",
+          "predict": "乌镇",
+          "match": true
+        },
+        "group_by": {
+          "target": "week",
+          "predict": "week",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "query_orders_by_time",
+        "analyze_time_trends",
+        "query_monthly_data",
+        "query_historical_periods",
+        "get_sales_channel_analysis"
+      ],
+      "predicted_tool": {
+        "name": "query_orders_by_time",
+        "arguments": {
+          "time_range_type": "date_range",
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31",
+          "resort_filter": "乌镇",
+          "group_by": "week"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询订单，支持多种时间范围类型查询，包括最近天数、特定月份、日期范围、季度查询，提供趋势分析功能",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 9,
+      "user_query": "我需要2025年7月的资源统计，要带明细。",
+      "target_tool_name": "count_basic_statistics",
+      "target_arguments": {
+        "count_type": "resources",
+        "time_period": "month",
+        "year": 2025,
+        "month": 7,
+        "include_breakdown": true
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "count_type": {
+          "target": "resources",
+          "predict": null,
+          "match": false
+        },
+        "time_period": {
+          "target": "month",
+          "predict": null,
+          "match": false
+        },
+        "year": {
+          "target": 2025,
+          "predict": 2025,
+          "match": true
+        },
+        "month": {
+          "target": 7,
+          "predict": null,
+          "match": false
+        },
+        "include_breakdown": {
+          "target": true,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "query_orders_by_time",
+        "query_annual_data",
+        "query_quarterly_data",
+        "query_monthly_data",
+        "query_historical_periods"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "resources"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询资源，支持最近记录、日期范围、月份、季度、年度等时间范围的资源统计，提供多维度筛选和统计信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    }
+  ]
+}

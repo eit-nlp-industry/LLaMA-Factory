@@ -1,0 +1,210 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 10,
+    "total_failed": 4,
+    "total_cases": 10,
+    "failure_rate": 0.4
+  },
+  "cases": [
+    {
+      "index": 3,
+      "user_query": "灵栖洞里面的景色怎么样，给我看看照片",
+      "target_tool_name": "search_travel_images",
+      "target_arguments": {
+        "query": "里面的景色怎么样，给我看看照片",
+        "location_filter": "灵栖洞"
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "query": {
+          "target": "里面的景色怎么样，给我看看照片",
+          "predict": null,
+          "match": false
+        },
+        "location_filter": {
+          "target": "灵栖洞",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "在文旅图片库中，语义搜索灵栖洞的景色图片",
+          "source_filter": "xinchang",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 6,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"result\": [{\"content\": \"近期可建成的实景印证诗境节点\"}, {\"content\": \"风景 、 名人故居观光\"}, {\"content\": \"图 5- 14  三十六渡溪 ·湿地风景画廊示意\"}, {\"content\": \"图 5- 13  石磁溪 ·户外风景画廊示意\"}, {\"content\": \"序号\\t景区\\t品牌\\t资源特点\\t旅游产品\"}], \"error\": null, \"has_content\": true, \"trace_id\": \"\"}"
+    },
+    {
+      "index": 5,
+      "user_query": "有哪些订单处理时长超过3天了？",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "processing_duration": 3
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "processing_duration": {
+          "target": 3,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "query_orders_by_time",
+        "list_orders",
+        "rank_orders",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "limit": 100,
+          "time_filter": {
+            "status": "pending"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单状态查询和分析，筛选订单处理时长超过3天的订单。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 6,
+      "user_query": "帮我看下长城景区的已支付订单。",
+      "target_tool_name": "manage_order_status",
+      "target_arguments": {
+        "resort_filter": "长城景区",
+        "payment_status": "paid"
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "resort_filter": {
+          "target": "长城景区",
+          "predict": "长城",
+          "match": false
+        },
+        "payment_status": {
+          "target": "paid",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "calculate_order_distribution",
+        "manage_resort_resources",
+        "query_resort_visitors",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue"
+      ],
+      "predicted_tool": {
+        "name": "manage_resort_resources",
+        "arguments": {
+          "resource_query_type": "related_orders",
+          "resort_filter": "长城",
+          "resource_level": "all"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询长城景区的已支付订单状态，并进行支付状态管理。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 9,
+      "user_query": "我需要2025年7月的资源统计，要带明细。",
+      "target_tool_name": "count_basic_statistics",
+      "target_arguments": {
+        "count_type": "resources",
+        "time_period": "month",
+        "year": 2025,
+        "month": 7,
+        "include_breakdown": true
+      },
+      "recall@5": 0,
+      "arg_match": 0,
+      "arg_match_details": {
+        "count_type": {
+          "target": "resources",
+          "predict": null,
+          "match": false
+        },
+        "time_period": {
+          "target": "month",
+          "predict": null,
+          "match": false
+        },
+        "year": {
+          "target": 2025,
+          "predict": 2025,
+          "match": true
+        },
+        "month": {
+          "target": 7,
+          "predict": null,
+          "match": false
+        },
+        "include_breakdown": {
+          "target": true,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "query_orders_by_time",
+        "query_annual_data",
+        "query_quarterly_data",
+        "query_monthly_data",
+        "query_historical_periods"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "resources"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "按时间范围查询资源，支持最近记录、日期范围、月份、季度、年度等时间范围的资源统计，提供多维度筛选和统计信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    }
+  ]
+}

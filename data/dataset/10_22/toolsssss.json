@@ -1,0 +1,1800 @@
+[
+    {
+        "query": "我申请的待审批记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "pending"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "",
+                "msg": "未找到相关审批记录！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "待审批记录中有哪些是我申请的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "pending"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "",
+                "msg": "未找到相关审批记录！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "我申请的审批同意的记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "approved"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[382号资源：555](/pages/newResourceDetail/newResourceDetail?reaoueceId=382&type=detail)<br>[381号资源：333](/pages/newResourceDetail/newResourceDetail?reaoueceId=381&type=detail)<br>[380号资源：222222](/pages/newResourceDetail/newResourceDetail?reaoueceId=380&type=detail)<br>[379号资源：11111](/pages/newResourceDetail/newResourceDetail?reaoueceId=379&type=detail)<br>[378号资源：拒绝策略0-0](/pages/newResourceDetail/newResourceDetail?reaoueceId=378&type=detail)<br>[377号资源：拒绝策略1](/pages/newResourceDetail/newResourceDetail?reaoueceId=377&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "审批成功的记录中有哪些是我申请的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "approved"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[382号资源：555](/pages/newResourceDetail/newResourceDetail?reaoueceId=382&type=detail)<br>[381号资源：333](/pages/newResourceDetail/newResourceDetail?reaoueceId=381&type=detail)<br>[380号资源：222222](/pages/newResourceDetail/newResourceDetail?reaoueceId=380&type=detail)<br>[379号资源：11111](/pages/newResourceDetail/newResourceDetail?reaoueceId=379&type=detail)<br>[378号资源：拒绝策略0-0](/pages/newResourceDetail/newResourceDetail?reaoueceId=378&type=detail)<br>[377号资源：拒绝策略1](/pages/newResourceDetail/newResourceDetail?reaoueceId=377&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "我申请的审批拒绝的记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "rejected"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[385号资源：121212](/pages/newResourceDetail/newResourceDetail?reaoueceId=385&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "审批拒绝的记录中有哪些是我申请的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "applicant",
+                "approval_status": "rejected"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[385号资源：121212](/pages/newResourceDetail/newResourceDetail?reaoueceId=385&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "需要我审批记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "apprpver",
+                "approval_status": "pending"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "",
+                "msg": "未找到相关审批记录！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "待审批记录中有哪些需要我审批的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "approver",
+                "approval_status": "pending"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "",
+                "msg": "未找到相关审批记录！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "我同意的审批记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "approver",
+                "approval_status": "approved"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[382号资源：555](/pages/newResourceDetail/newResourceDetail?reaoueceId=382&type=detail)<br>[381号资源：333](/pages/newResourceDetail/newResourceDetail?reaoueceId=381&type=detail)<br>[380号资源：222222](/pages/newResourceDetail/newResourceDetail?reaoueceId=380&type=detail)<br>[379号资源：11111](/pages/newResourceDetail/newResourceDetail?reaoueceId=379&type=detail)<br>[378号资源：拒绝策略0-0](/pages/newResourceDetail/newResourceDetail?reaoueceId=378&type=detail)<br>[377号资源：拒绝策略1](/pages/newResourceDetail/newResourceDetail?reaoueceId=377&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "审批成功的记录中有哪些是我审批的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "approver",
+                "approval_status": "approved"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[382号资源：555](/pages/newResourceDetail/newResourceDetail?reaoueceId=382&type=detail)<br>[381号资源：333](/pages/newResourceDetail/newResourceDetail?reaoueceId=381&type=detail)<br>[380号资源：222222](/pages/newResourceDetail/newResourceDetail?reaoueceId=380&type=detail)<br>[379号资源：11111](/pages/newResourceDetail/newResourceDetail?reaoueceId=379&type=detail)<br>[378号资源：拒绝策略0-0](/pages/newResourceDetail/newResourceDetail?reaoueceId=378&type=detail)<br>[377号资源：拒绝策略1](/pages/newResourceDetail/newResourceDetail?reaoueceId=377&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "我拒绝的审批记录",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "approver",
+                "approval_status": "rejected"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[385号资源：121212](/pages/newResourceDetail/newResourceDetail?reaoueceId=385&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "审批拒绝的记录中有哪些是我审批的",
+        "input": {
+            "name": "get_approval_list",
+            "arguments": {
+                "user_id": 1,
+                "user_role": "approver",
+                "approval_status": "rejected"
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "get_approval_list 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "[385号资源：121212](/pages/newResourceDetail/newResourceDetail?reaoueceId=385&type=detail)",
+                "msg": "成功获取审批列表！",
+                "status_code": 200,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增审批人骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增审批人柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增审批人胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增审批人徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "徐慎"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增审批人穆亚琴",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "穆亚琴"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人穆亚琴成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批人骆燕君改为胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "骆燕君",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批人柴志芳改为颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "柴志芳",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "颜晖"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批人胡凯改为骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批人徐慎改为柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批人穆亚琴改为胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批节点中的骆燕君改为胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "骆燕君",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批节点中的柴志芳改为颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "柴志芳",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "颜晖"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批节点中的胡凯改为骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批节点中的徐慎改为柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将审批节点中的穆亚琴改为胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的审批人为胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除抄送人穆亚琴",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "cc",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除抄送人穆亚琴成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除抄送人徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "cc",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除抄送人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除抄送人胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "cc",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除抄送人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除抄送人颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "颜晖",
+                "entity_type": "cc",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除抄送人颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除抄送人胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡刚",
+                "entity_type": "cc",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除抄送人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批人穆亚琴",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人穆亚琴成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批人徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批人胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批人颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "颜晖",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批人胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡刚",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批节点中的穆亚琴",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人穆亚琴成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批节点中的徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批节点中的胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批节点中的颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "颜晖",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "删除审批节点中的胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡刚",
+                "entity_type": "approver",
+                "operate_type": "delete",
+                "target_values": []
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "删除审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增抄送人骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "cc",
+                "operate_type": "create",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增抄送人骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增抄送人柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "cc",
+                "operate_type": "create",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增抄送人柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增抄送人胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "cc",
+                "operate_type": "create",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增抄送人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增抄送人徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "cc",
+                "operate_type": "create",
+                "target_values": [
+                    "徐慎"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增抄送人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "新增抄送人穆亚琴",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "",
+                "entity_type": "cc",
+                "operate_type": "create",
+                "target_values": [
+                    "穆亚琴"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增抄送人穆亚琴成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将抄送人骆燕君改为胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "骆燕君",
+                "entity_type": "cc",
+                "operate_type": "update",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的抄送人为胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将抄送人柴志芳改为颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "柴志芳",
+                "entity_type": "cc",
+                "operate_type": "update",
+                "target_values": [
+                    "颜晖"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的抄送人为颜晖成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将抄送人胡凯改为骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "cc",
+                "operate_type": "update",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的抄送人为骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将抄送人徐慎改为柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "cc",
+                "operate_type": "update",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的抄送人为柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "将抄送人穆亚琴改为胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "cc",
+                "operate_type": "update",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "更新对应的抄送人为胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在节点1新增审批人骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "1",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在节点2新增审批人胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "2",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在节点3新增审批人胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "3",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在节点4新增审批人徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "4",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "徐慎"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在节点5新增审批人柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "5",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在第一个审批人处新增骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "1",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在第2个审批人处新增胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "2",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在第三个审批人处新增胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "3",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在第4个审批人处新增徐慎",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "4",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "徐慎"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人徐慎成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在第5个审批人处新增柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "5",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在审批人骆燕君处新增胡刚",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "骆燕君",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "胡刚"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在审批人柴志芳处新增颜晖",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "柴志芳",
+                "entity_type": "approver",
+                "operate_type": "create",
+                "target_values": [
+                    "颜晖"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡刚成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在审批人胡凯处新增骆燕君",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "胡凯",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "骆燕君"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人骆燕君成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在审批人徐慎处新增柴志芳",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "徐慎",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "柴志芳"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人柴志芳成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    },
+    {
+        "query": "在审批人穆亚琴处新增胡凯",
+        "input": {
+            "name": "update_approval_template",
+            "arguments": {
+                "approval_template_id": 105,
+                "operate_entity": "穆亚琴",
+                "entity_type": "approver",
+                "operate_type": "update",
+                "target_values": [
+                    "胡凯"
+                ]
+            }
+        },
+        "output": [
+            {
+                "type": "text",
+                "text": "update_approval_template 服务调用完成"
+            },
+            {
+                "type": "service_data",
+                "data": "在对应位置新增审批人胡凯成功！",
+                "msg": "success",
+                "status_code": 2000,
+                "success": true
+            }
+        ]
+    }
+]

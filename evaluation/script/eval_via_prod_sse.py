@@ -25,8 +25,8 @@ from datetime import datetime
 
 
 PROD_SSE_URL = os.getenv("PROD_SSE_URL", "http://125.122.38.32:8085/mcp_end2end/stream")
-RETRIEVAL_ENDPOINT = os.getenv("RETRIEVAL_ENDPOINT", "http://125.122.38.32:6227/v1/mcp/tools/call")
-
+#RETRIEVAL_ENDPOINT = os.getenv("RETRIEVAL_ENDPOINT", "http://125.122.38.32:6227/v1/mcp/tools/call")
+RETRIEVAL_ENDPOINT = os.getenv("RETRIEVAL_ENDPOINT", "http://125.122.38.32:9527/v1/databoard/tools/call")
 
 def _extract_user_query_from_conversation(item: Dict[str, Any]) -> str:
     """从标注数据的一条对话中提取原始用户问题（第一条 human）。"""
@@ -569,6 +569,41 @@ async def main():
             print("✅ 所有可评估的cases参数完全匹配！")
         else:
             print("ℹ️ 本次无可评估的参数匹配样本（arg_match 皆为 None）")
+
+    # 筛选完全成功的cases（同时满足recall@5、precision@1和arg_accuracy成功）
+    success_cases = []
+    for case in results:
+        recall_success = case.get("recall@5", 0) == 1
+        tgt_name = case.get("target_tool_name")
+        pred_tool = case.get("predicted_tool") or {}
+        pred_name = pred_tool.get("name")
+        precision_success = recall_success and tgt_name and (pred_name == tgt_name)
+        arg_success = case.get("arg_match") == 1
+        
+        # 同时满足三个条件才算成功
+        if recall_success and precision_success and arg_success:
+            success_cases.append(case)
+    
+    if success_cases:
+        success_output = args.output_file.replace(".json", "_success.json")
+        success_report = {
+            "summary": {
+                "api": PROD_SSE_URL,
+                "user_id": args.user_id,
+                "start_idx": start,
+                "end_idx": end,
+                "total_success": len(success_cases),
+                "total_cases": len(results),
+                "success_rate": len(success_cases) / len(results) if results else 0.0
+            },
+            "cases": success_cases
+        }
+        with open(success_output, "w", encoding="utf-8") as f:
+            json.dump(success_report, f, ensure_ascii=False, indent=2)
+        print(f"✅ 完全成功cases已保存: {success_output} (共 {len(success_cases)} 条)")
+        print(f"   成功率: {len(success_cases) / len(results) * 100:.1f}%")
+    else:
+        print("ℹ️ 本次无完全成功的cases（需同时满足recall@5、precision@1和arg_accuracy）")
 
 
 if __name__ == "__main__":

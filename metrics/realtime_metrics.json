@@ -1,35 +1,35 @@
 {
-  "total_conversations": 1533,
-  "total_pairs": 3066,
+  "total_conversations": 20,
+  "total_pairs": 40,
   "pair1": {
-    "total": 1533,
-    "accuracy": 0.785,
+    "total": 20,
+    "accuracy": 0.65,
     "precision@1": 1.0
   },
   "pair2": {
-    "total": 1533,
-    "accuracy": 0.84,
-    "precision@1": 0.937
+    "total": 20,
+    "accuracy": 0.573,
+    "precision@1": 0.55
   },
   "pair2_consider_recall": {
-    "total": 1322,
-    "accuracy": 0.841,
-    "precision@1": 0.949
+    "total": 0,
+    "accuracy": 0.0,
+    "precision@1": 0.0
   },
   "pair3": {
     "total": 0,
     "answer_score": 0.0
   },
   "recall_metrics": {
-    "total_pairs": 1533,
-    "recall@5_1": 1322,
-    "recall@5_0": 211,
-    "recall_rate": 0.862
+    "total_pairs": 20,
+    "recall@5_1": 0,
+    "recall@5_0": 20,
+    "recall_rate": 0.0
   },
   "overall": {
-    "total": 3066,
-    "accuracy": 0.813,
-    "precision@1": 0.969,
+    "total": 40,
+    "accuracy": 0.611,
+    "precision@1": 0.775,
     "answer_score": 0.0
   }
 }

@@ -1,0 +1,281 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 38,
+    "total_failed": 5,
+    "total_eligible": 8,
+    "eligible_failure_rate": 0.625
+  },
+  "cases": [
+    {
+      "index": 3,
+      "user_query": "分析客户的消费习惯",
+      "target_tool_name": "analyze_customer_segments",
+      "target_arguments": {
+        "segment_type": "",
+        "analysis_metric": ""
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "segment_type": {
+          "target": "",
+          "predict": "consumption_difference",
+          "match": false
+        },
+        "analysis_metric": {
+          "target": "",
+          "predict": "consumption_difference",
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_customer_segments",
+        "get_sales_channel_analysis",
+        "analyze_proportions",
+        "manage_agreement_customers",
+        "analyze_visitor_sources"
+      ],
+      "predicted_tool": {
+        "name": "analyze_customer_segments",
+        "arguments": {
+          "segment_type": "consumption_difference",
+          "analysis_metric": "consumption_difference"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "分析客户的消费习惯",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 7,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 18,
+      "user_query": "哪个旅行社的订单成交率最高",
+      "target_tool_name": "analyze_travel_agencies",
+      "target_arguments": {
+        "analysis_type": "",
+        "time_period": ""
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "analysis_type": {
+          "target": "",
+          "predict": "top_orders",
+          "match": false
+        },
+        "time_period": {
+          "target": "",
+          "predict": "current_month",
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_order_trends",
+        "analyze_travel_agencies",
+        "get_scenic_spot_revenue",
+        "analyze_order_statistics",
+        "calculate_revenue_statistics"
+      ],
+      "predicted_tool": {
+        "name": "analyze_travel_agencies",
+        "arguments": {
+          "analysis_type": "top_orders",
+          "time_period": "current_month",
+          "top_n": 1
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "旅行社绩效考核，通过订单数据对比分析，统计旅行社的订单金额、客单价、服务费和绩效指标，用于业务评估和优化",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 53
+    },
+    {
+      "index": 19,
+      "user_query": "对比一下大慈岩和灵栖洞在7月份的订单",
+      "target_tool_name": "compare_resort_performance",
+      "target_arguments": {
+        "comparison_type": "",
+        "target_entities": []
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "comparison_type": {
+          "target": "",
+          "predict": "order_volume",
+          "match": false
+        },
+        "target_entities": {
+          "target": [],
+          "predict": [
+            "大慈岩",
+            "灵栖洞"
+          ],
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "get_ticket_sales_statistics",
+        "query_historical_periods",
+        "search_travel_images",
+        "query_quarterly_data",
+        "compare_resort_performance"
+      ],
+      "predicted_tool": {
+        "name": "compare_resort_performance",
+        "arguments": {
+          "comparison_type": "order_volume",
+          "target_entities": [
+            "大慈岩",
+            "灵栖洞"
+          ],
+          "time_dimension": "monthly",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对比一下大慈岩和灵栖洞在7月份的订单",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 61
+    },
+    {
+      "index": 21,
+      "user_query": "景区 一级资源 数量统计",
+      "target_tool_name": "manage_resort_resources",
+      "target_arguments": {
+        "resource_level": 1,
+        "resource_query_type": ""
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "resource_level": {
+          "target": 1,
+          "predict": "1",
+          "match": false
+        },
+        "resource_query_type": {
+          "target": "",
+          "predict": "resource_count",
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "manage_resort_resources",
+        "query_by_time_resort",
+        "query_resort_visitors",
+        "compare_by_time_resort",
+        "compare_resort_performance"
+      ],
+      "predicted_tool": {
+        "name": "manage_resort_resources",
+        "arguments": {
+          "resource_query_type": "resource_count",
+          "resource_level": "1"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "景区 一级资源 数量统计",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 34
+    },
+    {
+      "index": 25,
+      "user_query": "全年 季节性收入规律分析",
+      "target_tool_name": "analyze_time_trends",
+      "target_arguments": {
+        "trend_type": "revenue_trend",
+        "analysis_period": "",
+        "data_metric": "",
+        "trend_calculation": ""
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "trend_type": {
+          "target": "revenue_trend",
+          "predict": "seasonal",
+          "match": false
+        },
+        "analysis_period": {
+          "target": "",
+          "predict": "year",
+          "match": false
+        },
+        "data_metric": {
+          "target": "",
+          "predict": "revenue",
+          "match": false
+        },
+        "trend_calculation": {
+          "target": "",
+          "predict": "absolute",
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_time_trends",
+        "analyze_resort_revenue",
+        "perform_comparative_analysis",
+        "analyze_revenue_by_type",
+        "analyze_customer_segments"
+      ],
+      "predicted_tool": {
+        "name": "analyze_time_trends",
+        "arguments": {
+          "trend_type": "seasonal",
+          "analysis_period": "year",
+          "data_metric": "revenue",
+          "time_filter": {},
+          "trend_calculation": "absolute"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "全年 季节性收入规律分析 （工具说明：时间趋势分析工具,支持月度分布、季度增长、业务发展等趋势类型的绝对值、百分比、趋势分析和预测功能）",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 16
+    }
+  ]
+}

@@ -179,3 +179,11 @@ generated_predictions.jsonl
 predictions_score.json
 trainer_output/
 temp/
+
+# git-crypt keys (never commit these!)
+.git-crypt-keys/
+*.gpg
+!examples/**/*.gpg
+
+# git-crypt internal files (should be committed)
+!.git-crypt/

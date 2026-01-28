@@ -1,0 +1,7222 @@
+{
+  "model_path": "/data/models/Qwen3-8B",
+  "dataset_path": "/home/ziqiang/LLaMA-Factory/data/dataset/01_08/train_data.json",
+  "total_samples": 720,
+  "statistics": {
+    "total_tokens": 1536185,
+    "mean": 2133.590277777778,
+    "median": 1778.5,
+    "std": 970.9795713407332,
+    "min": 1134,
+    "max": 3906,
+    "p25": 1162.0,
+    "p50": 1778.5,
+    "p75": 3352.0,
+    "p90": 3487.0,
+    "p95": 3547.05,
+    "p99": 3763.62
+  },
+  "recommended_cutoff_len": 3647,
+  "token_distribution": [
+    {
+      "index": 0,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 463
+    },
+    {
+      "index": 1,
+      "token_count": 3314,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 251,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 751
+    },
+    {
+      "index": 2,
+      "token_count": 1621,
+      "instruction_tokens": 0,
+      "input_tokens": 1541,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3787,
+      "output_len": 187
+    },
+    {
+      "index": 3,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 4,
+      "token_count": 3351,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 289,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 774
+    },
+    {
+      "index": 5,
+      "token_count": 1655,
+      "instruction_tokens": 0,
+      "input_tokens": 1578,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3809,
+      "output_len": 184
+    },
+    {
+      "index": 6,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 7,
+      "token_count": 3355,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 291,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 769
+    },
+    {
+      "index": 8,
+      "token_count": 1661,
+      "instruction_tokens": 0,
+      "input_tokens": 1582,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3803,
+      "output_len": 184
+    },
+    {
+      "index": 9,
+      "token_count": 1139,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 461
+    },
+    {
+      "index": 10,
+      "token_count": 3435,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 374,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1039
+    },
+    {
+      "index": 11,
+      "token_count": 1741,
+      "instruction_tokens": 0,
+      "input_tokens": 1662,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 4073,
+      "output_len": 184
+    },
+    {
+      "index": 12,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 13,
+      "token_count": 3362,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 298,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 830
+    },
+    {
+      "index": 14,
+      "token_count": 1668,
+      "instruction_tokens": 0,
+      "input_tokens": 1589,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3865,
+      "output_len": 184
+    },
+    {
+      "index": 15,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 16,
+      "token_count": 3441,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 377,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1043
+    },
+    {
+      "index": 17,
+      "token_count": 1782,
+      "instruction_tokens": 0,
+      "input_tokens": 1668,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4076,
+      "output_len": 276
+    },
+    {
+      "index": 18,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 19,
+      "token_count": 3482,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 420,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1088
+    },
+    {
+      "index": 20,
+      "token_count": 1819,
+      "instruction_tokens": 0,
+      "input_tokens": 1709,
+      "output_tokens": 101,
+      "instruction_len": 0,
+      "input_len": 4122,
+      "output_len": 277
+    },
+    {
+      "index": 21,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 22,
+      "token_count": 3330,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 266,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 764
+    },
+    {
+      "index": 23,
+      "token_count": 1635,
+      "instruction_tokens": 0,
+      "input_tokens": 1557,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3802,
+      "output_len": 185
+    },
+    {
+      "index": 24,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 25,
+      "token_count": 3329,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 269,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 758
+    },
+    {
+      "index": 26,
+      "token_count": 1633,
+      "instruction_tokens": 0,
+      "input_tokens": 1556,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3791,
+      "output_len": 182
+    },
+    {
+      "index": 27,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 28,
+      "token_count": 3466,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 402,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1098
+    },
+    {
+      "index": 29,
+      "token_count": 1806,
+      "instruction_tokens": 0,
+      "input_tokens": 1693,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4131,
+      "output_len": 276
+    },
+    {
+      "index": 30,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 459
+    },
+    {
+      "index": 31,
+      "token_count": 3324,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 264,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 781
+    },
+    {
+      "index": 32,
+      "token_count": 1627,
+      "instruction_tokens": 0,
+      "input_tokens": 1551,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3813,
+      "output_len": 181
+    },
+    {
+      "index": 33,
+      "token_count": 1136,
+      "instruction_tokens": 0,
+      "input_tokens": 977,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2475,
+      "output_len": 457
+    },
+    {
+      "index": 34,
+      "token_count": 3318,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 259,
+      "instruction_len": 0,
+      "input_len": 11038,
+      "output_len": 735
+    },
+    {
+      "index": 35,
+      "token_count": 1619,
+      "instruction_tokens": 0,
+      "input_tokens": 1545,
+      "output_tokens": 65,
+      "instruction_len": 0,
+      "input_len": 3765,
+      "output_len": 179
+    },
+    {
+      "index": 36,
+      "token_count": 1139,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2476,
+      "output_len": 460
+    },
+    {
+      "index": 37,
+      "token_count": 3369,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 308,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 816
+    },
+    {
+      "index": 38,
+      "token_count": 1676,
+      "instruction_tokens": 0,
+      "input_tokens": 1596,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3849,
+      "output_len": 185
+    },
+    {
+      "index": 39,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 461
+    },
+    {
+      "index": 40,
+      "token_count": 3313,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 250,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 716
+    },
+    {
+      "index": 41,
+      "token_count": 1619,
+      "instruction_tokens": 0,
+      "input_tokens": 1540,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3750,
+      "output_len": 185
+    },
+    {
+      "index": 42,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 467
+    },
+    {
+      "index": 43,
+      "token_count": 3352,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 286,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 802
+    },
+    {
+      "index": 44,
+      "token_count": 1658,
+      "instruction_tokens": 0,
+      "input_tokens": 1579,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3842,
+      "output_len": 186
+    },
+    {
+      "index": 45,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 46,
+      "token_count": 3500,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 437,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1142
+    },
+    {
+      "index": 47,
+      "token_count": 1839,
+      "instruction_tokens": 0,
+      "input_tokens": 1727,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4177,
+      "output_len": 276
+    },
+    {
+      "index": 48,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 49,
+      "token_count": 3521,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 458,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1203
+    },
+    {
+      "index": 50,
+      "token_count": 1862,
+      "instruction_tokens": 0,
+      "input_tokens": 1748,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4241,
+      "output_len": 281
+    },
+    {
+      "index": 51,
+      "token_count": 1139,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2476,
+      "output_len": 459
+    },
+    {
+      "index": 52,
+      "token_count": 3468,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 407,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 1131
+    },
+    {
+      "index": 53,
+      "token_count": 1809,
+      "instruction_tokens": 0,
+      "input_tokens": 1695,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4163,
+      "output_len": 279
+    },
+    {
+      "index": 54,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 55,
+      "token_count": 3286,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 226,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 710
+    },
+    {
+      "index": 56,
+      "token_count": 1590,
+      "instruction_tokens": 0,
+      "input_tokens": 1513,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3743,
+      "output_len": 182
+    },
+    {
+      "index": 57,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 58,
+      "token_count": 3507,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 447,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1170
+    },
+    {
+      "index": 59,
+      "token_count": 1845,
+      "instruction_tokens": 0,
+      "input_tokens": 1734,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4204,
+      "output_len": 275
+    },
+    {
+      "index": 60,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2475,
+      "output_len": 456
+    },
+    {
+      "index": 61,
+      "token_count": 3433,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 373,
+      "instruction_len": 0,
+      "input_len": 11037,
+      "output_len": 1041
+    },
+    {
+      "index": 62,
+      "token_count": 1768,
+      "instruction_tokens": 0,
+      "input_tokens": 1660,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4070,
+      "output_len": 270
+    },
+    {
+      "index": 63,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 466
+    },
+    {
+      "index": 64,
+      "token_count": 3363,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 297,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 781
+    },
+    {
+      "index": 65,
+      "token_count": 1669,
+      "instruction_tokens": 0,
+      "input_tokens": 1590,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3820,
+      "output_len": 186
+    },
+    {
+      "index": 66,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 67,
+      "token_count": 3488,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 426,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1106
+    },
+    {
+      "index": 68,
+      "token_count": 1829,
+      "instruction_tokens": 0,
+      "input_tokens": 1715,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4140,
+      "output_len": 275
+    },
+    {
+      "index": 69,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 70,
+      "token_count": 3340,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 278,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 770
+    },
+    {
+      "index": 71,
+      "token_count": 1643,
+      "instruction_tokens": 0,
+      "input_tokens": 1567,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3805,
+      "output_len": 183
+    },
+    {
+      "index": 72,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 73,
+      "token_count": 3499,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 435,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1129
+    },
+    {
+      "index": 74,
+      "token_count": 1839,
+      "instruction_tokens": 0,
+      "input_tokens": 1726,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4163,
+      "output_len": 276
+    },
+    {
+      "index": 75,
+      "token_count": 1136,
+      "instruction_tokens": 0,
+      "input_tokens": 977,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 461
+    },
+    {
+      "index": 76,
+      "token_count": 3458,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 399,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1090
+    },
+    {
+      "index": 77,
+      "token_count": 1796,
+      "instruction_tokens": 0,
+      "input_tokens": 1685,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4124,
+      "output_len": 279
+    },
+    {
+      "index": 78,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 79,
+      "token_count": 3494,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 432,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1140
+    },
+    {
+      "index": 80,
+      "token_count": 1832,
+      "instruction_tokens": 0,
+      "input_tokens": 1721,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4173,
+      "output_len": 276
+    },
+    {
+      "index": 81,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 466
+    },
+    {
+      "index": 82,
+      "token_count": 3352,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 286,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 782
+    },
+    {
+      "index": 83,
+      "token_count": 1658,
+      "instruction_tokens": 0,
+      "input_tokens": 1579,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3821,
+      "output_len": 186
+    },
+    {
+      "index": 84,
+      "token_count": 1145,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 464
+    },
+    {
+      "index": 85,
+      "token_count": 3504,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 440,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 1114
+    },
+    {
+      "index": 86,
+      "token_count": 1845,
+      "instruction_tokens": 0,
+      "input_tokens": 1731,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4151,
+      "output_len": 278
+    },
+    {
+      "index": 87,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 88,
+      "token_count": 3360,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 298,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 787
+    },
+    {
+      "index": 89,
+      "token_count": 1664,
+      "instruction_tokens": 0,
+      "input_tokens": 1587,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3821,
+      "output_len": 184
+    },
+    {
+      "index": 90,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 464
+    },
+    {
+      "index": 91,
+      "token_count": 3345,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 279,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 757
+    },
+    {
+      "index": 92,
+      "token_count": 1650,
+      "instruction_tokens": 0,
+      "input_tokens": 1572,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3794,
+      "output_len": 183
+    },
+    {
+      "index": 93,
+      "token_count": 1147,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 468
+    },
+    {
+      "index": 94,
+      "token_count": 3508,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 443,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1194
+    },
+    {
+      "index": 95,
+      "token_count": 1844,
+      "instruction_tokens": 0,
+      "input_tokens": 1735,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4235,
+      "output_len": 278
+    },
+    {
+      "index": 96,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 159,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 464
+    },
+    {
+      "index": 97,
+      "token_count": 3378,
+      "instruction_tokens": 0,
+      "input_tokens": 3059,
+      "output_tokens": 310,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 822
+    },
+    {
+      "index": 98,
+      "token_count": 1688,
+      "instruction_tokens": 0,
+      "input_tokens": 1605,
+      "output_tokens": 74,
+      "instruction_len": 0,
+      "input_len": 3859,
+      "output_len": 187
+    },
+    {
+      "index": 99,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 100,
+      "token_count": 3357,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 297,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 823
+    },
+    {
+      "index": 101,
+      "token_count": 1661,
+      "instruction_tokens": 0,
+      "input_tokens": 1584,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3856,
+      "output_len": 182
+    },
+    {
+      "index": 102,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 459
+    },
+    {
+      "index": 103,
+      "token_count": 3617,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 555,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 1372
+    },
+    {
+      "index": 104,
+      "token_count": 1953,
+      "instruction_tokens": 0,
+      "input_tokens": 1844,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4404,
+      "output_len": 270
+    },
+    {
+      "index": 105,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 106,
+      "token_count": 3520,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 457,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1190
+    },
+    {
+      "index": 107,
+      "token_count": 1860,
+      "instruction_tokens": 0,
+      "input_tokens": 1747,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4225,
+      "output_len": 280
+    },
+    {
+      "index": 108,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 464
+    },
+    {
+      "index": 109,
+      "token_count": 3314,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 250,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 720
+    },
+    {
+      "index": 110,
+      "token_count": 1621,
+      "instruction_tokens": 0,
+      "input_tokens": 1541,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3757,
+      "output_len": 187
+    },
+    {
+      "index": 111,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2476,
+      "output_len": 458
+    },
+    {
+      "index": 112,
+      "token_count": 3336,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 276,
+      "instruction_len": 0,
+      "input_len": 11039,
+      "output_len": 758
+    },
+    {
+      "index": 113,
+      "token_count": 1639,
+      "instruction_tokens": 0,
+      "input_tokens": 1563,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3789,
+      "output_len": 181
+    },
+    {
+      "index": 114,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 115,
+      "token_count": 3331,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 269,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 803
+    },
+    {
+      "index": 116,
+      "token_count": 1638,
+      "instruction_tokens": 0,
+      "input_tokens": 1558,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3838,
+      "output_len": 187
+    },
+    {
+      "index": 117,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2476,
+      "output_len": 459
+    },
+    {
+      "index": 118,
+      "token_count": 3450,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 390,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 989
+    },
+    {
+      "index": 119,
+      "token_count": 1755,
+      "instruction_tokens": 0,
+      "input_tokens": 1677,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 4021,
+      "output_len": 183
+    },
+    {
+      "index": 120,
+      "token_count": 1153,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 160,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 472
+    },
+    {
+      "index": 121,
+      "token_count": 3329,
+      "instruction_tokens": 0,
+      "input_tokens": 3060,
+      "output_tokens": 260,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 713
+    },
+    {
+      "index": 122,
+      "token_count": 1638,
+      "instruction_tokens": 0,
+      "input_tokens": 1556,
+      "output_tokens": 73,
+      "instruction_len": 0,
+      "input_len": 3758,
+      "output_len": 187
+    },
+    {
+      "index": 123,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 460
+    },
+    {
+      "index": 124,
+      "token_count": 3469,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 409,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1162
+    },
+    {
+      "index": 125,
+      "token_count": 1810,
+      "instruction_tokens": 0,
+      "input_tokens": 1696,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4195,
+      "output_len": 275
+    },
+    {
+      "index": 126,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 127,
+      "token_count": 3325,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 262,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 764
+    },
+    {
+      "index": 128,
+      "token_count": 1630,
+      "instruction_tokens": 0,
+      "input_tokens": 1552,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3802,
+      "output_len": 183
+    },
+    {
+      "index": 129,
+      "token_count": 1155,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 475
+    },
+    {
+      "index": 130,
+      "token_count": 3333,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 262,
+      "instruction_len": 0,
+      "input_len": 11056,
+      "output_len": 739
+    },
+    {
+      "index": 131,
+      "token_count": 1640,
+      "instruction_tokens": 0,
+      "input_tokens": 1560,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3787,
+      "output_len": 183
+    },
+    {
+      "index": 132,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 470
+    },
+    {
+      "index": 133,
+      "token_count": 3804,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 739,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 2036
+    },
+    {
+      "index": 134,
+      "token_count": 2178,
+      "instruction_tokens": 0,
+      "input_tokens": 2031,
+      "output_tokens": 138,
+      "instruction_len": 0,
+      "input_len": 5079,
+      "output_len": 368
+    },
+    {
+      "index": 135,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 460
+    },
+    {
+      "index": 136,
+      "token_count": 3458,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 399,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1085
+    },
+    {
+      "index": 137,
+      "token_count": 1793,
+      "instruction_tokens": 0,
+      "input_tokens": 1685,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4118,
+      "output_len": 269
+    },
+    {
+      "index": 138,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 465
+    },
+    {
+      "index": 139,
+      "token_count": 3335,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 273,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 793
+    },
+    {
+      "index": 140,
+      "token_count": 1638,
+      "instruction_tokens": 0,
+      "input_tokens": 1562,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3831,
+      "output_len": 181
+    },
+    {
+      "index": 141,
+      "token_count": 1137,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 142,
+      "token_count": 3421,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 362,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1020
+    },
+    {
+      "index": 143,
+      "token_count": 1759,
+      "instruction_tokens": 0,
+      "input_tokens": 1648,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4054,
+      "output_len": 275
+    },
+    {
+      "index": 144,
+      "token_count": 1147,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 468
+    },
+    {
+      "index": 145,
+      "token_count": 3490,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 425,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1203
+    },
+    {
+      "index": 146,
+      "token_count": 1834,
+      "instruction_tokens": 0,
+      "input_tokens": 1717,
+      "output_tokens": 108,
+      "instruction_len": 0,
+      "input_len": 4244,
+      "output_len": 281
+    },
+    {
+      "index": 147,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 468
+    },
+    {
+      "index": 148,
+      "token_count": 3483,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 422,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1162
+    },
+    {
+      "index": 149,
+      "token_count": 1821,
+      "instruction_tokens": 0,
+      "input_tokens": 1710,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4203,
+      "output_len": 278
+    },
+    {
+      "index": 150,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 463
+    },
+    {
+      "index": 151,
+      "token_count": 3334,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 273,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 791
+    },
+    {
+      "index": 152,
+      "token_count": 1640,
+      "instruction_tokens": 0,
+      "input_tokens": 1561,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3827,
+      "output_len": 184
+    },
+    {
+      "index": 153,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 465
+    },
+    {
+      "index": 154,
+      "token_count": 3504,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 441,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1214
+    },
+    {
+      "index": 155,
+      "token_count": 1845,
+      "instruction_tokens": 0,
+      "input_tokens": 1731,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4252,
+      "output_len": 275
+    },
+    {
+      "index": 156,
+      "token_count": 1145,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 470
+    },
+    {
+      "index": 157,
+      "token_count": 3541,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 476,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 1287
+    },
+    {
+      "index": 158,
+      "token_count": 1845,
+      "instruction_tokens": 0,
+      "input_tokens": 1768,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 4330,
+      "output_len": 184
+    },
+    {
+      "index": 159,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 160,
+      "token_count": 3434,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 369,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1011
+    },
+    {
+      "index": 161,
+      "token_count": 1823,
+      "instruction_tokens": 0,
+      "input_tokens": 1661,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 4049,
+      "output_len": 407
+    },
+    {
+      "index": 162,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 163,
+      "token_count": 3467,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 406,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1144
+    },
+    {
+      "index": 164,
+      "token_count": 1808,
+      "instruction_tokens": 0,
+      "input_tokens": 1694,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4178,
+      "output_len": 275
+    },
+    {
+      "index": 165,
+      "token_count": 1136,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 149,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 458
+    },
+    {
+      "index": 166,
+      "token_count": 3452,
+      "instruction_tokens": 0,
+      "input_tokens": 3049,
+      "output_tokens": 394,
+      "instruction_len": 0,
+      "input_len": 11039,
+      "output_len": 1118
+    },
+    {
+      "index": 167,
+      "token_count": 1787,
+      "instruction_tokens": 0,
+      "input_tokens": 1679,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4149,
+      "output_len": 269
+    },
+    {
+      "index": 168,
+      "token_count": 1136,
+      "instruction_tokens": 0,
+      "input_tokens": 977,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2477,
+      "output_len": 461
+    },
+    {
+      "index": 169,
+      "token_count": 3340,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 281,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 794
+    },
+    {
+      "index": 170,
+      "token_count": 1646,
+      "instruction_tokens": 0,
+      "input_tokens": 1567,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3828,
+      "output_len": 184
+    },
+    {
+      "index": 171,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 465
+    },
+    {
+      "index": 172,
+      "token_count": 3490,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 429,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1206
+    },
+    {
+      "index": 173,
+      "token_count": 1828,
+      "instruction_tokens": 0,
+      "input_tokens": 1717,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4244,
+      "output_len": 275
+    },
+    {
+      "index": 174,
+      "token_count": 1149,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 470
+    },
+    {
+      "index": 175,
+      "token_count": 3307,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 241,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 703
+    },
+    {
+      "index": 176,
+      "token_count": 1612,
+      "instruction_tokens": 0,
+      "input_tokens": 1534,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3746,
+      "output_len": 183
+    },
+    {
+      "index": 177,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 178,
+      "token_count": 3461,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 401,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1110
+    },
+    {
+      "index": 179,
+      "token_count": 1802,
+      "instruction_tokens": 0,
+      "input_tokens": 1688,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4145,
+      "output_len": 278
+    },
+    {
+      "index": 180,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 181,
+      "token_count": 3442,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 380,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1069
+    },
+    {
+      "index": 182,
+      "token_count": 1786,
+      "instruction_tokens": 0,
+      "input_tokens": 1669,
+      "output_tokens": 108,
+      "instruction_len": 0,
+      "input_len": 4108,
+      "output_len": 284
+    },
+    {
+      "index": 183,
+      "token_count": 1145,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 468
+    },
+    {
+      "index": 184,
+      "token_count": 3762,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 697,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1926
+    },
+    {
+      "index": 185,
+      "token_count": 2130,
+      "instruction_tokens": 0,
+      "input_tokens": 1989,
+      "output_tokens": 132,
+      "instruction_len": 0,
+      "input_len": 4967,
+      "output_len": 361
+    },
+    {
+      "index": 186,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 469
+    },
+    {
+      "index": 187,
+      "token_count": 3764,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 699,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1965
+    },
+    {
+      "index": 188,
+      "token_count": 2130,
+      "instruction_tokens": 0,
+      "input_tokens": 1991,
+      "output_tokens": 130,
+      "instruction_len": 0,
+      "input_len": 5007,
+      "output_len": 355
+    },
+    {
+      "index": 189,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 472
+    },
+    {
+      "index": 190,
+      "token_count": 3337,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 270,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 769
+    },
+    {
+      "index": 191,
+      "token_count": 1672,
+      "instruction_tokens": 0,
+      "input_tokens": 1564,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 3814,
+      "output_len": 259
+    },
+    {
+      "index": 192,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 464
+    },
+    {
+      "index": 193,
+      "token_count": 3313,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 252,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 712
+    },
+    {
+      "index": 194,
+      "token_count": 1617,
+      "instruction_tokens": 0,
+      "input_tokens": 1540,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3749,
+      "output_len": 182
+    },
+    {
+      "index": 195,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 468
+    },
+    {
+      "index": 196,
+      "token_count": 3445,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 378,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1076
+    },
+    {
+      "index": 197,
+      "token_count": 1806,
+      "instruction_tokens": 0,
+      "input_tokens": 1672,
+      "output_tokens": 125,
+      "instruction_len": 0,
+      "input_len": 4117,
+      "output_len": 323
+    },
+    {
+      "index": 198,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 199,
+      "token_count": 3343,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 282,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 774
+    },
+    {
+      "index": 200,
+      "token_count": 1646,
+      "instruction_tokens": 0,
+      "input_tokens": 1570,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3808,
+      "output_len": 179
+    },
+    {
+      "index": 201,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 202,
+      "token_count": 3326,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 262,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 745
+    },
+    {
+      "index": 203,
+      "token_count": 1632,
+      "instruction_tokens": 0,
+      "input_tokens": 1553,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3784,
+      "output_len": 184
+    },
+    {
+      "index": 204,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 464
+    },
+    {
+      "index": 205,
+      "token_count": 3352,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 288,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 770
+    },
+    {
+      "index": 206,
+      "token_count": 1659,
+      "instruction_tokens": 0,
+      "input_tokens": 1579,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3807,
+      "output_len": 183
+    },
+    {
+      "index": 207,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 471
+    },
+    {
+      "index": 208,
+      "token_count": 3791,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 727,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 2014
+    },
+    {
+      "index": 209,
+      "token_count": 2161,
+      "instruction_tokens": 0,
+      "input_tokens": 2018,
+      "output_tokens": 134,
+      "instruction_len": 0,
+      "input_len": 5058,
+      "output_len": 366
+    },
+    {
+      "index": 210,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 472
+    },
+    {
+      "index": 211,
+      "token_count": 3570,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 503,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 1431
+    },
+    {
+      "index": 212,
+      "token_count": 1944,
+      "instruction_tokens": 0,
+      "input_tokens": 1797,
+      "output_tokens": 138,
+      "instruction_len": 0,
+      "input_len": 4476,
+      "output_len": 366
+    },
+    {
+      "index": 213,
+      "token_count": 1147,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 470
+    },
+    {
+      "index": 214,
+      "token_count": 3344,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 278,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 785
+    },
+    {
+      "index": 215,
+      "token_count": 1652,
+      "instruction_tokens": 0,
+      "input_tokens": 1571,
+      "output_tokens": 72,
+      "instruction_len": 0,
+      "input_len": 3828,
+      "output_len": 188
+    },
+    {
+      "index": 216,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 472
+    },
+    {
+      "index": 217,
+      "token_count": 3761,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 696,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 1966
+    },
+    {
+      "index": 218,
+      "token_count": 2127,
+      "instruction_tokens": 0,
+      "input_tokens": 1988,
+      "output_tokens": 130,
+      "instruction_len": 0,
+      "input_len": 5011,
+      "output_len": 359
+    },
+    {
+      "index": 219,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 469
+    },
+    {
+      "index": 220,
+      "token_count": 3525,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 461,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1247
+    },
+    {
+      "index": 221,
+      "token_count": 1908,
+      "instruction_tokens": 0,
+      "input_tokens": 1752,
+      "output_tokens": 147,
+      "instruction_len": 0,
+      "input_len": 4289,
+      "output_len": 397
+    },
+    {
+      "index": 222,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 467
+    },
+    {
+      "index": 223,
+      "token_count": 3461,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 400,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1069
+    },
+    {
+      "index": 224,
+      "token_count": 1799,
+      "instruction_tokens": 0,
+      "input_tokens": 1688,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4109,
+      "output_len": 278
+    },
+    {
+      "index": 225,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 470
+    },
+    {
+      "index": 226,
+      "token_count": 3312,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 245,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 747
+    },
+    {
+      "index": 227,
+      "token_count": 1619,
+      "instruction_tokens": 0,
+      "input_tokens": 1539,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3790,
+      "output_len": 185
+    },
+    {
+      "index": 228,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 466
+    },
+    {
+      "index": 229,
+      "token_count": 3626,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 563,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1555
+    },
+    {
+      "index": 230,
+      "token_count": 2024,
+      "instruction_tokens": 0,
+      "input_tokens": 1853,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 4594,
+      "output_len": 445
+    },
+    {
+      "index": 231,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 471
+    },
+    {
+      "index": 232,
+      "token_count": 3299,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 233,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 700
+    },
+    {
+      "index": 233,
+      "token_count": 1571,
+      "instruction_tokens": 0,
+      "input_tokens": 1526,
+      "output_tokens": 36,
+      "instruction_len": 0,
+      "input_len": 3744,
+      "output_len": 93
+    },
+    {
+      "index": 234,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 235,
+      "token_count": 3329,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 265,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 764
+    },
+    {
+      "index": 236,
+      "token_count": 1663,
+      "instruction_tokens": 0,
+      "input_tokens": 1556,
+      "output_tokens": 98,
+      "instruction_len": 0,
+      "input_len": 3803,
+      "output_len": 272
+    },
+    {
+      "index": 237,
+      "token_count": 1137,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 238,
+      "token_count": 3342,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 283,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 765
+    },
+    {
+      "index": 239,
+      "token_count": 1646,
+      "instruction_tokens": 0,
+      "input_tokens": 1569,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3799,
+      "output_len": 182
+    },
+    {
+      "index": 240,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 241,
+      "token_count": 3395,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 322,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 947
+    },
+    {
+      "index": 242,
+      "token_count": 1733,
+      "instruction_tokens": 0,
+      "input_tokens": 1622,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 3986,
+      "output_len": 272
+    },
+    {
+      "index": 243,
+      "token_count": 1163,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 167,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 471
+    },
+    {
+      "index": 244,
+      "token_count": 3341,
+      "instruction_tokens": 0,
+      "input_tokens": 3067,
+      "output_tokens": 265,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 712
+    },
+    {
+      "index": 245,
+      "token_count": 1649,
+      "instruction_tokens": 0,
+      "input_tokens": 1568,
+      "output_tokens": 72,
+      "instruction_len": 0,
+      "input_len": 3756,
+      "output_len": 188
+    },
+    {
+      "index": 246,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 247,
+      "token_count": 3370,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 297,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 760
+    },
+    {
+      "index": 248,
+      "token_count": 1674,
+      "instruction_tokens": 0,
+      "input_tokens": 1597,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3800,
+      "output_len": 186
+    },
+    {
+      "index": 249,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 250,
+      "token_count": 3680,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 608,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1701
+    },
+    {
+      "index": 251,
+      "token_count": 2119,
+      "instruction_tokens": 0,
+      "input_tokens": 1907,
+      "output_tokens": 203,
+      "instruction_len": 0,
+      "input_len": 4741,
+      "output_len": 555
+    },
+    {
+      "index": 252,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 253,
+      "token_count": 3424,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 352,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 986
+    },
+    {
+      "index": 254,
+      "token_count": 1763,
+      "instruction_tokens": 0,
+      "input_tokens": 1651,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4026,
+      "output_len": 276
+    },
+    {
+      "index": 255,
+      "token_count": 1165,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 168,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 256,
+      "token_count": 3366,
+      "instruction_tokens": 0,
+      "input_tokens": 3068,
+      "output_tokens": 289,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 756
+    },
+    {
+      "index": 257,
+      "token_count": 1674,
+      "instruction_tokens": 0,
+      "input_tokens": 1593,
+      "output_tokens": 72,
+      "instruction_len": 0,
+      "input_len": 3797,
+      "output_len": 186
+    },
+    {
+      "index": 258,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 461
+    },
+    {
+      "index": 259,
+      "token_count": 3460,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 389,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1118
+    },
+    {
+      "index": 260,
+      "token_count": 1793,
+      "instruction_tokens": 0,
+      "input_tokens": 1687,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 4152,
+      "output_len": 267
+    },
+    {
+      "index": 261,
+      "token_count": 1165,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 168,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 262,
+      "token_count": 3440,
+      "instruction_tokens": 0,
+      "input_tokens": 3068,
+      "output_tokens": 363,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 995
+    },
+    {
+      "index": 263,
+      "token_count": 1782,
+      "instruction_tokens": 0,
+      "input_tokens": 1667,
+      "output_tokens": 106,
+      "instruction_len": 0,
+      "input_len": 4036,
+      "output_len": 276
+    },
+    {
+      "index": 264,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 463
+    },
+    {
+      "index": 265,
+      "token_count": 3354,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 281,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 733
+    },
+    {
+      "index": 266,
+      "token_count": 1658,
+      "instruction_tokens": 0,
+      "input_tokens": 1581,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3769,
+      "output_len": 182
+    },
+    {
+      "index": 267,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 268,
+      "token_count": 3346,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 271,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 737
+    },
+    {
+      "index": 269,
+      "token_count": 1652,
+      "instruction_tokens": 0,
+      "input_tokens": 1573,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3777,
+      "output_len": 184
+    },
+    {
+      "index": 270,
+      "token_count": 1167,
+      "instruction_tokens": 0,
+      "input_tokens": 989,
+      "output_tokens": 169,
+      "instruction_len": 0,
+      "input_len": 2490,
+      "output_len": 472
+    },
+    {
+      "index": 271,
+      "token_count": 3552,
+      "instruction_tokens": 0,
+      "input_tokens": 3069,
+      "output_tokens": 474,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 1295
+    },
+    {
+      "index": 272,
+      "token_count": 1934,
+      "instruction_tokens": 0,
+      "input_tokens": 1779,
+      "output_tokens": 146,
+      "instruction_len": 0,
+      "input_len": 4340,
+      "output_len": 374
+    },
+    {
+      "index": 273,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 274,
+      "token_count": 3488,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 415,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1213
+    },
+    {
+      "index": 275,
+      "token_count": 1913,
+      "instruction_tokens": 0,
+      "input_tokens": 1715,
+      "output_tokens": 189,
+      "instruction_len": 0,
+      "input_len": 4252,
+      "output_len": 541
+    },
+    {
+      "index": 276,
+      "token_count": 1163,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 167,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 471
+    },
+    {
+      "index": 277,
+      "token_count": 3602,
+      "instruction_tokens": 0,
+      "input_tokens": 3067,
+      "output_tokens": 526,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 1425
+    },
+    {
+      "index": 278,
+      "token_count": 1979,
+      "instruction_tokens": 0,
+      "input_tokens": 1829,
+      "output_tokens": 141,
+      "instruction_len": 0,
+      "input_len": 4469,
+      "output_len": 381
+    },
+    {
+      "index": 279,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 463
+    },
+    {
+      "index": 280,
+      "token_count": 3573,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 501,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 1376
+    },
+    {
+      "index": 281,
+      "token_count": 1946,
+      "instruction_tokens": 0,
+      "input_tokens": 1800,
+      "output_tokens": 137,
+      "instruction_len": 0,
+      "input_len": 4412,
+      "output_len": 373
+    },
+    {
+      "index": 282,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 283,
+      "token_count": 3354,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 279,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 799
+    },
+    {
+      "index": 284,
+      "token_count": 1660,
+      "instruction_tokens": 0,
+      "input_tokens": 1581,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3839,
+      "output_len": 186
+    },
+    {
+      "index": 285,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 286,
+      "token_count": 3320,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 249,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 693
+    },
+    {
+      "index": 287,
+      "token_count": 1624,
+      "instruction_tokens": 0,
+      "input_tokens": 1547,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3732,
+      "output_len": 182
+    },
+    {
+      "index": 288,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 289,
+      "token_count": 3592,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 521,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1385
+    },
+    {
+      "index": 290,
+      "token_count": 1957,
+      "instruction_tokens": 0,
+      "input_tokens": 1819,
+      "output_tokens": 129,
+      "instruction_len": 0,
+      "input_len": 4424,
+      "output_len": 369
+    },
+    {
+      "index": 291,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 292,
+      "token_count": 3471,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 396,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1037
+    },
+    {
+      "index": 293,
+      "token_count": 1811,
+      "instruction_tokens": 0,
+      "input_tokens": 1698,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4077,
+      "output_len": 280
+    },
+    {
+      "index": 294,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 295,
+      "token_count": 3331,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 260,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 756
+    },
+    {
+      "index": 296,
+      "token_count": 1635,
+      "instruction_tokens": 0,
+      "input_tokens": 1558,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3797,
+      "output_len": 186
+    },
+    {
+      "index": 297,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 298,
+      "token_count": 3454,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 381,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1020
+    },
+    {
+      "index": 299,
+      "token_count": 1790,
+      "instruction_tokens": 0,
+      "input_tokens": 1681,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4059,
+      "output_len": 273
+    },
+    {
+      "index": 300,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 159,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 459
+    },
+    {
+      "index": 301,
+      "token_count": 3636,
+      "instruction_tokens": 0,
+      "input_tokens": 3059,
+      "output_tokens": 568,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 1591
+    },
+    {
+      "index": 302,
+      "token_count": 1974,
+      "instruction_tokens": 0,
+      "input_tokens": 1863,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4623,
+      "output_len": 271
+    },
+    {
+      "index": 303,
+      "token_count": 1160,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 165,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 304,
+      "token_count": 3427,
+      "instruction_tokens": 0,
+      "input_tokens": 3065,
+      "output_tokens": 353,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 964
+    },
+    {
+      "index": 305,
+      "token_count": 1766,
+      "instruction_tokens": 0,
+      "input_tokens": 1654,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4002,
+      "output_len": 274
+    },
+    {
+      "index": 306,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 307,
+      "token_count": 3423,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 350,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 972
+    },
+    {
+      "index": 308,
+      "token_count": 1759,
+      "instruction_tokens": 0,
+      "input_tokens": 1650,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4011,
+      "output_len": 273
+    },
+    {
+      "index": 309,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 470
+    },
+    {
+      "index": 310,
+      "token_count": 3444,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 369,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 1090
+    },
+    {
+      "index": 311,
+      "token_count": 1785,
+      "instruction_tokens": 0,
+      "input_tokens": 1671,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4133,
+      "output_len": 278
+    },
+    {
+      "index": 312,
+      "token_count": 1153,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 160,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 461
+    },
+    {
+      "index": 313,
+      "token_count": 3775,
+      "instruction_tokens": 0,
+      "input_tokens": 3060,
+      "output_tokens": 706,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1830
+    },
+    {
+      "index": 314,
+      "token_count": 2142,
+      "instruction_tokens": 0,
+      "input_tokens": 2002,
+      "output_tokens": 131,
+      "instruction_len": 0,
+      "input_len": 4864,
+      "output_len": 358
+    },
+    {
+      "index": 315,
+      "token_count": 1153,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 160,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 316,
+      "token_count": 3462,
+      "instruction_tokens": 0,
+      "input_tokens": 3060,
+      "output_tokens": 393,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1128
+    },
+    {
+      "index": 317,
+      "token_count": 1797,
+      "instruction_tokens": 0,
+      "input_tokens": 1689,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4169,
+      "output_len": 275
+    },
+    {
+      "index": 318,
+      "token_count": 1160,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 165,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 319,
+      "token_count": 3472,
+      "instruction_tokens": 0,
+      "input_tokens": 3065,
+      "output_tokens": 398,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1079
+    },
+    {
+      "index": 320,
+      "token_count": 1811,
+      "instruction_tokens": 0,
+      "input_tokens": 1699,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4117,
+      "output_len": 274
+    },
+    {
+      "index": 321,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 159,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 463
+    },
+    {
+      "index": 322,
+      "token_count": 3450,
+      "instruction_tokens": 0,
+      "input_tokens": 3059,
+      "output_tokens": 382,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 1111
+    },
+    {
+      "index": 323,
+      "token_count": 1786,
+      "instruction_tokens": 0,
+      "input_tokens": 1677,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4147,
+      "output_len": 278
+    },
+    {
+      "index": 324,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 325,
+      "token_count": 3534,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 463,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1252
+    },
+    {
+      "index": 326,
+      "token_count": 1930,
+      "instruction_tokens": 0,
+      "input_tokens": 1761,
+      "output_tokens": 160,
+      "instruction_len": 0,
+      "input_len": 4290,
+      "output_len": 453
+    },
+    {
+      "index": 327,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 463
+    },
+    {
+      "index": 328,
+      "token_count": 3332,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 261,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 730
+    },
+    {
+      "index": 329,
+      "token_count": 1636,
+      "instruction_tokens": 0,
+      "input_tokens": 1559,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3766,
+      "output_len": 180
+    },
+    {
+      "index": 330,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 331,
+      "token_count": 3465,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 390,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1054
+    },
+    {
+      "index": 332,
+      "token_count": 1805,
+      "instruction_tokens": 0,
+      "input_tokens": 1692,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4095,
+      "output_len": 280
+    },
+    {
+      "index": 333,
+      "token_count": 1165,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 168,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 334,
+      "token_count": 3503,
+      "instruction_tokens": 0,
+      "input_tokens": 3068,
+      "output_tokens": 426,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1236
+    },
+    {
+      "index": 335,
+      "token_count": 1880,
+      "instruction_tokens": 0,
+      "input_tokens": 1730,
+      "output_tokens": 141,
+      "instruction_len": 0,
+      "input_len": 4277,
+      "output_len": 373
+    },
+    {
+      "index": 336,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 468
+    },
+    {
+      "index": 337,
+      "token_count": 3533,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 461,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1307
+    },
+    {
+      "index": 338,
+      "token_count": 1907,
+      "instruction_tokens": 0,
+      "input_tokens": 1760,
+      "output_tokens": 138,
+      "instruction_len": 0,
+      "input_len": 4348,
+      "output_len": 374
+    },
+    {
+      "index": 339,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 462
+    },
+    {
+      "index": 340,
+      "token_count": 3454,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 383,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1035
+    },
+    {
+      "index": 341,
+      "token_count": 1787,
+      "instruction_tokens": 0,
+      "input_tokens": 1681,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 4070,
+      "output_len": 267
+    },
+    {
+      "index": 342,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 343,
+      "token_count": 3475,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 400,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1050
+    },
+    {
+      "index": 344,
+      "token_count": 1814,
+      "instruction_tokens": 0,
+      "input_tokens": 1702,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4090,
+      "output_len": 272
+    },
+    {
+      "index": 345,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 346,
+      "token_count": 3569,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 496,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1345
+    },
+    {
+      "index": 347,
+      "token_count": 1938,
+      "instruction_tokens": 0,
+      "input_tokens": 1796,
+      "output_tokens": 133,
+      "instruction_len": 0,
+      "input_len": 4384,
+      "output_len": 369
+    },
+    {
+      "index": 348,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 349,
+      "token_count": 3436,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 361,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 970
+    },
+    {
+      "index": 350,
+      "token_count": 1778,
+      "instruction_tokens": 0,
+      "input_tokens": 1663,
+      "output_tokens": 106,
+      "instruction_len": 0,
+      "input_len": 4010,
+      "output_len": 280
+    },
+    {
+      "index": 351,
+      "token_count": 1165,
+      "instruction_tokens": 0,
+      "input_tokens": 989,
+      "output_tokens": 167,
+      "instruction_len": 0,
+      "input_len": 2491,
+      "output_len": 472
+    },
+    {
+      "index": 352,
+      "token_count": 3404,
+      "instruction_tokens": 0,
+      "input_tokens": 3067,
+      "output_tokens": 328,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 987
+    },
+    {
+      "index": 353,
+      "token_count": 1740,
+      "instruction_tokens": 0,
+      "input_tokens": 1631,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4032,
+      "output_len": 276
+    },
+    {
+      "index": 354,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 355,
+      "token_count": 3382,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 307,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 778
+    },
+    {
+      "index": 356,
+      "token_count": 1688,
+      "instruction_tokens": 0,
+      "input_tokens": 1609,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3817,
+      "output_len": 184
+    },
+    {
+      "index": 357,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 358,
+      "token_count": 3387,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 314,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 916
+    },
+    {
+      "index": 359,
+      "token_count": 1723,
+      "instruction_tokens": 0,
+      "input_tokens": 1614,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 3955,
+      "output_len": 273
+    },
+    {
+      "index": 360,
+      "token_count": 1205,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 210,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 627
+    },
+    {
+      "index": 361,
+      "token_count": 3419,
+      "instruction_tokens": 0,
+      "input_tokens": 3110,
+      "output_tokens": 300,
+      "instruction_len": 0,
+      "input_len": 11208,
+      "output_len": 806
+    },
+    {
+      "index": 362,
+      "token_count": 1739,
+      "instruction_tokens": 0,
+      "input_tokens": 1646,
+      "output_tokens": 84,
+      "instruction_len": 0,
+      "input_len": 4006,
+      "output_len": 211
+    },
+    {
+      "index": 363,
+      "token_count": 1201,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 208,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 620
+    },
+    {
+      "index": 364,
+      "token_count": 3508,
+      "instruction_tokens": 0,
+      "input_tokens": 3108,
+      "output_tokens": 391,
+      "instruction_len": 0,
+      "input_len": 11201,
+      "output_len": 1086
+    },
+    {
+      "index": 365,
+      "token_count": 1856,
+      "instruction_tokens": 0,
+      "input_tokens": 1735,
+      "output_tokens": 112,
+      "instruction_len": 0,
+      "input_len": 4279,
+      "output_len": 291
+    },
+    {
+      "index": 366,
+      "token_count": 1257,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 2493,
+      "output_len": 782
+    },
+    {
+      "index": 367,
+      "token_count": 3445,
+      "instruction_tokens": 0,
+      "input_tokens": 3157,
+      "output_tokens": 279,
+      "instruction_len": 0,
+      "input_len": 11363,
+      "output_len": 800
+    },
+    {
+      "index": 368,
+      "token_count": 1778,
+      "instruction_tokens": 0,
+      "input_tokens": 1672,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 4155,
+      "output_len": 234
+    },
+    {
+      "index": 369,
+      "token_count": 1211,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 214,
+      "instruction_len": 0,
+      "input_len": 2489,
+      "output_len": 632
+    },
+    {
+      "index": 370,
+      "token_count": 3386,
+      "instruction_tokens": 0,
+      "input_tokens": 3114,
+      "output_tokens": 263,
+      "instruction_len": 0,
+      "input_len": 11213,
+      "output_len": 736
+    },
+    {
+      "index": 371,
+      "token_count": 1704,
+      "instruction_tokens": 0,
+      "input_tokens": 1613,
+      "output_tokens": 82,
+      "instruction_len": 0,
+      "input_len": 3941,
+      "output_len": 208
+    },
+    {
+      "index": 372,
+      "token_count": 1221,
+      "instruction_tokens": 0,
+      "input_tokens": 994,
+      "output_tokens": 218,
+      "instruction_len": 0,
+      "input_len": 2498,
+      "output_len": 640
+    },
+    {
+      "index": 373,
+      "token_count": 3395,
+      "instruction_tokens": 0,
+      "input_tokens": 3118,
+      "output_tokens": 268,
+      "instruction_len": 0,
+      "input_len": 11221,
+      "output_len": 734
+    },
+    {
+      "index": 374,
+      "token_count": 1713,
+      "instruction_tokens": 0,
+      "input_tokens": 1622,
+      "output_tokens": 82,
+      "instruction_len": 0,
+      "input_len": 3947,
+      "output_len": 206
+    },
+    {
+      "index": 375,
+      "token_count": 1257,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 2493,
+      "output_len": 782
+    },
+    {
+      "index": 376,
+      "token_count": 3414,
+      "instruction_tokens": 0,
+      "input_tokens": 3157,
+      "output_tokens": 248,
+      "instruction_len": 0,
+      "input_len": 11363,
+      "output_len": 745
+    },
+    {
+      "index": 377,
+      "token_count": 1743,
+      "instruction_tokens": 0,
+      "input_tokens": 1641,
+      "output_tokens": 93,
+      "instruction_len": 0,
+      "input_len": 4100,
+      "output_len": 230
+    },
+    {
+      "index": 378,
+      "token_count": 1256,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 256,
+      "instruction_len": 0,
+      "input_len": 2495,
+      "output_len": 783
+    },
+    {
+      "index": 379,
+      "token_count": 3459,
+      "instruction_tokens": 0,
+      "input_tokens": 3156,
+      "output_tokens": 294,
+      "instruction_len": 0,
+      "input_len": 11364,
+      "output_len": 806
+    },
+    {
+      "index": 380,
+      "token_count": 1789,
+      "instruction_tokens": 0,
+      "input_tokens": 1686,
+      "output_tokens": 94,
+      "instruction_len": 0,
+      "input_len": 4162,
+      "output_len": 234
+    },
+    {
+      "index": 381,
+      "token_count": 1263,
+      "instruction_tokens": 0,
+      "input_tokens": 994,
+      "output_tokens": 260,
+      "instruction_len": 0,
+      "input_len": 2498,
+      "output_len": 786
+    },
+    {
+      "index": 382,
+      "token_count": 3466,
+      "instruction_tokens": 0,
+      "input_tokens": 3160,
+      "output_tokens": 297,
+      "instruction_len": 0,
+      "input_len": 11367,
+      "output_len": 794
+    },
+    {
+      "index": 383,
+      "token_count": 1793,
+      "instruction_tokens": 0,
+      "input_tokens": 1693,
+      "output_tokens": 91,
+      "instruction_len": 0,
+      "input_len": 4153,
+      "output_len": 228
+    },
+    {
+      "index": 384,
+      "token_count": 1321,
+      "instruction_tokens": 0,
+      "input_tokens": 999,
+      "output_tokens": 313,
+      "instruction_len": 0,
+      "input_len": 2504,
+      "output_len": 946
+    },
+    {
+      "index": 385,
+      "token_count": 3628,
+      "instruction_tokens": 0,
+      "input_tokens": 3213,
+      "output_tokens": 406,
+      "instruction_len": 0,
+      "input_len": 11527,
+      "output_len": 1127
+    },
+    {
+      "index": 386,
+      "token_count": 2013,
+      "instruction_tokens": 0,
+      "input_tokens": 1855,
+      "output_tokens": 149,
+      "instruction_len": 0,
+      "input_len": 4646,
+      "output_len": 354
+    },
+    {
+      "index": 387,
+      "token_count": 1217,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 217,
+      "instruction_len": 0,
+      "input_len": 2497,
+      "output_len": 643
+    },
+    {
+      "index": 388,
+      "token_count": 3379,
+      "instruction_tokens": 0,
+      "input_tokens": 3117,
+      "output_tokens": 253,
+      "instruction_len": 0,
+      "input_len": 11224,
+      "output_len": 716
+    },
+    {
+      "index": 389,
+      "token_count": 1699,
+      "instruction_tokens": 0,
+      "input_tokens": 1606,
+      "output_tokens": 84,
+      "instruction_len": 0,
+      "input_len": 3932,
+      "output_len": 214
+    },
+    {
+      "index": 390,
+      "token_count": 1315,
+      "instruction_tokens": 0,
+      "input_tokens": 997,
+      "output_tokens": 309,
+      "instruction_len": 0,
+      "input_len": 2500,
+      "output_len": 940
+    },
+    {
+      "index": 391,
+      "token_count": 3663,
+      "instruction_tokens": 0,
+      "input_tokens": 3209,
+      "output_tokens": 445,
+      "instruction_len": 0,
+      "input_len": 11521,
+      "output_len": 1116
+    },
+    {
+      "index": 392,
+      "token_count": 2045,
+      "instruction_tokens": 0,
+      "input_tokens": 1890,
+      "output_tokens": 146,
+      "instruction_len": 0,
+      "input_len": 4629,
+      "output_len": 344
+    },
+    {
+      "index": 393,
+      "token_count": 1316,
+      "instruction_tokens": 0,
+      "input_tokens": 997,
+      "output_tokens": 310,
+      "instruction_len": 0,
+      "input_len": 2502,
+      "output_len": 945
+    },
+    {
+      "index": 394,
+      "token_count": 3628,
+      "instruction_tokens": 0,
+      "input_tokens": 3210,
+      "output_tokens": 409,
+      "instruction_len": 0,
+      "input_len": 11526,
+      "output_len": 1154
+    },
+    {
+      "index": 395,
+      "token_count": 2027,
+      "instruction_tokens": 0,
+      "input_tokens": 1855,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 4672,
+      "output_len": 389
+    },
+    {
+      "index": 396,
+      "token_count": 1316,
+      "instruction_tokens": 0,
+      "input_tokens": 997,
+      "output_tokens": 310,
+      "instruction_len": 0,
+      "input_len": 2500,
+      "output_len": 941
+    },
+    {
+      "index": 397,
+      "token_count": 3478,
+      "instruction_tokens": 0,
+      "input_tokens": 3210,
+      "output_tokens": 259,
+      "instruction_len": 0,
+      "input_len": 11522,
+      "output_len": 741
+    },
+    {
+      "index": 398,
+      "token_count": 1820,
+      "instruction_tokens": 0,
+      "input_tokens": 1705,
+      "output_tokens": 106,
+      "instruction_len": 0,
+      "input_len": 4255,
+      "output_len": 247
+    },
+    {
+      "index": 399,
+      "token_count": 1319,
+      "instruction_tokens": 0,
+      "input_tokens": 998,
+      "output_tokens": 312,
+      "instruction_len": 0,
+      "input_len": 2501,
+      "output_len": 943
+    },
+    {
+      "index": 400,
+      "token_count": 3519,
+      "instruction_tokens": 0,
+      "input_tokens": 3212,
+      "output_tokens": 298,
+      "instruction_len": 0,
+      "input_len": 11524,
+      "output_len": 773
+    },
+    {
+      "index": 401,
+      "token_count": 1863,
+      "instruction_tokens": 0,
+      "input_tokens": 1746,
+      "output_tokens": 108,
+      "instruction_len": 0,
+      "input_len": 4289,
+      "output_len": 252
+    },
+    {
+      "index": 402,
+      "token_count": 1252,
+      "instruction_tokens": 0,
+      "input_tokens": 990,
+      "output_tokens": 253,
+      "instruction_len": 0,
+      "input_len": 2495,
+      "output_len": 781
+    },
+    {
+      "index": 403,
+      "token_count": 3411,
+      "instruction_tokens": 0,
+      "input_tokens": 3153,
+      "output_tokens": 249,
+      "instruction_len": 0,
+      "input_len": 11362,
+      "output_len": 743
+    },
+    {
+      "index": 404,
+      "token_count": 1736,
+      "instruction_tokens": 0,
+      "input_tokens": 1638,
+      "output_tokens": 89,
+      "instruction_len": 0,
+      "input_len": 4097,
+      "output_len": 222
+    },
+    {
+      "index": 405,
+      "token_count": 1202,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 208,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 621
+    },
+    {
+      "index": 406,
+      "token_count": 3519,
+      "instruction_tokens": 0,
+      "input_tokens": 3108,
+      "output_tokens": 402,
+      "instruction_len": 0,
+      "input_len": 11202,
+      "output_len": 1105
+    },
+    {
+      "index": 407,
+      "token_count": 1868,
+      "instruction_tokens": 0,
+      "input_tokens": 1746,
+      "output_tokens": 113,
+      "instruction_len": 0,
+      "input_len": 4299,
+      "output_len": 298
+    },
+    {
+      "index": 408,
+      "token_count": 1208,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 212,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 623
+    },
+    {
+      "index": 409,
+      "token_count": 3520,
+      "instruction_tokens": 0,
+      "input_tokens": 3112,
+      "output_tokens": 399,
+      "instruction_len": 0,
+      "input_len": 11204,
+      "output_len": 1091
+    },
+    {
+      "index": 410,
+      "token_count": 1876,
+      "instruction_tokens": 0,
+      "input_tokens": 1747,
+      "output_tokens": 120,
+      "instruction_len": 0,
+      "input_len": 4287,
+      "output_len": 306
+    },
+    {
+      "index": 411,
+      "token_count": 1263,
+      "instruction_tokens": 0,
+      "input_tokens": 994,
+      "output_tokens": 260,
+      "instruction_len": 0,
+      "input_len": 2499,
+      "output_len": 789
+    },
+    {
+      "index": 412,
+      "token_count": 3457,
+      "instruction_tokens": 0,
+      "input_tokens": 3160,
+      "output_tokens": 288,
+      "instruction_len": 0,
+      "input_len": 11370,
+      "output_len": 773
+    },
+    {
+      "index": 413,
+      "token_count": 1785,
+      "instruction_tokens": 0,
+      "input_tokens": 1684,
+      "output_tokens": 92,
+      "instruction_len": 0,
+      "input_len": 4135,
+      "output_len": 232
+    },
+    {
+      "index": 414,
+      "token_count": 1227,
+      "instruction_tokens": 0,
+      "input_tokens": 996,
+      "output_tokens": 222,
+      "instruction_len": 0,
+      "input_len": 2498,
+      "output_len": 641
+    },
+    {
+      "index": 415,
+      "token_count": 3442,
+      "instruction_tokens": 0,
+      "input_tokens": 3122,
+      "output_tokens": 311,
+      "instruction_len": 0,
+      "input_len": 11222,
+      "output_len": 804
+    },
+    {
+      "index": 416,
+      "token_count": 1761,
+      "instruction_tokens": 0,
+      "input_tokens": 1669,
+      "output_tokens": 83,
+      "instruction_len": 0,
+      "input_len": 4018,
+      "output_len": 207
+    },
+    {
+      "index": 417,
+      "token_count": 1249,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 252,
+      "instruction_len": 0,
+      "input_len": 2490,
+      "output_len": 778
+    },
+    {
+      "index": 418,
+      "token_count": 3390,
+      "instruction_tokens": 0,
+      "input_tokens": 3152,
+      "output_tokens": 229,
+      "instruction_len": 0,
+      "input_len": 11359,
+      "output_len": 709
+    },
+    {
+      "index": 419,
+      "token_count": 1718,
+      "instruction_tokens": 0,
+      "input_tokens": 1617,
+      "output_tokens": 92,
+      "instruction_len": 0,
+      "input_len": 4060,
+      "output_len": 228
+    },
+    {
+      "index": 420,
+      "token_count": 1223,
+      "instruction_tokens": 0,
+      "input_tokens": 994,
+      "output_tokens": 220,
+      "instruction_len": 0,
+      "input_len": 2500,
+      "output_len": 644
+    },
+    {
+      "index": 421,
+      "token_count": 3396,
+      "instruction_tokens": 0,
+      "input_tokens": 3120,
+      "output_tokens": 267,
+      "instruction_len": 0,
+      "input_len": 11225,
+      "output_len": 741
+    },
+    {
+      "index": 422,
+      "token_count": 1714,
+      "instruction_tokens": 0,
+      "input_tokens": 1623,
+      "output_tokens": 82,
+      "instruction_len": 0,
+      "input_len": 3958,
+      "output_len": 208
+    },
+    {
+      "index": 423,
+      "token_count": 1258,
+      "instruction_tokens": 0,
+      "input_tokens": 992,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 2497,
+      "output_len": 785
+    },
+    {
+      "index": 424,
+      "token_count": 3470,
+      "instruction_tokens": 0,
+      "input_tokens": 3157,
+      "output_tokens": 304,
+      "instruction_len": 0,
+      "input_len": 11366,
+      "output_len": 818
+    },
+    {
+      "index": 425,
+      "token_count": 1796,
+      "instruction_tokens": 0,
+      "input_tokens": 1697,
+      "output_tokens": 90,
+      "instruction_len": 0,
+      "input_len": 4176,
+      "output_len": 229
+    },
+    {
+      "index": 426,
+      "token_count": 1206,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 211,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 626
+    },
+    {
+      "index": 427,
+      "token_count": 3515,
+      "instruction_tokens": 0,
+      "input_tokens": 3111,
+      "output_tokens": 395,
+      "instruction_len": 0,
+      "input_len": 11207,
+      "output_len": 1085
+    },
+    {
+      "index": 428,
+      "token_count": 1870,
+      "instruction_tokens": 0,
+      "input_tokens": 1742,
+      "output_tokens": 119,
+      "instruction_len": 0,
+      "input_len": 4284,
+      "output_len": 304
+    },
+    {
+      "index": 429,
+      "token_count": 1219,
+      "instruction_tokens": 0,
+      "input_tokens": 993,
+      "output_tokens": 217,
+      "instruction_len": 0,
+      "input_len": 2496,
+      "output_len": 638
+    },
+    {
+      "index": 430,
+      "token_count": 3415,
+      "instruction_tokens": 0,
+      "input_tokens": 3117,
+      "output_tokens": 289,
+      "instruction_len": 0,
+      "input_len": 11219,
+      "output_len": 780
+    },
+    {
+      "index": 431,
+      "token_count": 1733,
+      "instruction_tokens": 0,
+      "input_tokens": 1642,
+      "output_tokens": 82,
+      "instruction_len": 0,
+      "input_len": 3991,
+      "output_len": 206
+    },
+    {
+      "index": 432,
+      "token_count": 1317,
+      "instruction_tokens": 0,
+      "input_tokens": 997,
+      "output_tokens": 311,
+      "instruction_len": 0,
+      "input_len": 2501,
+      "output_len": 944
+    },
+    {
+      "index": 433,
+      "token_count": 3474,
+      "instruction_tokens": 0,
+      "input_tokens": 3211,
+      "output_tokens": 254,
+      "instruction_len": 0,
+      "input_len": 11525,
+      "output_len": 753
+    },
+    {
+      "index": 434,
+      "token_count": 1811,
+      "instruction_tokens": 0,
+      "input_tokens": 1701,
+      "output_tokens": 101,
+      "instruction_len": 0,
+      "input_len": 4270,
+      "output_len": 237
+    },
+    {
+      "index": 435,
+      "token_count": 1258,
+      "instruction_tokens": 0,
+      "input_tokens": 992,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 2496,
+      "output_len": 785
+    },
+    {
+      "index": 436,
+      "token_count": 3485,
+      "instruction_tokens": 0,
+      "input_tokens": 3157,
+      "output_tokens": 319,
+      "instruction_len": 0,
+      "input_len": 11366,
+      "output_len": 852
+    },
+    {
+      "index": 437,
+      "token_count": 1811,
+      "instruction_tokens": 0,
+      "input_tokens": 1712,
+      "output_tokens": 90,
+      "instruction_len": 0,
+      "input_len": 4210,
+      "output_len": 229
+    },
+    {
+      "index": 438,
+      "token_count": 1318,
+      "instruction_tokens": 0,
+      "input_tokens": 998,
+      "output_tokens": 311,
+      "instruction_len": 0,
+      "input_len": 2502,
+      "output_len": 942
+    },
+    {
+      "index": 439,
+      "token_count": 3594,
+      "instruction_tokens": 0,
+      "input_tokens": 3211,
+      "output_tokens": 374,
+      "instruction_len": 0,
+      "input_len": 11523,
+      "output_len": 1048
+    },
+    {
+      "index": 440,
+      "token_count": 1974,
+      "instruction_tokens": 0,
+      "input_tokens": 1821,
+      "output_tokens": 144,
+      "instruction_len": 0,
+      "input_len": 4563,
+      "output_len": 345
+    },
+    {
+      "index": 441,
+      "token_count": 1318,
+      "instruction_tokens": 0,
+      "input_tokens": 998,
+      "output_tokens": 311,
+      "instruction_len": 0,
+      "input_len": 2501,
+      "output_len": 942
+    },
+    {
+      "index": 442,
+      "token_count": 3509,
+      "instruction_tokens": 0,
+      "input_tokens": 3211,
+      "output_tokens": 289,
+      "instruction_len": 0,
+      "input_len": 11523,
+      "output_len": 795
+    },
+    {
+      "index": 443,
+      "token_count": 1856,
+      "instruction_tokens": 0,
+      "input_tokens": 1736,
+      "output_tokens": 111,
+      "instruction_len": 0,
+      "input_len": 4310,
+      "output_len": 255
+    },
+    {
+      "index": 444,
+      "token_count": 1262,
+      "instruction_tokens": 0,
+      "input_tokens": 993,
+      "output_tokens": 260,
+      "instruction_len": 0,
+      "input_len": 2498,
+      "output_len": 789
+    },
+    {
+      "index": 445,
+      "token_count": 3464,
+      "instruction_tokens": 0,
+      "input_tokens": 3160,
+      "output_tokens": 295,
+      "instruction_len": 0,
+      "input_len": 11370,
+      "output_len": 847
+    },
+    {
+      "index": 446,
+      "token_count": 1810,
+      "instruction_tokens": 0,
+      "input_tokens": 1691,
+      "output_tokens": 110,
+      "instruction_len": 0,
+      "input_len": 4209,
+      "output_len": 275
+    },
+    {
+      "index": 447,
+      "token_count": 1212,
+      "instruction_tokens": 0,
+      "input_tokens": 990,
+      "output_tokens": 213,
+      "instruction_len": 0,
+      "input_len": 2492,
+      "output_len": 628
+    },
+    {
+      "index": 448,
+      "token_count": 3519,
+      "instruction_tokens": 0,
+      "input_tokens": 3113,
+      "output_tokens": 397,
+      "instruction_len": 0,
+      "input_len": 11209,
+      "output_len": 1065
+    },
+    {
+      "index": 449,
+      "token_count": 1867,
+      "instruction_tokens": 0,
+      "input_tokens": 1746,
+      "output_tokens": 112,
+      "instruction_len": 0,
+      "input_len": 4266,
+      "output_len": 291
+    },
+    {
+      "index": 450,
+      "token_count": 1209,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 212,
+      "instruction_len": 0,
+      "input_len": 2490,
+      "output_len": 629
+    },
+    {
+      "index": 451,
+      "token_count": 3523,
+      "instruction_tokens": 0,
+      "input_tokens": 3112,
+      "output_tokens": 402,
+      "instruction_len": 0,
+      "input_len": 11210,
+      "output_len": 1110
+    },
+    {
+      "index": 452,
+      "token_count": 1875,
+      "instruction_tokens": 0,
+      "input_tokens": 1750,
+      "output_tokens": 116,
+      "instruction_len": 0,
+      "input_len": 4312,
+      "output_len": 304
+    },
+    {
+      "index": 453,
+      "token_count": 1261,
+      "instruction_tokens": 0,
+      "input_tokens": 993,
+      "output_tokens": 259,
+      "instruction_len": 0,
+      "input_len": 2496,
+      "output_len": 784
+    },
+    {
+      "index": 454,
+      "token_count": 3426,
+      "instruction_tokens": 0,
+      "input_tokens": 3159,
+      "output_tokens": 258,
+      "instruction_len": 0,
+      "input_len": 11365,
+      "output_len": 762
+    },
+    {
+      "index": 455,
+      "token_count": 1749,
+      "instruction_tokens": 0,
+      "input_tokens": 1653,
+      "output_tokens": 87,
+      "instruction_len": 0,
+      "input_len": 4119,
+      "output_len": 217
+    },
+    {
+      "index": 456,
+      "token_count": 1200,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 207,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 621
+    },
+    {
+      "index": 457,
+      "token_count": 3377,
+      "instruction_tokens": 0,
+      "input_tokens": 3107,
+      "output_tokens": 261,
+      "instruction_len": 0,
+      "input_len": 11202,
+      "output_len": 727
+    },
+    {
+      "index": 458,
+      "token_count": 1696,
+      "instruction_tokens": 0,
+      "input_tokens": 1604,
+      "output_tokens": 83,
+      "instruction_len": 0,
+      "input_len": 3921,
+      "output_len": 209
+    },
+    {
+      "index": 459,
+      "token_count": 1216,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 216,
+      "instruction_len": 0,
+      "input_len": 2496,
+      "output_len": 638
+    },
+    {
+      "index": 460,
+      "token_count": 3491,
+      "instruction_tokens": 0,
+      "input_tokens": 3116,
+      "output_tokens": 366,
+      "instruction_len": 0,
+      "input_len": 11219,
+      "output_len": 1043
+    },
+    {
+      "index": 461,
+      "token_count": 1841,
+      "instruction_tokens": 0,
+      "input_tokens": 1718,
+      "output_tokens": 114,
+      "instruction_len": 0,
+      "input_len": 4254,
+      "output_len": 299
+    },
+    {
+      "index": 462,
+      "token_count": 1225,
+      "instruction_tokens": 0,
+      "input_tokens": 995,
+      "output_tokens": 221,
+      "instruction_len": 0,
+      "input_len": 2496,
+      "output_len": 639
+    },
+    {
+      "index": 463,
+      "token_count": 3547,
+      "instruction_tokens": 0,
+      "input_tokens": 3121,
+      "output_tokens": 417,
+      "instruction_len": 0,
+      "input_len": 11220,
+      "output_len": 1126
+    },
+    {
+      "index": 464,
+      "token_count": 1901,
+      "instruction_tokens": 0,
+      "input_tokens": 1774,
+      "output_tokens": 118,
+      "instruction_len": 0,
+      "input_len": 4338,
+      "output_len": 301
+    },
+    {
+      "index": 465,
+      "token_count": 1257,
+      "instruction_tokens": 0,
+      "input_tokens": 991,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 2492,
+      "output_len": 780
+    },
+    {
+      "index": 466,
+      "token_count": 3432,
+      "instruction_tokens": 0,
+      "input_tokens": 3157,
+      "output_tokens": 266,
+      "instruction_len": 0,
+      "input_len": 11361,
+      "output_len": 736
+    },
+    {
+      "index": 467,
+      "token_count": 1759,
+      "instruction_tokens": 0,
+      "input_tokens": 1659,
+      "output_tokens": 91,
+      "instruction_len": 0,
+      "input_len": 4089,
+      "output_len": 225
+    },
+    {
+      "index": 468,
+      "token_count": 1254,
+      "instruction_tokens": 0,
+      "input_tokens": 990,
+      "output_tokens": 255,
+      "instruction_len": 0,
+      "input_len": 2493,
+      "output_len": 782
+    },
+    {
+      "index": 469,
+      "token_count": 3557,
+      "instruction_tokens": 0,
+      "input_tokens": 3155,
+      "output_tokens": 393,
+      "instruction_len": 0,
+      "input_len": 11363,
+      "output_len": 1106
+    },
+    {
+      "index": 470,
+      "token_count": 1918,
+      "instruction_tokens": 0,
+      "input_tokens": 1784,
+      "output_tokens": 125,
+      "instruction_len": 0,
+      "input_len": 4461,
+      "output_len": 320
+    },
+    {
+      "index": 471,
+      "token_count": 1199,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 206,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 621
+    },
+    {
+      "index": 472,
+      "token_count": 3538,
+      "instruction_tokens": 0,
+      "input_tokens": 3106,
+      "output_tokens": 423,
+      "instruction_len": 0,
+      "input_len": 11202,
+      "output_len": 1119
+    },
+    {
+      "index": 473,
+      "token_count": 1889,
+      "instruction_tokens": 0,
+      "input_tokens": 1765,
+      "output_tokens": 115,
+      "instruction_len": 0,
+      "input_len": 4313,
+      "output_len": 298
+    },
+    {
+      "index": 474,
+      "token_count": 1221,
+      "instruction_tokens": 0,
+      "input_tokens": 994,
+      "output_tokens": 218,
+      "instruction_len": 0,
+      "input_len": 2498,
+      "output_len": 641
+    },
+    {
+      "index": 475,
+      "token_count": 3429,
+      "instruction_tokens": 0,
+      "input_tokens": 3118,
+      "output_tokens": 302,
+      "instruction_len": 0,
+      "input_len": 11222,
+      "output_len": 824
+    },
+    {
+      "index": 476,
+      "token_count": 1746,
+      "instruction_tokens": 0,
+      "input_tokens": 1656,
+      "output_tokens": 81,
+      "instruction_len": 0,
+      "input_len": 4038,
+      "output_len": 207
+    },
+    {
+      "index": 477,
+      "token_count": 1205,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 210,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 625
+    },
+    {
+      "index": 478,
+      "token_count": 3512,
+      "instruction_tokens": 0,
+      "input_tokens": 3110,
+      "output_tokens": 393,
+      "instruction_len": 0,
+      "input_len": 11206,
+      "output_len": 1108
+    },
+    {
+      "index": 479,
+      "token_count": 1865,
+      "instruction_tokens": 0,
+      "input_tokens": 1739,
+      "output_tokens": 117,
+      "instruction_len": 0,
+      "input_len": 4306,
+      "output_len": 304
+    },
+    {
+      "index": 480,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 481,
+      "token_count": 3316,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 253,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 732
+    },
+    {
+      "index": 482,
+      "token_count": 1648,
+      "instruction_tokens": 0,
+      "input_tokens": 1543,
+      "output_tokens": 96,
+      "instruction_len": 0,
+      "input_len": 3770,
+      "output_len": 270
+    },
+    {
+      "index": 483,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 484,
+      "token_count": 3294,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 234,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 687
+    },
+    {
+      "index": 485,
+      "token_count": 1599,
+      "instruction_tokens": 0,
+      "input_tokens": 1521,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3722,
+      "output_len": 184
+    },
+    {
+      "index": 486,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 467
+    },
+    {
+      "index": 487,
+      "token_count": 3308,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 245,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 725
+    },
+    {
+      "index": 488,
+      "token_count": 1613,
+      "instruction_tokens": 0,
+      "input_tokens": 1535,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3765,
+      "output_len": 185
+    },
+    {
+      "index": 489,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 463
+    },
+    {
+      "index": 490,
+      "token_count": 3482,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 420,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 1188
+    },
+    {
+      "index": 491,
+      "token_count": 1823,
+      "instruction_tokens": 0,
+      "input_tokens": 1709,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4224,
+      "output_len": 275
+    },
+    {
+      "index": 492,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 493,
+      "token_count": 3303,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 242,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 756
+    },
+    {
+      "index": 494,
+      "token_count": 1606,
+      "instruction_tokens": 0,
+      "input_tokens": 1530,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3790,
+      "output_len": 178
+    },
+    {
+      "index": 495,
+      "token_count": 1152,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 160,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 469
+    },
+    {
+      "index": 496,
+      "token_count": 3349,
+      "instruction_tokens": 0,
+      "input_tokens": 3060,
+      "output_tokens": 280,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 737
+    },
+    {
+      "index": 497,
+      "token_count": 1660,
+      "instruction_tokens": 0,
+      "input_tokens": 1576,
+      "output_tokens": 75,
+      "instruction_len": 0,
+      "input_len": 3779,
+      "output_len": 187
+    },
+    {
+      "index": 498,
+      "token_count": 1142,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 466
+    },
+    {
+      "index": 499,
+      "token_count": 3759,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 696,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1964
+    },
+    {
+      "index": 500,
+      "token_count": 2125,
+      "instruction_tokens": 0,
+      "input_tokens": 1986,
+      "output_tokens": 130,
+      "instruction_len": 0,
+      "input_len": 5003,
+      "output_len": 356
+    },
+    {
+      "index": 501,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 466
+    },
+    {
+      "index": 502,
+      "token_count": 3407,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 344,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 959
+    },
+    {
+      "index": 503,
+      "token_count": 1748,
+      "instruction_tokens": 0,
+      "input_tokens": 1634,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 3998,
+      "output_len": 278
+    },
+    {
+      "index": 504,
+      "token_count": 1136,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 149,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 462
+    },
+    {
+      "index": 505,
+      "token_count": 3437,
+      "instruction_tokens": 0,
+      "input_tokens": 3049,
+      "output_tokens": 379,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1024
+    },
+    {
+      "index": 506,
+      "token_count": 1772,
+      "instruction_tokens": 0,
+      "input_tokens": 1664,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4059,
+      "output_len": 272
+    },
+    {
+      "index": 507,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 470
+    },
+    {
+      "index": 508,
+      "token_count": 3321,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 254,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 724
+    },
+    {
+      "index": 509,
+      "token_count": 1628,
+      "instruction_tokens": 0,
+      "input_tokens": 1548,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3767,
+      "output_len": 185
+    },
+    {
+      "index": 510,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 511,
+      "token_count": 3481,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 421,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1166
+    },
+    {
+      "index": 512,
+      "token_count": 1822,
+      "instruction_tokens": 0,
+      "input_tokens": 1708,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4201,
+      "output_len": 278
+    },
+    {
+      "index": 513,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 514,
+      "token_count": 3318,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 255,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 773
+    },
+    {
+      "index": 515,
+      "token_count": 1623,
+      "instruction_tokens": 0,
+      "input_tokens": 1545,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3811,
+      "output_len": 183
+    },
+    {
+      "index": 516,
+      "token_count": 1138,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 151,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 462
+    },
+    {
+      "index": 517,
+      "token_count": 3343,
+      "instruction_tokens": 0,
+      "input_tokens": 3051,
+      "output_tokens": 283,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 817
+    },
+    {
+      "index": 518,
+      "token_count": 1650,
+      "instruction_tokens": 0,
+      "input_tokens": 1570,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3852,
+      "output_len": 187
+    },
+    {
+      "index": 519,
+      "token_count": 1149,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 473
+    },
+    {
+      "index": 520,
+      "token_count": 3770,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 703,
+      "instruction_len": 0,
+      "input_len": 11054,
+      "output_len": 1983
+    },
+    {
+      "index": 521,
+      "token_count": 2140,
+      "instruction_tokens": 0,
+      "input_tokens": 1997,
+      "output_tokens": 134,
+      "instruction_len": 0,
+      "input_len": 5029,
+      "output_len": 363
+    },
+    {
+      "index": 522,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 467
+    },
+    {
+      "index": 523,
+      "token_count": 3313,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 250,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 746
+    },
+    {
+      "index": 524,
+      "token_count": 1618,
+      "instruction_tokens": 0,
+      "input_tokens": 1540,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3786,
+      "output_len": 185
+    },
+    {
+      "index": 525,
+      "token_count": 1134,
+      "instruction_tokens": 0,
+      "input_tokens": 977,
+      "output_tokens": 148,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 526,
+      "token_count": 3436,
+      "instruction_tokens": 0,
+      "input_tokens": 3048,
+      "output_tokens": 379,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 1035
+    },
+    {
+      "index": 527,
+      "token_count": 1771,
+      "instruction_tokens": 0,
+      "input_tokens": 1663,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 4069,
+      "output_len": 275
+    },
+    {
+      "index": 528,
+      "token_count": 1147,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 474
+    },
+    {
+      "index": 529,
+      "token_count": 3541,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 474,
+      "instruction_len": 0,
+      "input_len": 11055,
+      "output_len": 1283
+    },
+    {
+      "index": 530,
+      "token_count": 1975,
+      "instruction_tokens": 0,
+      "input_tokens": 1768,
+      "output_tokens": 198,
+      "instruction_len": 0,
+      "input_len": 4330,
+      "output_len": 550
+    },
+    {
+      "index": 531,
+      "token_count": 1137,
+      "instruction_tokens": 0,
+      "input_tokens": 978,
+      "output_tokens": 150,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 460
+    },
+    {
+      "index": 532,
+      "token_count": 3436,
+      "instruction_tokens": 0,
+      "input_tokens": 3050,
+      "output_tokens": 377,
+      "instruction_len": 0,
+      "input_len": 11041,
+      "output_len": 1052
+    },
+    {
+      "index": 533,
+      "token_count": 1774,
+      "instruction_tokens": 0,
+      "input_tokens": 1663,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4085,
+      "output_len": 272
+    },
+    {
+      "index": 534,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 464
+    },
+    {
+      "index": 535,
+      "token_count": 3336,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 273,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 784
+    },
+    {
+      "index": 536,
+      "token_count": 1641,
+      "instruction_tokens": 0,
+      "input_tokens": 1563,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3821,
+      "output_len": 181
+    },
+    {
+      "index": 537,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 464
+    },
+    {
+      "index": 538,
+      "token_count": 3311,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 247,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 722
+    },
+    {
+      "index": 539,
+      "token_count": 1618,
+      "instruction_tokens": 0,
+      "input_tokens": 1538,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3759,
+      "output_len": 183
+    },
+    {
+      "index": 540,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 541,
+      "token_count": 3305,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 240,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 695
+    },
+    {
+      "index": 542,
+      "token_count": 1612,
+      "instruction_tokens": 0,
+      "input_tokens": 1532,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3733,
+      "output_len": 183
+    },
+    {
+      "index": 543,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 544,
+      "token_count": 3355,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 291,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 789
+    },
+    {
+      "index": 545,
+      "token_count": 1661,
+      "instruction_tokens": 0,
+      "input_tokens": 1582,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3828,
+      "output_len": 184
+    },
+    {
+      "index": 546,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 470
+    },
+    {
+      "index": 547,
+      "token_count": 3450,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 387,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 1076
+    },
+    {
+      "index": 548,
+      "token_count": 1791,
+      "instruction_tokens": 0,
+      "input_tokens": 1677,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4119,
+      "output_len": 281
+    },
+    {
+      "index": 549,
+      "token_count": 1146,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 156,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 467
+    },
+    {
+      "index": 550,
+      "token_count": 3316,
+      "instruction_tokens": 0,
+      "input_tokens": 3056,
+      "output_tokens": 251,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 746
+    },
+    {
+      "index": 551,
+      "token_count": 1623,
+      "instruction_tokens": 0,
+      "input_tokens": 1543,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3786,
+      "output_len": 185
+    },
+    {
+      "index": 552,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 471
+    },
+    {
+      "index": 553,
+      "token_count": 3356,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 290,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 771
+    },
+    {
+      "index": 554,
+      "token_count": 1663,
+      "instruction_tokens": 0,
+      "input_tokens": 1583,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3815,
+      "output_len": 187
+    },
+    {
+      "index": 555,
+      "token_count": 1150,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 468
+    },
+    {
+      "index": 556,
+      "token_count": 3322,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 255,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 756
+    },
+    {
+      "index": 557,
+      "token_count": 1629,
+      "instruction_tokens": 0,
+      "input_tokens": 1549,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3797,
+      "output_len": 183
+    },
+    {
+      "index": 558,
+      "token_count": 1152,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 161,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 473
+    },
+    {
+      "index": 559,
+      "token_count": 3458,
+      "instruction_tokens": 0,
+      "input_tokens": 3061,
+      "output_tokens": 388,
+      "instruction_len": 0,
+      "input_len": 11054,
+      "output_len": 1022
+    },
+    {
+      "index": 560,
+      "token_count": 1803,
+      "instruction_tokens": 0,
+      "input_tokens": 1685,
+      "output_tokens": 109,
+      "instruction_len": 0,
+      "input_len": 4068,
+      "output_len": 278
+    },
+    {
+      "index": 561,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 469
+    },
+    {
+      "index": 562,
+      "token_count": 3457,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 393,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1103
+    },
+    {
+      "index": 563,
+      "token_count": 1793,
+      "instruction_tokens": 0,
+      "input_tokens": 1684,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4145,
+      "output_len": 272
+    },
+    {
+      "index": 564,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 465
+    },
+    {
+      "index": 565,
+      "token_count": 3317,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 254,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 749
+    },
+    {
+      "index": 566,
+      "token_count": 1622,
+      "instruction_tokens": 0,
+      "input_tokens": 1544,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3787,
+      "output_len": 183
+    },
+    {
+      "index": 567,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 568,
+      "token_count": 3362,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 298,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 772
+    },
+    {
+      "index": 569,
+      "token_count": 1669,
+      "instruction_tokens": 0,
+      "input_tokens": 1589,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3811,
+      "output_len": 185
+    },
+    {
+      "index": 570,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 465
+    },
+    {
+      "index": 571,
+      "token_count": 3320,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 747
+    },
+    {
+      "index": 572,
+      "token_count": 1623,
+      "instruction_tokens": 0,
+      "input_tokens": 1547,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3785,
+      "output_len": 179
+    },
+    {
+      "index": 573,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2478,
+      "output_len": 461
+    },
+    {
+      "index": 574,
+      "token_count": 3319,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 258,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 726
+    },
+    {
+      "index": 575,
+      "token_count": 1622,
+      "instruction_tokens": 0,
+      "input_tokens": 1546,
+      "output_tokens": 67,
+      "instruction_len": 0,
+      "input_len": 3760,
+      "output_len": 179
+    },
+    {
+      "index": 576,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 577,
+      "token_count": 3342,
+      "instruction_tokens": 0,
+      "input_tokens": 3053,
+      "output_tokens": 280,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 733
+    },
+    {
+      "index": 578,
+      "token_count": 1650,
+      "instruction_tokens": 0,
+      "input_tokens": 1569,
+      "output_tokens": 72,
+      "instruction_len": 0,
+      "input_len": 3772,
+      "output_len": 188
+    },
+    {
+      "index": 579,
+      "token_count": 1141,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 465
+    },
+    {
+      "index": 580,
+      "token_count": 3487,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 426,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1191
+    },
+    {
+      "index": 581,
+      "token_count": 1825,
+      "instruction_tokens": 0,
+      "input_tokens": 1714,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4229,
+      "output_len": 275
+    },
+    {
+      "index": 582,
+      "token_count": 1147,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 472
+    },
+    {
+      "index": 583,
+      "token_count": 3715,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 649,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 1876
+    },
+    {
+      "index": 584,
+      "token_count": 2085,
+      "instruction_tokens": 0,
+      "input_tokens": 1942,
+      "output_tokens": 134,
+      "instruction_len": 0,
+      "input_len": 4921,
+      "output_len": 364
+    },
+    {
+      "index": 585,
+      "token_count": 1140,
+      "instruction_tokens": 0,
+      "input_tokens": 979,
+      "output_tokens": 152,
+      "instruction_len": 0,
+      "input_len": 2479,
+      "output_len": 463
+    },
+    {
+      "index": 586,
+      "token_count": 3432,
+      "instruction_tokens": 0,
+      "input_tokens": 3052,
+      "output_tokens": 371,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 1094
+    },
+    {
+      "index": 587,
+      "token_count": 1773,
+      "instruction_tokens": 0,
+      "input_tokens": 1659,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4130,
+      "output_len": 278
+    },
+    {
+      "index": 588,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 981,
+      "output_tokens": 158,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 472
+    },
+    {
+      "index": 589,
+      "token_count": 3856,
+      "instruction_tokens": 0,
+      "input_tokens": 3058,
+      "output_tokens": 789,
+      "instruction_len": 0,
+      "input_len": 11053,
+      "output_len": 2092
+    },
+    {
+      "index": 590,
+      "token_count": 2228,
+      "instruction_tokens": 0,
+      "input_tokens": 2083,
+      "output_tokens": 136,
+      "instruction_len": 0,
+      "input_len": 5137,
+      "output_len": 369
+    },
+    {
+      "index": 591,
+      "token_count": 1148,
+      "instruction_tokens": 0,
+      "input_tokens": 982,
+      "output_tokens": 157,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 468
+    },
+    {
+      "index": 592,
+      "token_count": 3327,
+      "instruction_tokens": 0,
+      "input_tokens": 3057,
+      "output_tokens": 261,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 792
+    },
+    {
+      "index": 593,
+      "token_count": 1634,
+      "instruction_tokens": 0,
+      "input_tokens": 1554,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3833,
+      "output_len": 185
+    },
+    {
+      "index": 594,
+      "token_count": 1143,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 154,
+      "instruction_len": 0,
+      "input_len": 2481,
+      "output_len": 467
+    },
+    {
+      "index": 595,
+      "token_count": 3329,
+      "instruction_tokens": 0,
+      "input_tokens": 3054,
+      "output_tokens": 266,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 779
+    },
+    {
+      "index": 596,
+      "token_count": 1634,
+      "instruction_tokens": 0,
+      "input_tokens": 1556,
+      "output_tokens": 69,
+      "instruction_len": 0,
+      "input_len": 3819,
+      "output_len": 185
+    },
+    {
+      "index": 597,
+      "token_count": 1144,
+      "instruction_tokens": 0,
+      "input_tokens": 980,
+      "output_tokens": 155,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 466
+    },
+    {
+      "index": 598,
+      "token_count": 3321,
+      "instruction_tokens": 0,
+      "input_tokens": 3055,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 765
+    },
+    {
+      "index": 599,
+      "token_count": 1628,
+      "instruction_tokens": 0,
+      "input_tokens": 1548,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3804,
+      "output_len": 185
+    },
+    {
+      "index": 600,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 469
+    },
+    {
+      "index": 601,
+      "token_count": 3693,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 621,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1708
+    },
+    {
+      "index": 602,
+      "token_count": 2100,
+      "instruction_tokens": 0,
+      "input_tokens": 1920,
+      "output_tokens": 171,
+      "instruction_len": 0,
+      "input_len": 4750,
+      "output_len": 461
+    },
+    {
+      "index": 603,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 463
+    },
+    {
+      "index": 604,
+      "token_count": 3336,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 265,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 719
+    },
+    {
+      "index": 605,
+      "token_count": 1640,
+      "instruction_tokens": 0,
+      "input_tokens": 1563,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3755,
+      "output_len": 180
+    },
+    {
+      "index": 606,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 607,
+      "token_count": 3397,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 326,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 946
+    },
+    {
+      "index": 608,
+      "token_count": 1732,
+      "instruction_tokens": 0,
+      "input_tokens": 1624,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 3987,
+      "output_len": 278
+    },
+    {
+      "index": 609,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 610,
+      "token_count": 3356,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 283,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 754
+    },
+    {
+      "index": 611,
+      "token_count": 1660,
+      "instruction_tokens": 0,
+      "input_tokens": 1583,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3794,
+      "output_len": 186
+    },
+    {
+      "index": 612,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 470
+    },
+    {
+      "index": 613,
+      "token_count": 3330,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 257,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 700
+    },
+    {
+      "index": 614,
+      "token_count": 1636,
+      "instruction_tokens": 0,
+      "input_tokens": 1557,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3743,
+      "output_len": 186
+    },
+    {
+      "index": 615,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 469
+    },
+    {
+      "index": 616,
+      "token_count": 3685,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 613,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1703
+    },
+    {
+      "index": 617,
+      "token_count": 2092,
+      "instruction_tokens": 0,
+      "input_tokens": 1912,
+      "output_tokens": 171,
+      "instruction_len": 0,
+      "input_len": 4745,
+      "output_len": 461
+    },
+    {
+      "index": 618,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 619,
+      "token_count": 3531,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 458,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1146
+    },
+    {
+      "index": 620,
+      "token_count": 1867,
+      "instruction_tokens": 0,
+      "input_tokens": 1758,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4187,
+      "output_len": 276
+    },
+    {
+      "index": 621,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 468
+    },
+    {
+      "index": 622,
+      "token_count": 3528,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 456,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1321
+    },
+    {
+      "index": 623,
+      "token_count": 1903,
+      "instruction_tokens": 0,
+      "input_tokens": 1755,
+      "output_tokens": 139,
+      "instruction_len": 0,
+      "input_len": 4362,
+      "output_len": 375
+    },
+    {
+      "index": 624,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 469
+    },
+    {
+      "index": 625,
+      "token_count": 3396,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 323,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 954
+    },
+    {
+      "index": 626,
+      "token_count": 1731,
+      "instruction_tokens": 0,
+      "input_tokens": 1623,
+      "output_tokens": 99,
+      "instruction_len": 0,
+      "input_len": 3996,
+      "output_len": 275
+    },
+    {
+      "index": 627,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 628,
+      "token_count": 3442,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 371,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 1003
+    },
+    {
+      "index": 629,
+      "token_count": 1780,
+      "instruction_tokens": 0,
+      "input_tokens": 1669,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4041,
+      "output_len": 272
+    },
+    {
+      "index": 630,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 631,
+      "token_count": 3456,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 381,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1033
+    },
+    {
+      "index": 632,
+      "token_count": 1796,
+      "instruction_tokens": 0,
+      "input_tokens": 1683,
+      "output_tokens": 104,
+      "instruction_len": 0,
+      "input_len": 4072,
+      "output_len": 277
+    },
+    {
+      "index": 633,
+      "token_count": 1155,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 464
+    },
+    {
+      "index": 634,
+      "token_count": 3470,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 399,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 1108
+    },
+    {
+      "index": 635,
+      "token_count": 1808,
+      "instruction_tokens": 0,
+      "input_tokens": 1697,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4145,
+      "output_len": 275
+    },
+    {
+      "index": 636,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2482,
+      "output_len": 463
+    },
+    {
+      "index": 637,
+      "token_count": 3501,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 429,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 1243
+    },
+    {
+      "index": 638,
+      "token_count": 1874,
+      "instruction_tokens": 0,
+      "input_tokens": 1728,
+      "output_tokens": 137,
+      "instruction_len": 0,
+      "input_len": 4279,
+      "output_len": 373
+    },
+    {
+      "index": 639,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 464
+    },
+    {
+      "index": 640,
+      "token_count": 3348,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 277,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 742
+    },
+    {
+      "index": 641,
+      "token_count": 1652,
+      "instruction_tokens": 0,
+      "input_tokens": 1575,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3779,
+      "output_len": 180
+    },
+    {
+      "index": 642,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 643,
+      "token_count": 3440,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 365,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1062
+    },
+    {
+      "index": 644,
+      "token_count": 1779,
+      "instruction_tokens": 0,
+      "input_tokens": 1667,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4103,
+      "output_len": 273
+    },
+    {
+      "index": 645,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 465
+    },
+    {
+      "index": 646,
+      "token_count": 3352,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 281,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 777
+    },
+    {
+      "index": 647,
+      "token_count": 1656,
+      "instruction_tokens": 0,
+      "input_tokens": 1579,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3815,
+      "output_len": 180
+    },
+    {
+      "index": 648,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 649,
+      "token_count": 3548,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 477,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1415
+    },
+    {
+      "index": 650,
+      "token_count": 1886,
+      "instruction_tokens": 0,
+      "input_tokens": 1775,
+      "output_tokens": 102,
+      "instruction_len": 0,
+      "input_len": 4456,
+      "output_len": 275
+    },
+    {
+      "index": 651,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 652,
+      "token_count": 3360,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 285,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 740
+    },
+    {
+      "index": 653,
+      "token_count": 1666,
+      "instruction_tokens": 0,
+      "input_tokens": 1587,
+      "output_tokens": 70,
+      "instruction_len": 0,
+      "input_len": 3780,
+      "output_len": 186
+    },
+    {
+      "index": 654,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 462
+    },
+    {
+      "index": 655,
+      "token_count": 3486,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 415,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 1136
+    },
+    {
+      "index": 656,
+      "token_count": 1819,
+      "instruction_tokens": 0,
+      "input_tokens": 1713,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 4171,
+      "output_len": 269
+    },
+    {
+      "index": 657,
+      "token_count": 1160,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 165,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 469
+    },
+    {
+      "index": 658,
+      "token_count": 3443,
+      "instruction_tokens": 0,
+      "input_tokens": 3065,
+      "output_tokens": 369,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1030
+    },
+    {
+      "index": 659,
+      "token_count": 1784,
+      "instruction_tokens": 0,
+      "input_tokens": 1670,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4072,
+      "output_len": 278
+    },
+    {
+      "index": 660,
+      "token_count": 1160,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 165,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 661,
+      "token_count": 3591,
+      "instruction_tokens": 0,
+      "input_tokens": 3065,
+      "output_tokens": 517,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1406
+    },
+    {
+      "index": 662,
+      "token_count": 1964,
+      "instruction_tokens": 0,
+      "input_tokens": 1818,
+      "output_tokens": 137,
+      "instruction_len": 0,
+      "input_len": 4446,
+      "output_len": 373
+    },
+    {
+      "index": 663,
+      "token_count": 1155,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 161,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 468
+    },
+    {
+      "index": 664,
+      "token_count": 3839,
+      "instruction_tokens": 0,
+      "input_tokens": 3061,
+      "output_tokens": 769,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 2025
+    },
+    {
+      "index": 665,
+      "token_count": 2205,
+      "instruction_tokens": 0,
+      "input_tokens": 2066,
+      "output_tokens": 130,
+      "instruction_len": 0,
+      "input_len": 5066,
+      "output_len": 364
+    },
+    {
+      "index": 666,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 462
+    },
+    {
+      "index": 667,
+      "token_count": 3418,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 347,
+      "instruction_len": 0,
+      "input_len": 11043,
+      "output_len": 975
+    },
+    {
+      "index": 668,
+      "token_count": 1751,
+      "instruction_tokens": 0,
+      "input_tokens": 1645,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 4010,
+      "output_len": 268
+    },
+    {
+      "index": 669,
+      "token_count": 1157,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 468
+    },
+    {
+      "index": 670,
+      "token_count": 3687,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 615,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1837
+    },
+    {
+      "index": 671,
+      "token_count": 2126,
+      "instruction_tokens": 0,
+      "input_tokens": 1914,
+      "output_tokens": 203,
+      "instruction_len": 0,
+      "input_len": 4878,
+      "output_len": 556
+    },
+    {
+      "index": 672,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2483,
+      "output_len": 461
+    },
+    {
+      "index": 673,
+      "token_count": 3410,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 339,
+      "instruction_len": 0,
+      "input_len": 11042,
+      "output_len": 936
+    },
+    {
+      "index": 674,
+      "token_count": 1743,
+      "instruction_tokens": 0,
+      "input_tokens": 1637,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 3970,
+      "output_len": 268
+    },
+    {
+      "index": 675,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 469
+    },
+    {
+      "index": 676,
+      "token_count": 3372,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 299,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 777
+    },
+    {
+      "index": 677,
+      "token_count": 1679,
+      "instruction_tokens": 0,
+      "input_tokens": 1599,
+      "output_tokens": 71,
+      "instruction_len": 0,
+      "input_len": 3819,
+      "output_len": 185
+    },
+    {
+      "index": 678,
+      "token_count": 1154,
+      "instruction_tokens": 0,
+      "input_tokens": 984,
+      "output_tokens": 161,
+      "instruction_len": 0,
+      "input_len": 2484,
+      "output_len": 463
+    },
+    {
+      "index": 679,
+      "token_count": 3906,
+      "instruction_tokens": 0,
+      "input_tokens": 3061,
+      "output_tokens": 836,
+      "instruction_len": 0,
+      "input_len": 11044,
+      "output_len": 2082
+    },
+    {
+      "index": 680,
+      "token_count": 2276,
+      "instruction_tokens": 0,
+      "input_tokens": 2133,
+      "output_tokens": 134,
+      "instruction_len": 0,
+      "input_len": 5118,
+      "output_len": 359
+    },
+    {
+      "index": 681,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 682,
+      "token_count": 3334,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 263,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 715
+    },
+    {
+      "index": 683,
+      "token_count": 1638,
+      "instruction_tokens": 0,
+      "input_tokens": 1561,
+      "output_tokens": 68,
+      "instruction_len": 0,
+      "input_len": 3753,
+      "output_len": 182
+    },
+    {
+      "index": 684,
+      "token_count": 1161,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 165,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 468
+    },
+    {
+      "index": 685,
+      "token_count": 3455,
+      "instruction_tokens": 0,
+      "input_tokens": 3065,
+      "output_tokens": 381,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 1045
+    },
+    {
+      "index": 686,
+      "token_count": 1792,
+      "instruction_tokens": 0,
+      "input_tokens": 1682,
+      "output_tokens": 101,
+      "instruction_len": 0,
+      "input_len": 4086,
+      "output_len": 276
+    },
+    {
+      "index": 687,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 465
+    },
+    {
+      "index": 688,
+      "token_count": 3427,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 354,
+      "instruction_len": 0,
+      "input_len": 11046,
+      "output_len": 994
+    },
+    {
+      "index": 689,
+      "token_count": 1763,
+      "instruction_tokens": 0,
+      "input_tokens": 1654,
+      "output_tokens": 100,
+      "instruction_len": 0,
+      "input_len": 4032,
+      "output_len": 274
+    },
+    {
+      "index": 690,
+      "token_count": 1158,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 163,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 468
+    },
+    {
+      "index": 691,
+      "token_count": 3421,
+      "instruction_tokens": 0,
+      "input_tokens": 3063,
+      "output_tokens": 349,
+      "instruction_len": 0,
+      "input_len": 11049,
+      "output_len": 955
+    },
+    {
+      "index": 692,
+      "token_count": 1754,
+      "instruction_tokens": 0,
+      "input_tokens": 1648,
+      "output_tokens": 97,
+      "instruction_len": 0,
+      "input_len": 3996,
+      "output_len": 274
+    },
+    {
+      "index": 693,
+      "token_count": 1168,
+      "instruction_tokens": 0,
+      "input_tokens": 989,
+      "output_tokens": 170,
+      "instruction_len": 0,
+      "input_len": 2487,
+      "output_len": 469
+    },
+    {
+      "index": 694,
+      "token_count": 3356,
+      "instruction_tokens": 0,
+      "input_tokens": 3070,
+      "output_tokens": 277,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 714
+    },
+    {
+      "index": 695,
+      "token_count": 1680,
+      "instruction_tokens": 0,
+      "input_tokens": 1583,
+      "output_tokens": 88,
+      "instruction_len": 0,
+      "input_len": 3756,
+      "output_len": 222
+    },
+    {
+      "index": 696,
+      "token_count": 1165,
+      "instruction_tokens": 0,
+      "input_tokens": 988,
+      "output_tokens": 168,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 470
+    },
+    {
+      "index": 697,
+      "token_count": 3405,
+      "instruction_tokens": 0,
+      "input_tokens": 3068,
+      "output_tokens": 328,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 955
+    },
+    {
+      "index": 698,
+      "token_count": 1747,
+      "instruction_tokens": 0,
+      "input_tokens": 1632,
+      "output_tokens": 106,
+      "instruction_len": 0,
+      "input_len": 3998,
+      "output_len": 276
+    },
+    {
+      "index": 699,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 467
+    },
+    {
+      "index": 700,
+      "token_count": 3487,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 412,
+      "instruction_len": 0,
+      "input_len": 11048,
+      "output_len": 1090
+    },
+    {
+      "index": 701,
+      "token_count": 1826,
+      "instruction_tokens": 0,
+      "input_tokens": 1714,
+      "output_tokens": 103,
+      "instruction_len": 0,
+      "input_len": 4130,
+      "output_len": 279
+    },
+    {
+      "index": 702,
+      "token_count": 1159,
+      "instruction_tokens": 0,
+      "input_tokens": 986,
+      "output_tokens": 164,
+      "instruction_len": 0,
+      "input_len": 2486,
+      "output_len": 466
+    },
+    {
+      "index": 703,
+      "token_count": 3480,
+      "instruction_tokens": 0,
+      "input_tokens": 3064,
+      "output_tokens": 407,
+      "instruction_len": 0,
+      "input_len": 11047,
+      "output_len": 1123
+    },
+    {
+      "index": 704,
+      "token_count": 1821,
+      "instruction_tokens": 0,
+      "input_tokens": 1707,
+      "output_tokens": 105,
+      "instruction_len": 0,
+      "input_len": 4162,
+      "output_len": 274
+    },
+    {
+      "index": 705,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 469
+    },
+    {
+      "index": 706,
+      "token_count": 3555,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 480,
+      "instruction_len": 0,
+      "input_len": 11050,
+      "output_len": 1359
+    },
+    {
+      "index": 707,
+      "token_count": 1928,
+      "instruction_tokens": 0,
+      "input_tokens": 1782,
+      "output_tokens": 137,
+      "instruction_len": 0,
+      "input_len": 4401,
+      "output_len": 372
+    },
+    {
+      "index": 708,
+      "token_count": 1168,
+      "instruction_tokens": 0,
+      "input_tokens": 989,
+      "output_tokens": 170,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 471
+    },
+    {
+      "index": 709,
+      "token_count": 3572,
+      "instruction_tokens": 0,
+      "input_tokens": 3070,
+      "output_tokens": 493,
+      "instruction_len": 0,
+      "input_len": 11052,
+      "output_len": 1433
+    },
+    {
+      "index": 710,
+      "token_count": 1961,
+      "instruction_tokens": 0,
+      "input_tokens": 1799,
+      "output_tokens": 153,
+      "instruction_len": 0,
+      "input_len": 4477,
+      "output_len": 407
+    },
+    {
+      "index": 711,
+      "token_count": 1153,
+      "instruction_tokens": 0,
+      "input_tokens": 983,
+      "output_tokens": 161,
+      "instruction_len": 0,
+      "input_len": 2480,
+      "output_len": 459
+    },
+    {
+      "index": 712,
+      "token_count": 3558,
+      "instruction_tokens": 0,
+      "input_tokens": 3061,
+      "output_tokens": 488,
+      "instruction_len": 0,
+      "input_len": 11040,
+      "output_len": 1369
+    },
+    {
+      "index": 713,
+      "token_count": 1927,
+      "instruction_tokens": 0,
+      "input_tokens": 1785,
+      "output_tokens": 133,
+      "instruction_len": 0,
+      "input_len": 4401,
+      "output_len": 364
+    },
+    {
+      "index": 714,
+      "token_count": 1156,
+      "instruction_tokens": 0,
+      "input_tokens": 985,
+      "output_tokens": 162,
+      "instruction_len": 0,
+      "input_len": 2485,
+      "output_len": 464
+    },
+    {
+      "index": 715,
+      "token_count": 3512,
+      "instruction_tokens": 0,
+      "input_tokens": 3062,
+      "output_tokens": 441,
+      "instruction_len": 0,
+      "input_len": 11045,
+      "output_len": 1299
+    },
+    {
+      "index": 716,
+      "token_count": 1883,
+      "instruction_tokens": 0,
+      "input_tokens": 1739,
+      "output_tokens": 135,
+      "instruction_len": 0,
+      "input_len": 4336,
+      "output_len": 363
+    },
+    {
+      "index": 717,
+      "token_count": 1162,
+      "instruction_tokens": 0,
+      "input_tokens": 987,
+      "output_tokens": 166,
+      "instruction_len": 0,
+      "input_len": 2488,
+      "output_len": 470
+    },
+    {
+      "index": 718,
+      "token_count": 3603,
+      "instruction_tokens": 0,
+      "input_tokens": 3066,
+      "output_tokens": 528,
+      "instruction_len": 0,
+      "input_len": 11051,
+      "output_len": 1542
+    },
+    {
+      "index": 719,
+      "token_count": 2015,
+      "instruction_tokens": 0,
+      "input_tokens": 1830,
+      "output_tokens": 176,
+      "instruction_len": 0,
+      "input_len": 4585,
+      "output_len": 461
+    }
+  ]
+}

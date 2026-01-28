@@ -1,0 +1,346 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 38,
+    "total_failed": 9,
+    "total_cases": 38,
+    "precision_eligible": 17,
+    "failure_rate": 0.5294117647058824
+  },
+  "cases": [
+    {
+      "index": 7,
+      "user_query": "提供25年全年大慈岩景区的财务数据",
+      "target_tool_name": "get_scenic_spot_revenue",
+      "target_arguments": {
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "search_travel_images",
+        "get_ticket_sales_statistics",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": {
+        "name": "query_quarterly_data",
+        "arguments": {
+          "year": 2025,
+          "quarter": "all",
+          "data_type": "revenue"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "提供25年全年大慈岩景区的财务数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 9,
+      "user_query": "提供25年全年大慈岩景区的财务数据",
+      "target_tool_name": "get_scenic_spot_revenue",
+      "target_arguments": {
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "search_travel_images",
+        "get_ticket_sales_statistics",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "提供25年全年大慈岩景区的财务数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 5
+    },
+    {
+      "index": 12,
+      "user_query": "玉泉寺游客的男女比例大概是多少",
+      "target_tool_name": "analyze_visitor_sources",
+      "target_arguments": {
+        "resort_filter": "玉泉寺",
+        "source_type": "",
+        "analysis_scope": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_proportions",
+        "query_top_rankings",
+        "analyze_visitor_sources",
+        "calculate_revenue_statistics",
+        "compare_resort_performance"
+      ],
+      "predicted_tool": {
+        "name": "analyze_proportions",
+        "arguments": {
+          "proportion_type": "",
+          "resort_filter": "玉泉寺"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "玉泉寺游客的男女比例大概是多少 （工具说明：占比分布统计工具,支持订单量占比、游客来源占比、年龄组占比、客户类型占比、省份分布、产品销售占比等占比统计分析）",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 8
+    },
+    {
+      "index": 16,
+      "user_query": "对比大慈岩和新安江的季度订单",
+      "target_tool_name": "compare_resort_performance",
+      "target_arguments": {
+        "comparison_type": "",
+        "target_entities": []
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_by_time_resort",
+        "compare_by_time_resort",
+        "compare_resort_performance",
+        "query_quarterly_data",
+        "analyze_resort_revenue"
+      ],
+      "predicted_tool": {
+        "name": "query_quarterly_data",
+        "arguments": {
+          "quarter": "",
+          "year": 2025,
+          "data_type": "orders",
+          "comparison_type": "resort_comparison",
+          "resort_list": [
+            "大慈岩",
+            "新安江"
+          ]
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "对比分析大慈岩和新安江的季度订单，进行景区间对比。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 18,
+      "user_query": "哪个旅行社的订单成交率最高",
+      "target_tool_name": "analyze_travel_agencies",
+      "target_arguments": {
+        "analysis_type": "",
+        "time_period": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_travel_agencies",
+        "analyze_order_statistics",
+        "analyze_order_trends",
+        "query_top_rankings",
+        "get_scenic_spot_revenue"
+      ],
+      "predicted_tool": null,
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "哪个旅行社的订单成交率最高 （工具说明：订单统计分析工具,订单数量统计,支持按客户名称、状态、景区等多维度进行订单统计和分析）",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 29,
+      "user_query": "协议客户 列表查询 按创建时间排序",
+      "target_tool_name": "manage_agreement_customers",
+      "target_arguments": {
+        "query_type": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "manage_agreement_customers",
+        "create_sorted_lists",
+        "rank_orders",
+        "query_historical_periods",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "create_sorted_lists",
+        "arguments": {
+          "entity_type": "customer",
+          "sort_field": "created_time"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "协议客户 列表查询 按创建时间排序",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 30,
+      "user_query": "客户 按创建日期排序 查询前十",
+      "target_tool_name": "query_top_rankings",
+      "target_arguments": {
+        "top_n": 10,
+        "ranking_type": "order_amount"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "query_top_rankings",
+        "create_sorted_lists",
+        "query_historical_periods",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "create_sorted_lists",
+        "arguments": {
+          "entity_type": "customer",
+          "sort_field": "created_time"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "客户 按创建日期排序 查询前十",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 32,
+      "user_query": "景区游客总量统计",
+      "target_tool_name": "query_resort_visitors",
+      "target_arguments": {
+        "query_type": "",
+        "resort_list": [],
+        "time_period": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_by_time_resort",
+        "query_resort_visitors",
+        "manage_resort_resources",
+        "compare_resort_performance",
+        "get_guide_service_statistics"
+      ],
+      "predicted_tool": {
+        "name": "query_by_time_resort",
+        "arguments": {
+          "start_date": "2025-11-01",
+          "end_date": "2025-11-30",
+          "target_object": "游客",
+          "query_type": "数量"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "景区游客总量统计",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 9
+    },
+    {
+      "index": 33,
+      "user_query": "订单金额等值查询",
+      "target_tool_name": "filter_by_amount",
+      "target_arguments": {
+        "filter_type": "",
+        "comparison_operator": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "get_order_details",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "filter_orders_by_conditions",
+        "arguments": {
+          "amount_min": 0,
+          "amount_max": 0,
+          "comparison_operator": "eq"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单金额等值查询",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 15
+    }
+  ]
+}

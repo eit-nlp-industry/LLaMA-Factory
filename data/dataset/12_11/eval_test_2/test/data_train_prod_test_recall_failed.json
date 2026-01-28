@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 36,
+    "total_failed": 1,
+    "total_cases": 36,
+    "failure_rate": 0.027777777777777776
+  },
+  "cases": [
+    {
+      "index": 8,
+      "user_query": "有没有状态是0的\"灵栖洞\"产品？",
+      "target_tool_name": "list_products",
+      "target_arguments": {
+        "keyword": "灵栖洞",
+        "status": 0
+      },
+      "recall@5": 0,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [],
+      "predicted_tool": {
+        "name": "list_products",
+        "arguments": {
+          "query": "灵栖洞",
+          "status": 0
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "有没有状态是0的'灵栖洞'产品？",
+          "source_filter": "jiande",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 23,
+      "retrieval_http_status": 200,
+      "retrieval_response_preview": "{\"jsonrpc\": \"2.0\", \"id\": \"eval_req_001\", \"has_content\": true, \"result\": [{\"content\": \"list_products\\n产品列表查询\\n按关键词、状态和时间范围筛选产品列表，支持排序与分页，输出固定表格。\", \"relevance_score\": 0.5035, \"source\": \"IndependentVector\", \"relevance_level\": \"中等相关性\", \"metadata\": {\"source\": \"independent_tools_api\", \"tool_list_url\": \"http://125.122.38.32:9527/v1/databoard/tools/list\", \"tool_index\": 9, \"tool_name\": \"list_products\", \"chinese_name\": \"产品列表查询\", \"full_json\": \"{\\n  \\\"name\\\": \\\"list_products\\\",\\n  \\\"chinese_name\\\": \\\"产品列表查询\\\",\\n  \\\"description\\\": \\\"按关键词、状态和时间范围筛选产品列表，支持排序与分页，输出固定表格。\\\",\\n  \\\"category\\\": \\\"listing\\\",\\n  \\\"enabled\\\": true,\\n  \\\"source\\\": \\\"internal_service\\\",\\n  \\\"inputSchema\\\": {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n      \\\"keyword\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"keyword\\\"\\n      },\\n      \\\"status\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"label\\\": \\\"status\\\"\\n      },\\n      \\\"time_start\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"time_start\\\"\\n      },\\n      \\\"time_end\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"label\\\": \\\"time_end\\\"\\n      },\\n      \\\"sort\\\": {\\n        \\\"type\\\": \\\"object\\\",\\n        \\\"properties\\\": {\\n          \\\"field\\\": {\\n            \\\"type\\\": \\\"string\\\",\\n            \\\"default\\\": \\\"create_time\\\"\\n          },\\n          \\\"descending\\\": {\\n            \\\"type\\\": \\\"boolean\\\",\\n            \\\"default\\\": true\\n          }\\n        },\\n        \\\"label\\\": \\\"sort\\\"\\n      },\\n      \\\"limit\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"minimum\\\": 1,\\n        \\\"default\\\": 50,\\n        \\\"label\\\": \\\"limit\\\"\\n      },\\n      \\\"offset\\\": {\\n        \\\"type\\\": \\\"integer\\\",\\n        \\\"minimum\\\": 0,\\n        \\\"default\\\": 0,\\n        \\\"label\\\": \\\"offset\\\"\\n      }\\n    }\\n  }\\n}\", \"_id\": \"b1ac9908-97ce-4ba0-823a-88503e3df92b\", \"_collection_name\": \"independent_tools_collection\"}}, {\"content\": \"analyze_products\\n产品统计分析\\n对产品数据进行分组、聚合、时间分桶、趋势分析与可视化，支持按产品状态等维度统计。\", \"relevance_score\": 0.4479, \"source\": \"IndependentV"
+    }
+  ]
+}

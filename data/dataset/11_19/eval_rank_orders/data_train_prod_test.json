@@ -1,0 +1,4535 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 63,
+    "metrics": {
+      "total": 63,
+      "recall@5": 1.0,
+      "precision@1": 0.8412698412698413,
+      "precision_denominator": 63,
+      "arg_accuracy": 0.32075471698113206,
+      "arg_denominator": 53
+    }
+  },
+  "cases": [
+    {
+      "index": 0,
+      "user_query": "我想问问，2025年8月订单数量最少的客户是哪家？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 1,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 1,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我想问问，2025年8月订单数量最少的客户是哪家？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 38
+    },
+    {
+      "index": 1,
+      "user_query": "请帮我查一下2025年7月1日到15日这段时间里，哪些产品的订单金额最低，排在前五名的有哪些。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-15"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-15"
+          },
+          "predict": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-15"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": "product",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_orders_by_conditions",
+        "create_sorted_lists",
+        "filter_by_amount",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-15"
+          },
+          "entity_type": "product"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请帮我查一下2025年7月1日到15日这段时间里，哪些产品的订单金额最低，排在前五名的有哪些。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 34
+    },
+    {
+      "index": 2,
+      "user_query": "请查一下2025年8月订单数量最多的客户，并展示他们的详细信息。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer",
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-17"
+          },
+          "match": false
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "include_details": {
+          "target": true,
+          "predict": true,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "manage_customer_basic",
+        "rank_orders",
+        "analyze_order_statistics",
+        "analyze_travel_agencies",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-17"
+          },
+          "entity_type": "customer",
+          "include_details": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请查一下2025年8月订单数量最多的客户，并展示他们的详细信息。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 62
+    },
+    {
+      "index": 3,
+      "user_query": "在严州古城，今年7月到8月期间，哪些商品的订单金额最低？请列出前五名。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "严州古城",
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "严州古城",
+          "predict": "严州古城",
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": "product",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "filter_orders_by_conditions",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-08-31"
+          },
+          "resort_filter": "严州古城",
+          "entity_type": "product"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "在严州古城，今年7月到8月期间，哪些商品的订单金额最低？请列出前五名。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 46
+    },
+    {
+      "index": 4,
+      "user_query": "今年上半年订单数量最多的前10位客户是哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "query_monthly_data",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-06-30"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "今年上半年订单数量最多的前10位客户是哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 136
+    },
+    {
+      "index": 5,
+      "user_query": "帮我看看2025年7月在大慈岩，哪个产品的订单数量最少。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 1,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "resort_filter": "大慈岩",
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 1,
+          "predict": 1,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31"
+          },
+          "predict": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "大慈岩",
+          "predict": "大慈岩",
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": "product",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_travel_agencies",
+        "get_ranked_by_time_resort",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 1,
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31"
+          },
+          "resort_filter": "大慈岩",
+          "entity_type": "product"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我看看2025年7月在大慈岩，哪个产品的订单数量最少。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 7,
+      "error": "timeout after 30s"
+    },
+    {
+      "index": 6,
+      "user_query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-08-17"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_travel_agencies",
+        "rank_orders",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "analyze_travel_agencies",
+        "arguments": {
+          "analysis_type": "top_orders",
+          "time_period": "monthly",
+          "year": 2025,
+          "month": 8,
+          "top_n": 5,
+          "metric": "order_count"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "请帮我列出2025年8月1日到8月17日期间，订单数量最多的前5位客户。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 84
+    },
+    {
+      "index": 7,
+      "user_query": "我想了解一下，2025年7月收入排名前三的客户是谁。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 3,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "query_top_rankings",
+        "get_ranked_by_time_resort",
+        "rank_orders",
+        "analyze_visitor_sources"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "revenue",
+          "include_ranking": true,
+          "top_n": 3,
+          "month_filter": 7
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我想了解一下，2025年7月收入排名前三的客户是谁。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 29
+    },
+    {
+      "index": 8,
+      "user_query": "今年哪个产品为我们创造了最高的收入？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 1,
+        "entity_type": "product",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        }
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "query_annual_data",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "product",
+          "metric": "revenue",
+          "time_filter": {
+            "start_date": "2025-01-01",
+            "end_date": "2025-10-31"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "今年哪个产品为我们创造了最高的收入？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 30
+    },
+    {
+      "index": 9,
+      "user_query": "帮我查一下2025年7月10日到8月10日这段时间里，订单金额最高的前三名客户。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 3,
+        "time_filter": {
+          "start_date": "2025-07-10",
+          "end_date": "2025-08-10"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 3,
+          "predict": 3,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-10",
+            "end_date": "2025-08-10"
+          },
+          "predict": {
+            "start_date": "2025-07-10",
+            "end_date": "2025-08-10"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "query_top_rankings",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 3,
+          "time_filter": {
+            "start_date": "2025-07-10",
+            "end_date": "2025-08-10"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我查一下2025年7月10日到8月10日这段时间里，订单金额最高的前三名客户。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 93
+    },
+    {
+      "index": 10,
+      "user_query": "哪个客户的订单数量最多？请列出前10名。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "哪个客户的订单数量最多？请列出前10名。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 137
+    },
+    {
+      "index": 11,
+      "user_query": "帮我查一下2025年6月到8月期间，大慈岩景区客户下单数量最多的订单情况",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "大慈岩",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "大慈岩",
+          "predict": "大慈岩",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_travel_agencies",
+        "analyze_order_statistics",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "resort_filter": "大慈岩"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我查一下2025年6月到8月期间，大慈岩景区客户下单数量最多的订单情况",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 37
+    },
+    {
+      "index": 12,
+      "user_query": "2025年7月15日到9月12日，景澜酒店客户下单最少的是那些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-15",
+          "end_date": "2025-09-12"
+        },
+        "resort_filter": "景澜酒店",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 10,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "景澜酒店",
+          "predict": "景澜酒店",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_customer_segments",
+        "find_extreme_values",
+        "filter_orders_by_conditions",
+        "analyze_team_scales"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "resort_filter": "景澜酒店",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月15日到9月12日，景澜酒店客户下单最少的是那些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 75
+    },
+    {
+      "index": 13,
+      "user_query": "2025年第二季度，雷迪森酒店客户下单金额最高的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "resort_filter": "雷迪森酒店",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "雷迪森酒店",
+          "predict": "雷迪森酒店",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "order",
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "resort_filter": "雷迪森酒店",
+          "entity_type": "order",
+          "include_details": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第二季度，雷迪森酒店客户下单金额最高的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35
+    },
+    {
+      "index": 14,
+      "user_query": "2025年8月1日到10月22日，汉庭酒店客户下单金额最低的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "resort_filter": "汉庭酒店",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "汉庭酒店",
+          "predict": "汉庭酒店",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "analyze_customer_segments",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "entity_type": "customer",
+          "resort_filter": "汉庭酒店",
+          "include_details": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年8月1日到10月22日，汉庭酒店客户下单金额最低的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 56
+    },
+    {
+      "index": 15,
+      "user_query": "2025年5-6月，交运公司客户下单数量最多的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-05-01",
+          "end_date": "2025-06-30"
+        },
+        "resort_filter": "交运公司",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "交运公司",
+          "predict": null,
+          "match": false
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_order_statistics",
+        "analyze_travel_agencies",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "entity_type": "customer",
+          "include_details": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年5-6月，交运公司客户下单数量最多的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 87
+    },
+    {
+      "index": 16,
+      "user_query": "2025年7月17日到9月12日，严州古城客户下单金额最高的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-17",
+          "end_date": "2025-09-12"
+        },
+        "resort_filter": "严州古城",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "严州古城",
+          "predict": "严州古城",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "resort_filter": "严州古城",
+          "entity_type": "customer",
+          "include_details": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月17日到9月12日，严州古城客户下单金额最高的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 150
+    },
+    {
+      "index": 17,
+      "user_query": "2025年6月到8月，千鹤妇女精神教育基地客户下单数量最少的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "千鹤妇女精神教育基地",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 8,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "千鹤妇女精神教育基地",
+          "predict": "千鹤妇女精神教育基地",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "find_extreme_values",
+        "create_sorted_lists",
+        "analyze_travel_agencies",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 8,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "resort_filter": "千鹤妇女精神教育基地",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月，千鹤妇女精神教育基地客户下单数量最少的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 66
+    },
+    {
+      "index": 18,
+      "user_query": "2025年第二季度，新安江客户下单金额最低的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "resort_filter": "新安江",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "新安江",
+          "predict": "新安江",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "analyze_order_statistics",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "resort_filter": "新安江",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第二季度，新安江客户下单金额最低的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 104
+    },
+    {
+      "index": 19,
+      "user_query": "2025年第三季度，三都渔村客户下单金额最高的订单有哪些？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30"
+        },
+        "resort_filter": "三都渔村",
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "predict": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "三都渔村",
+          "predict": "三都渔村",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_order_statistics",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "resort_filter": "三都渔村",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第三季度，三都渔村客户下单金额最高的订单有哪些？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 55
+    },
+    {
+      "index": 20,
+      "user_query": "帮我查一下2025年6月到8月期间客户订单数量最多的前10名",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_travel_agencies",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我查一下2025年6月到8月期间客户订单数量最多的前10名",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 144
+    },
+    {
+      "index": 21,
+      "user_query": "最近想看看2025年7月15日到9月12日客户订单金额最低的前5个",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-15",
+          "end_date": "2025-09-12"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "create_sorted_lists",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "最近想看看2025年7月15日到9月12日客户订单金额最低的前5个",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 196
+    },
+    {
+      "index": 22,
+      "user_query": "2025年第二季度客户订单收入最高的前10个客户是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "query_monthly_data",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第二季度客户订单收入最高的前10个客户是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 65
+    },
+    {
+      "index": 23,
+      "user_query": "2025年8月1日到10月22日客户订单数量最少的前5个客户有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "create_sorted_lists",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "minimum",
+          "target_entity": "customer",
+          "metric": "order_count",
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "bottom_n": 5,
+          "include_zero": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年8月1日到10月22日客户订单数量最少的前5个客户有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 78
+    },
+    {
+      "index": 24,
+      "user_query": "2025年5-6月客户订单金额最高的前10个客户是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-05-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "query_top_rankings",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-05-01",
+            "end_date": "2025-06-30"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年5-6月客户订单金额最高的前10个客户是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 86
+    },
+    {
+      "index": 25,
+      "user_query": "2025年7月17日到9月12日客户订单收入最低的前5个客户有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-17",
+          "end_date": "2025-09-12"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_revenue",
+          "match": false
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "query_monthly_data",
+        "query_top_rankings",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_revenue",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月17日到9月12日客户订单收入最低的前5个客户有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 167
+    },
+    {
+      "index": 26,
+      "user_query": "2025年第二季度客户订单数量最多的前10个客户是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "find_extreme_values",
+        "manage_customer_basic",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第二季度客户订单数量最多的前10个客户是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 152
+    },
+    {
+      "index": 27,
+      "user_query": "2025年8月1日到10月22日客户订单金额最低的前5个客户有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "lowest_amount",
+          "predict": "lowest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "create_sorted_lists",
+        "query_monthly_data",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "lowest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年8月1日到10月22日客户订单金额最低的前5个客户有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 87
+    },
+    {
+      "index": 28,
+      "user_query": "2025年6月到8月客户订单收入最高的前10个客户是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "query_top_rankings",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月客户订单收入最高的前10个客户是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 60
+    },
+    {
+      "index": 29,
+      "user_query": "2025年7月15日到9月12日客户订单数量最少的前5个客户有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-07-15",
+          "end_date": "2025-09-12"
+        },
+        "entity_type": "customer"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "manage_customer_basic",
+        "find_extreme_values",
+        "get_ranked_by_time_resort",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 5,
+          "entity_type": "customer",
+          "time_filter": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          }
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月15日到9月12日客户订单数量最少的前5个客户有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 100
+    },
+    {
+      "index": 30,
+      "user_query": "2025年6月到8月期间，产品收入最高的前5名是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 5,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "find_extreme_values",
+        "query_top_rankings",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "query_top_rankings",
+        "arguments": {
+          "ranking_type": "resource_revenue",
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "top_n": 5,
+          "trace_id": "eval_20251121_140511"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月期间，产品收入最高的前5名是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 86
+    },
+    {
+      "index": 31,
+      "user_query": "2025年第三季度，产品销售额最低的前10名有哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "lowest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-09-30"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "find_extreme_values",
+        "manage_products",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "minimum",
+          "target_entity": "product",
+          "metric": "revenue",
+          "time_filter": {
+            "start_date": "2025-07-01",
+            "end_date": "2025-09-30"
+          },
+          "bottom_n": 10
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第三季度，产品销售额最低的前10名有哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 32,
+      "user_query": "2025年6月到8月，产品订单数量最少的前10名是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "entity_type": "product"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": "product",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "create_sorted_lists",
+        "find_extreme_values",
+        "analyze_travel_agencies",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "entity_type": "product"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月，产品订单数量最少的前10名是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 33
+    },
+    {
+      "index": 33,
+      "user_query": "帮我查查2025年7月15日到8月15日大慈岩的订单金额排名前10",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-15",
+          "end_date": "2025-08-15"
+        },
+        "resort_filter": "大慈岩",
+        "entity_type": "order",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-08-15"
+          },
+          "predict": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-08-15"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "大慈岩",
+          "predict": "大慈岩",
+          "match": true
+        },
+        "entity_type": {
+          "target": "order",
+          "predict": null,
+          "match": false
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "query_top_rankings",
+        "filter_by_amount",
+        "create_sorted_lists",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-08-15"
+          },
+          "resort_filter": "大慈岩"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我查查2025年7月15日到8月15日大慈岩的订单金额排名前10",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 40
+    },
+    {
+      "index": 34,
+      "user_query": "2025年6月到8月期间，汉庭酒店的订单数量最少的是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "least_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "汉庭酒店",
+        "entity_type": "order",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "least_orders",
+          "predict": "least_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "汉庭酒店",
+          "predict": "汉庭酒店",
+          "match": true
+        },
+        "entity_type": {
+          "target": "order",
+          "predict": null,
+          "match": false
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_travel_agencies",
+        "query_by_time_resort",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "least_orders",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "resort_filter": "汉庭酒店"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月期间，汉庭酒店的订单数量最少的是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 37
+    },
+    {
+      "index": 35,
+      "user_query": "2025年8月1日到10月22日，雷迪森酒店的订单金额最高的是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "resort_filter": "雷迪森酒店",
+        "entity_type": "order",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "雷迪森酒店",
+          "predict": "雷迪森",
+          "match": false
+        },
+        "entity_type": {
+          "target": "order",
+          "predict": null,
+          "match": false
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_team_scales",
+        "analyze_travel_agencies",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "resort_filter": "雷迪森"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年8月1日到10月22日，雷迪森酒店的订单金额最高的是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 44
+    },
+    {
+      "index": 36,
+      "user_query": "2025年第二季度，景澜酒店的订单收入最高的是哪些客户",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-04-01",
+          "end_date": "2025-06-30"
+        },
+        "resort_filter": "景澜酒店",
+        "entity_type": "customer",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "predict": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "景澜酒店",
+          "predict": "景澜酒店",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "include_details": {
+          "target": false,
+          "predict": true,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_visitor_sources",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-04-01",
+            "end_date": "2025-06-30"
+          },
+          "resort_filter": "景澜酒店",
+          "entity_type": "customer",
+          "include_details": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年第二季度，景澜酒店的订单收入最高的是哪些客户",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 72
+    },
+    {
+      "index": 37,
+      "user_query": "2025年7月17日到9月12日，严州古城的订单数量最多的是哪些客户",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-17",
+          "end_date": "2025-09-12"
+        },
+        "resort_filter": "严州古城",
+        "entity_type": "customer",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "严州古城",
+          "predict": "严州古城",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "query_monthly_data",
+        "analyze_travel_agencies",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-17",
+            "end_date": "2025-09-12"
+          },
+          "resort_filter": "严州古城",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月17日到9月12日，严州古城的订单数量最多的是哪些客户",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 76
+    },
+    {
+      "index": 38,
+      "user_query": "2025年6月到8月，千岛湖好运岛的订单金额最高的是哪些",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_amount",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-31"
+        },
+        "resort_filter": "千岛湖好运岛",
+        "entity_type": "order",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_amount",
+          "predict": "highest_amount",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "千岛湖好运岛",
+          "predict": "千岛湖好运岛",
+          "match": true
+        },
+        "entity_type": {
+          "target": "order",
+          "predict": "order",
+          "match": true
+        },
+        "include_details": {
+          "target": false,
+          "predict": false,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "analyze_team_scales",
+        "find_extreme_values",
+        "analyze_travel_agencies"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_amount",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-31"
+          },
+          "resort_filter": "千岛湖好运岛",
+          "entity_type": "order",
+          "include_details": false
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年6月到8月，千岛湖好运岛的订单金额最高的是哪些",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 51
+    },
+    {
+      "index": 39,
+      "user_query": "在玉泉寺景区，8月1日到10月22日哪些客户的订单收入最高？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-08-01",
+          "end_date": "2025-10-22"
+        },
+        "resort_filter": "玉泉寺",
+        "entity_type": "customer",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "predict": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "玉泉寺",
+          "predict": "玉泉寺",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_order_statistics",
+        "analyze_resort_revenue",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-08-01",
+            "end_date": "2025-10-22"
+          },
+          "resort_filter": "玉泉寺",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "在玉泉寺景区，8月1日到10月22日哪些客户的订单收入最高？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 39
+    },
+    {
+      "index": 40,
+      "user_query": "2025年7月15日到9月12日，三都渔村的订单数量最多的是哪些客户",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "most_orders",
+        "top_n": 10,
+        "time_filter": {
+          "start_date": "2025-07-15",
+          "end_date": "2025-09-12"
+        },
+        "resort_filter": "三都渔村",
+        "entity_type": "customer",
+        "include_details": false
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "most_orders",
+          "predict": "most_orders",
+          "match": true
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 5,
+          "match": false
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "predict": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "match": true
+        },
+        "resort_filter": {
+          "target": "三都渔村",
+          "predict": "三都渔村",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "include_details": {
+          "target": false,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "query_monthly_data",
+        "analyze_travel_agencies",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "most_orders",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-07-15",
+            "end_date": "2025-09-12"
+          },
+          "resort_filter": "三都渔村",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年7月15日到9月12日，三都渔村的订单数量最多的是哪些客户",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 60
+    },
+    {
+      "index": 41,
+      "user_query": "检查一下大慈岩景区的运营状态是否出现异常，设置阈值为30",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "大慈岩",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 30,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "大慈岩",
+          "predict": "大慈岩",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 30,
+          "predict": 30,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "find_extreme_values",
+        "manage_order_status",
+        "filter_by_status",
+        "analyze_product_sales"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "大慈岩",
+          "alert_threshold": 30
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "检查一下大慈岩景区的运营状态是否出现异常，设置阈值为30",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 21
+    },
+    {
+      "index": 42,
+      "user_query": "看看严州古城的运营状态有没有超过阈值，设为25",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "严州古城",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 25,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "严州古城",
+          "predict": "严州古城",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 25,
+          "predict": 25,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "calculate_business_metrics",
+        "find_extreme_values",
+        "filter_by_status",
+        "manage_order_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "严州古城",
+          "alert_threshold": 25
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "看看严州古城的运营状态有没有超过阈值，设为25",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 43,
+      "user_query": "看看导服中心的运营状态有没有异常，设置阈值为20",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "导服中心",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 20,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "导服中心",
+          "predict": "导服中心",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 20,
+          "predict": 20,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "find_extreme_values",
+        "manage_order_status",
+        "analyze_product_sales",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "导服中心",
+          "alert_threshold": 20
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "看看导服中心的运营状态有没有异常，设置阈值为20",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 18
+    },
+    {
+      "index": 44,
+      "user_query": "监控一下三都渔村的运营状态，设置阈值为28",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "三都渔村",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 28,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "三都渔村",
+          "predict": "三都渔村",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 28,
+          "predict": 28,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_complex_conditions",
+        "calculate_business_metrics",
+        "manage_order_status",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "三都渔村",
+          "alert_threshold": 28
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "监控一下三都渔村的运营状态，设置阈值为28",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 45,
+      "user_query": "检查一下玉泉寺的运营状态是否超过阈值，设为32",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "玉泉寺",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 32,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "玉泉寺",
+          "predict": "玉泉寺",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 32,
+          "predict": 32,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_complex_conditions",
+        "find_extreme_values",
+        "manage_order_status",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "玉泉寺",
+          "alert_threshold": 32
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "检查一下玉泉寺的运营状态是否超过阈值，设为32",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 46,
+      "user_query": "看看千鹤妇女精神教育基地的运营状态有没有异常，设置阈值为22",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "千鹤妇女精神教育基地",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 22,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "千鹤妇女精神教育基地",
+          "predict": "千鹤妇女精神教育基地",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 22,
+          "predict": 22,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "find_extreme_values",
+        "manage_order_status",
+        "analyze_product_sales",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "千鹤妇女精神教育基地",
+          "alert_threshold": 22
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "看看千鹤妇女精神教育基地的运营状态有没有异常，设置阈值为22",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 28
+    },
+    {
+      "index": 47,
+      "user_query": "监控一下新叶古村的运营状态，设置阈值为27",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "新叶古村",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 27,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "operational_status",
+          "predict": "operational_status",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "新叶古村",
+          "predict": "新叶古村",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "time_scope": {
+          "target": "current_month",
+          "predict": null,
+          "match": false
+        },
+        "time_filter": {
+          "target": null,
+          "predict": null,
+          "match": true
+        },
+        "include_trends": {
+          "target": false,
+          "predict": null,
+          "match": false
+        },
+        "alert_threshold": {
+          "target": 27,
+          "predict": 27,
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_complex_conditions",
+        "find_extreme_values",
+        "manage_order_status",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "operational_status",
+          "resort_filter": "新叶古村",
+          "alert_threshold": 27
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "监控一下新叶古村的运营状态，设置阈值为27",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 24
+    },
+    {
+      "index": 48,
+      "user_query": "检查一下汉庭酒店的运营状态是否超过阈值，设为33",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "operational_status",
+        "resort_filter": "汉庭酒店",
+        "status_filter": "all",
+        "time_scope": "current_month",
+        "time_filter": null,
+        "include_trends": false,
+        "alert_threshold": 33,
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "find_extreme_values",
+        "calculate_business_metrics",
+        "manage_order_status",
+        "filter_by_status"
+      ],
+      "predicted_tool": {
+        "name": "find_extreme_values",
+        "arguments": {
+          "extreme_type": "maximum",
+          "target_entity": "resort",
+          "metric": "operational_status",
+          "threshold": 33,
+          "analysis_reason": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "检查一下汉庭酒店的运营状态是否超过阈值，设为33",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35
+    },
+    {
+      "index": 49,
+      "user_query": "实时查看今天各景区的订单状态和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": "all",
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_and_generate_chart",
+        "query_orders_by_time",
+        "query_realtime_today",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "status_filter": "all",
+          "time_scope": "real_time",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时查看今天各景区的订单状态和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 37
+    },
+    {
+      "index": 50,
+      "user_query": "看看最近1小时各景区的实时业务数据",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 1,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": "all",
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": "status",
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "analyze_travel_agencies",
+        "monitor_business_operations",
+        "query_resort_visitors",
+        "query_historical_periods",
+        "query_realtime_today"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "status_filter": "all",
+          "group_by": "status"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "看看最近1小时各景区的实时业务数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 22
+    },
+    {
+      "index": 51,
+      "user_query": "实时统计今日各景区的订单量和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": "all",
+          "match": true
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_travel_agencies",
+        "analyze_and_generate_chart",
+        "query_realtime_today",
+        "query_resort_visitors"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "status_filter": "all",
+          "time_scope": "real_time",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时统计今日各景区的订单量和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 52,
+      "user_query": "我要实时查看各景区的订单状态和趋势，请帮我查询一下",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_travel_agencies",
+        "query_orders_by_time",
+        "query_realtime_today",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我要实时查看各景区的订单状态和趋势，请帮我查询一下",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 33
+    },
+    {
+      "index": 53,
+      "user_query": "实时统计各景区的订单量和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_travel_agencies",
+        "analyze_and_generate_chart",
+        "query_resort_visitors",
+        "query_realtime_today"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时统计各景区的订单量和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 54,
+      "user_query": "查看各景区的实时业务数据和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_travel_agencies",
+        "query_historical_periods",
+        "query_resort_visitors",
+        "query_realtime_today"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "include_trends": true,
+          "resort_filter": "all"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查看各景区的实时业务数据和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 55,
+      "user_query": "实时查看各景区的订单状态和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_and_generate_chart",
+        "calculate_order_distribution",
+        "query_realtime_today",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时查看各景区的订单状态和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 25
+    },
+    {
+      "index": 56,
+      "user_query": "实时统计各景区的订单量和趋势",
+      "target_tool_name": "monitor_business_operations",
+      "target_arguments": {
+        "monitoring_type": "real_time_metrics",
+        "status_filter": "all",
+        "group_by": "status"
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "monitoring_type": {
+          "target": "real_time_metrics",
+          "predict": "real_time_metrics",
+          "match": true
+        },
+        "status_filter": {
+          "target": "all",
+          "predict": null,
+          "match": false
+        },
+        "group_by": {
+          "target": "status",
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "monitor_business_operations",
+        "analyze_travel_agencies",
+        "analyze_and_generate_chart",
+        "query_resort_visitors",
+        "query_realtime_today"
+      ],
+      "predicted_tool": {
+        "name": "monitor_business_operations",
+        "arguments": {
+          "monitoring_type": "real_time_metrics",
+          "include_trends": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "实时统计各景区的订单量和趋势",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 21
+    },
+    {
+      "index": 57,
+      "user_query": "我想知道大慈岩景区3月份哪些客户的订单总收入最高？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "customer",
+        "resort_filter": "大慈岩",
+        "time_filter": {
+          "start_date": "2025-03-01",
+          "end_date": "2025-03-31"
+        },
+        "top_n": 5,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": null,
+          "match": false
+        },
+        "resort_filter": {
+          "target": "大慈岩",
+          "predict": "大慈岩",
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-03-01",
+            "end_date": "2025-03-31"
+          },
+          "predict": {
+            "start_date": "2025-03-01",
+            "end_date": "2025-03-31"
+          },
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "include_details": {
+          "target": true,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "analyze_order_statistics",
+        "query_top_rankings",
+        "find_extreme_values",
+        "analyze_resort_revenue"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-03-01",
+            "end_date": "2025-03-31"
+          },
+          "resort_filter": "大慈岩"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "我想知道大慈岩景区3月份哪些客户的订单总收入最高？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 35
+    },
+    {
+      "index": 58,
+      "user_query": "6到9月哪些客户的订单收入在千岛湖好运岛景区最高，为我查询前五个？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "customer",
+        "resort_filter": "千岛湖好运岛",
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-09-30"
+        },
+        "top_n": 5,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "entity_type": {
+          "target": "customer",
+          "predict": "customer",
+          "match": true
+        },
+        "resort_filter": {
+          "target": "千岛湖好运岛",
+          "predict": "千岛湖好运岛",
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-09-30"
+          },
+          "predict": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-09-30"
+          },
+          "match": true
+        },
+        "top_n": {
+          "target": 5,
+          "predict": 5,
+          "match": true
+        },
+        "include_details": {
+          "target": true,
+          "predict": null,
+          "match": false
+        }
+      },
+      "retrieved_top5": [
+        "rank_orders",
+        "query_monthly_data",
+        "query_top_rankings",
+        "find_extreme_values",
+        "get_ranked_by_time_resort"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 5,
+          "time_filter": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-09-30"
+          },
+          "resort_filter": "千岛湖好运岛",
+          "entity_type": "customer"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "6到9月哪些客户的订单收入在千岛湖好运岛景区最高，为我查询前五个？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 142
+    },
+    {
+      "index": 59,
+      "user_query": "2025年全年在大慈岩景区哪些客户的订单收入是最高的？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "customer",
+        "resort_filter": "大慈岩",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        },
+        "top_n": 10,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "find_extreme_values",
+        "analyze_resort_revenue",
+        "filter_by_amount"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "customers",
+          "resort_filter": "大慈岩",
+          "include_ranking": true,
+          "top_n": 5
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年全年在大慈岩景区哪些客户的订单收入是最高的？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 97
+    },
+    {
+      "index": 60,
+      "user_query": "帮我看看2025年7月在大慈岩，哪些产品的收入最高。",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "product",
+        "resort_filter": "大慈岩",
+        "time_filter": {
+          "start_date": "2025-07-01",
+          "end_date": "2025-07-31"
+        },
+        "top_n": 5,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_resort_revenue",
+        "rank_orders",
+        "analyze_team_scales",
+        "find_extreme_values",
+        "query_top_rankings"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resort_revenue",
+        "arguments": {
+          "analysis_type": "highest_product",
+          "time_period": "monthly",
+          "year": 2025,
+          "specific_date": "2025-07-01 到 2025-07-31",
+          "resort_list": [
+            "大慈岩"
+          ]
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "帮我看看2025年7月在大慈岩，哪些产品的收入最高。",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 61,
+      "user_query": "2025年全年哪些产品的收入最高？我需要详细信息",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "product",
+        "time_filter": {
+          "start_date": "2025-01-01",
+          "end_date": "2025-12-31"
+        },
+        "top_n": 10,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_annual_data",
+        "analyze_resort_revenue",
+        "rank_orders",
+        "calculate_revenue_statistics",
+        "find_extreme_values"
+      ],
+      "predicted_tool": {
+        "name": "analyze_resort_revenue",
+        "arguments": {
+          "analysis_type": "highest_product",
+          "time_period": "annual",
+          "year": 2025,
+          "include_visitor_count": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "2025年全年哪些产品的收入最高？我需要详细信息",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 54
+    },
+    {
+      "index": 62,
+      "user_query": "从25年6月1日到8月1日，哪些产品的收入最高？",
+      "target_tool_name": "rank_orders",
+      "target_arguments": {
+        "ranking_type": "highest_revenue",
+        "entity_type": "product",
+        "time_filter": {
+          "start_date": "2025-06-01",
+          "end_date": "2025-08-01"
+        },
+        "top_n": 10,
+        "include_details": true
+      },
+      "recall@5": 1,
+      "arg_match": 0,
+      "arg_match_details": {
+        "ranking_type": {
+          "target": "highest_revenue",
+          "predict": "highest_revenue",
+          "match": true
+        },
+        "entity_type": {
+          "target": "product",
+          "predict": "product",
+          "match": true
+        },
+        "time_filter": {
+          "target": {
+            "start_date": "2025-06-01",
+            "end_date": "2025-08-01"
+          },
+          "predict": {
+            "start_date": "2025-6-1",
+            "end_date": "2025-8-1"
+          },
+          "match": false
+        },
+        "top_n": {
+          "target": 10,
+          "predict": 10,
+          "match": true
+        },
+        "include_details": {
+          "target": true,
+          "predict": true,
+          "match": true
+        }
+      },
+      "retrieved_top5": [
+        "query_annual_data",
+        "rank_orders",
+        "analyze_resort_revenue",
+        "find_extreme_values",
+        "analyze_visitor_sources"
+      ],
+      "predicted_tool": {
+        "name": "rank_orders",
+        "arguments": {
+          "ranking_type": "highest_revenue",
+          "top_n": 10,
+          "time_filter": {
+            "start_date": "2025-6-1",
+            "end_date": "2025-8-1"
+          },
+          "entity_type": "product",
+          "include_details": true
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "从25年6月1日到8月1日，哪些产品的收入最高？",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 44
+    }
+  ]
+}

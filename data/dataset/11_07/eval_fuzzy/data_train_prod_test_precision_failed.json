@@ -1,0 +1,320 @@
+{
+  "summary": {
+    "api": "http://125.122.38.32:8085/mcp_end2end/stream",
+    "user_id": "1",
+    "start_idx": 0,
+    "end_idx": 38,
+    "total_failed": 8,
+    "total_cases": 38,
+    "precision_eligible": 16,
+    "failure_rate": 0.5
+  },
+  "cases": [
+    {
+      "index": 1,
+      "user_query": "查询订单",
+      "target_tool_name": "query_orders_by_time",
+      "target_arguments": {
+        "start_date": "2025-11-01",
+        "end_date": "2025-11-31",
+        "time_range_type": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_realtime_today",
+        "get_order_details",
+        "rank_orders",
+        "query_orders_by_time",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "query_realtime_today",
+        "arguments": {
+          "query_type": "orders"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "查询订单",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 26
+    },
+    {
+      "index": 7,
+      "user_query": "提供25年全年大慈岩景区的财务数据",
+      "target_tool_name": "get_scenic_spot_revenue",
+      "target_arguments": {
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "search_travel_images",
+        "get_ticket_sales_statistics",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": {
+        "name": "query_quarterly_data",
+        "arguments": {
+          "year": 2025,
+          "quarter": "all",
+          "data_type": "revenue"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "提供25年全年大慈岩景区的财务数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 14
+    },
+    {
+      "index": 9,
+      "user_query": "提供25年全年大慈岩景区的财务数据",
+      "target_tool_name": "get_scenic_spot_revenue",
+      "target_arguments": {
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "search_travel_images",
+        "get_ticket_sales_statistics",
+        "query_quarterly_data",
+        "get_scenic_spot_revenue",
+        "manage_resort_resources"
+      ],
+      "predicted_tool": {
+        "name": "query_annual_data",
+        "arguments": {
+          "year": 2025,
+          "data_type": "revenue",
+          "resort_filter": "大慈岩",
+          "period": "full_year"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "提供25年全年大慈岩景区的财务数据",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 42
+    },
+    {
+      "index": 17,
+      "user_query": "统计一级资源下所有类别的资源数量",
+      "target_tool_name": "generate_statistics",
+      "target_arguments": {
+        "entity_type": "",
+        "group_by_field": "",
+        "statistic_type": "",
+        "target_field": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "query_basic_resources",
+        "count_basic_statistics",
+        "group_by_dimensions",
+        "generate_statistics",
+        "analyze_order_statistics"
+      ],
+      "predicted_tool": {
+        "name": "query_basic_resources",
+        "arguments": {
+          "query_type": "level_statistics",
+          "resource_level": "1",
+          "group_by": "type"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "统计一级资源下所有类别的资源数量",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 27
+    },
+    {
+      "index": 24,
+      "user_query": "时间区间 团队游客来源分布分析",
+      "target_tool_name": "analyze_regional_data",
+      "target_arguments": {
+        "region_type": "",
+        "analysis_target": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "analyze_visitor_sources",
+        "analyze_regional_data",
+        "compare_by_time_resort",
+        "analyze_travel_agencies",
+        "get_scenic_spot_revenue"
+      ],
+      "predicted_tool": {
+        "name": "analyze_visitor_sources",
+        "arguments": {
+          "source_type": "visitor_origin",
+          "analysis_scope": "main_sources",
+          "visitor_category": "team",
+          "target_date": "2025-10-26",
+          "time_period": "daily"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "时间区间 团队游客来源分布分析",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 37
+    },
+    {
+      "index": 29,
+      "user_query": "协议客户 列表查询 按创建时间排序",
+      "target_tool_name": "manage_agreement_customers",
+      "target_arguments": {
+        "query_type": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "manage_agreement_customers",
+        "create_sorted_lists",
+        "rank_orders",
+        "query_historical_periods",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "list_orders",
+        "arguments": {
+          "limit": 10,
+          "sort_by": "create_time",
+          "sort_order": "asc"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "协议客户 列表查询 按创建时间排序",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 17
+    },
+    {
+      "index": 30,
+      "user_query": "客户 按创建日期排序 查询前十",
+      "target_tool_name": "query_top_rankings",
+      "target_arguments": {
+        "top_n": 10,
+        "ranking_type": "order_amount"
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "query_top_rankings",
+        "create_sorted_lists",
+        "query_historical_periods",
+        "query_orders_by_time"
+      ],
+      "predicted_tool": {
+        "name": "create_sorted_lists",
+        "arguments": {
+          "entity_type": "customer",
+          "sort_field": "created_time",
+          "sort_order": "desc",
+          "limit": 10
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "客户 按创建日期排序 查询前十",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 33
+    },
+    {
+      "index": 33,
+      "user_query": "订单金额等值查询",
+      "target_tool_name": "filter_by_amount",
+      "target_arguments": {
+        "filter_type": "",
+        "comparison_operator": ""
+      },
+      "recall@5": 1,
+      "arg_match": null,
+      "arg_match_details": {},
+      "retrieved_top5": [
+        "rank_orders",
+        "filter_by_amount",
+        "filter_orders_by_conditions",
+        "get_order_details",
+        "list_order_resource_status_distribution"
+      ],
+      "predicted_tool": {
+        "name": "filter_orders_by_conditions",
+        "arguments": {
+          "comparison_operator": "eq"
+        }
+      },
+      "retrieval_call_params": {
+        "name": "retrieval_tool",
+        "arguments": {
+          "query": "订单金额等值查询",
+          "source_filter": "toollist",
+          "user_id": "1",
+          "top_k": 5
+        }
+      },
+      "http_status": 200,
+      "event_count": 205
+    }
+  ]
+}

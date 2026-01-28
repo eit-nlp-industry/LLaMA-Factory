@@ -46,8 +46,8 @@ QWEN_MODEL_NAME = "my_lora"
 
 # 统一的 Chat Completions 端点（vLLM/OpenAI 兼容）
 QWEN_API_URL = f"{VLLM_BASE_URL.rstrip('/')}/v1/chat/completions"
-# Retrieval Tool API 配置
-RETRIEVAL_ENDPOINT = "http://125.122.38.32:8024/retrieval_tool"
+# Retrieval Tool API 配置（默认与生产一致，可用环境变量覆盖）
+RETRIEVAL_ENDPOINT = os.getenv("RETRIEVAL_ENDPOINT", "http://125.122.38.32:6227/v1/mcp/tools/call")
 RETRIEVAL_HEADERS = {
     "accept": "application/json",
     "Content-Type": "application/json",
@@ -167,36 +167,7 @@ class DataProcessor:
             # 如果没有tools标签，直接使用原始system
             base_system = system_prompt
 
-        # 追加英文模板与英文 <tools>（与训练模板对齐）
-        try:
-            parsed_tools = json.loads(tools) if isinstance(tools, str) else tools
-        except Exception:
-            parsed_tools = tools
-
-        try:
-            if isinstance(parsed_tools, list) and parsed_tools and isinstance(parsed_tools[0], dict):
-                english_tools_obj = {"type": "function", "function": parsed_tools[0]}
-                english_tools_str = json.dumps(english_tools_obj, ensure_ascii=False)
-            else:
-                english_tools_str = tools_str
-        except Exception:
-            english_tools_str = tools_str
-
-        # 英文模板固定化，逐字对齐训练日志
-        english_tail = (
-            "\n\n# Tools\n\n"
-            "You may call one or more functions to assist with the user query.\n\n"
-            "You are provided with function signatures within <tools></tools> XML tags:\n"
-            "<tools>\n"
-            f"{english_tools_str}\n"
-            "</tools>\n\n"
-            "For each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n"
-            "<tool_call>\n"
-            "{\"name\": <function-name>, \"arguments\": <args-json-object>}\n"
-            "</tool_call>"
-        )
-
-        base_system = f"{base_system}{english_tail}"
+        # 不再追加英文 Tools 尾巴，保持与生产系统提示一致（仅使用数据集提供的 system 提示）
         
         i = 0
         while i < len(conversations):
@@ -372,14 +343,8 @@ class LLMPredictor:
             if user_content is None:
                 user_content = ""
 
-            # 为不同 pair 类型补充用户端约束指令
-            if pair_type == "tool_call":
-                if user_content.strip():
-                    # 保持原始用户问题，只添加约束指令
-                    user_content = f"{user_content}\n\n只输出一个<tool_call>，不要输出解释性文本或答案。"
-                else:
-                    user_content = "只输出一个<tool_call>，不要输出解释性文本或答案。"
-            else:
+            # 不再在 user 内容中追加额外约束，完全依赖 system 模板（对齐生产提示）
+            if pair_type != "tool_call":
                 if not user_content.strip():
                     user_content = "请根据工具返回的结果生成最终回答。"
 
@@ -414,11 +379,14 @@ class RetrievalToolCaller:
                 user_query = pair1_source.split("User: ")[1].strip()
             
             # 构建retrieval_tool的调用参数
+            default_user_id = os.getenv("EVAL_USER_ID", "1")
+            trace_id = os.getenv("EVAL_TRACE_ID", "trace_eval_001")
             params = {
                 "query": user_query,
                 "source_filter": "toollist",
-                "user_id": 136451106,  # 使用默认用户ID
-                "top_k": 5
+                "user_id": str(default_user_id),
+                "top_k": 5,
+                "trace_id": trace_id
             }
             return params
         except Exception as e:
@@ -437,6 +405,45 @@ class RetrievalToolCaller:
             # 最后尝试整体解析
             return json.loads(text)
         except Exception:
+            # 兼容“简化键值”格式，如："query": "...", "source_filter": "toollist"
+            kv = self._extract_kv_pairs(text)
+            if kv:
+                return {"arguments": kv}
+            return {}
+
+    def _extract_kv_pairs(self, text: str) -> Dict[str, Any]:
+        """提取简化键值对，支持出现在 <tool_call> 内或裸文本。"""
+        try:
+            inner = text
+            m = re.search(r'<tool_call>\s*([\s\S]*?)\s*</tool_call>', text)
+            if m:
+                inner = m.group(1)
+
+            # 优先匹配双引号
+            pairs = re.findall(r'"([^"\n]+)"\s*:\s*"([\s\S]*?)"(?=,|$)', inner)
+            if not pairs:
+                # 退化到单引号
+                pairs = re.findall(r"'([^'\n]+)'\s*:\s*'([\s\S]*?)'(?=,|$)", inner)
+
+            result: Dict[str, Any] = {}
+            for k, v in pairs:
+                key = k.strip()
+                val = v.strip()
+                # 尝试将数字/布尔/JSON再解析
+                parsed: Any = val
+                if val.lower() in ("true", "false"):
+                    parsed = val.lower() == "true"
+                else:
+                    try:
+                        if re.fullmatch(r"-?\d+", val):
+                            parsed = int(val)
+                        elif re.fullmatch(r"-?\d+\.\d+", val):
+                            parsed = float(val)
+                    except Exception:
+                        parsed = val
+                result[key] = parsed
+            return result
+        except Exception:
             return {}
 
     def extract_query_params_from_pair1_predict(self, pair1_predict: str) -> Dict[str, Any]:
@@ -446,11 +453,14 @@ class RetrievalToolCaller:
             arguments = call_obj.get("arguments", {}) if isinstance(call_obj, dict) else {}
             query_from_predict = arguments.get("query", "")
 
+            default_user_id = os.getenv("EVAL_USER_ID", "1")
+            trace_id = os.getenv("EVAL_TRACE_ID", "trace_eval_001")
             params = {
                 "query": query_from_predict,
                 "source_filter": "toollist",
-                "user_id": 136451106,
-                "top_k": 5
+                "user_id": str(default_user_id),
+                "top_k": 5,
+                "trace_id": trace_id
             }
             return params
         except Exception as e:
@@ -509,6 +519,15 @@ class RetrievalToolCaller:
                             if matches:
                                 tools.append(matches[0])
             
+            # 兼容 result 为对象且包含 tools 列表的返回格式
+            elif "result" in response_obj and isinstance(response_obj["result"], dict) and isinstance(response_obj["result"].get("tools"), list):
+                for item in response_obj["result"].get("tools", [])[:top_k]:
+                    if isinstance(item, dict):
+                        for key in ["name", "tool_name", "title", "id", "label", "api_name"]:
+                            if key in item and isinstance(item[key], str):
+                                tools.append(item[key])
+                                break
+
             # 如果result字段没有找到，尝试其他可能的字段
             elif "data" in response_obj and isinstance(response_obj["data"], list):
                 for item in response_obj["data"][:top_k]:
@@ -595,12 +614,23 @@ class RetrievalToolCaller:
 
             recall = 1 if target_tool in retrieved_tools else 0
 
+            # 记录原始响应片段，便于对齐生产
+            raw_snippet = None
+            try:
+                raw_snippet = json.dumps(response, ensure_ascii=False)[:1500]
+            except Exception:
+                try:
+                    raw_snippet = str(response)[:1500]
+                except Exception:
+                    raw_snippet = None
+
             recall_details = {
                 "target_tool": target_tool,
                 "retrieved_tools": retrieved_tools,
                 "recall": recall,
                 "query_params": params,
-                "response_status": status_code
+                "response_status": status_code,
+                "raw_response_preview": raw_snippet
             }
 
             return recall, recall_details
@@ -630,6 +660,29 @@ class ToolCallEvaluator:
             # 直接尝试解析整个文本
             return json.loads(text)
         except:
+            # 兼容“简化键值对”格式：例如 \"query\": "...", \"source_filter\": "..."
+            return self._extract_kv_pairs(text)
+
+    def _extract_kv_pairs(self, text: str) -> Dict[str, Any]:
+        """从非JSON文本中提取简单键值对（用于兼容pair1的简化格式）。"""
+        try:
+            # 如果包含 <tool_call> ... </tool_call>，先取内部文本
+            inner = text
+            mc = re.search(r'<tool_call>\s*([\s\S]*?)\s*</tool_call>', text)
+            if mc:
+                inner = mc.group(1)
+
+            # 提取形如 "key": "value" 或 'key': 'value'
+            pairs = re.findall(r'"([^"]+)"\s*:\s*"([\s\S]*?)"(?=,|$)', inner)
+            # 如果没匹配到，再尝试单引号
+            if not pairs:
+                pairs = re.findall(r"'([^']+)'\s*:\s*'([\s\S]*?)'(?=,|$)", inner)
+
+            result: Dict[str, Any] = {}
+            for k, v in pairs:
+                result[k.strip()] = v.strip()
+            return result
+        except Exception:
             return {}
     
     def evaluate_tool_call(self, target: str, predict: str) -> Tuple[float, float, Dict[str, Any]]:
@@ -653,38 +706,61 @@ class ToolCallEvaluator:
         score = 0.0
         tool_name_score = 0.0  # 单独的工具名称得分
         
-        # 检查工具名称
-        target_name = target_call.get("name", "")
-        predict_name = predict_call.get("name", "")
-        
-        if target_name == predict_name and target_name:
-            details["tool_name_match"] = True
-            score += 0.5
-            tool_name_score = 1.0  # 工具名称完全匹配得满分
-        
-        # 检查参数
-        target_args = target_call.get("arguments", {})
-        predict_args = predict_call.get("arguments", {})
-        
-        if target_args and predict_args:
-            matching_args = 0
-            total_args = len(target_args)
-            
-            for key, target_value in target_args.items():
-                predict_value = predict_args.get(key)
-                match = (predict_value == target_value)
-                details["argument_details"][key] = {
-                    "target": target_value,
-                    "predict": predict_value,
-                    "match": match
-                }
-                if match:
-                    matching_args += 1
-            
-            if total_args > 0:
-                arg_score = matching_args / total_args
+        # 兼容两种格式：
+        # 1) 标准格式 {"name": ..., "arguments": {...}}
+        # 2) 简化键值格式 {"query": ..., "source_filter": ...}
+        if "name" in target_call or "arguments" in target_call:
+            # 标准格式评估
+            target_name = target_call.get("name", "")
+            predict_name = predict_call.get("name", "")
+            if target_name == predict_name and target_name:
+                details["tool_name_match"] = True
+                score += 0.5
+                tool_name_score = 1.0
+
+            target_args = target_call.get("arguments", {}) or {}
+            predict_args = predict_call.get("arguments", {}) or {}
+            if target_args and predict_args:
+                matching_args = 0
+                total_args = len(target_args)
+                for key, target_value in target_args.items():
+                    predict_value = predict_args.get(key)
+                    match = (predict_value == target_value)
+                    details["argument_details"][key] = {
+                        "target": target_value,
+                        "predict": predict_value,
+                        "match": match
+                    }
+                    if match:
+                        matching_args += 1
+                if total_args > 0:
+                    arg_score = matching_args / total_args
+                    details["arguments_match"] = (arg_score == 1.0)
+                    score += 0.5 * arg_score
+        else:
+            # 简化键值格式评估：以 target 中出现的键为准
+            keys_to_check = list(target_call.keys())
+            if keys_to_check:
+                matching = 0
+                for key in keys_to_check:
+                    tv = target_call.get(key)
+                    pv = predict_call.get(key)
+                    is_match = (pv == tv and pv is not None)
+                    details["argument_details"][key] = {
+                        "target": tv,
+                        "predict": pv,
+                        "match": is_match
+                    }
+                    if is_match:
+                        matching += 1
+                arg_score = matching / len(keys_to_check)
                 details["arguments_match"] = (arg_score == 1.0)
-                score += 0.5 * arg_score
+                # 简化格式不计算工具名，改用关键字段匹配评分
+                score = arg_score  # 直接用参数匹配度作为总分（0-1）
+                # 将 source_filter 完全匹配视作“名称匹配”的等价信号，记入 precision@1
+                sf_target = target_call.get("source_filter")
+                sf_predict = predict_call.get("source_filter")
+                tool_name_score = 1.0 if (sf_target and sf_target == sf_predict) else 0.0
         
         return score, tool_name_score, details
 
@@ -1321,68 +1397,80 @@ class TrainingDataEvaluator:
             logger.error(f"保存实时指标失败: {e}")
     
     def generate_report(self, results: List[EvaluationResult]) -> Dict[str, Any]:
-        """生成评估报告，按pair_id分组"""
-        # 按pair_id分组结果
-        grouped_results = defaultdict(list)
-        for result in results:
-            grouped_results[result.pair_id].append(result)
+        """生成评估报告，按 conversation 聚合为 case，case 内包含 pair1/pair2(及pair3)"""
+        # 按 conversation_id 分组
+        conv_groups: Dict[int, List[EvaluationResult]] = defaultdict(list)
+        for r in results:
+            conv_groups[r.conversation_id].append(r)
         
-        # 计算各种指标
+        # 计算各种指标（维持原有 summary 指标口径不变）
         metrics_calc = MetricsCalculator()
-        
-        # 按pair分组的指标
+        # 计算 pair 指标（保持 summary 里的字段兼容）
         pair_metrics = {}
-        for pair_id in [1, 2, 3]:
-            pair_results = grouped_results.get(pair_id, [])
-            if pair_results:
-                if pair_id == 1:
-                    # pair1指标
-                    pair_metrics["pair1"] = metrics_calc.calculate_pair_metrics(pair_results, pair_id, "current_logic")
-                elif pair_id == 2:
-                    # pair2指标
-                    pair_metrics["pair2"] = metrics_calc.calculate_pair_metrics(pair_results, pair_id, "current_logic")
-                    pair_metrics["pair2_consider_recall"] = metrics_calc.calculate_pair_metrics(pair_results, pair_id, "real_tool")
-                    pair_metrics["pair2_recall_subset"] = metrics_calc.calculate_pair_metrics(pair_results, pair_id, "recall_subset")
+        for pid in [1, 2, 3]:
+            pid_results = [r for r in results if r.pair_id == pid]
+            if pid_results:
+                if pid == 1:
+                    pair_metrics["pair1"] = metrics_calc.calculate_pair_metrics(pid_results, pid, "current_logic")
+                elif pid == 2:
+                    pair_metrics["pair2"] = metrics_calc.calculate_pair_metrics(pid_results, pid, "current_logic")
+                    pair_metrics["pair2_consider_recall"] = metrics_calc.calculate_pair_metrics(pid_results, pid, "real_tool")
+                    pair_metrics["pair2_recall_subset"] = metrics_calc.calculate_pair_metrics(pid_results, pid, "recall_subset")
                 else:
-                    # pair3指标
-                    pair_metrics["pair3"] = metrics_calc.calculate_text_generation_metrics(pair_results)
-        
+                    pair_metrics["pair3"] = metrics_calc.calculate_text_generation_metrics(pid_results)
+
         # recall指标
         recall_metrics = metrics_calc.calculate_recall_metrics(results)
         
         # 总体指标
         overall_metrics = metrics_calc.calculate_overall_metrics(results, "current_logic")
         
-        # 构建报告
+        # 详细结果改为 per-conversation case：包含该对话的各个 pair 的结果
+        cases = []
+        for conv_id, conv_results in sorted(conv_groups.items(), key=lambda x: x[0]):
+            # 按 pair_id 建立索引
+            by_pid = defaultdict(list)
+            for r in conv_results:
+                by_pid[r.pair_id].append(r)
+
+            def serialize_result(r: EvaluationResult) -> Dict[str, Any]:
+                base = {
+                    "conversation_id": r.conversation_id,
+                    "pair_id": r.pair_id,
+                    "pair_type": r.pair_type,
+                    "score": r.score,
+                    "tool_name_score": r.tool_name_score if r.pair_type == "tool_call" else None,
+                    "source": r.source,
+                    "target": r.target,
+                    "predict": r.predict,
+                    "target_preview": r.target[:100] + "..." if len(r.target) > 100 else r.target,
+                    "predict_preview": r.predict[:100] + "..." if len(r.predict) > 100 else r.predict,
+                    "details": r.details,
+                }
+                if r.pair_id == 2 and r.recall is not None:
+                    base.update({"recall": r.recall, "recall_details": r.recall_details})
+                return base
+
+            case_entry: Dict[str, Any] = {
+                "conversation_id": conv_id,
+                "pairs": {
+                    f"pair{pid}": [serialize_result(r) for r in by_pid.get(pid, [])]
+                    for pid in sorted(by_pid.keys())
+                }
+            }
+            cases.append(case_entry)
+
+        # 构建报告（保持 summary 字段，替换 detailed_results 为 cases）
         report = {
             "summary": {
-                "total_conversations": len(set(r.conversation_id for r in results)),
+                "total_conversations": len(conv_groups),
                 "total_pairs": len(results),
                 "pair_metrics": pair_metrics,
                 "recall_metrics": recall_metrics,
                 "overall_metrics": overall_metrics,
                 "model": self.llm_predictor.model_type
             },
-            "detailed_results": {
-                f"pair{pair_id}": [
-                    {
-                        "conversation_id": r.conversation_id,
-                        "pair_id": r.pair_id,
-                        "pair_type": r.pair_type,
-                        "score": r.score,
-                        "tool_name_score": r.tool_name_score if r.pair_type == "tool_call" else None,
-                        **({"recall": r.recall, "recall_details": r.recall_details} if pair_id == 2 and r.recall is not None else {}),
-                        "source": r.source,
-                        "target": r.target,
-                        "predict": r.predict,
-                        "target_preview": r.target[:100] + "..." if len(r.target) > 100 else r.target,
-                        "predict_preview": r.predict[:100] + "..." if len(r.predict) > 100 else r.predict,
-                        "details": r.details
-                    }
-                    for r in pair_results
-                ]
-                for pair_id, pair_results in grouped_results.items()
-            }
+            "cases": cases
         }
         
         return report
@@ -1391,34 +1479,34 @@ def parse_args():
     """解析命令行参数"""
     parser = argparse.ArgumentParser(description="训练数据评估脚本")
     parser.add_argument("--input_file", "-i", type=str, 
-                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/10.22_fuzzy_data.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_27/10.22_train_data.json",
                        help="输入JSON文件路径 (默认: data/9.17_evaluate_data_top5_final.json)")
     parser.add_argument("--output_file", "-o", type=str,
-                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/data_evaluation.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_27/data_evaluation_1.json",
                        help="输出结果文件路径 (默认: metrics/data_evaluation_results.json)")
     parser.add_argument("--checkpoint_file", "-c", type=str,
-                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/evaluation_checkpoint.json",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_27/evaluation_checkpoint_1.json",
                        help="断点文件路径 (默认: metrics/evaluation_checkpoint.json)")
     parser.add_argument("--start_idx", "-s", type=int, default=0,
                        help="开始评估的对话索引（从0开始，默认: 0）")
-    parser.add_argument("--end_idx", "-e", type=int, default=2000,
+    parser.add_argument("--end_idx", "-e", type=int, default=20,
                        help="结束评估的对话索引（不包含，默认: 10）")
     parser.add_argument("--log_file", "-l", type=str,
-                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_22/data_evaluation.log",
+                       default="/home/ziqiang/LLaMA-Factory/data/dataset/10_27/data_evaluation_1.log",
                        help="日志文件路径 (默认: metrics/data_evaluation.log)")
     parser.add_argument("--models", type=str, default="",
                        help="以逗号分隔的一组模型名（例如: /data/models/Qwen3-8B,my_lora）。提供多个时开启多模型评估模式")
     parser.add_argument("--multi_output_dir", type=str, default="evaluation/multi",
                        help="多模型评估输出目录（默认: evaluation/multi）")
-    parser.add_argument("--aggregate_output", type=str, default="evaluation/multi_aggregate_0929_v2.json",
+    parser.add_argument("--aggregate_output", type=str, default="/home/ziqiang/LLaMA-Factory/data/dataset/10_27/multi_aggregate_0929_v2.json",
                        help="多模型聚合报告输出文件（默认: evaluation/multi_aggregate.json）")
     
     # 并发控制参数
-    parser.add_argument("--max_concurrent_conversations", type=int, default=1,
+    parser.add_argument("--max_concurrent_conversations", type=int, default=5,
                        help="最大并发对话数（默认: 5）")
-    parser.add_argument("--max_concurrent_pairs", type=int, default=1,
+    parser.add_argument("--max_concurrent_pairs", type=int, default=10,
                        help="最大并发pair数（默认: 10）")
-    parser.add_argument("--max_concurrent_api_calls", type=int, default=1,
+    parser.add_argument("--max_concurrent_api_calls", type=int, default=20,
                        help="最大并发API调用数（默认: 20）")
     
     return parser.parse_args()

@@ -1,0 +1,1322 @@
+[
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "你是谁"
+      },
+      {
+        "from": "gpt",
+        "value": "我是一个AI助手，致力于帮助你解答问题和完成任务。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-03-07 05:46"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "早上好"
+      },
+      {
+        "from": "gpt",
+        "value": "早上好！新的一天开始了，希望你有个美好的一天！"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-11-03 15:58"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "我想变得更优秀"
+      },
+      {
+        "from": "gpt",
+        "value": "很棒的目标！变得更优秀需要持续努力：设定明确目标、制定计划、保持学习、接受挑战、从失败中成长。记住，进步是一个过程，每天进步一点点就很了不起。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-27 20:01"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "好的"
+      },
+      {
+        "from": "gpt",
+        "value": "好的，明白了。还有其他需要帮助的吗？"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-06-16 00:27"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What is the Internet?"
+      },
+      {
+        "from": "gpt",
+        "value": "The Internet is a global network of interconnected computers that allows information to be shared worldwide. It enables communication, access to information, online services, and has revolutionized how we live and work."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-10 11:09"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "区块链是什么"
+      },
+      {
+        "from": "gpt",
+        "value": "区块链是一种分布式账本技术，通过密码学方法将数据区块按时间顺序链接起来，形成不可篡改的数据链。它具有去中心化、透明度高、安全性强等特点，被广泛应用于数字货币、供应链管理等领域。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-02-20 20:26"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "圆周率是多少"
+      },
+      {
+        "from": "gpt",
+        "value": "圆周率π约等于3.14159265358979323846...，它是一个无理数，小数部分无限不循环。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-01-14 07:47"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "我很开心"
+      },
+      {
+        "from": "gpt",
+        "value": "太好了！能看到你开心我也很高兴。有什么好事想分享吗？"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-25 14:08"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "推荐一本书"
+      },
+      {
+        "from": "gpt",
+        "value": "我推荐《人类简史》，这是以色列历史学家尤瓦尔·赫拉利的作品，以宏大的视角讲述了人类从石器时代到21世纪的发展历程，非常值得一读。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-13 21:59"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What is climate change?"
+      },
+      {
+        "from": "gpt",
+        "value": "Climate change refers to long-term shifts in global temperatures and weather patterns. While natural factors play a role, human activities, particularly burning fossil fuels, have been the dominant cause since the mid-20th century."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-08 09:04"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "如何学习弹吉他"
+      },
+      {
+        "from": "gpt",
+        "value": "学习吉他建议：1)先学习基础乐理和和弦；2)每天坚持练习，从简单曲目开始；3)注意手型和姿势；4)可以跟随在线教程或找老师指导；5)多听多练，培养乐感。坚持是关键！"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-12-26 12:56"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是温室效应"
+      },
+      {
+        "from": "gpt",
+        "value": "温室效应是指大气中的二氧化碳、甲烷等温室气体吸收地面辐射的热量，使地球表面温度升高的现象。适度的温室效应维持地球温度，但过度则会导致全球变暖。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-01-27 00:34"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "如何保持健康"
+      },
+      {
+        "from": "gpt",
+        "value": "保持健康的关键包括：规律作息、均衡饮食、适量运动、保持良好心态、定期体检。建议每天至少运动30分钟，多吃蔬菜水果，少吃油腻食物，保证充足睡眠。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-25 05:10"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为什么天空是蓝色的"
+      },
+      {
+        "from": "gpt",
+        "value": "天空呈现蓝色是因为大气中的气体分子和微小颗粒会散射太阳光。蓝光的波长较短，更容易被散射，所以我们看到的天空主要是蓝色的。这种现象叫做瑞利散射。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-03-13 03:50"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "谢谢你"
+      },
+      {
+        "from": "gpt",
+        "value": "不客气！能帮到你是我的荣幸。如果还有其他需要，随时告诉我。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-02-04 05:38"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Good morning"
+      },
+      {
+        "from": "gpt",
+        "value": "Good morning! I hope you have a wonderful day ahead. What can I help you with?"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-12-24 23:08"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "现在是早上还是下午"
+      },
+      {
+        "from": "gpt",
+        "value": "现在是下午。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-11-20 12:10"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "地球有多大"
+      },
+      {
+        "from": "gpt",
+        "value": "地球的赤道半径约为6378公里，极半径约为6357公里，平均半径约为6371公里。地球的表面积约为5.1亿平方公里。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-10-28 04:39"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "你能做什么"
+      },
+      {
+        "from": "gpt",
+        "value": "我可以回答各种问题，提供信息查询、日常对话、知识解答等服务。如果需要特定领域的深度信息，我也可以帮你检索相关资料。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-04-10 15:47"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是质数"
+      },
+      {
+        "from": "gpt",
+        "value": "质数是指大于1的自然数中，除了1和它本身以外不再有其他因数的数。例如2、3、5、7、11、13等都是质数。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-20 00:24"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What's your name?"
+      },
+      {
+        "from": "gpt",
+        "value": "I'm an AI assistant designed to help answer questions and assist with various tasks."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-13 09:00"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "推荐一部电影"
+      },
+      {
+        "from": "gpt",
+        "value": "我推荐《肖申克的救赎》，这是一部经典的励志电影，讲述了希望与自由的力量。影片节奏流畅，内涵深刻，是影史评分最高的电影之一。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-12-20 09:39"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "学习编程从哪里开始"
+      },
+      {
+        "from": "gpt",
+        "value": "建议从Python开始学习编程，它语法简单、应用广泛。可以先学习基础语法，然后通过做小项目来实践。推荐网站如Codecademy、菜鸟教程等，都有很好的入门教程。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-11 09:16"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是5G"
+      },
+      {
+        "from": "gpt",
+        "value": "5G是第五代移动通信技术，相比4G具有更高的传输速度、更低的延迟和更大的连接容量。5G能够支持更多的智能设备连接，为物联网、自动驾驶等应用提供基础。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-01-01 07:22"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Goodbye"
+      },
+      {
+        "from": "gpt",
+        "value": "Goodbye! Have a great day and feel free to come back anytime!"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-07-10 10:12"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Tell me a joke"
+      },
+      {
+        "from": "gpt",
+        "value": "Why don't scientists trust atoms? Because they make up everything!"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-16 04:40"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What is machine learning?"
+      },
+      {
+        "from": "gpt",
+        "value": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It uses algorithms to analyze data, identify patterns, and make decisions."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-06-05 17:00"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "How do I stay motivated?"
+      },
+      {
+        "from": "gpt",
+        "value": "Staying motivated involves setting clear goals, breaking them into smaller tasks, celebrating small wins, maintaining a positive mindset, and surrounding yourself with supportive people. Remember why you started and keep that vision in mind."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-02 17:58"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是春节"
+      },
+      {
+        "from": "gpt",
+        "value": "春节是中国农历新年，是中华民族最重要的传统节日。通常在公历1月或2月间，人们会贴春联、放鞭炮、吃团圆饭、走亲访友、发红包等，庆祝新年的到来。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-01-27 13:50"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What time is it now?"
+      },
+      {
+        "from": "gpt",
+        "value": "It's 22:49 right now."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-21 22:49"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "晚安"
+      },
+      {
+        "from": "gpt",
+        "value": "晚安！祝你有个好梦，明天见！"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-11-01 13:55"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "我有点难过"
+      },
+      {
+        "from": "gpt",
+        "value": "听到你难过我很关心。如果你愿意的话，可以和我聊聊发生了什么事。有时候倾诉能让心情好一些。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-07-27 16:35"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Explain photosynthesis"
+      },
+      {
+        "from": "gpt",
+        "value": "Photosynthesis is the process by which green plants use sunlight to synthesize nutrients from carbon dioxide and water. It generates oxygen as a byproduct and is fundamental to life on Earth."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-02-10 19:11"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "如何提高效率"
+      },
+      {
+        "from": "gpt",
+        "value": "提高效率的方法包括：1)制定优先级清单，先做重要紧急的事；2)避免多任务，专注当下；3)使用番茄工作法等时间管理技巧；4)保持工作环境整洁；5)定期休息，保持精力充沛。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-09-21 18:29"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What's today's date?"
+      },
+      {
+        "from": "gpt",
+        "value": "Today is 2024-04-23."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-04-23 03:29"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "嗯"
+      },
+      {
+        "from": "gpt",
+        "value": "我在听，请继续说。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-11-20 21:42"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是光合作用"
+      },
+      {
+        "from": "gpt",
+        "value": "光合作用是植物、藻类和某些细菌利用阳光能量，将二氧化碳和水转化为葡萄糖等有机物，并释放氧气的过程。这是地球上最重要的生物化学反应之一。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-01-28 21:00"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "春天有什么特点"
+      },
+      {
+        "from": "gpt",
+        "value": "春天是万物复苏的季节，气温逐渐回暖，百花盛开，草木发芽。人们常说一年之计在于春，是播种和新生的季节。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-06 17:35"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "如何做番茄炒蛋"
+      },
+      {
+        "from": "gpt",
+        "value": "番茄炒蛋的做法：1)鸡蛋打散加少许盐；2)番茄切块；3)热锅倒油，炒蛋至凝固盛出；4)锅中再加油，炒番茄至出汁；5)放入鸡蛋，加盐和少许糖调味，翻炒均匀即可。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-05-09 09:55"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "今天星期几"
+      },
+      {
+        "from": "gpt",
+        "value": "今天是星期六。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-12-06 16:44"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "今天是几月几号"
+      },
+      {
+        "from": "gpt",
+        "value": "今天是2025-05-26。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-26 22:47"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "1加1等于几"
+      },
+      {
+        "from": "gpt",
+        "value": "1加1等于2。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-07-30 12:26"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "介绍一下你自己"
+      },
+      {
+        "from": "gpt",
+        "value": "我是一个智能对话助手，基于大型语言模型训练而成。我可以理解自然语言，回答问题，进行对话交流，必要时还能调用工具获取更专业的信息。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-18 19:12"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Hello"
+      },
+      {
+        "from": "gpt",
+        "value": "Hello! How can I help you today?"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-12-31 13:04"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What is the capital of France?"
+      },
+      {
+        "from": "gpt",
+        "value": "The capital of France is Paris, known for its iconic landmarks like the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-07-11 18:53"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Thank you"
+      },
+      {
+        "from": "gpt",
+        "value": "You're very welcome! Feel free to reach out if you need anything else."
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-12-10 11:13"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "你好"
+      },
+      {
+        "from": "gpt",
+        "value": "你好！很高兴为你服务，有什么我可以帮助你的吗？"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-04-30 23:23"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "中国有多少个省"
+      },
+      {
+        "from": "gpt",
+        "value": "中国有23个省、5个自治区、4个直辖市和2个特别行政区，共计34个省级行政区。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-17 01:33"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "夏天要注意什么"
+      },
+      {
+        "from": "gpt",
+        "value": "夏天要注意防暑降温，多喝水，避免长时间在烈日下暴晒。外出时做好防晒措施，穿着透气的衣物，预防中暑。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-08-06 10:32"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么是人工智能"
+      },
+      {
+        "from": "gpt",
+        "value": "人工智能（AI）是计算机科学的一个分支，旨在创建能够执行通常需要人类智能的任务的系统，如学习、推理、问题解决、感知和语言理解等。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-18 21:33"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "感冒了怎么办"
+      },
+      {
+        "from": "gpt",
+        "value": "感冒时建议多休息、多喝水、保持室内空气流通。如果症状严重或持续不退，应及时就医。注意保暖，避免着凉，可以吃一些富含维生素C的水果。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-02-25 07:53"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "再见"
+      },
+      {
+        "from": "gpt",
+        "value": "再见！期待下次为你服务。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-02-13 20:19"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "How are you?"
+      },
+      {
+        "from": "gpt",
+        "value": "I'm functioning well, thank you for asking! How can I assist you today?"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-15 14:13"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "喝水有什么好处"
+      },
+      {
+        "from": "gpt",
+        "value": "喝水的好处很多：促进新陈代谢、维持体温、帮助消化、排出废物、保持皮肤水润、预防便秘等。建议成年人每天饮水1500-2000毫升。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-01-08 11:40"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "现在几点了"
+      },
+      {
+        "from": "gpt",
+        "value": "现在是09:42。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-05-12 09:42"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "早餐吃什么好"
+      },
+      {
+        "from": "gpt",
+        "value": "健康的早餐应该包含蛋白质、碳水化合物和维生素。建议搭配：鸡蛋/牛奶（蛋白质）+ 面包/粥（碳水）+ 水果/蔬菜（维生素）。避免油腻食物，营养均衡最重要。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-30 01:34"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "为什么会下雨"
+      },
+      {
+        "from": "gpt",
+        "value": "下雨是因为水循环。太阳加热地表水分蒸发上升，遇冷凝结成小水滴形成云。云中水滴越聚越多，当重力超过上升气流时就会降落，形成降雨。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2024-06-18 23:05"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "长城有多长"
+      },
+      {
+        "from": "gpt",
+        "value": "中国长城的总长度约为21196.18公里，包括墙体、壕堑、单体建筑等。我们常说的明长城东起辽宁虎山，西至甘肃嘉峪关，全长约8851.8公里。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-07 20:13"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "杭州有什么好玩的地方"
+      },
+      {
+        "from": "gpt",
+        "value": "杭州有很多值得游玩的景点！西湖是必去的,可以游览断桥、雷峰塔、苏堤、白堤等。还可以去灵隐寺感受佛教文化,西溪湿地体验自然风光,宋城景区看《宋城千古情》表演,河坊街品尝美食购买特产。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-03-15 10:30"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "成都有什么美食推荐"
+      },
+      {
+        "from": "gpt",
+        "value": "成都美食非常丰富！必吃的有火锅、串串香、麻辣烫、夫妻肺片、担担面、龙抄手、钟水饺、赖汤圆等。推荐去宽窄巷子、锦里、春熙路品尝地道小吃。成都菜以麻辣著称,口味偏重,非常适合喜欢川菜的朋友。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-08 14:22"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "什么时候去西藏最合适"
+      },
+      {
+        "from": "gpt",
+        "value": "去西藏最佳时间是5-10月,其中7-8月是旺季。春秋季(5-6月、9-10月)天气适宜,游客相对较少,性价比高。需要注意高原反应,提前做好准备。冬季虽然寒冷但能看到更原生态的西藏,而且游客少、费用低。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-06-12 16:45"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "第一次出国旅游要注意什么"
+      },
+      {
+        "from": "gpt",
+        "value": "第一次出国旅游要注意：1)提前办好护照和签证；2)购买旅游保险；3)准备好外币或信用卡；4)了解目的地的风俗习惯和法律法规；5)保存好重要文件的复印件；6)提前下载翻译软件和地图；7)告知家人行程安排；8)注意人身和财产安全。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-02-19 09:15"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "苏州有什么特色景点"
+      },
+      {
+        "from": "gpt",
+        "value": "苏州以园林著称,是人间天堂。必游景点有拙政园、留园、虎丘、狮子林等古典园林。还有寒山寺、苏州博物馆、平江路古街、金鸡湖等。推荐品尝苏式面点、松鼠桂鱼、阳澄湖大闸蟹等美食。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-07-23 11:05"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "云南有什么值得去的地方"
+      },
+      {
+        "from": "gpt",
+        "value": "云南旅游资源丰富多样！推荐昆明的石林、滇池,大理的洱海、古城,丽江的古城、玉龙雪山,香格里拉的普达措国家公园,西双版纳的热带雨林。每个地方都有独特的民族风情和自然风光,建议安排10-15天深度游。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-08-05 13:20"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "带孩子去哪里旅游比较好"
+      },
+      {
+        "from": "gpt",
+        "value": "带孩子旅游推荐选择安全、有趣、寓教于乐的地方。国内可以考虑：上海迪士尼、北京欢乐谷、长隆野生动物园、海洋公园、科技馆、自然博物馆等。海边城市如青岛、三亚也很适合,可以玩沙子看海。选择时要考虑孩子年龄和兴趣,不要安排太紧凑的行程。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-14 15:38"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "秋天适合去哪里看红叶"
+      },
+      {
+        "from": "gpt",
+        "value": "秋天是赏红叶的最佳季节！推荐去北京香山、南京栖霞山、苏州天平山、四川九寨沟、长白山、喀纳斯等地。最佳观赏时间一般在10月中旬至11月初。建议提前查询红叶预报,选择最佳时间前往,避开周末高峰期。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-28 17:42"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "西安有什么历史古迹"
+      },
+      {
+        "from": "gpt",
+        "value": "西安是十三朝古都,历史古迹众多。必去的有秦始皇兵马俑、大雁塔、小雁塔、古城墙、钟鼓楼、华清池、陕西历史博物馆等。推荐品尝肉夹馍、凉皮、羊肉泡馍、biangbiang面等特色美食。建议安排3-5天游览,感受厚重的历史文化。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-22 09:55"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "去海边旅游要带什么"
+      },
+      {
+        "from": "gpt",
+        "value": "去海边旅游必备物品：防晒霜(SPF50+)、太阳镜、遮阳帽、泳衣泳裤、沙滩拖鞋、浴巾、防水手机袋、创可贴等。还要带些轻便透气的衣服,以及肠胃药、防蚊液等常用药品。如果要游泳,建议带游泳圈等安全装备。记得做好防晒,避免晒伤。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-07-11 14:28"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "青岛有什么好吃的"
+      },
+      {
+        "from": "gpt",
+        "value": "青岛美食以海鲜为主。必吃的有：辣炒蛤蜊、鲅鱼水饺、海菜凉粉、排骨米饭、烤鱿鱼、海鲜大餐等。推荐去台东步行街、劈柴院等地方品尝小吃。青岛啤酒也是必喝的,可以去青岛啤酒博物馆参观品尝。春夏季节海鲜最肥美。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-19 08:33"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "三亚什么时候去最好"
+      },
+      {
+        "from": "gpt",
+        "value": "三亚最佳旅游时间是11月至次年4月,此时气候宜人,是避寒度假的好选择。9-11月是淡季,性价比高。夏季(5-9月)天气炎热多雨,但价格便宜,人少。建议避开春节、国庆等旺季,人多价格贵。记得提前预订酒店和机票。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-01-29 19:47"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "自驾游要注意什么"
+      },
+      {
+        "from": "gpt",
+        "value": "自驾游注意事项：1)出发前检查车况,准备好备胎、工具箱、急救包；2)规划好路线,提前下载离线地图；3)遵守交通规则,不疲劳驾驶；4)购买自驾游保险；5)准备充足的食物和水；6)留意天气变化；7)提前预订住宿；8)保持通讯畅通,告知家人行程。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-03 11:12"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "厦门有什么必去的景点"
+      },
+      {
+        "from": "gpt",
+        "value": "厦门必去景点有：鼓浪屿(日光岩、菽庄花园、钢琴博物馆)、南普陀寺、厦门大学、环岛路、曾厝垵、中山路步行街、集美学村等。推荐品尝沙茶面、海蛎煎、土笋冻、姜母鸭等地道小吃。建议安排3-4天游玩,鼓浪屿需要提前预订船票。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-06-27 16:55"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "爬山需要准备什么装备"
+      },
+      {
+        "from": "gpt",
+        "value": "爬山必备装备：1)舒适的登山鞋；2)速干衣裤,备用衣物；3)登山杖；4)背包；5)水和食物；6)防晒用品；7)急救包、常用药品；8)手电筒或头灯；9)雨具；10)手机、充电宝。根据山的难度和时长调整装备,新手建议选择成熟景区,不要独自登山。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-03-31 13:44"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "桂林山水有什么特色"
+      },
+      {
+        "from": "gpt",
+        "value": "桂林山水甲天下,以喀斯特地貌著称。主要景点有漓江、象鼻山、芦笛岩、七星公园、阳朔西街等。推荐乘船游漓江,欣赏两岸秀丽风光。阳朔可以骑行十里画廊,晚上看《印象·刘三姐》实景演出。品尝桂林米粉、啤酒鱼等特色美食。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-08-16 10:27"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "冬天去哪里旅游比较好"
+      },
+      {
+        "from": "gpt",
+        "value": "冬天旅游可以选择：1)北方看雪：哈尔滨冰雪大世界、吉林雾凇、长白山；2)南方避寒：海南、云南、福建；3)温泉度假：江苏、浙江、四川等地温泉；4)滑雪运动：崇礼、亚布力等滑雪场。根据个人喜好选择赏雪或避寒路线,注意保暖和安全。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-12-02 14:19"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "古镇旅游有什么推荐"
+      },
+      {
+        "from": "gpt",
+        "value": "推荐的古镇有：江南六大古镇(周庄、同里、西塘、乌镇、南浔、甪直)、凤凰古城、丽江古城、平遥古城、阆中古城、束河古镇等。古镇适合慢游,体验当地民俗文化,品尝特色小吃,拍照留念。建议避开节假日,选择淡季游览更有古镇韵味。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-14 17:31"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "长沙有什么好玩的"
+      },
+      {
+        "from": "gpt",
+        "value": "长沙好玩的地方很多！必去的有岳麓山、岳麓书院、橘子洲头、湖南省博物馆、天心阁等。晚上可以去太平街、都正街、坡子街品尝臭豆腐、糖油粑粑、口味虾等美食。还可以去湖南卫视体验互动节目。长沙是娱乐之都,夜生活丰富。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-08 12:40"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "夏天避暑去哪里好"
+      },
+      {
+        "from": "gpt",
+        "value": "夏天避暑推荐去：1)高原地区：贵州、青海、甘肃南部；2)山区：庐山、莫干山、鸡公山、承德避暑山庄；3)海滨城市：大连、青岛、威海；4)西北地区：新疆、内蒙古。这些地方夏季气温适宜,风景优美,是避暑纳凉的好去处。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-07-20 16:03"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "重庆有哪些必吃的美食"
+      },
+      {
+        "from": "gpt",
+        "value": "重庆必吃美食有：火锅（最具代表性）、小面、酸辣粉、毛血旺、辣子鸡、烤鱼、抄手、豆花饭等。推荐去洪崖洞、磁器口、解放碑、八一路好吃街品尝。重庆菜以麻辣著称,喜欢吃辣的朋友千万不要错过。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-10-05 20:15"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "春天去哪里看花"
+      },
+      {
+        "from": "gpt",
+        "value": "春天赏花推荐：1)看樱花：武汉大学、南京鸡鸣寺、北京玉渊潭；2)看油菜花：江西婺源、云南罗平；3)看桃花：西藏林芝、湖南桃花源；4)看牡丹：洛阳、菏泽；5)看郁金香：荷兰、新疆等。最佳时间3-5月,建议关注花期预报及时出游。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-04-17 09:28"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "穷游怎么省钱"
+      },
+      {
+        "from": "gpt",
+        "value": "穷游省钱技巧：1)淡季出行,机票酒店便宜；2)选择青年旅社或民宿；3)提前预订交通和住宿；4)多吃当地小吃,少去游客餐厅；5)利用免费景点和博物馆；6)办理旅游年卡或学生证；7)拼车或搭顺风车；8)自己做攻略,不跟团。合理规划可以节省很多费用。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-06-03 11:47"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "北京有哪些值得去的地方"
+      },
+      {
+        "from": "gpt",
+        "value": "北京值得去的地方很多！必去的有故宫、天安门、长城、颐和园、天坛、圆明园、鸟巢水立方、南锣鼓巷、什刹海、798艺术区等。推荐品尝北京烤鸭、炸酱面、豆汁儿等特色美食。建议安排5-7天游览,深度体验首都的历史文化。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-02-28 15:52"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "去草原旅游要注意什么"
+      },
+      {
+        "from": "gpt",
+        "value": "去草原旅游注意事项：1)注意防晒,紫外线强；2)早晚温差大,带好外套；3)防蚊虫叮咬；4)尊重当地民族习俗；5)骑马要注意安全,穿长裤和运动鞋；6)注意饮食卫生；7)不要随意采摘草原植物；8)带好感冒药、肠胃药等常用药品。最佳旅游时间是6-9月。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-08-12 13:25"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "南京有什么历史景点"
+      },
+      {
+        "from": "gpt",
+        "value": "南京历史悠久,必去景点有：中山陵、明孝陵、夫子庙、秦淮河、总统府、南京大屠杀纪念馆、玄武湖、鸡鸣寺等。推荐品尝鸭血粉丝汤、盐水鸭、小笼包等特色美食。南京作为六朝古都,处处都有历史印记,建议安排3-4天游览。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-03-24 18:07"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "跟团游和自由行哪个好"
+      },
+      {
+        "from": "gpt",
+        "value": "各有优劣。跟团游优点：省心省力,有导游讲解,安全有保障,适合老年人和不熟悉目的地的游客；缺点：行程固定,购物环节多,自由度低。自由行优点：时间自由,深度游玩,个性化行程；缺点：需要做攻略,费用可能更高。建议根据目的地、预算和个人偏好选择。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-11-07 10:33"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "武汉有什么好玩的地方"
+      },
+      {
+        "from": "gpt",
+        "value": "武汉好玩的地方有：黄鹤楼、东湖、武汉大学、昙华林、户部巷、江汉路、武汉长江大桥、湖北省博物馆等。春天可以去武大看樱花,秋天登黄鹤楼赏景。推荐品尝热干面、豆皮、鸭脖、武昌鱼等特色美食。武汉是座有历史底蕴的现代化大都市。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-05-19 14:41"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "旅游拍照有什么技巧"
+      },
+      {
+        "from": "gpt",
+        "value": "旅游拍照技巧：1)利用黄金时段(日出日落)拍摄；2)注意构图,使用三分法；3)寻找独特视角；4)拍摄当地人文风情；5)留白处理增加意境；6)利用前景增加层次感；7)保持镜头稳定,避免模糊；8)后期适度修图。最重要的是多拍多练,用心感受当下的美好。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-09-25 16:19"
+  },
+  {
+    "conversations": [
+      {
+        "from": "human",
+        "value": "上海有什么网红景点"
+      },
+      {
+        "from": "gpt",
+        "value": "上海网红景点有：外滩、东方明珠、迪士尼乐园、田子坊、新天地、豫园、南京路、武康路、思南公馆、上海博物馆、朱家角古镇等。还有很多网红咖啡馆和餐厅值得打卡。上海融合了传统与现代,既有历史韵味又充满时尚气息,建议安排3-5天游览。"
+      }
+    ],
+    "system": "\n\n# 工具\n\n你可以调用一个或多个函数来协助处理用户查询。\n\n在 <tools></tools> XML 标签中提供了可用的函数签名：\n<tools>\n</tools>\n\n你在输出时必须严格遵循以下规则：\n\n1. 如果需要调用函数，则 **只能输出一个函数调用**，格式如下：\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>\n\n2. 如果你已经从工具返回结果或已有推理得出足够信息，必须立即停止调用工具，并输出最终答案，格式如下：\n<answer>\n你的最终答案在这里\n</answer>\n\n3. **智能流程阶段判断**：\n- 仔细分析下方的对话流程历史，了解当前处于哪个阶段\n- 如果看到Assistant已经调用过工具且User已经提供了<tool_response>...</tool_response>，说明工具调用已完成\n- 如果工具返回空数据（如总收入为0、空列表等），应生成解释性答案而不是重复调用\n- 如果已经获得足够信息回答用户问题，立即生成最终答案\n",
+    "tools": "[{\"name\":\"retrieval_tool\",\"description\":\"根据用户的问题，在知识库中搜索相关信息。可以指定知识来源（如工具库、对话历史或具体的'建德'、'新昌'文档库），并返回最匹配的结果。\",\"category\":\"nlp\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的查询内容或问题\"},\"top_k\":{\"type\":\"integer\",\"description\":\"可选：需要返回的最相关结果的数量\",\"default\":3},\"source_filter\":{\"type\":\"string\",\"description\":\"必选：指定检索的知识库来源以缩小搜索范围。'toollist'搜索mcp工具库，'xinchang'搜索新昌的导游手册，'jiande'搜索建德的导游手册。\",\"examples\":[\"toollist\",\"jiande\"],\"enum\":[\"toollist\",\"jiande\",\"xinchang\"]},\"user_id\":{\"type\":\"integer\",\"description\":\"必选，用户的ID，用于确认身份\"}},\"required\":[\"query\",\"source_filter\",\"user_id\"]}}]",
+    "time": "2025-01-16 12:08"
+  }
+]
