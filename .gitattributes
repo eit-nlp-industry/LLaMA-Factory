@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# git-crypt 加密规则已临时禁用
+# 修复 GitHub Actions workflow 文件加密问题后将重新启用

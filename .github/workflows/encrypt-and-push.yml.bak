@@ -1,0 +1,129 @@
+name: Encrypt and Push to Encrypted Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_repo:
+        description: 'Target encrypted repository (format: owner/repo)'
+        required: false
+        default: 'zich601/LLaMA-Factory-encrypted'
+        type: string
+      target_branch:
+        description: 'Target branch'
+        required: false
+        default: 'main'
+        type: string
+  push:
+    branches:
+      - main
+      - master
+
+env:
+  ENCRYPTED_REPO: ${{ github.event.inputs.target_repo || 'zich601/LLaMA-Factory-encrypted' }}
+  ENCRYPTED_BRANCH: ${{ github.event.inputs.target_branch || 'main' }}
+
+jobs:
+  encrypt-and-push:
+    name: Encrypt Repository and Push
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Install git-crypt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-crypt
+          
+      - name: Setup GPG for encryption
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          set -e
+          
+          if [ -z "$GPG_PRIVATE_KEY" ]; then
+            echo "Error: GPG_PRIVATE_KEY Secret is not set"
+            exit 1
+          fi
+          
+          echo "Importing GPG private key..."
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --yes --import 2>&1 || {
+            echo "Error: Failed to import GPG private key"
+            exit 1
+          }
+          
+          GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -E "sec\s+[a-zA-Z0-9/]+" | head -1 | awk '{print $2}' | cut -d'/' -f2)
+          
+          if [ -z "$GPG_KEY_ID" ]; then
+            echo "Error: Failed to get GPG key ID"
+            gpg --list-secret-keys --keyid-format LONG
+            exit 1
+          fi
+          
+          echo "GPG Key ID: $GPG_KEY_ID"
+          echo "GPG_KEY_ID=$GPG_KEY_ID" >> $GITHUB_ENV
+          
+          echo "$GPG_KEY_ID:6:" | gpg --import-ownertrust
+          
+          if [ ! -d .git-crypt ]; then
+            echo "Initializing git-crypt..."
+            git-crypt init
+          else
+            echo "git-crypt already initialized"
+          fi
+          
+          echo "Adding GPG user to git-crypt..."
+          if [ -n "$GPG_PASSPHRASE" ] && [ "$GPG_PASSPHRASE" != "" ]; then
+            echo "$GPG_PASSPHRASE" | git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || echo "Warning: User may already be added"
+          else
+            git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || echo "Warning: User may already be added"
+          fi
+          
+      - name: Encrypt repository
+        run: |
+          set -e
+          echo "Unlocking git-crypt..."
+          git-crypt unlock 2>&1 || echo "Warning: git-crypt may already be unlocked"
+          echo "Checking encryption status..."
+          git-crypt status | head -20 || true
+          git add -A
+          git status --short | head -20 || true
+          
+      - name: Setup target repository
+        env:
+          ENCRYPTED_REPO_TOKEN: ${{ secrets.ENCRYPTED_REPO_TOKEN }}
+        run: |
+          set -e
+          
+          if [ -z "$ENCRYPTED_REPO_TOKEN" ]; then
+            echo "Error: ENCRYPTED_REPO_TOKEN Secret is not set"
+            exit 1
+          fi
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git remote remove encrypted-origin 2>/dev/null || true
+          
+          echo "Adding remote repository: ${{ env.ENCRYPTED_REPO }}"
+          git remote add encrypted-origin https://x-access-token:$ENCRYPTED_REPO_TOKEN@github.com/${{ env.ENCRYPTED_REPO }}.git
+          
+          git remote -v
+          
+      - name: Push to encrypted repository
+        run: |
+          git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }} --force || \
+          git push encrypted-origin HEAD:${{ env.ENCRYPTED_BRANCH }}
+          
+      - name: Cleanup
+        if: always()
+        run: |
+          gpg --batch --yes --delete-secret-keys "$GPG_KEY_ID" || true
+          gpg --batch --yes --delete-keys "$GPG_KEY_ID" || true
