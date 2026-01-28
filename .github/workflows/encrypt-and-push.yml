@@ -6,7 +6,7 @@ on:
       target_repo:
         description: 'Target encrypted repository (format: owner/repo)'
         required: false
-        default: 'zich601/LLaMA-Factory-encrypted'
+        default: 'eit-nlp-industry/LLaMA-Factory-encrypted'
         type: string
       target_branch:
         description: 'Target branch'
@@ -19,7 +19,7 @@ on:
       - master
 
 env:
-  ENCRYPTED_REPO: ${{ github.event.inputs.target_repo || 'zich601/LLaMA-Factory-encrypted' }}
+  ENCRYPTED_REPO: ${{ github.event.inputs.target_repo || 'eit-nlp-industry/LLaMA-Factory-encrypted' }}
   ENCRYPTED_BRANCH: ${{ github.event.inputs.target_branch || 'main' }}
 
 jobs:
