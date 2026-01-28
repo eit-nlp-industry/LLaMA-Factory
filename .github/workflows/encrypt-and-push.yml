@@ -221,7 +221,17 @@ jobs:
           
           git status --short | head -20 || true
           
-          echo "✓ Repository encrypted and ready for push"
+          # Commit the encrypted blobs (index has encrypted content from clean filter)
+          # Without this commit, we would push the previous commit which has unencrypted blobs
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Creating commit with encrypted file contents..."
+            git commit -m "Encrypted repository content (git-crypt)"
+          else
+            echo "No changes to commit after re-add; creating empty commit to ensure encrypted tree..."
+            git commit --allow-empty -m "Encrypted repository content (git-crypt)"
+          fi
+          
+          echo "✓ Repository encrypted and committed, ready for push"
           
       - name: Setup target repository
         env:
