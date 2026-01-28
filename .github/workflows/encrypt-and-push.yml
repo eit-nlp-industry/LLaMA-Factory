@@ -139,10 +139,17 @@ jobs:
           
           # Test remote access with verbose output
           echo "Testing remote access..."
-          GIT_CURL_VERBOSE=1 GIT_TRACE=1 git ls-remote encrypted-origin HEAD 2>&1 | head -20 || {
-            echo "Warning: ls-remote failed, trying direct push test..."
-            git push encrypted-origin HEAD:main --dry-run 2>&1 | head -10 || true
+          LS_REMOTE_RESULT=$(GIT_CURL_VERBOSE=1 GIT_TRACE=1 git ls-remote encrypted-origin HEAD 2>&1) || {
+            echo "Warning: ls-remote failed"
+            echo "Error output: $LS_REMOTE_RESULT"
           }
+          
+          if [ -n "$LS_REMOTE_RESULT" ] && echo "$LS_REMOTE_RESULT" | grep -q "refs/heads"; then
+            echo "✓ Remote access successful"
+            echo "$LS_REMOTE_RESULT" | head -5
+          else
+            echo "⚠ Remote access test inconclusive, will try push anyway"
+          fi
           
       - name: Push to encrypted repository
         env:
