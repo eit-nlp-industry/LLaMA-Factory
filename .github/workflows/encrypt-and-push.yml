@@ -110,10 +110,12 @@ jobs:
             if git-crypt unlock 2>&1; then
               echo "✓ Successfully unlocked with current GPG key"
               echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
-              # Restore real filter and decrypt (unlock with cat left files encrypted)
+              # Restore real filter; use smudge wrapper so subprocess finds key
               git config --unset-all filter.git-crypt.clean 2>/dev/null || true
               git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+              git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
               git checkout -f HEAD -- .
+              git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
               if git stash list | grep -q "ci-pre-unlock"; then
                 git config filter.git-crypt.clean "cat"
                 git config filter.git-crypt.smudge "cat"
@@ -137,10 +139,12 @@ jobs:
                 if git-crypt unlock 2>&1; then
                   echo "✓ Successfully unlocked after adding GPG user"
                   echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
-                  # Restore real filter and decrypt working tree (unlock with cat left files encrypted)
+                  # Restore real filter; use smudge wrapper so subprocess finds key
                   git config --unset-all filter.git-crypt.clean 2>/dev/null || true
                   git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+                  git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
                   git checkout -f HEAD -- .
+                  git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
                   while git stash list | grep -q "ci-pre-unlock"; do
                     git config filter.git-crypt.clean "cat"
                     git config filter.git-crypt.smudge "cat"
