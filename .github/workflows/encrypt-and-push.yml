@@ -81,11 +81,16 @@ jobs:
           # Set ultimate trust for the key
           echo "$GPG_FINGERPRINT:6:" | gpg --import-ownertrust
           
-          # Debug: verify .git-crypt key file is present after checkout
-          echo "Listing .git-crypt/ after checkout..."
+          echo "=== [Setup GPG] Repo root: $PWD ==="
+          echo "=== [Setup GPG] .git-crypt/ after checkout ==="
           ls -la .git-crypt/ 2>/dev/null || echo ".git-crypt/ missing"
           ls -la .git-crypt/keys/default/0/ 2>/dev/null || echo ".git-crypt/keys/default/0/ missing or empty"
           git ls-files .git-crypt/ | head -20
+          echo "=== [Setup GPG] Current filter config (before cat) ==="
+          git config --get filter.git-crypt.clean || echo "(not set)"
+          git config --get filter.git-crypt.smudge || echo "(not set)"
+          echo "=== [Setup GPG] git status --porcelain (first 5 lines) ==="
+          git status --porcelain | head -5 || true
           
           # Always use filter=cat before first unlock: unlock runs git status internally,
           # which would trigger clean filter before key is in .git/git-crypt/ and fail.
@@ -94,8 +99,12 @@ jobs:
           git config filter.git-crypt.smudge "cat"
           
           if [ -n "$(git status --porcelain)" ]; then
-            echo "Working directory not clean, stashing..."
+            echo "=== [Setup GPG] Working directory not clean, stashing ==="
             git stash push -u -m "ci-pre-unlock" || true
+            echo "=== [Setup GPG] Stash list after stash ==="
+            git stash list
+          else
+            echo "=== [Setup GPG] Working directory already clean, no stash ==="
           fi
           
           # Check if git-crypt is initialized
@@ -110,19 +119,27 @@ jobs:
             if git-crypt unlock 2>&1; then
               echo "✓ Successfully unlocked with current GPG key"
               echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
-              # Restore real filter; use smudge wrapper so subprocess finds key
+              echo "=== [Setup GPG] After unlock: .git/git-crypt/keys/default ==="
+              ls -la .git/git-crypt/keys/default 2>/dev/null || echo "(missing)"
+              echo "=== [Setup GPG] Setting clean/smudge wrappers, then checkout -f HEAD ==="
+              # Restore real filter; use both wrappers so checkout/status find key
               git config --unset-all filter.git-crypt.clean 2>/dev/null || true
               git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+              git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
               git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
+              echo "  clean: $(git config --get filter.git-crypt.clean)"
+              echo "  smudge: $(git config --get filter.git-crypt.smudge)"
               git checkout -f HEAD -- .
-              git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
               if git stash list | grep -q "ci-pre-unlock"; then
+                echo "=== [Setup GPG] Popping stash (with filter=cat) ==="
                 git config filter.git-crypt.clean "cat"
                 git config filter.git-crypt.smudge "cat"
                 git stash pop || true
                 git config --unset-all filter.git-crypt.clean 2>/dev/null || true
                 git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
               fi
+              echo "=== [Setup GPG] Done (unlock success path). Stash list: ==="
+              git stash list || true
             else
               echo "⚠ Cannot unlock with current GPG key"
               # Try to add GPG user (preserves existing symmetric key if possible)
@@ -139,12 +156,12 @@ jobs:
                 if git-crypt unlock 2>&1; then
                   echo "✓ Successfully unlocked after adding GPG user"
                   echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
-                  # Restore real filter; use smudge wrapper so subprocess finds key
+                  # Restore real filter; use both wrappers so checkout finds key
                   git config --unset-all filter.git-crypt.clean 2>/dev/null || true
                   git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+                  git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
                   git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
                   git checkout -f HEAD -- .
-                  git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
                   while git stash list | grep -q "ci-pre-unlock"; do
                     git config filter.git-crypt.clean "cat"
                     git config filter.git-crypt.smudge "cat"
@@ -169,30 +186,41 @@ jobs:
             fi
           fi
           
-          echo "git-crypt setup complete"
+          echo "=== [Setup GPG] git-crypt setup complete ==="
           
       - name: Prepare repository for encryption
         run: |
           set -e
           
+          echo "=== [Prepare] Repo root: $PWD ==="
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Use wrappers so smudge/clean find key in subprocess (reset and add trigger them)
+          echo "=== [Prepare] Setting clean/smudge wrappers ==="
           git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
           git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
+          echo "  clean: $(git config --get filter.git-crypt.clean)"
+          echo "  smudge: $(git config --get filter.git-crypt.smudge)"
+          echo "=== [Prepare] Wrapper scripts exist? ==="
+          ls -la scripts/git-crypt-clean-wrapper.sh scripts/git-crypt-smudge-wrapper.sh 2>/dev/null || echo "wrapper(s) missing"
           
+          echo "=== [Prepare] git status --porcelain (first 10) ==="
+          git status --porcelain | head -10 || true
           # First, commit any existing changes to have a clean state
-          echo "Committing any existing changes..."
+          echo "=== [Prepare] Committing any existing changes (if any) ==="
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "Prepare for encryption: commit all changes" || echo "No changes to commit"
           fi
           
           # Remove .github directory from git tracking
+          echo "=== [Prepare] Checking .github in index ==="
           if git ls-files | grep -q "^\.github/"; then
             echo "Removing .github directory from git..."
             git rm -rf --cached .github 2>/dev/null || true
+            echo "  .github removed from index"
+          else
+            echo "  .github not in index, skip"
           fi
           
           # Remove other excluded directories
@@ -204,9 +232,13 @@ jobs:
           done
           
           # Create commit to remove excluded directories (if any were removed)
+          echo "=== [Prepare] Status after rm --cached (first 10) ==="
+          git status --porcelain | head -10 || true
           if [ -n "$(git status --porcelain)" ]; then
             echo "Creating commit to remove excluded directories..."
             git commit -m "Remove .github and other excluded directories for encrypted repo" || echo "No changes to commit"
+          else
+            echo "  No staged changes, skip commit"
           fi
           
           # Verify .github is removed from current HEAD
@@ -217,21 +249,27 @@ jobs:
           fi
           
           # Ensure working directory is completely clean
-          echo "Ensuring working directory is clean..."
+          echo "=== [Prepare] Ensuring working directory is clean (reset --hard, clean -fd) ==="
           git reset --hard HEAD
           git clean -fd
-          
-          echo "✓ Repository prepared (excluded directories removed, working directory clean)"
+          echo "=== [Prepare] After reset: status (first 5) ==="
+          git status --porcelain | head -5 || true
+          echo "=== [Prepare] Repository prepared ==="
           
       - name: Encrypt repository
         run: |
           set -e
           
+          echo "=== [Encrypt] Repo root: $PWD, NEEDS_FULL_REENCRYPT=${NEEDS_FULL_REENCRYPT:-not set} ==="
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          echo "=== [Encrypt] Current filter config ==="
+          git config --get filter.git-crypt.clean || echo "(not set)"
+          git config --get filter.git-crypt.smudge || echo "(not set)"
+          
           # Ensure working directory is completely clean before unlock
-          echo "Ensuring working directory is clean for git-crypt unlock..."
+          echo "=== [Encrypt] Ensuring working directory is clean (reset --hard, clean -fd) ==="
           git reset --hard HEAD
           git clean -fd
           
@@ -282,6 +320,7 @@ jobs:
           fi
           
           # Remove all files from index
+          echo "=== [Encrypt] Removing all from index (git rm --cached -r .) ==="
           git rm --cached -r . 2>/dev/null || true
           
           # Restore real git-crypt filters before re-add (use wrapper so clean finds key)
@@ -290,14 +329,15 @@ jobs:
             git config --unset-all filter.git-crypt.clean
             git config --unset-all filter.git-crypt.smudge
           fi
+          echo "=== [Encrypt] Setting clean wrapper before git add ==="
           git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
+          echo "  clean: $(git config --get filter.git-crypt.clean)"
           
           # Use --renormalize to force git to re-process all files through filters
-          # This ensures the clean filter runs even if file content appears unchanged
-          echo "Adding all files with --renormalize to force filter application..."
+          echo "=== [Encrypt] Adding all files with --renormalize ==="
           git add --renormalize .
           
-          # Also add any new/untracked files
+          echo "=== [Encrypt] Adding any new/untracked (git add -A) ==="
           git add -A
           
           # Verify files are now encrypted in the index
