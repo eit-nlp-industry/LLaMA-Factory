@@ -81,13 +81,15 @@ jobs:
           # Set ultimate trust for the key
           echo "$GPG_FINGERPRINT:6:" | gpg --import-ownertrust
           
-          # Ensure working directory is clean before any git-crypt operation (unlock requires it)
+          # Always use filter=cat before first unlock: unlock runs git status internally,
+          # which would trigger clean filter before key is in .git/git-crypt/ and fail.
+          echo "Setting filter=cat for unlock (avoid clean/smudge before key is loaded)..."
+          git config filter.git-crypt.clean "cat"
+          git config filter.git-crypt.smudge "cat"
+          
           if [ -n "$(git status --porcelain)" ]; then
-            echo "Working directory not clean, stashing with filter=cat to avoid git-crypt filter..."
-            git config filter.git-crypt.clean "cat"
-            git config filter.git-crypt.smudge "cat"
+            echo "Working directory not clean, stashing..."
             git stash push -u -m "ci-pre-unlock" || true
-            # Do NOT unset filter - unlock runs git status and would trigger clean filter
           fi
           
           # Check if git-crypt is initialized
