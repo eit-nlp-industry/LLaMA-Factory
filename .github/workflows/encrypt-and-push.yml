@@ -48,6 +48,10 @@ jobs:
         run: |
           set -e
           
+          # Required for git-crypt add-gpg-user (it runs git commit)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
           if [ -z "$GPG_PRIVATE_KEY" ]; then
             echo "Error: GPG_PRIVATE_KEY Secret is not set"
             exit 1
@@ -77,43 +81,83 @@ jobs:
           # Set ultimate trust for the key
           echo "$GPG_FINGERPRINT:6:" | gpg --import-ownertrust
           
-          # Check if git-crypt is initialized and if current GPG key can unlock it
+          # Ensure working directory is clean before any git-crypt operation (unlock requires it)
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Working directory not clean, stashing with filter=cat to avoid git-crypt filter..."
+            git config filter.git-crypt.clean "cat"
+            git config filter.git-crypt.smudge "cat"
+            git stash push -u -m "ci-pre-unlock" || true
+            # Do NOT unset filter - unlock runs git status and would trigger clean filter
+          fi
+          
+          # Check if git-crypt is initialized
           if [ ! -d .git-crypt ]; then
-            echo "Initializing git-crypt..."
+            echo "git-crypt not initialized, initializing..."
             git-crypt init
+            git-crypt add-gpg-user --trusted "$GPG_KEY_ID"
+            echo "NEEDS_FULL_REENCRYPT=true" >> $GITHUB_ENV
           else
-            echo "git-crypt already initialized"
-            # Try to unlock to check if current GPG key works
+            echo "git-crypt already initialized, checking if current GPG key can unlock..."
+            # Try to unlock
             if git-crypt unlock 2>/dev/null; then
-              echo "✓ Can unlock with current GPG key"
+              echo "✓ Successfully unlocked with current GPG key"
+              echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
+              # Restore real filter and decrypt (unlock with cat left files encrypted)
+              git config --unset-all filter.git-crypt.clean 2>/dev/null || true
+              git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+              git checkout -f HEAD -- .
+              if git stash list | grep -q "ci-pre-unlock"; then
+                git config filter.git-crypt.clean "cat"
+                git config filter.git-crypt.smudge "cat"
+                git stash pop || true
+                git config --unset-all filter.git-crypt.clean 2>/dev/null || true
+                git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+              fi
             else
-              echo "⚠ Cannot unlock - repository may have different GPG keys"
-              echo "Re-initializing git-crypt to use current GPG key..."
-              # Remove old git-crypt directory
-              rm -rf .git-crypt
-              git-crypt init
+              echo "⚠ Cannot unlock with current GPG key"
+              # Try to add GPG user (preserves existing symmetric key if possible)
+              if git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1; then
+                echo "✓ Successfully added GPG user"
+                # Ensure clean before second unlock attempt (stash with cat, keep cat for unlock)
+                if [ -n "$(git status --porcelain)" ]; then
+                  git config filter.git-crypt.clean "cat"
+                  git config filter.git-crypt.smudge "cat"
+                  git stash push -u -m "ci-pre-unlock-2" || true
+                  # Do NOT unset filter here - unlock runs git status and would trigger clean filter
+                fi
+                # Try unlock again (filter still cat so git status inside unlock won't fail)
+                if git-crypt unlock 2>&1; then
+                  echo "✓ Successfully unlocked after adding GPG user"
+                  echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
+                  # Restore real filter and decrypt working tree (unlock with cat left files encrypted)
+                  git config --unset-all filter.git-crypt.clean 2>/dev/null || true
+                  git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+                  git checkout -f HEAD -- .
+                  while git stash list | grep -q "ci-pre-unlock"; do
+                    git config filter.git-crypt.clean "cat"
+                    git config filter.git-crypt.smudge "cat"
+                    git stash pop || break
+                    git config --unset-all filter.git-crypt.clean 2>/dev/null || true
+                    git config --unset-all filter.git-crypt.smudge 2>/dev/null || true
+                  done
+                else
+                  echo "ERROR: Still cannot unlock after adding GPG user - git-crypt state corrupted"
+                echo ""
+                echo "The .git-crypt directory in source repository is corrupted."
+                echo "Please fix locally and re-run."
+                exit 1
+              fi
+            else
+              echo "ERROR: add-gpg-user failed, git-crypt state is corrupted in source repository"
+              echo ""
+              echo "This means the source repository (LLaMA-Factory) has a corrupted .git-crypt directory."
+              echo "You must fix this locally before running this workflow."
+              exit 1
+            fi
             fi
           fi
           
-          echo "Adding GPG user to git-crypt..."
-          if [ -n "$GPG_PASSPHRASE" ] && [ "$GPG_PASSPHRASE" != "" ]; then
-            echo "$GPG_PASSPHRASE" | git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || {
-              echo "Warning: Failed to add GPG user, may already be added"
-            }
-          else
-            git-crypt add-gpg-user --trusted "$GPG_KEY_ID" 2>&1 || {
-              echo "Warning: Failed to add GPG user, may already be added"
-            }
-          fi
-          
-          # Verify we can unlock now
-          echo "Verifying git-crypt setup..."
-          if git-crypt unlock 2>&1; then
-            echo "✓ git-crypt unlock successful - GPG key is properly configured"
-          else
-            echo "ERROR: Still cannot unlock after adding GPG user!"
-            exit 1
-          fi
+          echo "git-crypt setup complete"
           
       - name: Prepare repository for encryption
         run: |
@@ -186,18 +230,25 @@ jobs:
           echo "Unlocking git-crypt..."
           # Unlock is needed to apply filters when staging files
           # Working directory must be clean for unlock
-          git-crypt unlock 2>&1 || {
-            echo "ERROR: git-crypt unlock failed!"
-            echo "Checking git status..."
-            git status --short | head -20 || true
-            echo "Checking git-crypt status..."
-            git-crypt status | head -10 || true
-            echo "Listing GPG keys..."
-            gpg --list-secret-keys --keyid-format LONG || true
-            exit 1
-          }
-          
-          echo "✓ git-crypt unlocked successfully"
+          if [ "${NEEDS_FULL_REENCRYPT:-false}" = "true" ]; then
+            echo "⚠ NEEDS_FULL_REENCRYPT=true, unlock may fail (new symmetric key cannot decrypt old files)"
+            echo "This is expected - we will re-encrypt everything with the new key"
+            git-crypt unlock 2>&1 || {
+              echo "✓ Unlock failed as expected (new key), proceeding with full re-encryption..."
+            }
+          else
+            git-crypt unlock 2>&1 || {
+              echo "ERROR: git-crypt unlock failed!"
+              echo "Checking git status..."
+              git status --short | head -20 || true
+              echo "Checking git-crypt status..."
+              git-crypt status | head -10 || true
+              echo "Listing GPG keys..."
+              gpg --list-secret-keys --keyid-format LONG || true
+              exit 1
+            }
+            echo "✓ git-crypt unlocked successfully"
+          fi
           
           echo "Checking encryption status (before re-encryption)..."
           git-crypt status 2>&1 | head -20 || true
@@ -207,8 +258,22 @@ jobs:
           # We need to force git to re-process ALL files through the clean filter.
           echo "Re-applying git-crypt filters to force encryption..."
           
+          # If NEEDS_FULL_REENCRYPT=true, use cat filter to avoid smudge/clean errors with mismatched keys
+          if [ "${NEEDS_FULL_REENCRYPT:-false}" = "true" ]; then
+            echo "Setting filters to 'cat' temporarily (new key cannot process old encrypted files)..."
+            git config filter.git-crypt.clean "cat"
+            git config filter.git-crypt.smudge "cat"
+          fi
+          
           # Remove all files from index
           git rm --cached -r . 2>/dev/null || true
+          
+          # Restore real git-crypt filters before re-add (so clean filter encrypts properly)
+          if [ "${NEEDS_FULL_REENCRYPT:-false}" = "true" ]; then
+            echo "Restoring real git-crypt filters..."
+            git config --unset-all filter.git-crypt.clean
+            git config --unset-all filter.git-crypt.smudge
+          fi
           
           # Use --renormalize to force git to re-process all files through filters
           # This ensures the clean filter runs even if file content appears unchanged
