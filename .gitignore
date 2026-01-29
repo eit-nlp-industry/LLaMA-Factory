@@ -185,5 +185,6 @@ temp/
 *.gpg
 !examples/**/*.gpg
 
-# git-crypt internal files (should be committed)
+# git-crypt internal files (should be committed so CI can unlock)
 !.git-crypt/
+!.git-crypt/**/*.gpg
