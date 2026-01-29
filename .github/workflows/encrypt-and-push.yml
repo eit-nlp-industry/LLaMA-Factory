@@ -178,6 +178,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # Use clean wrapper so git add can find key in subprocess
+          git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
+          
           # First, commit any existing changes to have a clean state
           echo "Committing any existing changes..."
           if [ -n "$(git status --porcelain)" ]; then
@@ -280,12 +283,13 @@ jobs:
           # Remove all files from index
           git rm --cached -r . 2>/dev/null || true
           
-          # Restore real git-crypt filters before re-add (so clean filter encrypts properly)
+          # Restore real git-crypt filters before re-add (use wrapper so clean finds key)
           if [ "${NEEDS_FULL_REENCRYPT:-false}" = "true" ]; then
             echo "Restoring real git-crypt filters..."
             git config --unset-all filter.git-crypt.clean
             git config --unset-all filter.git-crypt.smudge
           fi
+          git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
           
           # Use --renormalize to force git to re-process all files through filters
           # This ensures the clean filter runs even if file content appears unchanged
