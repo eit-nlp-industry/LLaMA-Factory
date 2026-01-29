@@ -178,8 +178,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Use clean wrapper so git add can find key in subprocess
+          # Use wrappers so smudge/clean find key in subprocess (reset and add trigger them)
           git config filter.git-crypt.clean "$PWD/scripts/git-crypt-clean-wrapper.sh"
+          git config filter.git-crypt.smudge "$PWD/scripts/git-crypt-smudge-wrapper.sh"
           
           # First, commit any existing changes to have a clean state
           echo "Committing any existing changes..."
