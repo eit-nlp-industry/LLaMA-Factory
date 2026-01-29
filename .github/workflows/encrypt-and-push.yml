@@ -81,6 +81,12 @@ jobs:
           # Set ultimate trust for the key
           echo "$GPG_FINGERPRINT:6:" | gpg --import-ownertrust
           
+          # Debug: verify .git-crypt key file is present after checkout
+          echo "Listing .git-crypt/ after checkout..."
+          ls -la .git-crypt/ 2>/dev/null || echo ".git-crypt/ missing"
+          ls -la .git-crypt/keys/default/0/ 2>/dev/null || echo ".git-crypt/keys/default/0/ missing or empty"
+          git ls-files .git-crypt/ | head -20
+          
           # Always use filter=cat before first unlock: unlock runs git status internally,
           # which would trigger clean filter before key is in .git/git-crypt/ and fail.
           echo "Setting filter=cat for unlock (avoid clean/smudge before key is loaded)..."
@@ -100,8 +106,8 @@ jobs:
             echo "NEEDS_FULL_REENCRYPT=true" >> $GITHUB_ENV
           else
             echo "git-crypt already initialized, checking if current GPG key can unlock..."
-            # Try to unlock
-            if git-crypt unlock 2>/dev/null; then
+            # Try to unlock (show real error if it fails)
+            if git-crypt unlock 2>&1; then
               echo "✓ Successfully unlocked with current GPG key"
               echo "NEEDS_FULL_REENCRYPT=false" >> $GITHUB_ENV
               # Restore real filter and decrypt (unlock with cat left files encrypted)
